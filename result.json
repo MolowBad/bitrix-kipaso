@@ -1,0 +1,5914 @@
+[
+    {
+        "sku": "raz_emi_dlya_preobrazovatelej_termoelektricheskih",
+        "url": "https://owen.ru/product/raz_emi_dlya_preobrazovatelej_termoelektricheskih",
+        "mods": []
+    },
+    {
+        "sku": "trm251",
+        "url": "https://owen.ru/product/trm251",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой, 96х96х70 мм, IP54"
+                    },
+                    {
+                        "value2": "Н",
+                        "description": "настенный, 105х130х65 мм, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Выход 1",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "реле электромагнитное 4 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара 50 мА 250 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "для управления твердотельным реле 4…6 В 70 мА"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "ЦАП «параметр–ток 4…20 мА»"
+                    }
+                ]
+            },
+            {
+                "header": "Выход 3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "реле электромагнитное 2 А 220 В"
+                    },
+                    {
+                        "value2": "И",
+                        "description": "ЦАП «параметр–ток 4…20 мА»"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "trm500",
+        "url": "https://owen.ru/product/trm500",
+        "mods": [
+            {
+                "header": "Нагрузочная способность реле 1",
+                "items": [
+                    {
+                        "value1": "5А",
+                        "description": "э/м реле 5 А, один индикатор"
+                    },
+                    {
+                        "value2": "30А",
+                        "description": "э/м реле 30 А, два индикатора"
+                    },
+                    {
+                        "value3": "WIFI",
+                        "description": "два индикатора, э/м реле 5 А, доступ к OwenCloud"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "2trm1",
+        "url": "https://owen.ru/product/2trm1",
+        "mods": []
+    },
+    {
+        "sku": "promezhutochnie_rele_kippribor_mr",
+        "url": "https://owen.ru/product/promezhutochnie_rele_kippribor_mr",
+        "mods": []
+    },
+    {
+        "sku": "tyagonaporomer_tyagomer_perepadomer_PD150_dlya_ventsistem_kotelnyh",
+        "url": "https://owen.ru/product/tyagonaporomer_tyagomer_perepadomer_PD150_dlya_ventsistem_kotelnyh",
+        "mods": [
+            {
+                "header": "Тип давления",
+                "items": [
+                    {
+                        "value1": "ДВ",
+                        "description": "вакуумметрическое"
+                    },
+                    {
+                        "value2": "ДД",
+                        "description": "дифференциальное"
+                    },
+                    {
+                        "value3": "ДИ",
+                        "description": "избыточное"
+                    },
+                    {
+                        "value4": "ДИВ",
+                        "description": "избыточно-вакуумметрическое"
+                    }
+                ]
+            },
+            {
+                "header": "Диапазон измерения, кПа",
+                "items": [
+                    {
+                        "value1": "1,0К",
+                        "description": "1"
+                    },
+                    {
+                        "value2": "1,25К",
+                        "description": "1,25"
+                    },
+                    {
+                        "value3": "1,6К",
+                        "description": "1,6"
+                    },
+                    {
+                        "value4": "2,0К",
+                        "description": "2"
+                    },
+                    {
+                        "value5": "2,5К",
+                        "description": "2,5"
+                    },
+                    {
+                        "value6": "3,0К",
+                        "description": "3"
+                    },
+                    {
+                        "value7": "4,0К",
+                        "description": "4"
+                    },
+                    {
+                        "value8": "5,0К",
+                        "description": "5"
+                    },
+                    {
+                        "value9": "6,0К",
+                        "description": "6"
+                    },
+                    {
+                        "value10": "8,0К",
+                        "description": "8"
+                    },
+                    {
+                        "value11": "10,0К",
+                        "description": "10"
+                    },
+                    {
+                        "value12": "12,5К",
+                        "description": "12,5"
+                    },
+                    {
+                        "value13": "16,0К",
+                        "description": "16"
+                    },
+                    {
+                        "value14": "20,0К",
+                        "description": "20"
+                    },
+                    {
+                        "value15": "25,0К",
+                        "description": "25"
+                    },
+                    {
+                        "value16": "30,0К",
+                        "description": "30"
+                    },
+                    {
+                        "value17": "40,0К",
+                        "description": "40"
+                    },
+                    {
+                        "value18": "50,0К",
+                        "description": "50"
+                    },
+                    {
+                        "value19": "60,0К",
+                        "description": "60"
+                    },
+                    {
+                        "value20": "80,0К",
+                        "description": "80"
+                    },
+                    {
+                        "value21": "100К",
+                        "description": "100"
+                    },
+                    {
+                        "value22": "200П",
+                        "description": "200"
+                    },
+                    {
+                        "value23": "250П",
+                        "description": "250"
+                    },
+                    {
+                        "value24": "300П",
+                        "description": "300"
+                    },
+                    {
+                        "value25": "400П",
+                        "description": "400"
+                    },
+                    {
+                        "value26": "500П",
+                        "description": "500"
+                    },
+                    {
+                        "value27": "600П",
+                        "description": "600"
+                    },
+                    {
+                        "value28": "800П",
+                        "description": "800"
+                    }
+                ]
+            },
+            {
+                "header": "Корпус",
+                "items": [
+                    {
+                        "value1": "809",
+                        "description": "Щитовой"
+                    },
+                    {
+                        "value2": "899",
+                        "description": "Настенный"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности, % от ВПИ",
+                "items": [
+                    {
+                        "value1": "0,5",
+                        "description": "±0,5"
+                    },
+                    {
+                        "value2": "1,0",
+                        "description": "±1,0"
+                    },
+                    {
+                        "value3": "1,5",
+                        "description": "±1,5"
+                    }
+                ]
+            },
+            {
+                "header": "Выходной сигнал",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "4...20 мА"
+                    },
+                    {
+                        "value2": "-R",
+                        "description": "RS-485 Modbus"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pbr10a",
+        "url": "https://owen.ru/product/pbr10a",
+        "mods": []
+    },
+    {
+        "sku": "ba12_ba24",
+        "url": "https://owen.ru/product/ba12_ba24",
+        "mods": []
+    },
+    {
+        "sku": "meyertec_dru3",
+        "url": "https://owen.ru/product/meyertec_dru3",
+        "mods": []
+    },
+    {
+        "sku": "spk1xx",
+        "url": "https://owen.ru/product/spk1xx",
+        "mods": [
+            {
+                "header": "Диагональ экрана:",
+                "items": [
+                    {
+                        "value1": "07",
+                        "description": "7’’"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10,2’’"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "moduli_analogovogo_vvoda_s_universal_nimi_vhodami_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_analogovogo_vvoda_s_universal_nimi_vhodami_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "bgr",
+        "url": "https://owen.ru/product/bgr",
+        "mods": []
+    },
+    {
+        "sku": "datchiki_temperaturi_dlya_ventilation_heating_conditioning_dts3xxx",
+        "url": "https://owen.ru/product/datchiki_temperaturi_dlya_ventilation_heating_conditioning_dts3xxx",
+        "mods": []
+    },
+    {
+        "sku": "montajniy_flanets_dly_dts3xxx",
+        "url": "https://owen.ru/product/montajniy_flanets_dly_dts3xxx",
+        "mods": []
+    },
+    {
+        "sku": "sensor_CH4",
+        "url": "https://owen.ru/product/sensor_CH4",
+        "mods": []
+    },
+    {
+        "sku": "rd30_dd",
+        "url": "https://owen.ru/product/rd30_dd",
+        "mods": []
+    },
+    {
+        "sku": "pd100i_modeli_115_125_175_185_2",
+        "url": "https://owen.ru/product/pd100i_modeli_115_125_175_185_2",
+        "mods": []
+    },
+    {
+        "sku": "pvt100",
+        "url": "https://owen.ru/product/pvt100",
+        "mods": [
+            {
+                "header": "Исполнение",
+                "items": [
+                    {
+                        "value1": "К1",
+                        "description": "Канальное с встроенным зондом"
+                    },
+                    {
+                        "value2": "Н4",
+                        "description": "Настенное с встроенным зондом"
+                    },
+                    {
+                        "value3": "Н5",
+                        "description": "Настенное с выносным зондом"
+                    }
+                ]
+            },
+            {
+                "header": "Длина кабеля, выносной зонд, м",
+                "items": [
+                    {
+                        "value1": ".2",
+                        "description": "2,5"
+                    },
+                    {
+                        "value2": ".Т2",
+                        "description": "2,5 для высокотемпературного кабеля"
+                    },
+                    {
+                        "value3": ".5",
+                        "description": "5"
+                    },
+                    {
+                        "value4": ".Т5",
+                        "description": "5 для высокотемпературного кабеля"
+                    },
+                    {
+                        "value5": "",
+                        "description": "нет"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pd100i_model_1x7_ip68",
+        "url": "https://owen.ru/product/pd100i_model_1x7_ip68",
+        "mods": []
+    },
+    {
+        "sku": "moduli_diskretnogo_vvoda_ethernet",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vvoda_ethernet",
+        "mods": []
+    },
+    {
+        "sku": "iskra",
+        "url": "https://owen.ru/product/iskra",
+        "mods": [
+            {
+                "header": "Сигнал",
+                "items": [
+                    {
+                        "value1": "АТ",
+                        "description": "для подключения датчиков с унифицированным выходным сигналом тока"
+                    },
+                    {
+                        "value2": "ТП",
+                        "description": "для подключения термопар и датчиков с унифицированным выходным сигналом напряжения -1..+1 В"
+                    },
+                    {
+                        "value3": "ТС",
+                        "description": "для подключения термосопротивлений"
+                    },
+                    {
+                        "value4": "СК1",
+                        "description": "дискретный сигнал, 1 канал подключения для ПДУ-1.1-Ex, ПДУ-2.1-Ex, ПДУ-3.1-Ex"
+                    },
+                    {
+                        "value5": "СК2",
+                        "description": "дискретный сигнал, 2 канала подключения для ПДУ-1.2-Ex, ПДУ-2.2-Ex, ПДУ-3.2-Ex"
+                    },
+                    {
+                        "value6": "СК3",
+                        "description": "дискретный сигнал, 3 канала подключения для ПДУ-3.3-Ex"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "battery_12v_7ah",
+        "url": "https://owen.ru/product/battery_12v_7ah",
+        "mods": []
+    },
+    {
+        "sku": "pchv_m01",
+        "url": "https://owen.ru/product/pchv_m01",
+        "mods": []
+    },
+    {
+        "sku": "termostati_dlya_elektrotehnicheskih_shkafov_meyertec_mtk_st",
+        "url": "https://owen.ru/product/termostati_dlya_elektrotehnicheskih_shkafov_meyertec_mtk_st",
+        "mods": []
+    },
+    {
+        "sku": "itp17",
+        "url": "https://owen.ru/product/itp17",
+        "mods": []
+    },
+    {
+        "sku": "sau_m6",
+        "url": "https://owen.ru/product/sau_m6",
+        "mods": []
+    },
+    {
+        "sku": "razemnie_soediniteli_m12_tip_a",
+        "url": "https://owen.ru/product/razemnie_soediniteli_m12_tip_a",
+        "mods": []
+    },
+    {
+        "sku": "dtp_termopari_na_osnove_ktms",
+        "url": "https://owen.ru/product/dtp_termopari_na_osnove_ktms",
+        "mods": []
+    },
+    {
+        "sku": "montazhnie_kolodki_kippribor_pyf_029be",
+        "url": "https://owen.ru/product/montazhnie_kolodki_kippribor_pyf_029be",
+        "mods": []
+    },
+    {
+        "sku": "si10",
+        "url": "https://owen.ru/product/si10",
+        "mods": []
+    },
+    {
+        "sku": "bkk1",
+        "url": "https://owen.ru/product/bkk1",
+        "mods": [
+            {
+                "header": "Напряжение питания",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "24 В постоянного тока, выходы – транзисторные ключи"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "220 В переменного тока, выходы – э/м реле"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "trm32",
+        "url": "https://owen.ru/product/trm32",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ4",
+                        "description": "щитовой, 96x96x145 мм, IP54*"
+                    },
+                    {
+                        "value2": "Щ7",
+                        "description": "щитовой, 144х169х50,5 мм, IP54*"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса связи",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "без интерфейса связи"
+                    },
+                    {
+                        "value2": ".RS",
+                        "description": "с интерфейсом связи RS-485 (по заказу)  (ТРМ32-Щ4.01.RS и ТРМ32-Щ4.03.RS)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "meyertec_mst",
+        "url": "https://owen.ru/product/meyertec_mst",
+        "mods": []
+    },
+    {
+        "sku": "vuga1",
+        "url": "https://owen.ru/product/vuga1",
+        "mods": []
+    },
+    {
+        "sku": "dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj",
+        "url": "https://owen.ru/product/dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj",
+        "mods": []
+    },
+    {
+        "sku": "trm33",
+        "url": "https://owen.ru/product/trm33",
+        "mods": [
+            {
+                "header": "Наличие интерфейса связи",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "без интерфейса связи"
+                    },
+                    {
+                        "value2": ".RS",
+                        "description": "с интерфейсом связи RS-485 (по заказу)  (ТРМ33-Щ4.01.RS и ТРМ33-Щ4.03.RS)"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса связи",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "без интерфейса связи"
+                    },
+                    {
+                        "value2": ".RS",
+                        "description": "с интерфейсом RS-485 и для подключения ТС с R=100 и 50 Ом (по заказу)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "preobrazovateli_vo_vzrivozashishennom_ispolnenii_pd100_di_111_exia_115_exd",
+        "url": "https://owen.ru/product/preobrazovateli_vo_vzrivozashishennom_ispolnenii_pd100_di_111_exia_115_exd",
+        "mods": []
+    },
+    {
+        "sku": "owen_configurator",
+        "url": "https://owen.ru/product/owen_configurator",
+        "mods": []
+    },
+    {
+        "sku": "datchik_CO",
+        "url": "https://owen.ru/product/datchik_CO",
+        "mods": []
+    },
+    {
+        "sku": "rd55_di",
+        "url": "https://owen.ru/product/rd55_di",
+        "mods": []
+    },
+    {
+        "sku": "pdu_rs_exd",
+        "url": "https://owen.ru/product/pdu_rs_exd",
+        "mods": []
+    },
+    {
+        "sku": "sensor_CO",
+        "url": "https://owen.ru/product/sensor_CO",
+        "mods": []
+    },
+    {
+        "sku": "smi2_m",
+        "url": "https://owen.ru/product/smi2_m",
+        "mods": []
+    },
+    {
+        "sku": "as4m",
+        "url": "https://owen.ru/product/as4m",
+        "mods": []
+    },
+    {
+        "sku": "battery_logger100",
+        "url": "https://owen.ru/product/battery_logger100",
+        "mods": []
+    },
+    {
+        "sku": "polygon",
+        "url": "https://owen.ru/product/polygon",
+        "mods": []
+    },
+    {
+        "sku": "kxu1",
+        "url": "https://owen.ru/product/kxu1",
+        "mods": []
+    },
+    {
+        "sku": "termosoprotivleniya_termopari_s_npt_dts_i_dtp_i",
+        "url": "https://owen.ru/product/termosoprotivleniya_termopari_s_npt_dts_i_dtp_i",
+        "mods": []
+    },
+    {
+        "sku": "ibp60zd_24",
+        "url": "https://owen.ru/product/ibp60zd_24",
+        "mods": []
+    },
+    {
+        "sku": "klemmnaya_korobka_kk_01",
+        "url": "https://owen.ru/product/klemmnaya_korobka_kk_01",
+        "mods": []
+    },
+    {
+        "sku": "modbus_opc_dde_server",
+        "url": "https://owen.ru/product/modbus_opc_dde_server",
+        "mods": []
+    },
+    {
+        "sku": "itp16",
+        "url": "https://owen.ru/product/itp16",
+        "mods": []
+    },
+    {
+        "sku": "tormoznie_rezistori_oven_rb",
+        "url": "https://owen.ru/product/tormoznie_rezistori_oven_rb",
+        "mods": []
+    },
+    {
+        "sku": "blok_obratnogo_osmosa_kosmaster",
+        "url": "https://owen.ru/product/blok_obratnogo_osmosa_kosmaster",
+        "mods": []
+    },
+    {
+        "sku": "codesys_v2",
+        "url": "https://owen.ru/product/codesys_v2",
+        "mods": []
+    },
+    {
+        "sku": "multi_protocol_masteropc_server",
+        "url": "https://owen.ru/product/multi_protocol_masteropc_server",
+        "mods": []
+    },
+    {
+        "sku": "dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj_exia",
+        "url": "https://owen.ru/product/dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj_exia",
+        "mods": []
+    },
+    {
+        "sku": "bloki_ventil_nie_owen_bv",
+        "url": "https://owen.ru/product/bloki_ventil_nie_owen_bv",
+        "mods": [
+            {
+                "header": "Тип вентильного блока",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "одновентильный"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "двухвентильный"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "трехвентильный"
+                    }
+                ]
+            },
+            {
+                "header": "Тип дренажа",
+                "items": [
+                    {
+                        "value1": "0",
+                        "description": "без дренажа"
+                    },
+                    {
+                        "value2": "1",
+                        "description": "вентиль"
+                    },
+                    {
+                        "value3": "2",
+                        "description": "игольчатый болт"
+                    },
+                    {
+                        "value4": "3",
+                        "description": "винтовая пробка"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ok50",
+        "url": "https://owen.ru/product/ok50",
+        "mods": []
+    },
+    {
+        "sku": "pkg100_co2",
+        "url": "https://owen.ru/product/pkg100_co2",
+        "mods": []
+    },
+    {
+        "sku": "pd100i_modeli_811_871_881_exia_datchik_davleniya_dlya_gazoraspredelitel_nih_sistem",
+        "url": "https://owen.ru/product/pd100i_modeli_811_871_881_exia_datchik_davleniya_dlya_gazoraspredelitel_nih_sistem",
+        "mods": [
+            {
+                "header": "Тип давления",
+                "items": [
+                    {
+                        "value1": "ДИ",
+                        "description": "избыточное"
+                    },
+                    {
+                        "value2": "ДВ",
+                        "description": "вакуумметрическое"
+                    },
+                    {
+                        "value3": "ДИВ",
+                        "description": "избыточно-вакуумметрическое"
+                    }
+                ]
+            },
+            {
+                "header": "Диапазон измерения, МПа",
+                "items": [
+                    {
+                        "value1": "0,0002",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,00025",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,0003",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,0004",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,0006",
+                        "description": ""
+                    },
+                    {
+                        "value6": "0,0006",
+                        "description": ""
+                    },
+                    {
+                        "value7": "0,0008",
+                        "description": ""
+                    },
+                    {
+                        "value8": "0,001",
+                        "description": ""
+                    },
+                    {
+                        "value9": "0,00125",
+                        "description": ""
+                    },
+                    {
+                        "value10": "0,0016",
+                        "description": ""
+                    },
+                    {
+                        "value11": "0,0025",
+                        "description": ""
+                    },
+                    {
+                        "value12": "0,003",
+                        "description": ""
+                    },
+                    {
+                        "value13": "0,004",
+                        "description": ""
+                    },
+                    {
+                        "value14": "0,005",
+                        "description": ""
+                    },
+                    {
+                        "value15": "0,006",
+                        "description": ""
+                    },
+                    {
+                        "value16": "0,008",
+                        "description": ""
+                    },
+                    {
+                        "value17": "0,01",
+                        "description": ""
+                    },
+                    {
+                        "value18": "0,0125",
+                        "description": ""
+                    },
+                    {
+                        "value19": "0,016",
+                        "description": ""
+                    },
+                    {
+                        "value20": "0,025",
+                        "description": ""
+                    },
+                    {
+                        "value21": "0,04",
+                        "description": ""
+                    },
+                    {
+                        "value22": "0,05",
+                        "description": ""
+                    },
+                    {
+                        "value23": "0,06",
+                        "description": ""
+                    },
+                    {
+                        "value24": "0,08",
+                        "description": ""
+                    },
+                    {
+                        "value25": "0,1",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Присоединение к процессу",
+                "items": [
+                    {
+                        "value1": "811",
+                        "description": "М20х1,5"
+                    },
+                    {
+                        "value2": "871",
+                        "description": "G1/2"
+                    },
+                    {
+                        "value3": "881",
+                        "description": "G1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности, % от ВПИ",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5"
+                    },
+                    {
+                        "value3": "1,0",
+                        "description": "±1,0"
+                    },
+                    {
+                        "value4": "1,5",
+                        "description": "±1,5"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ustrojstva_dempfernie_owen_ud",
+        "url": "https://owen.ru/product/ustrojstva_dempfernie_owen_ud",
+        "mods": []
+    },
+    {
+        "sku": "moduli_analogovogo_vvoda_s_universal_nimi_vhodami_ethernet_mv210",
+        "url": "https://owen.ru/product/moduli_analogovogo_vvoda_s_universal_nimi_vhodami_ethernet_mv210",
+        "mods": []
+    },
+    {
+        "sku": "pr102",
+        "url": "https://owen.ru/product/pr102",
+        "mods": [
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "230",
+                        "description": "~230"
+                    }
+                ]
+            },
+            {
+                "header": "Тип и количество входов-выходов",
+                "items": [
+                    {
+                        "value1": "01",
+                        "description": "24 DI, 16 DO (Р)"
+                    },
+                    {
+                        "value2": "11",
+                        "description": "24 DI, 16 DO (К)"
+                    },
+                    {
+                        "value3": "03",
+                        "description": "16 DI, 8 AI, 16 DO (Р)"
+                    },
+                    {
+                        "value4": "13",
+                        "description": "16 DI, 8 AI, 16 DO (К)"
+                    },
+                    {
+                        "value5": "06",
+                        "description": "16 DI, 8 AI, 14 DO (Р), 2 АО"
+                    },
+                    {
+                        "value6": "16",
+                        "description": "16 DI, 8 AI, 14 DO (К), 2 АО"
+                    }
+                ]
+            },
+            {
+                "header": "Интерфейс:",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "1 × RS-485"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "2 × RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "moduli_analogovogo_vivoda_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_analogovogo_vivoda_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "izmeriteli_parametrov_elektricheskoj_seti",
+        "url": "https://owen.ru/product/izmeriteli_parametrov_elektricheskoj_seti",
+        "mods": [
+            {
+                "header": "Тип измерителя",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "входной сигнал от 40 до 400 В"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "входной сигнал от 5 до 400 В"
+                    }
+                ]
+            },
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ3",
+                        "description": "76×34×70 мм, IP54"
+                    },
+                    {
+                        "value2": "Щ9",
+                        "description": "26×48×65 мм, IP54"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "bust2",
+        "url": "https://owen.ru/product/bust2",
+        "mods": []
+    },
+    {
+        "sku": "moduli_diskretnogo_vvoda_vivoda_ethernet",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vvoda_vivoda_ethernet",
+        "mods": []
+    },
+    {
+        "sku": "radiatori_ohlazhdeniya",
+        "url": "https://owen.ru/product/radiatori_ohlazhdeniya",
+        "mods": []
+    },
+    {
+        "sku": "komplekt_montazha_npt2",
+        "url": "https://owen.ru/product/komplekt_montazha_npt2",
+        "mods": []
+    },
+    {
+        "sku": "pm01",
+        "url": "https://owen.ru/product/pm01",
+        "mods": [
+            {
+                "header": "Напряжение питания",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "-10...30 В постояннока тока (номинальное =24 В)"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "90...250 В переменного тока частотой 47... 63 Гц ( номинальное 220 В)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dtpxx5m_rs",
+        "url": "https://owen.ru/product/dtpxx5m_rs",
+        "mods": []
+    },
+    {
+        "sku": "gaskets_rings",
+        "url": "https://owen.ru/product/gaskets_rings",
+        "mods": []
+    },
+    {
+        "sku": "dtphhh5_termopari_s_kommutatcionnoj_golovkoj",
+        "url": "https://owen.ru/product/dtphhh5_termopari_s_kommutatcionnoj_golovkoj",
+        "mods": []
+    },
+    {
+        "sku": "promezhutochnie_rele_kippribor_rs",
+        "url": "https://owen.ru/product/promezhutochnie_rele_kippribor_rs",
+        "mods": []
+    },
+    {
+        "sku": "rg10",
+        "url": "https://owen.ru/product/rg10",
+        "mods": []
+    },
+    {
+        "sku": "protective_covers",
+        "url": "https://owen.ru/product/protective_covers",
+        "mods": []
+    },
+    {
+        "sku": "moduli_izmereniya_parametrov_elektricheskoj_seti",
+        "url": "https://owen.ru/product/moduli_izmereniya_parametrov_elektricheskoj_seti",
+        "mods": []
+    },
+    {
+        "sku": "2trm0",
+        "url": "https://owen.ru/product/2trm0",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой, 96х96х53 мм, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "щитовой, 96х48х100 мм, IP54"
+                    },
+                    {
+                        "value3": "Д",
+                        "description": "DIN-реечный, 72х90х58 мм, IP20"
+                    },
+                    {
+                        "value4": "Щ5",
+                        "description": "щитовой, 48х48х102 мм, IP54"
+                    },
+                    {
+                        "value5": "Н",
+                        "description": "настенный, 129×110×69 мм, IP66"
+                    }
+                ]
+            },
+            {
+                "header": "Тип индикации",
+                "items": [
+                    {
+                        "value1": "2",
+                        "description": "красные индикаторы"
+                    },
+                    {
+                        "value2": "3",
+                        "description": "зеленые индикаторы"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "Без интерфейса RS-485 (при заказе не указывается)"
+                    },
+                    {
+                        "value2": "RS",
+                        "description": "с интерфейсом RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "bloki_pitaniya_dlya_datchikov",
+        "url": "https://owen.ru/product/bloki_pitaniya_dlya_datchikov",
+        "mods": []
+    },
+    {
+        "sku": "bobishki_datchiki_davlenie",
+        "url": "https://owen.ru/product/bobishki_datchiki_davlenie",
+        "mods": []
+    },
+    {
+        "sku": "pd200_visokotochnii_intelektualnii_datchik_davleniay_ex",
+        "url": "https://owen.ru/product/pd200_visokotochnii_intelektualnii_datchik_davleniay_ex",
+        "mods": []
+    },
+    {
+        "sku": "ac6_m",
+        "url": "https://owen.ru/product/ac6_m",
+        "mods": []
+    },
+    {
+        "sku": "konfiguratori_programmatori",
+        "url": "https://owen.ru/product/konfiguratori_programmatori",
+        "mods": []
+    },
+    {
+        "sku": "montazhnie_kolodki_kippribor_pyf_011be",
+        "url": "https://owen.ru/product/montazhnie_kolodki_kippribor_pyf_011be",
+        "mods": []
+    },
+    {
+        "sku": "trm151",
+        "url": "https://owen.ru/product/trm151",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой, 96х96х70 мм, IP54"
+                    },
+                    {
+                        "value2": "Н",
+                        "description": "настенный, 105х130х65 мм, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Выход 1",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "реле электромагнитное 4 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара 50 мА 600 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "для управления твердотельным реле 4…6 В 50 мА"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Выход 2",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": ""
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара 50 мА 600 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "для управления твердотельным реле 4…6 В 50 мА"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Модификация по алгоритму работы",
+                "items": [
+                    {
+                        "value1": "00",
+                        "description": ""
+                    },
+                    {
+                        "value2": "01",
+                        "description": "двухканальный регулятор"
+                    },
+                    {
+                        "value3": "03",
+                        "description": "одноканальный регулятор для управления задвижкой"
+                    },
+                    {
+                        "value4": "04",
+                        "description": "одноканальный регулятор с аварийной сигнализацией"
+                    },
+                    {
+                        "value5": "05",
+                        "description": "одноканальный регулятор с коррекцией уставки по графику и аварийной сигнализацией"
+                    },
+                    {
+                        "value6": "06",
+                        "description": "одноканальный регулятор для управления задвижкой с коррекцией уставки по графику"
+                    },
+                    {
+                        "value7": "07",
+                        "description": "одноканальный регулятор с регистрацией измеренной величины на ЦАП"
+                    },
+                    {
+                        "value8": "08",
+                        "description": "регулятор температуры и влажности"
+                    },
+                    {
+                        "value9": "09",
+                        "description": "одноканальный регулятор с генерацией переодических импульсов на втором выходе"
+                    },
+                    {
+                        "value10": "10",
+                        "description": "одноканальный регулятор для управления системой «нагреватель–холодильник»"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "uo_100_40",
+        "url": "https://owen.ru/product/uo_100_40",
+        "mods": []
+    },
+    {
+        "sku": "tx01rs",
+        "url": "https://owen.ru/product/tx01rs",
+        "mods": [
+            {
+                "header": "Напряжения питания",
+                "items": [
+                    {
+                        "value1": "224",
+                        "description": "от 90...264 В (номиналы: ~110 В и ~220 В)  или =20...34 В (номиналы: =24 В)"
+                    },
+                    {
+                        "value2": "24",
+                        "description": "=10,5...30 В (номиналы: =12 В и =24 В)"
+                    }
+                ]
+            },
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Н",
+                        "description": "настенный, 105×130×65 мм, IP44"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "щитовой, 96×48×100 мм, IP54 (со стороны передней панели)"
+                    }
+                ]
+            },
+            {
+                "header": "Тип аналогового ВУ",
+                "items": [
+                    {
+                        "value1": "И",
+                        "description": "ЦАП «параметр-ток 4...20 мА»"
+                    },
+                    {
+                        "value2": "У",
+                        "description": "ЦАП «параметр-напряжение 0...10 В»"
+                    },
+                    {
+                        "value3": "",
+                        "description": "без аналогового ВУ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "mpr51",
+        "url": "https://owen.ru/product/mpr51",
+        "mods": [
+            {
+                "header": "Тип входа",
+                "items": [
+                    {
+                        "value1": "01",
+                        "description": "ТС 50 для подключения датчиков типа ТСМ 50М/Cu50 или ТСП 50П/Pt50"
+                    },
+                    {
+                        "value2": "03",
+                        "description": "ТС 100 для подключения датчиков типа ТСМ 100М/Cu100 или ТСП 100П/Pt100"
+                    }
+                ]
+            },
+            {
+                "header": "Интерфейс RS-485",
+                "items": [
+                    {
+                        "value2": "RS",
+                        "description": "указывается при заказе модификации прибора с интерфейсом RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "br24k",
+        "url": "https://owen.ru/product/br24k",
+        "mods": []
+    },
+    {
+        "sku": "rd55_dd",
+        "url": "https://owen.ru/product/rd55_dd",
+        "mods": []
+    },
+    {
+        "sku": "kippribor_mpr",
+        "url": "https://owen.ru/product/kippribor_mpr",
+        "mods": []
+    },
+    {
+        "sku": "pshs01",
+        "url": "https://owen.ru/product/pshs01",
+        "mods": []
+    },
+    {
+        "sku": "datchiki_urovnya_poplavkovie_pdu",
+        "url": "https://owen.ru/product/datchiki_urovnya_poplavkovie_pdu",
+        "mods": []
+    },
+    {
+        "sku": "ventilyatori_ohlazhdeniya_kippribor_serii_vent_i_vent",
+        "url": "https://owen.ru/product/ventilyatori_ohlazhdeniya_kippribor_serii_vent_i_vent",
+        "mods": [
+            {
+                "header": "Размер корпуса, мм",
+                "items": [
+                    {
+                        "value1": "80",
+                        "description": "80×80"
+                    },
+                    {
+                        "value2": "92",
+                        "description": "92×92"
+                    },
+                    {
+                        "value3": "120",
+                        "description": "120×120"
+                    },
+                    {
+                        "value4": "127",
+                        "description": "127×127"
+                    },
+                    {
+                        "value5": "150",
+                        "description": "150×150"
+                    },
+                    {
+                        "value6": "160",
+                        "description": "160×160"
+                    },
+                    {
+                        "value7": "172",
+                        "description": "172×150"
+                    },
+                    {
+                        "value8": "180",
+                        "description": "180×180"
+                    },
+                    {
+                        "value9": "208",
+                        "description": "208×208"
+                    },
+                    {
+                        "value10": "222",
+                        "description": "∅222"
+                    },
+                    {
+                        "value11": "225",
+                        "description": "∅225"
+                    },
+                    {
+                        "value12": "254",
+                        "description": "∅254"
+                    },
+                    {
+                        "value13": "280",
+                        "description": "∅280"
+                    }
+                ]
+            },
+            {
+                "header": "Толщина корпуса, мм",
+                "items": [
+                    {
+                        "value1": "25",
+                        "description": ""
+                    },
+                    {
+                        "value2": "38",
+                        "description": ""
+                    },
+                    {
+                        "value3": "51",
+                        "description": ""
+                    },
+                    {
+                        "value4": "55",
+                        "description": ""
+                    },
+                    {
+                        "value5": "60",
+                        "description": ""
+                    },
+                    {
+                        "value6": "65",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Напряжение, В",
+                "items": [
+                    {
+                        "value1": "24VDC",
+                        "description": "24 (постоянный)"
+                    },
+                    {
+                        "value2": "220VAC",
+                        "description": "220 (переменный)"
+                    }
+                ]
+            },
+            {
+                "header": "Количество лопастей",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": ""
+                    },
+                    {
+                        "value2": "7",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Форма корпуса",
+                "items": [
+                    {
+                        "value1": "S",
+                        "description": "Квадратный"
+                    },
+                    {
+                        "value2": "R",
+                        "description": "Круглый"
+                    },
+                    {
+                        "value3": "O",
+                        "description": "Овальный"
+                    }
+                ]
+            },
+            {
+                "header": "Уровень производительности",
+                "items": [
+                    {
+                        "value1": "L",
+                        "description": "Низкая"
+                    },
+                    {
+                        "value2": "M",
+                        "description": "Средняя"
+                    },
+                    {
+                        "value3": "H",
+                        "description": "Высокая"
+                    },
+                    {
+                        "value4": "X",
+                        "description": "Максимальная"
+                    }
+                ]
+            },
+            {
+                "header": "Температурный диапазон, ⁰С",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "-20...+85"
+                    },
+                    {
+                        "value2": "С50",
+                        "description": "-50...+85"
+                    },
+                    {
+                        "value3": "H10",
+                        "description": "-20...+100"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "trm148",
+        "url": "https://owen.ru/product/trm148",
+        "mods": [
+            {
+                "header": "Типы выходов 1...8",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 ЦАП 4…20 мА"
+                    },
+                    {
+                        "value6": "ИИИИУУУУ",
+                        "description": "4 ЦАП 4…20 мА, 4 ЦАП 0..10 В"
+                    }
+                ]
+            },
+            {
+                "header": "тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ7",
+                        "description": "щитовой, 169х138х50 мм, IP54 со стороны передней панели"
+                    },
+                    {
+                        "value2": "",
+                        "description": "Щитовой Щ4 ( при заказе не указывается), 96х96х145 мм, IP54 со стороны передней панели"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 1",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 2",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 4",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 5",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода 6",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода 7",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 8",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "э/м реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "выход для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип корпуса",
+                "items": [
+                    {
+                        "value1": ".Щ7",
+                        "description": "щитовой, 169х138х50 мм, IP54 со стороны передней панели"
+                    },
+                    {
+                        "value2": "",
+                        "description": "Щитовой Щ4 ( при заказе не указывается), 96х96х145 мм, IP54 со стороны передней панели"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "scada_sistema_oven_telemehanika_lajt",
+        "url": "https://owen.ru/product/scada_sistema_oven_telemehanika_lajt",
+        "mods": []
+    },
+    {
+        "sku": "montazhnie_kolodki_kippribor_pyf_dlya_rele_kippribor_rp",
+        "url": "https://owen.ru/product/montazhnie_kolodki_kippribor_pyf_dlya_rele_kippribor_rp",
+        "mods": []
+    },
+    {
+        "sku": "si30",
+        "url": "https://owen.ru/product/si30",
+        "mods": [
+            {
+                "header": "Напряжение питания",
+                "items": [
+                    {
+                        "value1": "220",
+                        "description": "90...250 В переменного тока 47...63 Гц"
+                    },
+                    {
+                        "value2": "24",
+                        "description": "10,5...30 В постоянного тока"
+                    }
+                ]
+            },
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "Щитовой, Щ1 96×96×70, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "Щитовой, Щ2 96×48×100, IP54"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "Настенный, Н 105×130×65, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "контакты электромагнитного реле 8 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "оптопара транзисторная n-p-n типа 0,2 А 50 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "оптопара симисторная 40 мА 240 В"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "termopreobrazovatel_soprotivleniya_dlya_izmereniya_temperaturi_vozduha_datchik_temperaturi_vozduha",
+        "url": "https://owen.ru/product/termopreobrazovatel_soprotivleniya_dlya_izmereniya_temperaturi_vozduha_datchik_temperaturi_vozduha",
+        "mods": []
+    },
+    {
+        "sku": "psu_1",
+        "url": "https://owen.ru/product/psu_1",
+        "mods": []
+    },
+    {
+        "sku": "codesys_v3",
+        "url": "https://owen.ru/product/codesys_v3",
+        "mods": []
+    },
+    {
+        "sku": "dz_so",
+        "url": "https://owen.ru/product/dz_so",
+        "mods": []
+    },
+    {
+        "sku": "plk110_m02",
+        "url": "https://owen.ru/product/plk110_m02",
+        "mods": [
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "~220"
+                    }
+                ]
+            },
+            {
+                "header": "Тип и количество входов-выходов:",
+                "items": [
+                    {
+                        "value1": "30",
+                        "description": "2 × FDI + 16 × DI / 12 × DO"
+                    },
+                    {
+                        "value2": "32",
+                        "description": "2 × FDI + 16 × DI / 14 × DO"
+                    },
+                    {
+                        "value3": "60",
+                        "description": "4 × FDI + 32 × DI / 24 × DO"
+                    }
+                ]
+            },
+            {
+                "header": "Выход:",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "Электромагнитное реле: 3 А"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "Транзисторная оптопара n-p-n: 400 мА"
+                    }
+                ]
+            },
+            {
+                "header": "Объем памяти сетевых переменных, режим Slave:",
+                "items": [
+                    {
+                        "value1": "L",
+                        "description": "До 360 Б"
+                    },
+                    {
+                        "value2": "М",
+                        "description": "До 100 кБ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pr225",
+        "url": "https://owen.ru/product/pr225",
+        "mods": []
+    },
+    {
+        "sku": "bp60k",
+        "url": "https://owen.ru/product/bp60k",
+        "mods": []
+    },
+    {
+        "sku": "pdu_rs_urovnemer_rs485",
+        "url": "https://owen.ru/product/pdu_rs_urovnemer_rs485",
+        "mods": []
+    },
+    {
+        "sku": "ksn210",
+        "url": "https://owen.ru/product/ksn210",
+        "mods": []
+    },
+    {
+        "sku": "mkon",
+        "url": "https://owen.ru/product/mkon",
+        "mods": []
+    },
+    {
+        "sku": "ibp60b",
+        "url": "https://owen.ru/product/ibp60b",
+        "mods": []
+    },
+    {
+        "sku": "beskontaktnie_induktivnie_datchiki_kippribor",
+        "url": "https://owen.ru/product/beskontaktnie_induktivnie_datchiki_kippribor",
+        "mods": [
+            {
+                "header": "Корпус, мм",
+                "items": [
+                    {
+                        "value1": "08",
+                        "description": "8"
+                    },
+                    {
+                        "value2": "12",
+                        "description": "12"
+                    },
+                    {
+                        "value3": "18",
+                        "description": "18"
+                    },
+                    {
+                        "value4": "30",
+                        "description": "30"
+                    }
+                ]
+            },
+            {
+                "header": "Исполнение",
+                "items": [
+                    {
+                        "value1": "M",
+                        "description": "неутапливаемое"
+                    },
+                    {
+                        "value2": "",
+                        "description": "утапливаемое"
+                    }
+                ]
+            },
+            {
+                "header": "Длина корпуса, мм",
+                "items": [
+                    {
+                        "value1": "45",
+                        "description": ""
+                    },
+                    {
+                        "value2": "50",
+                        "description": ""
+                    },
+                    {
+                        "value3": "55",
+                        "description": ""
+                    },
+                    {
+                        "value4": "60",
+                        "description": ""
+                    },
+                    {
+                        "value5": "68",
+                        "description": ""
+                    },
+                    {
+                        "value6": "80",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Расстояние срабатывания, мм",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": ""
+                    },
+                    {
+                        "value2": "2",
+                        "description": ""
+                    },
+                    {
+                        "value3": "4",
+                        "description": ""
+                    },
+                    {
+                        "value4": "5",
+                        "description": ""
+                    },
+                    {
+                        "value5": "8",
+                        "description": ""
+                    },
+                    {
+                        "value6": "10",
+                        "description": ""
+                    },
+                    {
+                        "value7": "15",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Схема подключения",
+                "items": [
+                    {
+                        "value1": "N",
+                        "description": "NPN"
+                    },
+                    {
+                        "value2": "P",
+                        "description": "PNP"
+                    },
+                    {
+                        "value3": "D",
+                        "description": "Двухпроводная (постоянный ток)"
+                    },
+                    {
+                        "value4": "A",
+                        "description": "Двухпроводная (переменный ток)"
+                    }
+                ]
+            },
+            {
+                "header": "Коммутационная функция",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "N0"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "NC"
+                    },
+                    {
+                        "value3": "4",
+                        "description": "N0+NC"
+                    }
+                ]
+            },
+            {
+                "header": "Питание",
+                "items": [
+                    {
+                        "value1": "U1",
+                        "description": "= 10...30 VDC"
+                    },
+                    {
+                        "value2": "U4",
+                        "description": "= 10...60 VDC"
+                    },
+                    {
+                        "value3": "U7",
+                        "description": "~ 20...250 VAC"
+                    }
+                ]
+            },
+            {
+                "header": "Подключение",
+                "items": [
+                    {
+                        "value1": "К",
+                        "description": "Кабель 2 м"
+                    },
+                    {
+                        "value2": "E",
+                        "description": "Разъем М12"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "plk210_4g",
+        "url": "https://owen.ru/product/plk210_4g",
+        "mods": []
+    },
+    {
+        "sku": "ok30",
+        "url": "https://owen.ru/product/ok30",
+        "mods": []
+    },
+    {
+        "sku": "dtsxx2_termosoprotivleniya_s_kommutatcionnim_razemom_din",
+        "url": "https://owen.ru/product/dtsxx2_termosoprotivleniya_s_kommutatcionnim_razemom_din",
+        "mods": []
+    },
+    {
+        "sku": "dtphhh1_termopari_poverhnostnie",
+        "url": "https://owen.ru/product/dtphhh1_termopari_poverhnostnie",
+        "mods": []
+    },
+    {
+        "sku": "plk160",
+        "url": "https://owen.ru/product/plk160",
+        "mods": [
+            {
+                "header": "Тип и количество входов-выходов: 4×FDI+12×DI/12×DO/8×AI/4×AО",
+                "items": [
+                    {
+                        "value1": "ПЛК160",
+                        "description": "4 × FDI + 12 × DI / 12 × DO /  8 × AI / 4 × AО"
+                    }
+                ]
+            },
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "~220"
+                    }
+                ]
+            },
+            {
+                "header": "Выход",
+                "items": [
+                    {
+                        "value1": "И",
+                        "description": "4 × ток 4...20 мА"
+                    },
+                    {
+                        "value2": "У",
+                        "description": "4 × напряжение 0...10 В"
+                    },
+                    {
+                        "value3": "А",
+                        "description": "4 × универсальных ток/напряжение"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ukt38",
+        "url": "https://owen.ru/product/ukt38",
+        "mods": [
+            {
+                "header": "Тип входа",
+                "items": [
+                    {
+                        "value1": "ТС",
+                        "description": "для подключения датчиков типа ТСМ 50М/100М, Cu50/Cu100 или ТСП 50П/100П, Pt50/Pt100"
+                    },
+                    {
+                        "value2": "ТП",
+                        "description": "для подключения термопар TXK(L), TXA(K), THH(N) или ТЖК(J)"
+                    },
+                    {
+                        "value3": "ТПП",
+                        "description": "для подключения термопар ТПП(S) или ТПП(R)"
+                    },
+                    {
+                        "value4": "АТ",
+                        "description": "для подключения датчиков с унифицированным выходным сигналом тока"
+                    },
+                    {
+                        "value5": "АН",
+                        "description": "для подключения датчиков с унифицированным выходным сигналом напряжения"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "datchiki_temperatury_pishchevoj_promyshlennosti",
+        "url": "https://owen.ru/product/datchiki_temperatury_pishchevoj_promyshlennosti",
+        "mods": []
+    },
+    {
+        "sku": "ksn210_2_1",
+        "url": "https://owen.ru/product/ksn210_2_1",
+        "mods": []
+    },
+    {
+        "sku": "termoelektricheskie_preobrazovateli_dtplhk_eh_i_dtpkha_eh_vo_vzrivozashishennom_ispolnenii",
+        "url": "https://owen.ru/product/termoelektricheskie_preobrazovateli_dtplhk_eh_i_dtpkha_eh_vo_vzrivozashishennom_ispolnenii",
+        "mods": []
+    },
+    {
+        "sku": "dtphhh4_termopari_s_kabel_nim_vivodom_na_osnove_ktms_exia",
+        "url": "https://owen.ru/product/dtphhh4_termopari_s_kabel_nim_vivodom_na_osnove_ktms_exia",
+        "mods": []
+    },
+    {
+        "sku": "motornie_drosseli",
+        "url": "https://owen.ru/product/motornie_drosseli",
+        "mods": [
+            {
+                "header": "Количество рабочих фаз",
+                "items": [
+                    {
+                        "value1": "О",
+                        "description": "1"
+                    },
+                    {
+                        "value2": "Т",
+                        "description": "3"
+                    }
+                ]
+            },
+            {
+                "header": "Ток, А",
+                "items": [
+                    {
+                        "value1": "002",
+                        "description": "2"
+                    },
+                    {
+                        "value2": "004",
+                        "description": "4"
+                    },
+                    {
+                        "value3": "006",
+                        "description": "6"
+                    },
+                    {
+                        "value4": "008",
+                        "description": "8"
+                    },
+                    {
+                        "value5": "010",
+                        "description": "10"
+                    },
+                    {
+                        "value6": "015",
+                        "description": "15"
+                    },
+                    {
+                        "value7": "016",
+                        "description": "16"
+                    },
+                    {
+                        "value8": "025",
+                        "description": "25"
+                    },
+                    {
+                        "value9": "030",
+                        "description": "30"
+                    },
+                    {
+                        "value10": "040",
+                        "description": "40"
+                    },
+                    {
+                        "value11": "050",
+                        "description": "50"
+                    },
+                    {
+                        "value12": "060",
+                        "description": "60"
+                    },
+                    {
+                        "value13": "080",
+                        "description": "80"
+                    },
+                    {
+                        "value14": "090",
+                        "description": "90"
+                    },
+                    {
+                        "value15": "120",
+                        "description": "120"
+                    },
+                    {
+                        "value16": "150",
+                        "description": "150"
+                    },
+                    {
+                        "value17": "200",
+                        "description": "200"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pchv3_m01",
+        "url": "https://owen.ru/product/pchv3_m01",
+        "mods": []
+    },
+    {
+        "sku": "npt_1k_ex",
+        "url": "https://owen.ru/product/npt_1k_ex",
+        "mods": []
+    },
+    {
+        "sku": "kms_f1",
+        "url": "https://owen.ru/product/kms_f1",
+        "mods": [
+            {
+                "header": "Выходы 1,2,3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "электромагнитное реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара структуры n-p-n-типа"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "И",
+                        "description": "ЦАП \"параметр - ток 4..20 мА\""
+                    },
+                    {
+                        "value5": "У",
+                        "description": "ЦАП \"параметр - напряжение 0...10 В\""
+                    },
+                    {
+                        "value6": "Т",
+                        "description": "Выход для управления твердотельным реле"
+                    }
+                ]
+            },
+            {
+                "header": "Выходы 1,2,3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "электромагнитное реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара структуры n-p-n-типа"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "И",
+                        "description": "ЦАП \"параметр - ток 4..20 мА\""
+                    },
+                    {
+                        "value5": "У",
+                        "description": "ЦАП \"параметр - напряжение 0...10 В\""
+                    },
+                    {
+                        "value6": "Т",
+                        "description": "Выход для управления твердотельным реле"
+                    }
+                ]
+            },
+            {
+                "header": "Выходы 1,2,3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "электромагнитное реле"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара структуры n-p-n-типа"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара"
+                    },
+                    {
+                        "value4": "И",
+                        "description": "ЦАП \"параметр - ток 4..20 мА\""
+                    },
+                    {
+                        "value5": "У",
+                        "description": "ЦАП \"параметр - напряжение 0...10 В\""
+                    },
+                    {
+                        "value6": "Т",
+                        "description": "Выход для управления твердотельным реле"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "moduli_analogovogo_vvoda_signalov_tenzodatchikov",
+        "url": "https://owen.ru/product/moduli_analogovogo_vvoda_signalov_tenzodatchikov",
+        "mods": []
+    },
+    {
+        "sku": "setevie_drosseli_oven_rsorst",
+        "url": "https://owen.ru/product/setevie_drosseli_oven_rsorst",
+        "mods": [
+            {
+                "header": "Количество рабочих фаз",
+                "items": [
+                    {
+                        "value1": "О",
+                        "description": "1"
+                    },
+                    {
+                        "value2": "Т",
+                        "description": "3"
+                    }
+                ]
+            },
+            {
+                "header": "Ток, А",
+                "items": [
+                    {
+                        "value1": "002",
+                        "description": "2"
+                    },
+                    {
+                        "value2": "004",
+                        "description": "4"
+                    },
+                    {
+                        "value3": "006",
+                        "description": "6"
+                    },
+                    {
+                        "value4": "008",
+                        "description": "8"
+                    },
+                    {
+                        "value5": "010",
+                        "description": "10"
+                    },
+                    {
+                        "value6": "016",
+                        "description": "16"
+                    },
+                    {
+                        "value7": "020",
+                        "description": "20"
+                    },
+                    {
+                        "value8": "025",
+                        "description": "25"
+                    },
+                    {
+                        "value9": "035",
+                        "description": "35"
+                    },
+                    {
+                        "value10": "040",
+                        "description": "40"
+                    },
+                    {
+                        "value11": "050",
+                        "description": "50"
+                    },
+                    {
+                        "value12": "060",
+                        "description": "60"
+                    },
+                    {
+                        "value13": "080",
+                        "description": "80"
+                    },
+                    {
+                        "value14": "120",
+                        "description": "120"
+                    },
+                    {
+                        "value15": "160",
+                        "description": "160"
+                    },
+                    {
+                        "value16": "200",
+                        "description": "200"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "plk200",
+        "url": "https://owen.ru/product/plk200",
+        "mods": []
+    },
+    {
+        "sku": "gilzi_zashitnie",
+        "url": "https://owen.ru/product/gilzi_zashitnie",
+        "mods": []
+    },
+    {
+        "sku": "preobrazovateli_dlya_zhkh_pd100",
+        "url": "https://owen.ru/product/preobrazovateli_dlya_zhkh_pd100",
+        "mods": [
+            {
+                "header": "Диапазон измерения, МПа",
+                "items": [
+                    {
+                        "value1": "0,1",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,16",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,25",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,4",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,6",
+                        "description": ""
+                    },
+                    {
+                        "value6": "1,0",
+                        "description": ""
+                    },
+                    {
+                        "value7": "1,6",
+                        "description": ""
+                    },
+                    {
+                        "value8": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value9": "4,0",
+                        "description": ""
+                    },
+                    {
+                        "value10": "6,0",
+                        "description": ""
+                    },
+                    {
+                        "value11": "10,0",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Присоединение к процессу",
+                "items": [
+                    {
+                        "value1": "311",
+                        "description": "М20×1,5"
+                    },
+                    {
+                        "value2": "371",
+                        "description": "G1/2"
+                    },
+                    {
+                        "value3": "381",
+                        "description": "G1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности, % от ВПИ",
+                "items": [
+                    {
+                        "value1": "0,5",
+                        "description": "±0,5"
+                    },
+                    {
+                        "value2": "1,0",
+                        "description": "±1,0"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "as3_m",
+        "url": "https://owen.ru/product/as3_m",
+        "mods": []
+    },
+    {
+        "sku": "prm",
+        "url": "https://owen.ru/product/prm",
+        "mods": [
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "~220"
+                    }
+                ]
+            },
+            {
+                "header": "Тип и количество входов-выходов:",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "8 × DI / 8 × DO"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "4 × AI / 4 × DO"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "4 × AI / 2 × AO"
+                    },
+                    {
+                        "value4": "4",
+                        "description": "16 × DI"
+                    },
+                    {
+                        "value5": "5",
+                        "description": "16 × DO"
+                    },
+                    {
+                        "value6": "6",
+                        "description": "16 × DI / 12 × DO"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "masterscada_4d",
+        "url": "https://owen.ru/product/masterscada_4d",
+        "mods": []
+    },
+    {
+        "sku": "universalnye_kondyktometricheskie_datchiki",
+        "url": "https://owen.ru/product/universalnye_kondyktometricheskie_datchiki",
+        "mods": []
+    },
+    {
+        "sku": "ramka_montazhnaya_96x96",
+        "url": "https://owen.ru/product/ramka_montazhnaya_96x96",
+        "mods": []
+    },
+    {
+        "sku": "ku1411",
+        "url": "https://owen.ru/product/ku1411",
+        "mods": []
+    },
+    {
+        "sku": "pr_ip485",
+        "url": "https://owen.ru/product/pr_ip485",
+        "mods": []
+    },
+    {
+        "sku": "ipp120",
+        "url": "https://owen.ru/product/ipp120",
+        "mods": []
+    },
+    {
+        "sku": "owen_monitor",
+        "url": "https://owen.ru/product/owen_monitor",
+        "mods": []
+    },
+    {
+        "sku": "promezhutochnie_rele_kolodka_meyertec_msn",
+        "url": "https://owen.ru/product/promezhutochnie_rele_kolodka_meyertec_msn",
+        "mods": []
+    },
+    {
+        "sku": "zp1",
+        "url": "https://owen.ru/product/zp1",
+        "mods": []
+    },
+    {
+        "sku": "kabeli_k_preobrazovatelyam_termoelektricheskim",
+        "url": "https://owen.ru/product/kabeli_k_preobrazovatelyam_termoelektricheskim",
+        "mods": []
+    },
+    {
+        "sku": "bp100k",
+        "url": "https://owen.ru/product/bp100k",
+        "mods": []
+    },
+    {
+        "sku": "trm12",
+        "url": "https://owen.ru/product/trm12",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой, 96×96×53 мм, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "щитовой, 96×48×100 мм, IP54"
+                    },
+                    {
+                        "value3": "Щ5",
+                        "description": "щитовой, 48×48×103 мм, IP54"
+                    },
+                    {
+                        "value4": "Д",
+                        "description": "DIN-реечный, 88×90×59 мм, IP20"
+                    },
+                    {
+                        "value5": "Н",
+                        "description": "настенный, 110×129×69 мм, IP66"
+                    }
+                ]
+            },
+            {
+                "header": "Тип индикации",
+                "items": [
+                    {
+                        "value1": "2",
+                        "description": "красные индикаторы"
+                    },
+                    {
+                        "value2": "3",
+                        "description": "зеленые индикаторы"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "электромагнитное реле 8 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара 50 мА 250 В"
+                    },
+                    {
+                        "value4": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value5": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    },
+                    {
+                        "value6": "Т",
+                        "description": "выход 4…6 В 40 мА для управления твердотельным реле"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "электромагнитное реле 8 А 230 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "транзисторная оптопара n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "симисторная оптопара 50 мА 250 В"
+                    },
+                    {
+                        "value4": "И",
+                        "description": "цифроаналоговый преобразователь «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value5": "У",
+                        "description": "цифроаналоговый преобразователь «параметр – напряжение 0…10 В»"
+                    },
+                    {
+                        "value6": "Т",
+                        "description": "выход 4…6 В 40 мА для управления твердотельным реле"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса RS-485",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "без интерфейса RS-485 (при заказе не указывается)"
+                    },
+                    {
+                        "value2": ".RS",
+                        "description": "с интерфейсом RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dy_konduktometricheskie_datchiki_dlya_rezervuarov",
+        "url": "https://owen.ru/product/dy_konduktometricheskie_datchiki_dlya_rezervuarov",
+        "mods": [
+            {
+                "header": "количество электродов",
+                "items": [
+                    {
+                        "value1": "3",
+                        "description": ""
+                    },
+                    {
+                        "value2": "4",
+                        "description": ""
+                    },
+                    {
+                        "value3": "5",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Длина электродов L, м",
+                "items": [
+                    {
+                        "value1": "0,5",
+                        "description": ""
+                    },
+                    {
+                        "value2": "1",
+                        "description": ""
+                    },
+                    {
+                        "value3": "1,95",
+                        "description": ""
+                    },
+                    {
+                        "value4": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value5": "3",
+                        "description": ""
+                    },
+                    {
+                        "value6": "3,5",
+                        "description": ""
+                    },
+                    {
+                        "value7": "4",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "komplekti_termometrov_soprotivleniya_kdts",
+        "url": "https://owen.ru/product/komplekti_termometrov_soprotivleniya_kdts",
+        "mods": []
+    },
+    {
+        "sku": "bobishki_datchiki_urovnya",
+        "url": "https://owen.ru/product/bobishki_datchiki_urovnya",
+        "mods": []
+    },
+    {
+        "sku": "poplavkovie_datchiki_urovnya_vo_vzrivozashishennom_ispolnenii_oven_pdu_ex",
+        "url": "https://owen.ru/product/poplavkovie_datchiki_urovnya_vo_vzrivozashishennom_ispolnenii_oven_pdu_ex",
+        "mods": [
+            {
+                "header": "Тип конструктивного исполнения",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "горизонтальный монтаж, цилиндрический поплавок"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "вертикальный монтаж, цилиндрический поплавок"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "вертикальный монтаж, шарообразный поплавок"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "Нормально разомкнутый"
+                    },
+                    {
+                        "value2": ".К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            },
+            {
+                "header": "Тип конструктивного исполнения",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "горизонтальный монтаж, цилиндрический поплавок"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "вертикальный монтаж, цилиндрический поплавок"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "вертикальный монтаж, шарообразный поплавок"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта для нижнего уровня ",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "нормально-разомкнутый ( не указывается)"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта для верхнего уровня",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "нормально-разомкнутый( не указывается)"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта для нижнего уровня",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "нормально-разомкнутый ( не указывается)"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта для среднего уровня",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "нормально-разомкнутый ( не указывается)"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            },
+            {
+                "header": "Тип контакта для верхнего уровня",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "нормально-разомкнутый (не указывается)"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "нормально-замкнутый"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pd200_visokotochnii_intelektualnii_datchik_davleniay",
+        "url": "https://owen.ru/product/pd200_visokotochnii_intelektualnii_datchik_davleniay",
+        "mods": []
+    },
+    {
+        "sku": "tvr1",
+        "url": "https://owen.ru/product/tvr1",
+        "mods": []
+    },
+    {
+        "sku": "kippribor_of65",
+        "url": "https://owen.ru/product/kippribor_of65",
+        "mods": []
+    },
+    {
+        "sku": "ventilyatori_i_reshetki_s_fil_trami_kippribor_serii_kipvent",
+        "url": "https://owen.ru/product/ventilyatori_i_reshetki_s_fil_trami_kippribor_serii_kipvent",
+        "mods": []
+    },
+    {
+        "sku": "itp15",
+        "url": "https://owen.ru/product/itp15",
+        "mods": []
+    },
+    {
+        "sku": "pr103",
+        "url": "https://owen.ru/product/pr103",
+        "mods": [
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "230",
+                        "description": "~230"
+                    }
+                ]
+            },
+            {
+                "header": "Тип и количество входов-выходов",
+                "items": [
+                    {
+                        "value1": "01",
+                        "description": "16 DI (230В), 10 DO (P)"
+                    },
+                    {
+                        "value2": "03",
+                        "description": "6 DI (24В), 4 FDI, 6 AI, 10 DO (Р)"
+                    },
+                    {
+                        "value3": "06",
+                        "description": "6 DI (24В), 4 FDI, 6 AI, 8 DO (Р), 2 AO"
+                    }
+                ]
+            },
+            {
+                "header": "Интерфейс",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "1 × RS-485, 1 × Ethernet"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "2 × RS-485, 1 × Ethernet"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pr200",
+        "url": "https://owen.ru/product/pr200",
+        "mods": []
+    },
+    {
+        "sku": "montazhnie_kolodki_kippribor_pyf_12_22_dlya_rele",
+        "url": "https://owen.ru/product/montazhnie_kolodki_kippribor_pyf_12_22_dlya_rele",
+        "mods": []
+    },
+    {
+        "sku": "ibp60k",
+        "url": "https://owen.ru/product/ibp60k",
+        "mods": []
+    },
+    {
+        "sku": "ustrojstva_perehodnie_owen_up",
+        "url": "https://owen.ru/product/ustrojstva_perehodnie_owen_up",
+        "mods": []
+    },
+    {
+        "sku": "shtutcer_vreznie",
+        "url": "https://owen.ru/product/shtutcer_vreznie",
+        "mods": [
+            {
+                "header": "Крепежная резьба",
+                "items": [
+                    {
+                        "value1": "М8Х1",
+                        "description": ""
+                    },
+                    {
+                        "value2": "М10Х1",
+                        "description": ""
+                    },
+                    {
+                        "value3": "М10Х1,5",
+                        "description": ""
+                    },
+                    {
+                        "value4": "М12Х1,5",
+                        "description": ""
+                    },
+                    {
+                        "value5": "М16Х1,5",
+                        "description": ""
+                    },
+                    {
+                        "value6": "М20Х1,5",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Внешний диаметр датчика , мм",
+                "items": [
+                    {
+                        "value1": "3,0",
+                        "description": ""
+                    },
+                    {
+                        "value2": "4,5",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "nagrevateli_shitovie_konvektcionnie_meyertec_mtk",
+        "url": "https://owen.ru/product/nagrevateli_shitovie_konvektcionnie_meyertec_mtk",
+        "mods": []
+    },
+    {
+        "sku": "moduli_analogovogo_vivoda_ethernet_mu210",
+        "url": "https://owen.ru/product/moduli_analogovogo_vivoda_ethernet_mu210",
+        "mods": []
+    },
+    {
+        "sku": "uzs1_m01",
+        "url": "https://owen.ru/product/uzs1_m01",
+        "mods": []
+    },
+    {
+        "sku": "npt",
+        "url": "https://owen.ru/product/npt",
+        "mods": [
+            {
+                "header": "Конструктивное исполнение",
+                "items": [
+                    {
+                        "value1": "2",
+                        "description": "монтаж в отечественную головку (Луцкая)"
+                    },
+                    {
+                        "value2": "3",
+                        "description": "монтаж в головку типа \"В\" (Евро)"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выходного сигнала",
+                "items": [
+                    {
+                        "value1": "2",
+                        "description": "4...20 мА (для НПТ-2, НПТ-3)"
+                    }
+                ]
+            },
+            {
+                "header": "Искробезопасная измерительная цепь",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "отсутствует (при заказе не указывается)"
+                    },
+                    {
+                        "value2": "-ЕХ",
+                        "description": "Искробезопасное исполнение (только НПТ-3)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "moduli_diskretnogo_vivoda_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vivoda_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "pd100i_datchik_davleniya_s_uvelichennim_mezhpoverochnim_intervalom_dlya_teploschetchikov",
+        "url": "https://owen.ru/product/pd100i_datchik_davleniya_s_uvelichennim_mezhpoverochnim_intervalom_dlya_teploschetchikov",
+        "mods": []
+    },
+    {
+        "sku": "trm138",
+        "url": "https://owen.ru/product/trm138",
+        "mods": [
+            {
+                "header": "Типы выходов 1...8",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 2",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 3",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода 4",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода 5",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "8 цифроаналоговых преобразователей «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода 6",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "8 цифроаналоговых преобразователей «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 7",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "8 цифроаналоговых преобразователей «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "тип выхода 8",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "8 реле электромагнитных 1 А 250 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "8 транзисторных оптопар структуры n-p-n-типа 400 мА 60 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "8 симисторных оптопар 40 мА 300 В"
+                    },
+                    {
+                        "value4": "Т",
+                        "description": "8 выходов 4...6 В 50 мА для управления твердотельным реле"
+                    },
+                    {
+                        "value5": "И",
+                        "description": "8 цифроаналоговых преобразователей «параметр – ток 4…20 мА»"
+                    },
+                    {
+                        "value6": "У",
+                        "description": "8 цифроаналоговых преобразователей «параметр – напряжение 0…10 В»"
+                    }
+                ]
+            },
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": ".Щ7",
+                        "description": "щитовой, 169х138х50 мм, IP54 со стороны передней панели"
+                    },
+                    {
+                        "value2": "",
+                        "description": "щитовой Щ4 ( при заказе не указывается), 96х96х145 мм, IP54 со стороны передней панели"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ps1",
+        "url": "https://owen.ru/product/ps1",
+        "mods": [
+            {
+                "header": "Корпус",
+                "items": [
+                    {
+                        "value1": "18M",
+                        "description": "Цилиндрический корпус, резьба 18 мм"
+                    },
+                    {
+                        "value2": "30M",
+                        "description": "Цилиндрический корпус, резьба 30 мм"
+                    },
+                    {
+                        "value3": "33",
+                        "description": "Пластиковый корпус 60х60х40 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Длина датчика, мм",
+                "items": [
+                    {
+                        "value1": "53",
+                        "description": ""
+                    },
+                    {
+                        "value2": "65",
+                        "description": ""
+                    },
+                    {
+                        "value3": "75",
+                        "description": ""
+                    },
+                    {
+                        "value4": "80",
+                        "description": ""
+                    },
+                    {
+                        "value5": "85",
+                        "description": ""
+                    },
+                    {
+                        "value6": "90",
+                        "description": ""
+                    },
+                    {
+                        "value7": "115",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Расстояние срабатывания, мм ",
+                "items": [
+                    {
+                        "value1": "10",
+                        "description": ""
+                    },
+                    {
+                        "value2": "15",
+                        "description": ""
+                    },
+                    {
+                        "value3": "30",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Монтаж",
+                "items": [
+                    {
+                        "value1": "N",
+                        "description": "не заподлицо"
+                    },
+                    {
+                        "value2": "B",
+                        "description": "заподлицо"
+                    }
+                ]
+            },
+            {
+                "header": "Схема подключения",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "PNP, замыкающий контакт"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "NPN, замыкающий контакт"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "PNP, размыкаюший контакт"
+                    },
+                    {
+                        "value4": "4",
+                        "description": "NPN, размыкающий контакт"
+                    },
+                    {
+                        "value5": "5",
+                        "description": "PNP,переключающий контакт"
+                    },
+                    {
+                        "value6": "6",
+                        "description": "NPN,переключающий контакт"
+                    }
+                ]
+            },
+            {
+                "header": "Питание",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "= 10...30VDC"
+                    },
+                    {
+                        "value2": "4",
+                        "description": "~ 20...250 VAC/VDC"
+                    }
+                ]
+            },
+            {
+                "header": "Подключение",
+                "items": [
+                    {
+                        "value1": "K",
+                        "description": "Кабель 2 м"
+                    },
+                    {
+                        "value2": "B",
+                        "description": "Клеммная коробка с угловым выводом кабеля"
+                    },
+                    {
+                        "value3": "T",
+                        "description": "Клеммная коробка с прямым и угловым выводом кабеля"
+                    },
+                    {
+                        "value4": "С4",
+                        "description": "Четырехконтактный соединитель, резьба 12 мм"
+                    },
+                    {
+                        "value5": "Z",
+                        "description": "Удлиненный штуцер"
+                    }
+                ]
+            },
+            {
+                "header": "Тип",
+                "items": [
+                    {
+                        "value1": "С18",
+                        "description": ""
+                    },
+                    {
+                        "value2": "С19",
+                        "description": ""
+                    },
+                    {
+                        "value3": "С20",
+                        "description": ""
+                    },
+                    {
+                        "value4": "С21",
+                        "description": ""
+                    },
+                    {
+                        "value5": "С29",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Тип подключаемого датчика",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "DC, PNP/NPN, NO"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "DC, NPN, NO"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "DC, PNP/NPN, NC"
+                    },
+                    {
+                        "value4": "4",
+                        "description": "DC, NPN, NC"
+                    },
+                    {
+                        "value5": "5",
+                        "description": "DC,PNP/NPN, NO/NC"
+                    },
+                    {
+                        "value6": "6",
+                        "description": "DC, NPN/ NO/NC"
+                    },
+                    {
+                        "value7": "7",
+                        "description": "AC, NO/NC"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "bloki_pitaniya_dlya_tyazhelih_uslovij_ekspluatatcii",
+        "url": "https://owen.ru/product/bloki_pitaniya_dlya_tyazhelih_uslovij_ekspluatatcii",
+        "mods": [
+            {
+                "header": "Выходная мощность, Вт",
+                "items": [
+                    {
+                        "value1": "30",
+                        "description": "30"
+                    },
+                    {
+                        "value2": "60",
+                        "description": "60"
+                    },
+                    {
+                        "value3": "120",
+                        "description": "120"
+                    }
+                ]
+            },
+            {
+                "header": "Корпус DIN-реечный",
+                "items": [
+                    {
+                        "value1": "Д3",
+                        "description": "54×90×58 мм"
+                    },
+                    {
+                        "value2": "Д4",
+                        "description": "72×90×58 мм"
+                    },
+                    {
+                        "value3": "Д9",
+                        "description": "157×90×58 мм"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "itp-14",
+        "url": "https://owen.ru/product/itp-14",
+        "mods": []
+    },
+    {
+        "sku": "itp11",
+        "url": "https://owen.ru/product/itp11",
+        "mods": []
+    },
+    {
+        "sku": "rd10",
+        "url": "https://owen.ru/product/rd10",
+        "mods": []
+    },
+    {
+        "sku": "sensor_head_ceramic_pad",
+        "url": "https://owen.ru/product/sensor_head_ceramic_pad",
+        "mods": []
+    },
+    {
+        "sku": "dtshh4_termosoprotivleniya_s_kabel_nim_vivodom_exia",
+        "url": "https://owen.ru/product/dtshh4_termosoprotivleniya_s_kabel_nim_vivodom_exia",
+        "mods": []
+    },
+    {
+        "sku": "scada_sistema_owen_process_manager_opm",
+        "url": "https://owen.ru/product/scada_sistema_owen_process_manager_opm",
+        "mods": []
+    },
+    {
+        "sku": "stepper_motors_kippribor_sm",
+        "url": "https://owen.ru/product/stepper_motors_kippribor_sm",
+        "mods": []
+    },
+    {
+        "sku": "montazhnie_kolodki_kippribor_pyf_025be",
+        "url": "https://owen.ru/product/montazhnie_kolodki_kippribor_pyf_025be",
+        "mods": []
+    },
+    {
+        "sku": "trm1032",
+        "url": "https://owen.ru/product/trm1032",
+        "mods": []
+    },
+    {
+        "sku": "si20",
+        "url": "https://owen.ru/product/si20",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "Щитовой, Щ1 96×96×70, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "Щитовой, Щ2 96×48×100, IP54"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "Настенный, Н 105×130×65, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "контакты электромагнитного реле 8 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "оптопара транзисторная n-p-n типа 0,4 А 50 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "оптопара симисторная 40 мА 240 В"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "termoelektricheskie_preobrazovateli_tipa_dtplhk_i_dtpkha_datchiki_temperaturi_termopari",
+        "url": "https://owen.ru/product/termoelektricheskie_preobrazovateli_tipa_dtplhk_i_dtpkha_datchiki_temperaturi_termopari",
+        "mods": []
+    },
+    {
+        "sku": "plk110_30_tl",
+        "url": "https://owen.ru/product/plk110_30_tl",
+        "mods": [
+            {
+                "header": "Тип и количество входов-выходов не выбирается:",
+                "items": [
+                    {
+                        "value1": "ПЛК110",
+                        "description": "18 × DI / 12 × DO"
+                    }
+                ]
+            },
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "~220"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "kmu1",
+        "url": "https://owen.ru/product/kmu1",
+        "mods": []
+    },
+    {
+        "sku": "induktivnie_beskontaktnie_datchiki_viklyuchateli_kippribor_serii_lk_v_pryamougol_nom_korpuse",
+        "url": "https://owen.ru/product/induktivnie_beskontaktnie_datchiki_viklyuchateli_kippribor_serii_lk_v_pryamougol_nom_korpuse",
+        "mods": [
+            {
+                "header": "Расположение чувствительной части ",
+                "items": [
+                    {
+                        "value1": "K",
+                        "description": "с торца"
+                    },
+                    {
+                        "value2": "KF",
+                        "description": "сверху"
+                    }
+                ]
+            },
+            {
+                "header": "Ширина корпуса, мм",
+                "items": [
+                    {
+                        "value1": "08",
+                        "description": "8"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10"
+                    },
+                    {
+                        "value3": "18",
+                        "description": "18"
+                    },
+                    {
+                        "value4": "40",
+                        "description": "40"
+                    }
+                ]
+            },
+            {
+                "header": "Длина корпуса, мм",
+                "items": [
+                    {
+                        "value1": "20",
+                        "description": "20"
+                    },
+                    {
+                        "value2": "23",
+                        "description": "23"
+                    },
+                    {
+                        "value3": "27",
+                        "description": "27"
+                    },
+                    {
+                        "value4": "35",
+                        "description": "35"
+                    },
+                    {
+                        "value5": "68",
+                        "description": "68"
+                    }
+                ]
+            },
+            {
+                "header": "Расстояние срабатывания, мм",
+                "items": [
+                    {
+                        "value1": "2",
+                        "description": ""
+                    },
+                    {
+                        "value2": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value3": "4",
+                        "description": ""
+                    },
+                    {
+                        "value4": "12",
+                        "description": ""
+                    },
+                    {
+                        "value5": "20",
+                        "description": ""
+                    },
+                    {
+                        "value6": "40",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Схема подключения",
+                "items": [
+                    {
+                        "value1": "N",
+                        "description": "NPN"
+                    },
+                    {
+                        "value2": "P",
+                        "description": "PNP"
+                    },
+                    {
+                        "value3": "D",
+                        "description": "Двухпроводная (постоянный ток)"
+                    }
+                ]
+            },
+            {
+                "header": "Коммутационная функция",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "N0"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "NC"
+                    },
+                    {
+                        "value3": "4",
+                        "description": "N0+NC"
+                    }
+                ]
+            },
+            {
+                "header": "Питание",
+                "items": [
+                    {
+                        "value1": "U1",
+                        "description": "10...30 VDC"
+                    },
+                    {
+                        "value2": "U4",
+                        "description": "10...60 VDC"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pkg100_nh3",
+        "url": "https://owen.ru/product/pkg100_nh3",
+        "mods": []
+    },
+    {
+        "sku": "preobrazovateli_na_nizkie_davleniya_pd100",
+        "url": "https://owen.ru/product/preobrazovateli_na_nizkie_davleniya_pd100",
+        "mods": [
+            {
+                "header": "Тип давления",
+                "items": [
+                    {
+                        "value1": "ДВ",
+                        "description": "вакуумметрическое"
+                    },
+                    {
+                        "value2": "ДИ",
+                        "description": "избыточное"
+                    },
+                    {
+                        "value3": "ДИВ",
+                        "description": "избыточно-вакуумметрическое"
+                    }
+                ]
+            },
+            {
+                "header": "Диапазон измерения, МПа",
+                "items": [
+                    {
+                        "value1": "0,0002",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,00025",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,0003",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,0004",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,0005",
+                        "description": ""
+                    },
+                    {
+                        "value6": "0,0006",
+                        "description": ""
+                    },
+                    {
+                        "value7": "0,0008",
+                        "description": ""
+                    },
+                    {
+                        "value8": "0,001",
+                        "description": ""
+                    },
+                    {
+                        "value9": "0,00125",
+                        "description": ""
+                    },
+                    {
+                        "value10": "0,0016",
+                        "description": ""
+                    },
+                    {
+                        "value11": "0,002",
+                        "description": ""
+                    },
+                    {
+                        "value12": "0,0025",
+                        "description": ""
+                    },
+                    {
+                        "value13": "0,003",
+                        "description": ""
+                    },
+                    {
+                        "value14": "0,004",
+                        "description": ""
+                    },
+                    {
+                        "value15": "0,005",
+                        "description": ""
+                    },
+                    {
+                        "value16": "0,006",
+                        "description": ""
+                    },
+                    {
+                        "value17": "0,008",
+                        "description": ""
+                    },
+                    {
+                        "value18": "0,01",
+                        "description": ""
+                    },
+                    {
+                        "value19": "0,0125",
+                        "description": ""
+                    },
+                    {
+                        "value20": "0,016",
+                        "description": ""
+                    },
+                    {
+                        "value21": "0,02",
+                        "description": ""
+                    },
+                    {
+                        "value22": "0,025",
+                        "description": ""
+                    },
+                    {
+                        "value23": "0,03",
+                        "description": ""
+                    },
+                    {
+                        "value24": "0,04",
+                        "description": ""
+                    },
+                    {
+                        "value25": "0,05",
+                        "description": ""
+                    },
+                    {
+                        "value26": "0,06",
+                        "description": ""
+                    },
+                    {
+                        "value27": "0,08",
+                        "description": ""
+                    },
+                    {
+                        "value28": "0,1",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Присоединение к процессу",
+                "items": [
+                    {
+                        "value1": "811",
+                        "description": "M20×1,5"
+                    },
+                    {
+                        "value2": "871",
+                        "description": "G1/2"
+                    },
+                    {
+                        "value3": "881",
+                        "description": "G1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности, % от ВПИ",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5"
+                    },
+                    {
+                        "value3": "1,0",
+                        "description": "±1,0"
+                    },
+                    {
+                        "value4": "1,5",
+                        "description": "±1,5"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dtpxhh5exia_termopari_s_vihodnim_signalom_420_ma",
+        "url": "https://owen.ru/product/dtpxhh5exia_termopari_s_vihodnim_signalom_420_ma",
+        "mods": []
+    },
+    {
+        "sku": "upp1_ustroistvo_plavnogo_puska",
+        "url": "https://owen.ru/product/upp1_ustroistvo_plavnogo_puska",
+        "mods": []
+    },
+    {
+        "sku": "programmnoe_obespechenie_owen_logic",
+        "url": "https://owen.ru/product/programmnoe_obespechenie_owen_logic",
+        "mods": []
+    },
+    {
+        "sku": "moduli_analogovogo_vvoda_s_bistrimi_vhodami_ethernet_mv210",
+        "url": "https://owen.ru/product/moduli_analogovogo_vvoda_s_bistrimi_vhodami_ethernet_mv210",
+        "mods": []
+    },
+    {
+        "sku": "pchv_meyertec_vfd1",
+        "url": "https://owen.ru/product/pchv_meyertec_vfd1",
+        "mods": []
+    },
+    {
+        "sku": "trm1032_old",
+        "url": "https://owen.ru/product/trm1032_old",
+        "mods": []
+    },
+    {
+        "sku": "cable_entry_exd",
+        "url": "https://owen.ru/product/cable_entry_exd",
+        "mods": []
+    },
+    {
+        "sku": "itp_10",
+        "url": "https://owen.ru/product/itp_10",
+        "mods": []
+    },
+    {
+        "sku": "pd100i_model_167",
+        "url": "https://owen.ru/product/pd100i_model_167",
+        "mods": []
+    },
+    {
+        "sku": "rzu_420",
+        "url": "https://owen.ru/product/rzu_420",
+        "mods": []
+    },
+    {
+        "sku": "preobrazovateli_izbitochnogo_davleniya_owen_pd_100_di_div_dv",
+        "url": "https://owen.ru/product/preobrazovateli_izbitochnogo_davleniya_owen_pd_100_di_div_dv",
+        "mods": []
+    },
+    {
+        "sku": "shtutcer_podvizhnij",
+        "url": "https://owen.ru/product/shtutcer_podvizhnij",
+        "mods": []
+    },
+    {
+        "sku": "bp240k",
+        "url": "https://owen.ru/product/bp240k",
+        "mods": []
+    },
+    {
+        "sku": "idtc1",
+        "url": "https://owen.ru/product/idtc1",
+        "mods": []
+    },
+    {
+        "sku": "termopreobrazovatel_soprotivleniya_dlya_izmereniya_temperaturi_vozduha_vo_vzrivozashishennom_ispolne",
+        "url": "https://owen.ru/product/termopreobrazovatel_soprotivleniya_dlya_izmereniya_temperaturi_vozduha_vo_vzrivozashishennom_ispolne",
+        "mods": []
+    },
+    {
+        "sku": "ramka_montazhnaya_96x48",
+        "url": "https://owen.ru/product/ramka_montazhnaya_96x48",
+        "mods": []
+    },
+    {
+        "sku": "emkostnoj_urovnemer_du311",
+        "url": "https://owen.ru/product/emkostnoj_urovnemer_du311",
+        "mods": []
+    },
+    {
+        "sku": "sau_u",
+        "url": "https://owen.ru/product/sau_u",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Н",
+                        "description": "настенный, 105х130х65 мм, IP44"
+                    },
+                    {
+                        "value2": "Щ11",
+                        "description": "щитовой, 96х96х46,5 мм, IP54 со стороны передней панели"
+                    },
+                    {
+                        "value3": "Д",
+                        "description": "на DIN-рейку, 72х88х54 мм, IP20"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "termoelektricheskie_preobrazovateli_termopari_visokotemperaturnie_platinovie_dtps021",
+        "url": "https://owen.ru/product/termoelektricheskie_preobrazovateli_termopari_visokotemperaturnie_platinovie_dtps021",
+        "mods": []
+    },
+    {
+        "sku": "pvt101",
+        "url": "https://owen.ru/product/pvt101",
+        "mods": []
+    },
+    {
+        "sku": "ksn210_8_2",
+        "url": "https://owen.ru/product/ksn210_8_2",
+        "mods": []
+    },
+    {
+        "sku": "npt_1k_1m",
+        "url": "https://owen.ru/product/npt_1k_1m",
+        "mods": []
+    },
+    {
+        "sku": "bsf",
+        "url": "https://owen.ru/product/bsf",
+        "mods": []
+    },
+    {
+        "sku": "bp30mc",
+        "url": "https://owen.ru/product/bp30mc",
+        "mods": []
+    },
+    {
+        "sku": "trubki_impulsnie_owen_ti_i_otvodnie_owen_to",
+        "url": "https://owen.ru/product/trubki_impulsnie_owen_ti_i_otvodnie_owen_to",
+        "mods": []
+    },
+    {
+        "sku": "kabeli",
+        "url": "https://owen.ru/product/kabeli",
+        "mods": []
+    },
+    {
+        "sku": "promezhutochnie_rele_kippribor",
+        "url": "https://owen.ru/product/promezhutochnie_rele_kippribor",
+        "mods": []
+    },
+    {
+        "sku": "interfejsnie_promezhutochnie_rele_kippribor",
+        "url": "https://owen.ru/product/interfejsnie_promezhutochnie_rele_kippribor",
+        "mods": []
+    },
+    {
+        "sku": "komplekt_smennyx_filtrov_kipvent",
+        "url": "https://owen.ru/product/komplekt_smennyx_filtrov_kipvent",
+        "mods": []
+    },
+    {
+        "sku": "dtshh5_termosoprotivleniya_s_vihodnim_signalom_420_ma",
+        "url": "https://owen.ru/product/dtshh5_termosoprotivleniya_s_vihodnim_signalom_420_ma",
+        "mods": []
+    },
+    {
+        "sku": "plk110_ms4_m02",
+        "url": "https://owen.ru/product/plk110_ms4_m02",
+        "mods": [
+            {
+                "header": "Напряжение питания, В:",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "=24"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "~220"
+                    }
+                ]
+            },
+            {
+                "header": "Тип и количество входов-выходов:",
+                "items": [
+                    {
+                        "value1": "30",
+                        "description": "2 × FDI + 16 × DI / 12 × DO"
+                    },
+                    {
+                        "value2": "60",
+                        "description": "4 × FDI + 32 × DI / 24 × DO"
+                    }
+                ]
+            },
+            {
+                "header": "Выход:",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "Электромагнитное реле: 3 А"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "Транзисторная оптопара n-p-n: 400 мА"
+                    }
+                ]
+            },
+            {
+                "header": "Количество web-клиентов:",
+                "items": [
+                    {
+                        "value1": "3",
+                        "description": "До 3"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "До 10"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "tverdotelnie_rele_kolodka_meyertec_mssr",
+        "url": "https://owen.ru/product/tverdotelnie_rele_kolodka_meyertec_mssr",
+        "mods": []
+    },
+    {
+        "sku": "sv01",
+        "url": "https://owen.ru/product/sv01",
+        "mods": [
+            {
+                "header": "Напряжение питания",
+                "items": [
+                    {
+                        "value1": "220",
+                        "description": "от сети переменного тока с частотой от 47...63 Гц и напряжением от 90...264 В от сети постоянного напряжения от 120...375 В"
+                    },
+                    {
+                        "value2": "24",
+                        "description": "от сети постоянного напряжения от 10,5...30 В  (номинальное значения 12 и 24 В)"
+                    }
+                ]
+            },
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "Щитовой, Щ1 96×96×70, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "Щитовой, Щ2 96×48×100, IP54"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "Настенный, Н 105×130×65, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие ВУ",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "прибор без ВУ"
+                    },
+                    {
+                        "value2": "Р",
+                        "description": "прибор имеет ВУ типа электромагнитного реле"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса связи",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "прибор без интерфейса"
+                    },
+                    {
+                        "value2": "RS",
+                        "description": "прибор имеет интерфейс связи RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "pr205",
+        "url": "https://owen.ru/product/pr205",
+        "mods": []
+    },
+    {
+        "sku": "rsu_rotacionnyj_datchik",
+        "url": "https://owen.ru/product/rsu_rotacionnyj_datchik",
+        "mods": []
+    },
+    {
+        "sku": "metallicheskie_zashchitnye_reshetki_serii_vent",
+        "url": "https://owen.ru/product/metallicheskie_zashchitnye_reshetki_serii_vent",
+        "mods": []
+    },
+    {
+        "sku": "moduli_diskretnogo_vvoda_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vvoda_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "me210_701",
+        "url": "https://owen.ru/product/me210_701",
+        "mods": []
+    },
+    {
+        "sku": "cl200",
+        "url": "https://owen.ru/product/cl200",
+        "mods": []
+    },
+    {
+        "sku": "np_kp20",
+        "url": "https://owen.ru/product/np_kp20",
+        "mods": []
+    },
+    {
+        "sku": "kabeli_k_termopreobrazovatelyam_soprotivleniya",
+        "url": "https://owen.ru/product/kabeli_k_termopreobrazovatelyam_soprotivleniya",
+        "mods": []
+    },
+    {
+        "sku": "bobishki",
+        "url": "https://owen.ru/product/bobishki",
+        "mods": [
+            {
+                "header": "Тип бобышки",
+                "items": [
+                    {
+                        "value1": "П",
+                        "description": "прямая"
+                    },
+                    {
+                        "value2": "У",
+                        "description": "угловая ( только для конструктивного исполнения 1)"
+                    }
+                ]
+            },
+            {
+                "header": "Конструктивное исполнение",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "для монтажа датчиков с приварным штуцером и гильз"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "для монтажа датчиков с подвижным штуцером"
+                    },
+                    {
+                        "value3": "3",
+                        "description": "для монтажа различных элементов с приварным штуцером"
+                    },
+                    {
+                        "value4": "4",
+                        "description": "для монтажа датчиков давления и трубок отводных с манометрическим типом штуцера"
+                    },
+                    {
+                        "value5": "5",
+                        "description": "для монтажа датчика давления ПД100И модели 121  с торцевой мембраной"
+                    },
+                    {
+                        "value6": "6",
+                        "description": "для монтажа датчика давления ПД100И модели 141 с торцевой мембраной"
+                    },
+                    {
+                        "value7": "7",
+                        "description": "для монтажа датчика уровня ПДУ-И с резьбовым соединением"
+                    }
+                ]
+            },
+            {
+                "header": "Крепежная резьба М",
+                "items": [
+                    {
+                        "value1": "16Х1,5",
+                        "description": "метрическая"
+                    },
+                    {
+                        "value2": "20Х1,5",
+                        "description": "метрическая"
+                    },
+                    {
+                        "value3": "24Х1,5",
+                        "description": "метрическая"
+                    },
+                    {
+                        "value4": "27Х1,5",
+                        "description": "метрическая"
+                    },
+                    {
+                        "value5": "27Х2",
+                        "description": "метрическая"
+                    },
+                    {
+                        "value6": "G1/2",
+                        "description": "трубная"
+                    },
+                    {
+                        "value7": "G1/4",
+                        "description": "трубная"
+                    },
+                    {
+                        "value8": "G3/4",
+                        "description": "трубная"
+                    },
+                    {
+                        "value9": "G2",
+                        "description": "трубная"
+                    },
+                    {
+                        "value10": "R1/2",
+                        "description": "трубная"
+                    }
+                ]
+            },
+            {
+                "header": "Материал",
+                "items": [
+                    {
+                        "value1": "1",
+                        "description": "сталь 20"
+                    },
+                    {
+                        "value2": "2",
+                        "description": "сталь AISI 304"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dtp_termopari_na_osnove_ktms_s_kommutatcionnoj_golovkoj",
+        "url": "https://owen.ru/product/dtp_termopari_na_osnove_ktms_s_kommutatcionnoj_golovkoj",
+        "mods": []
+    },
+    {
+        "sku": "silovye_promejutochnye_rele_rep",
+        "url": "https://owen.ru/product/silovye_promejutochnye_rele_rep",
+        "mods": []
+    },
+    {
+        "sku": "sau_m7e",
+        "url": "https://owen.ru/product/sau_m7e",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Н",
+                        "description": "настенный, 105х130х65 мм, IP44"
+                    },
+                    {
+                        "value2": "Щ1",
+                        "description": "щитовой, 96х96х70 мм, IP54"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "si8",
+        "url": "https://owen.ru/product/si8",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "Щитовой, Щ1 96×96×70, IP54*"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "Щитовой, Щ2 96×48×100, IP54*"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "Настенный, Н 105×130×65, IP44"
+                    }
+                ]
+            },
+            {
+                "header": "Тип выхода",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "два электромагнитных реле 8 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "две транзисторные оптопары структуры n-p-n типа 200 мА 50 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "две симисторные оптопары 50 мА 300 В для управления однофазными нагрузками"
+                    }
+                ]
+            },
+            {
+                "header": "Наличие интерфейса связи",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "без интерфейса связи (не указывается)"
+                    },
+                    {
+                        "value2": "RS",
+                        "description": "интерфейс RS-485"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "bloki_pitaniya_dlya_promishlennoj_avtomatiki",
+        "url": "https://owen.ru/product/bloki_pitaniya_dlya_promishlennoj_avtomatiki",
+        "mods": [
+            {
+                "header": "Выходная мощность, Вт",
+                "items": [
+                    {
+                        "value1": "15",
+                        "description": "15"
+                    },
+                    {
+                        "value2": "30",
+                        "description": "30"
+                    },
+                    {
+                        "value3": "60",
+                        "description": "60"
+                    }
+                ]
+            },
+            {
+                "header": "Корпус DIN-реечный",
+                "items": [
+                    {
+                        "value1": "Д2",
+                        "description": "36×90×58 мм"
+                    },
+                    {
+                        "value2": "Д3",
+                        "description": "54×90×58 мм"
+                    },
+                    {
+                        "value3": "Д4",
+                        "description": "72×90×58 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Выходное напряжение, В",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": ""
+                    },
+                    {
+                        "value2": "9",
+                        "description": ""
+                    },
+                    {
+                        "value3": "12",
+                        "description": ""
+                    },
+                    {
+                        "value4": "15",
+                        "description": ""
+                    },
+                    {
+                        "value5": "24",
+                        "description": ""
+                    },
+                    {
+                        "value6": "36",
+                        "description": ""
+                    },
+                    {
+                        "value7": "48",
+                        "description": ""
+                    },
+                    {
+                        "value8": "60",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "zu120k",
+        "url": "https://owen.ru/product/zu120k",
+        "mods": []
+    },
+    {
+        "sku": "datchik_avariynoy_avtomatiki_asu_kotlov_kotelnyh_PD150i",
+        "url": "https://owen.ru/product/datchik_avariynoy_avtomatiki_asu_kotlov_kotelnyh_PD150i",
+        "mods": []
+    },
+    {
+        "sku": "bp30a",
+        "url": "https://owen.ru/product/bp30a",
+        "mods": []
+    },
+    {
+        "sku": "new_opc_server",
+        "url": "https://owen.ru/product/new_opc_server",
+        "mods": []
+    },
+    {
+        "sku": "msd200",
+        "url": "https://owen.ru/product/msd200",
+        "mods": []
+    },
+    {
+        "sku": "datchik_kippribor_oa18",
+        "url": "https://owen.ru/product/datchik_kippribor_oa18",
+        "mods": []
+    },
+    {
+        "sku": "trm1033",
+        "url": "https://owen.ru/product/trm1033",
+        "mods": [
+            {
+                "header": "Напряжение питания",
+                "items": [
+                    {
+                        "value1": "24",
+                        "description": "24 В постоянного тока"
+                    },
+                    {
+                        "value2": "220",
+                        "description": "220 В переменного тока"
+                    }
+                ]
+            },
+            {
+                "header": "Тип системы и калорифера нагрева",
+                "items": [
+                    {
+                        "value1": "00.00",
+                        "description": "для самостоятельной прошивки"
+                    },
+                    {
+                        "value2": "01.00",
+                        "description": "водяной нагрев, вентилятор с ПЧ"
+                    },
+                    {
+                        "value3": "02.00",
+                        "description": "электрический нагрев, вентилятор с ПЧ"
+                    },
+                    {
+                        "value4": "03.00",
+                        "description": "водяной нагрев, водяное охлаждение"
+                    },
+                    {
+                        "value5": "04.00",
+                        "description": "водяной нагрев, фреоновое охлаждение, вентилятор с ПЧ"
+                    },
+                    {
+                        "value6": "05.00",
+                        "description": "электрический нагрев, фреоновое охлаждение, вентилятор с ПЧ"
+                    },
+                    {
+                        "value7": "06.00",
+                        "description": "электрический нагрев, водяное охлаждение"
+                    },
+                    {
+                        "value8": "21.00",
+                        "description": "водяной нагрев, рециркуляция"
+                    },
+                    {
+                        "value9": "22.00",
+                        "description": "электрический нагрев, рециркуляция"
+                    },
+                    {
+                        "value10": "31.00",
+                        "description": "водяной нагрев, рекуператор"
+                    },
+                    {
+                        "value11": "32.00",
+                        "description": "электрический нагрев, рекуператор"
+                    },
+                    {
+                        "value12": "01.01",
+                        "description": "водяной нагрев, резервный вентилятор, вентилятор с ПЧ"
+                    },
+                    {
+                        "value13": "02.01",
+                        "description": "электрический нагрев, резервный вентилятор, вентилятор с ПЧ"
+                    },
+                    {
+                        "value14": "01.02",
+                        "description": "водяной нагрев, увлажнитель, вентилятор с ПЧ"
+                    },
+                    {
+                        "value15": "02.02",
+                        "description": "электрический нагрев, увлажнитель, вентилятор с ПЧ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "klemmniki",
+        "url": "https://owen.ru/product/klemmniki",
+        "mods": []
+    },
+    {
+        "sku": "dtphkhkh1_termopary_beskorpusnye_na_osnove_ktms",
+        "url": "https://owen.ru/product/dtphkhkh1_termopary_beskorpusnye_na_osnove_ktms",
+        "mods": []
+    },
+    {
+        "sku": "ut24",
+        "url": "https://owen.ru/product/ut24",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой Щ1, 96×96×70 мм, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "щитовой Щ2, 96×48×100 мм, IP54"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "настенный Н, 105×130×65, IP44"
+                    },
+                    {
+                        "value4": "Д",
+                        "description": "DIN-реечный Д, 72×90×58 мм, IP20"
+                    }
+                ]
+            },
+            {
+                "header": "Выходы",
+                "items": [
+                    {
+                        "value1": "Р",
+                        "description": "два электромагнитных реле 8 А 220 В"
+                    },
+                    {
+                        "value2": "К",
+                        "description": "две транзисторные оптопары структуры n-p-n типа 200 мА 50 В"
+                    },
+                    {
+                        "value3": "С",
+                        "description": "две симисторные оптопары 50 мА 300 В для управления однофазной нагрузкой"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "poplavkovie_datchiki_urovnya_pdu_i",
+        "url": "https://owen.ru/product/poplavkovie_datchiki_urovnya_pdu_i",
+        "mods": [
+            {
+                "header": "Дискретность преобразования , мм",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": "5 мм"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Дискретность преобразования",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": "5 мм"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Дискретность преобразования",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": "5 мм"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Номинальный диаметр фланца DN",
+                "items": [
+                    {
+                        "value1": "65",
+                        "description": ""
+                    },
+                    {
+                        "value2": "80",
+                        "description": ""
+                    },
+                    {
+                        "value3": "100",
+                        "description": ""
+                    },
+                    {
+                        "value4": "125",
+                        "description": ""
+                    },
+                    {
+                        "value5": "150",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Номинальное давление PN, кгс/см2",
+                "items": [
+                    {
+                        "value1": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value2": "6",
+                        "description": ""
+                    },
+                    {
+                        "value3": "10",
+                        "description": ""
+                    },
+                    {
+                        "value4": "16",
+                        "description": ""
+                    },
+                    {
+                        "value5": "25",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Исполнение уплотнительной поверхности",
+                "items": [
+                    {
+                        "value1": "А",
+                        "description": "плоскость ( только для PN1; 2,5; 6)"
+                    },
+                    {
+                        "value2": "В",
+                        "description": "соединительный выступ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ip320",
+        "url": "https://owen.ru/product/ip320",
+        "mods": []
+    },
+    {
+        "sku": "pd100i_modeli_115_125_175_185_2_exd",
+        "url": "https://owen.ru/product/pd100i_modeli_115_125_175_185_2_exd",
+        "mods": []
+    },
+    {
+        "sku": "moduli_analogovogo_vvoda_s_bistrimi_vhodami_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_analogovogo_vvoda_s_bistrimi_vhodami_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "pdu_i_exd",
+        "url": "https://owen.ru/product/pdu_i_exd",
+        "mods": [
+            {
+                "header": "Дискретность преобразования , мм",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": "5 мм"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Дискретность преобразования",
+                "items": [
+                    {
+                        "value1": "5",
+                        "description": "5 мм"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10 мм"
+                    }
+                ]
+            },
+            {
+                "header": "Номинальный диаметр фланца DN, мм",
+                "items": [
+                    {
+                        "value1": "65",
+                        "description": ""
+                    },
+                    {
+                        "value2": "80",
+                        "description": ""
+                    },
+                    {
+                        "value3": "100",
+                        "description": ""
+                    },
+                    {
+                        "value4": "125",
+                        "description": ""
+                    },
+                    {
+                        "value5": "150",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Номинальное давление PN, кгс/см2",
+                "items": [
+                    {
+                        "value1": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value2": "6",
+                        "description": ""
+                    },
+                    {
+                        "value3": "10",
+                        "description": ""
+                    },
+                    {
+                        "value4": "16",
+                        "description": ""
+                    },
+                    {
+                        "value5": "25",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Исполнение уплотнительной поверхности",
+                "items": [
+                    {
+                        "value1": "А",
+                        "description": "плоскость ( только для PN 1; 2,5; 6)"
+                    },
+                    {
+                        "value2": "В",
+                        "description": "соединительный выступ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "ktr121",
+        "url": "https://owen.ru/product/ktr121",
+        "mods": []
+    },
+    {
+        "sku": "preobrazovateli_dlya_slozhnih_uslovij_v_polevom_korpuse",
+        "url": "https://owen.ru/product/preobrazovateli_dlya_slozhnih_uslovij_v_polevom_korpuse",
+        "mods": [
+            {
+                "header": "Верхний предел измерений",
+                "items": [
+                    {
+                        "value1": "0,01",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,016",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,025",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,04",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,06",
+                        "description": ""
+                    },
+                    {
+                        "value6": "0,1",
+                        "description": ""
+                    },
+                    {
+                        "value7": "0,16",
+                        "description": ""
+                    },
+                    {
+                        "value8": "0,25",
+                        "description": ""
+                    },
+                    {
+                        "value9": "0,4",
+                        "description": ""
+                    },
+                    {
+                        "value10": "0,6",
+                        "description": ""
+                    },
+                    {
+                        "value11": "1,0",
+                        "description": ""
+                    },
+                    {
+                        "value12": "1,6",
+                        "description": ""
+                    },
+                    {
+                        "value13": "2,5",
+                        "description": ""
+                    },
+                    {
+                        "value14": "4,0",
+                        "description": ""
+                    },
+                    {
+                        "value15": "6,0",
+                        "description": ""
+                    },
+                    {
+                        "value16": "10,0",
+                        "description": ""
+                    },
+                    {
+                        "value17": "16,0",
+                        "description": ""
+                    },
+                    {
+                        "value18": "25,0",
+                        "description": ""
+                    },
+                    {
+                        "value19": "40,0",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Код обозначения модели",
+                "items": [
+                    {
+                        "value1": "115",
+                        "description": "штуцер M20×1,5 манометрический"
+                    },
+                    {
+                        "value2": "175",
+                        "description": "штуцер G 1/2 манометрический"
+                    },
+                    {
+                        "value3": "185",
+                        "description": "штуцер G 1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25 % от ВПИ (от 0,06 до 4,0 МПа)"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5 % от ВПИ (от 0,04 МПа)"
+                    },
+                    {
+                        "value3": "1,5",
+                        "description": "±1,5 % от ВПИ (от 0,01; 0,16; 0,025 МПа)"
+                    }
+                ]
+            },
+            {
+                "header": "Верхний предел измерений",
+                "items": [
+                    {
+                        "value1": "0,0125",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,02",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,03",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,05",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,08",
+                        "description": ""
+                    },
+                    {
+                        "value6": "0,1",
+                        "description": ""
+                    },
+                    {
+                        "value7": "0,15",
+                        "description": ""
+                    },
+                    {
+                        "value8": "0,3",
+                        "description": ""
+                    },
+                    {
+                        "value9": "0,5",
+                        "description": ""
+                    },
+                    {
+                        "value10": "0,9",
+                        "description": ""
+                    },
+                    {
+                        "value11": "1,5",
+                        "description": ""
+                    },
+                    {
+                        "value12": "2,4",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Код обозначения модели",
+                "items": [
+                    {
+                        "value1": "115",
+                        "description": "штуцер M20×1,5 манометрический"
+                    },
+                    {
+                        "value2": "175",
+                        "description": "штуцер G 1/2 манометрический"
+                    },
+                    {
+                        "value3": "185",
+                        "description": "штуцер G 1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25 % от ВПИ ( от 0,08 МПа)"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5 % от ВПИ (от 0,08 МПа)"
+                    },
+                    {
+                        "value3": "1,5",
+                        "description": "±1,5 % от ВПИ (от 0,0125; 0,02; 0,03 МПа)"
+                    }
+                ]
+            },
+            {
+                "header": "Верхний предел измерений",
+                "items": [
+                    {
+                        "value1": "0,01",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,016",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,025",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,04",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,06",
+                        "description": ""
+                    },
+                    {
+                        "value6": "0,1",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Код обозначения модели",
+                "items": [
+                    {
+                        "value1": "115",
+                        "description": "штуцер M20×1,5 манометрический"
+                    },
+                    {
+                        "value2": "175",
+                        "description": "штуцер G 1/2 манометрический"
+                    },
+                    {
+                        "value3": "185",
+                        "description": "штуцер G 1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25 % от ВПИ (от 0,06 МПа)"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5 % от ВПИ (от 0,04 МПа)"
+                    },
+                    {
+                        "value3": "1,5",
+                        "description": "±1,5 % от ВПИ (от 0,01; 0,16; 0,025 МПа)"
+                    }
+                ]
+            },
+            {
+                "header": "Верхний предел измерений",
+                "items": [
+                    {
+                        "value1": "0,1",
+                        "description": ""
+                    },
+                    {
+                        "value2": "0,16",
+                        "description": ""
+                    },
+                    {
+                        "value3": "0,25",
+                        "description": ""
+                    },
+                    {
+                        "value4": "0,4",
+                        "description": ""
+                    },
+                    {
+                        "value5": "0,6",
+                        "description": ""
+                    },
+                    {
+                        "value6": "1,0",
+                        "description": ""
+                    },
+                    {
+                        "value7": "1,6",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "header": "Код обозначения модели",
+                "items": [
+                    {
+                        "value1": "115",
+                        "description": "штуцер M20×1,5 манометрический"
+                    },
+                    {
+                        "value2": "175",
+                        "description": "штуцер G 1/2 манометрический"
+                    },
+                    {
+                        "value3": "185",
+                        "description": "штуцер G 1/4"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25 % от ВПИ (от 0,06 МПа)"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5 % от ВПИ (от 0,04 МПа)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "suna_122",
+        "url": "https://owen.ru/product/suna_122",
+        "mods": []
+    },
+    {
+        "sku": "kippribor_pyf_023be",
+        "url": "https://owen.ru/product/kippribor_pyf_023be",
+        "mods": []
+    },
+    {
+        "sku": "biblioteka_win_dll",
+        "url": "https://owen.ru/product/biblioteka_win_dll",
+        "mods": []
+    },
+    {
+        "sku": "interface_cable",
+        "url": "https://owen.ru/product/interface_cable",
+        "mods": []
+    },
+    {
+        "sku": "ut1",
+        "url": "https://owen.ru/product/ut1",
+        "mods": [
+            {
+                "header": "Тип корпуса",
+                "items": [
+                    {
+                        "value1": "Щ1",
+                        "description": "щитовой Щ1, 96×96×70 мм, IP54"
+                    },
+                    {
+                        "value2": "Щ2",
+                        "description": "щитовой Щ2, 96×48×100 мм, IP54"
+                    },
+                    {
+                        "value3": "Н",
+                        "description": "настенный Н, 105×130×65 мм, IP44"
+                    },
+                    {
+                        "value4": "Д",
+                        "description": "DIN-реечный Д , 72×90×58 мм, IP20"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dtshh5exd_termosoprotivleniya_s_vihodnim_signalom_420ma",
+        "url": "https://owen.ru/product/dtshh5exd_termosoprotivleniya_s_vihodnim_signalom_420ma",
+        "mods": []
+    },
+    {
+        "sku": "pd100_model_141_datchik_davleniya_dlya_vyazkih_zagryaznyonnih_sred",
+        "url": "https://owen.ru/product/pd100_model_141_datchik_davleniya_dlya_vyazkih_zagryaznyonnih_sred",
+        "mods": [
+            {
+                "header": "Тип давления",
+                "items": [
+                    {
+                        "value1": "ДВ",
+                        "description": "вакуумметрическое"
+                    },
+                    {
+                        "value2": "ДИ",
+                        "description": "избыточное"
+                    },
+                    {
+                        "value3": "ДИВ",
+                        "description": "избыточно-вакуумметрическое"
+                    }
+                ]
+            },
+            {
+                "header": "Класс точности, % от ВПИ",
+                "items": [
+                    {
+                        "value1": "0,25",
+                        "description": "±0,25"
+                    },
+                    {
+                        "value2": "0,5",
+                        "description": "±0,5"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "opc_server_insat",
+        "url": "https://owen.ru/product/opc_server_insat",
+        "mods": []
+    },
+    {
+        "sku": "kk_03",
+        "url": "https://owen.ru/product/kk_03",
+        "mods": []
+    },
+    {
+        "sku": "temperature_relay_mtr_k",
+        "url": "https://owen.ru/product/temperature_relay_mtr_k",
+        "mods": []
+    },
+    {
+        "sku": "uzd1",
+        "url": "https://owen.ru/product/uzd1",
+        "mods": []
+    },
+    {
+        "sku": "owen_as5",
+        "url": "https://owen.ru/product/owen_as5",
+        "mods": []
+    },
+    {
+        "sku": "owen_as4",
+        "url": "https://owen.ru/product/owen_as4",
+        "mods": []
+    },
+    {
+        "sku": "dtphhh5exd_termopari_s_vihodnim_signalom_420ma",
+        "url": "https://owen.ru/product/dtphhh5exd_termopari_s_vihodnim_signalom_420ma",
+        "mods": []
+    },
+    {
+        "sku": "trm501",
+        "url": "https://owen.ru/product/trm501",
+        "mods": [
+            {
+                "header": "Единица отсчета времени таймером",
+                "items": [
+                    {
+                        "value1": "",
+                        "description": "минуты"
+                    },
+                    {
+                        "value2": "С",
+                        "description": "секунды"
+                    },
+                    {
+                        "value3": "Д",
+                        "description": "десятые доли секунды"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "moduli_diskretnogo_vivoda_ethernet",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vivoda_ethernet",
+        "mods": []
+    },
+    {
+        "sku": "dtshh5exia_termosoprotivleniya_s_vihodnim_signalom_420_ma",
+        "url": "https://owen.ru/product/dtshh5exia_termosoprotivleniya_s_vihodnim_signalom_420_ma",
+        "mods": []
+    },
+    {
+        "sku": "suna_121",
+        "url": "https://owen.ru/product/suna_121",
+        "mods": []
+    },
+    {
+        "sku": "plk210_polygon",
+        "url": "https://owen.ru/product/plk210_polygon",
+        "mods": []
+    },
+    {
+        "sku": "pvt110",
+        "url": "https://owen.ru/product/pvt110",
+        "mods": []
+    },
+    {
+        "sku": "mg1",
+        "url": "https://owen.ru/product/mg1",
+        "mods": []
+    },
+    {
+        "sku": "spk210",
+        "url": "https://owen.ru/product/spk210",
+        "mods": []
+    },
+    {
+        "sku": "antenni_gsm",
+        "url": "https://owen.ru/product/antenni_gsm",
+        "mods": []
+    },
+    {
+        "sku": "dtshh4_termosoprotivleniya_s_kabel_nim_vivodom",
+        "url": "https://owen.ru/product/dtshh4_termosoprotivleniya_s_kabel_nim_vivodom",
+        "mods": []
+    },
+    {
+        "sku": "vp110",
+        "url": "https://owen.ru/product/vp110",
+        "mods": []
+    },
+    {
+        "sku": "plk210_kr",
+        "url": "https://owen.ru/product/plk210_kr",
+        "mods": []
+    },
+    {
+        "sku": "komplect_montazh_pd150_rd30",
+        "url": "https://owen.ru/product/komplect_montazh_pd150_rd30",
+        "mods": []
+    },
+    {
+        "sku": "owen_screen",
+        "url": "https://owen.ru/product/owen_screen",
+        "mods": []
+    },
+    {
+        "sku": "pm210",
+        "url": "https://owen.ru/product/pm210",
+        "mods": []
+    },
+    {
+        "sku": "ksn210_8",
+        "url": "https://owen.ru/product/ksn210_8",
+        "mods": []
+    },
+    {
+        "sku": "pvt10",
+        "url": "https://owen.ru/product/pvt10",
+        "mods": []
+    },
+    {
+        "sku": "sp3xx",
+        "url": "https://owen.ru/product/sp3xx",
+        "mods": [
+            {
+                "header": "Диагональ экрана",
+                "items": [
+                    {
+                        "value1": "07",
+                        "description": "7’’"
+                    },
+                    {
+                        "value2": "10",
+                        "description": "10’’"
+                    },
+                    {
+                        "value3": "15",
+                        "description": "15’’"
+                    }
+                ]
+            },
+            {
+                "header": "Модификация",
+                "items": [
+                    {
+                        "value1": "Б",
+                        "description": "Базовая"
+                    },
+                    {
+                        "value2": "Р",
+                        "description": "Расширенная"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "dtp_termopari_na_osnove_ktms_visokotemperaturnie",
+        "url": "https://owen.ru/product/dtp_termopari_na_osnove_ktms_visokotemperaturnie",
+        "mods": []
+    },
+    {
+        "sku": "dtsxx3_termosoprotivleniya_s_kommutatcionnim_raziemom_m12",
+        "url": "https://owen.ru/product/dtsxx3_termosoprotivleniya_s_kommutatcionnim_raziemom_m12",
+        "mods": []
+    },
+    {
+        "sku": "current_transformers",
+        "url": "https://owen.ru/product/current_transformers",
+        "mods": []
+    },
+    {
+        "sku": "plk210",
+        "url": "https://owen.ru/product/plk210",
+        "mods": []
+    },
+    {
+        "sku": "complekt_clamp",
+        "url": "https://owen.ru/product/complekt_clamp",
+        "mods": []
+    },
+    {
+        "sku": "moduli_diskretnogo_vvoda_vivoda_s_interfejsom_rs_485",
+        "url": "https://owen.ru/product/moduli_diskretnogo_vvoda_vivoda_s_interfejsom_rs_485",
+        "mods": []
+    },
+    {
+        "sku": "g1bu3000",
+        "url": "https://owen.ru/product/g1bu3000",
+        "mods": []
+    },
+    {
+        "sku": "dtphhh5_termopari_s_kommutatcionnoj_golovkoj_na_osnove_ktms_exia",
+        "url": "https://owen.ru/product/dtphhh5_termopari_s_kommutatcionnoj_golovkoj_na_osnove_ktms_exia",
+        "mods": []
+    },
+    {
+        "sku": "dtsxx5m_rs",
+        "url": "https://owen.ru/product/dtsxx5m_rs",
+        "mods": []
+    },
+    {
+        "sku": "pr200_x8",
+        "url": "https://owen.ru/product/pr200_x8",
+        "mods": []
+    },
+    {
+        "sku": "ps2",
+        "url": "https://owen.ru/product/ps2",
+        "mods": []
+    }
+]

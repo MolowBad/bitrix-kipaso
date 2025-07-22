@@ -7,6 +7,7 @@ $this->addExternalCss($templateFolder . "/css/review.css");
 $this->addExternalCss($templateFolder . "/css/media.css");
 $this->addExternalCss($templateFolder . "/css/set.css");
 $this->addExternalCss($templateFolder . "/css/custom.css");
+$this->addExternalCss($templateFolder . "/css/product-modifications.css");
 
 $this->addExternalJS($templateFolder . "/js/morePicturesCarousel.js");
 $this->addExternalJS($templateFolder . "/js/pictureSlider.js");
@@ -15,6 +16,7 @@ $this->addExternalJS($templateFolder . "/js/tags.js");
 $this->addExternalJS($templateFolder . "/js/plus.js");
 $this->addExternalJS($templateFolder . "/js/tabs.js");
 $this->addExternalJS($templateFolder . "/js/sku.js");
+$this->addExternalJS($templateFolder . "/js/product-modifications.js");
 
 global $USER, $relatedFilter, $similarFilter, $servicesFilter;
 
@@ -167,6 +169,15 @@ if (!empty($arResult["EDIT_LINK"])) {
             </table>
         </div>
         <!-- Конец таблицы модификаций -->
+        
+        <!-- Блок выбора модификаций товара -->
+        <div class="product-modifications" style="display: none;"></div>
+        <div class="modification-result-block" style="display: none;">
+            <div class="modification-result-title">Выбранная модификация:</div>
+            <div class="modification-result"></div>
+        </div>
+        <!-- Конец блока выбора модификаций товара -->
+        
         <!-- Таблица выбора артикла товара (Создано Егором) -->
 
 
@@ -1435,4 +1446,60 @@ if (!empty($arResult["EDIT_LINK"])) {
     var disableWeight = "<?= $arParams["DISABLE_PRINT_WEIGHT"] ?>";
     var lastSectionId = "<?= $arResult["LAST_SECTION"]["ID"] ?>";
     var _topMenuNoFixed = true;
+
+    // Инициализация модификаций товара
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM загружен, начинаем инициализацию модификаций товара');
+        
+        // Отладка для свойства CML2_ARTICLE
+        console.log('Свойство CML2_ARTICLE:', JSON.stringify(<?= json_encode($arResult["PROPERTIES"]["CML2_ARTICLE"]) ?>));
+        
+        // Получаем артикул товара из свойств или из названия
+        var productSku = "<?= !empty($arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) 
+            ? $arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] 
+            : (preg_match('/^([a-zA-Z0-9]+)/', $arResult["NAME"], $matches) ? $matches[1] : '') ?>";
+        
+        console.log('Полученный артикул товара:', productSku);
+        
+        // Если артикул найден, инициализируем модификации
+        if (productSku) {
+            // Приведем артикул к нижнему регистру для соответствия с JSON
+            productSku = productSku.toLowerCase();
+            console.log('Артикул в нижнем регистре:', productSku);
+            
+            // Проверяем наличие блоков для модификаций
+            console.log('Блок модификаций:', document.querySelector('.product-modifications'));
+            console.log('Блок результата:', document.querySelector('.modification-result'));
+            
+            // Проверка наличия файла JSON
+            fetch('/result.json')
+                .then(response => {
+                    console.log('Статус ответа JSON:', response.status);
+                    if (!response.ok) {
+                        console.error('Ошибка загрузки JSON файла, статус:', response.status);
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    console.log('Содержимое JSON файла (начало):', text.substring(0, 200));
+                    try {
+                        const json = JSON.parse(text);
+                        console.log('JSON успешно разобран, количество элементов:', json.length);
+                    } catch(e) {
+                        console.error('Ошибка разбора JSON:', e);
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке JSON:', error);
+                });
+            
+            var productMods = new ProductModifications({
+                productSku: productSku,
+                resultSelector: '.modification-result',
+                modBlockSelector: '.product-modifications'
+            });
+        } else {
+            console.error('Артикул товара не найден!');
+        }
+    });
 </script>
