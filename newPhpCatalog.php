@@ -324,6 +324,9 @@ function importProducts() {
                 $detailText = (string)$p->desc;  
                 $specificText = trim((string)$p->specs); 
                 
+                // Добавляем артикул из id в свойство CML2_ARTICLE
+                $article = $xmlId; // Используем значение из тега id как артикул
+                
                 // Вывод отладочной информации о тегах specs
                 if ($specificText !== '') {
                 } else {
@@ -336,6 +339,9 @@ function importProducts() {
                 $fileArray["MODULE_ID"] = "iblock";
 
                 $propertyValues = [];
+                
+                // Добавляем артикул в свойства
+                $propertyValues['CML2_ARTICLE'] = $article;
 
                 // Обрабатываем документы и сертификаты
                 list($docsArray, $certsArray) = collectProductDocs($p);

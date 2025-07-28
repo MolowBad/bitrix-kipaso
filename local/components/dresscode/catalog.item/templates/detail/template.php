@@ -171,10 +171,23 @@ if (!empty($arResult["EDIT_LINK"])) {
         <!-- Конец таблицы модификаций -->
         
         <!-- Блок выбора модификаций товара -->
-        <div class="product-modifications" style="display: none;"></div>
-        <div class="modification-result-block" style="display: none;">
+        <div class="product-modifications" style="display: none;">
+            <h3>Выберите модификацию товара:</h3>
+            
+            <!-- Контейнер для шаблона модификации -->
+            <div class="modification-template">
+                <h4>Шаблон модификации:</h4>
+                <div class="template-display" id="modification-template"></div>
+            </div>
+            
+            <!-- Контейнер для групп модификаций -->
+            <div class="modification-groups" id="modification-groups"></div>
+        </div>
+        
+        <!-- Блок результата -->
+        <div class="modification-result-block" style="display: none;" id="result-block">
             <div class="modification-result-title">Выбранная модификация:</div>
-            <div class="modification-result"></div>
+            <div class="modification-result" id="modification-result"></div>
         </div>
         <!-- Конец блока выбора модификаций товара -->
         
@@ -511,8 +524,16 @@ if (!empty($arResult["EDIT_LINK"])) {
             </table>
         </div>
 
-
-
+        <!-- Блок модификаций товара -->
+        <div class="product-modifications" style="display: none;">
+            <div class="modification-title">Выберите модификацию товара:</div>
+            <div class="modification-template"></div>
+            <div class="modification-groups"></div>
+            <div class="modification-result-block">
+                <div class="modification-result-label">Выбранная модификация:</div>
+                <div class="modification-result"></div>
+            </div>
+        </div>
 
                     </div>
                 </div>
@@ -1451,13 +1472,33 @@ if (!empty($arResult["EDIT_LINK"])) {
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM загружен, начинаем инициализацию модификаций товара');
         
-        // Отладка для свойства CML2_ARTICLE
-        console.log('Свойство CML2_ARTICLE:', JSON.stringify(<?= json_encode($arResult["PROPERTIES"]["CML2_ARTICLE"]) ?>));
+        // Отладка для всех свойств товара
+        console.log('Все свойства товара:', <?= json_encode(array_keys($arResult["PROPERTIES"] ?? [])) ?>);
+        console.log('Название товара:', <?= json_encode($arResult["NAME"]) ?>);
+        console.log('ID товара:', <?= json_encode($arResult["ID"]) ?>);
         
-        // Получаем артикул товара из свойств или из названия
-        var productSku = "<?= !empty($arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) 
-            ? $arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] 
-            : (preg_match('/^([a-zA-Z0-9]+)/', $arResult["NAME"], $matches) ? $matches[1] : '') ?>";
+        // Получаем артикул товара из разных источников
+        <? 
+        $productSku = '';
+        
+        // Пробуем получить из свойства CML2_ARTICLE
+        if (!empty($arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"])) {
+            $productSku = $arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"];
+        }
+        // Пробуем получить из свойства ARTNUMBER
+        elseif (!empty($arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"])) {
+            $productSku = $arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"];
+        }
+        // Пробуем получить из названия
+        elseif (preg_match('/^([a-zA-Z0-9]+)/', $arResult["NAME"], $matches)) {
+            $productSku = $matches[1];
+        }
+        // Для тестирования используем фиксированный артикул
+        else {
+            $productSku = '2trm0'; // Тестовый артикул из JSON
+        }
+        ?>
+        var productSku = "<?= $productSku ?>";
         
         console.log('Полученный артикул товара:', productSku);
         
@@ -1472,7 +1513,7 @@ if (!empty($arResult["EDIT_LINK"])) {
             console.log('Блок результата:', document.querySelector('.modification-result'));
             
             // Проверка наличия файла JSON
-            fetch('/result.json')
+            fetch('/all_products.json')
                 .then(response => {
                     console.log('Статус ответа JSON:', response.status);
                     if (!response.ok) {
@@ -1498,6 +1539,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                 resultSelector: '.modification-result',
                 modBlockSelector: '.product-modifications'
             });
+            productMods.init();
         } else {
             console.error('Артикул товара не найден!');
         }
