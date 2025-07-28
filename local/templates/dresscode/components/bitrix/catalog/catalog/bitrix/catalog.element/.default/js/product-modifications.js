@@ -39,9 +39,15 @@ class ProductModifications {
             console.log('ProductModifications: Проверка данных:', {
                 hasData: !!this.modificationData,
                 hasTemplate: !!(this.modificationData && this.modificationData.template),
-                hasMods: !!(this.modificationData && this.modificationData.mods),
-                modsLength: this.modificationData && this.modificationData.mods ? this.modificationData.mods.length : 0
+                hasMods: !!(this.modificationData && (this.modificationData.mods || this.modificationData.modifications)),
+                modsLength: this.modificationData && (this.modificationData.mods || this.modificationData.modifications) ? (this.modificationData.mods || this.modificationData.modifications).length : 0
             });
+            
+            // Нормализуем структуру данных
+            if (this.modificationData && this.modificationData.modifications && !this.modificationData.mods) {
+                this.modificationData.mods = this.modificationData.modifications;
+                console.log('ProductModifications: Нормализована структура данных (modifications -> mods)');
+            }
             
             if (this.modificationData && this.modificationData.template && this.modificationData.mods && this.modificationData.mods.length > 0) {
                 console.log('ProductModifications: Найдены модификации для артикула');
@@ -71,20 +77,59 @@ class ProductModifications {
     async loadModificationData() {
         try {
             console.log('ProductModifications: Загрузка JSON файла с модификациями');
-            const response = await fetch('/all_products.json');
-            if (!response.ok) {
-                throw new Error('Network response was not ok, status: ' + response.status);
+            
+            // Пробуем разные пути к JSON файлу
+            let response;
+            let data;
+            
+            // Сначала пробуем all_products.json
+            try {
+                response = await fetch('/all_products.json');
+                if (response.ok) {
+                    data = await response.json();
+                    console.log('ProductModifications: Загружен all_products.json, элементов:', data.length || Object.keys(data).length);
+                }
+            } catch (e) {
+                console.log('ProductModifications: all_products.json не найден, пробуем result.json');
             }
             
-            const data = await response.json();
-            console.log('ProductModifications: JSON данные получены:', data);
+            // Если не получилось, пробуем result.json
+            if (!data) {
+                try {
+                    response = await fetch('/result.json');
+                    if (response.ok) {
+                        data = await response.json();
+                        console.log('ProductModifications: Загружен result.json, элементов:', data.length || Object.keys(data).length);
+                    }
+                } catch (e) {
+                    console.log('ProductModifications: result.json не найден');
+                }
+            }
             
-            // Находим нужный товар по SKU
+            if (!data) {
+                throw new Error('Не удалось загрузить файл с данными модификаций');
+            }
+            
+            // Определяем структуру данных и находим товар
             console.log('ProductModifications: Поиск товара с SKU:', this.productSku);
-            this.modificationData = data.find(item => {
-                console.log('ProductModifications: Проверяем совпадение:', item.sku, '===', this.productSku, item.sku === this.productSku);
-                return item.sku === this.productSku;
-            });
+            
+            if (Array.isArray(data)) {
+                // Если данные в виде массива
+                this.modificationData = data.find(item => {
+                    const matches = item.sku === this.productSku;
+                    console.log('ProductModifications: Проверяем совпадение (массив):', item.sku, '===', this.productSku, matches);
+                    return matches;
+                });
+            } else if (typeof data === 'object') {
+                // Если данные в виде объекта с ключами
+                this.modificationData = data[this.productSku];
+                console.log('ProductModifications: Проверяем совпадение (объект):', this.productSku, 'найден:', !!this.modificationData);
+                
+                // Если найден, добавляем sku для совместимости
+                if (this.modificationData) {
+                    this.modificationData.sku = this.productSku;
+                }
+            }
             
             console.log('ProductModifications: Результат поиска:', this.modificationData);
             return this.modificationData;

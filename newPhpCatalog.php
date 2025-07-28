@@ -324,7 +324,7 @@ function importProducts() {
                 $detailText = (string)$p->desc;  
                 $specificText = trim((string)$p->specs); 
                 
-                // Добавляем артикул из id в свойство CML2_ARTICLE
+                // Добавляем артикул из id в свойство CML2_ARTICLE загрузка инфы об артикулах
                 $article = $xmlId; // Используем значение из тега id как артикул
                 
                 // Вывод отладочной информации о тегах specs
