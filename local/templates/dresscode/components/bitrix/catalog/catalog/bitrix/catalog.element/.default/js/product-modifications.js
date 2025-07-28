@@ -3,19 +3,15 @@
  */
 class ProductModifications {
     constructor(options) {
-        console.log('ProductModifications: Инициализация с параметрами:', options);
         this.options = options || {};
         this.productSku = this.options.productSku || '';
         this.modificationData = null;
         this.selectedValues = {};
         this.initialized = false;
         this.resultElement = document.querySelector(this.options.resultSelector || '.modification-result');
-        this.modBlockElement = document.querySelector(this.options.modBlockSelector || '.product-modifications');
+        this.modBlockElement = document.querySelector(this.options.modBlockSelector || '.product-modifications-main');
         this.templateElement = document.querySelector('.modification-template');
         this.groupsElement = document.querySelector('.modification-groups');
-        
-        console.log('ProductModifications: Найден элемент для результата:', this.resultElement);
-        console.log('ProductModifications: Найден элемент для модификаций:', this.modBlockElement);
         
         this.init();
     }
@@ -26,48 +22,29 @@ class ProductModifications {
     init() {
         // Защита от повторной инициализации
         if (this.initialized) {
-            console.log('ProductModifications: Компонент уже инициализирован');
             return;
         }
         this.initialized = true;
         
-        console.log('ProductModifications: Инициализация компонента с артикулом:', this.productSku);
-        
         // Загружаем данные о модификациях
         this.loadModificationData().then((data) => {
-            console.log('ProductModifications: Данные загружены:', data);
-            console.log('ProductModifications: Проверка данных:', {
-                hasData: !!this.modificationData,
-                hasTemplate: !!(this.modificationData && this.modificationData.template),
-                hasMods: !!(this.modificationData && (this.modificationData.mods || this.modificationData.modifications)),
-                modsLength: this.modificationData && (this.modificationData.mods || this.modificationData.modifications) ? (this.modificationData.mods || this.modificationData.modifications).length : 0
-            });
-            
             // Нормализуем структуру данных
             if (this.modificationData && this.modificationData.modifications && !this.modificationData.mods) {
                 this.modificationData.mods = this.modificationData.modifications;
-                console.log('ProductModifications: Нормализована структура данных (modifications -> mods)');
             }
             
             if (this.modificationData && this.modificationData.template && this.modificationData.mods && this.modificationData.mods.length > 0) {
-                console.log('ProductModifications: Найдены модификации для артикула');
                 this.renderModificationBlocks();
                 this.modBlockElement.style.display = 'block';
                 
                 // Показываем блок с результатом
                 const resultBlock = document.querySelector('.modification-result-block');
                 if (resultBlock) {
-                    console.log('ProductModifications: Показываем блок результата');
                     resultBlock.style.display = 'block';
-                } else {
-                    console.error('ProductModifications: Блок результата не найден');
                 }
-            } else {
-                console.warn('ProductModifications: Не найдено модификаций для артикула:', this.productSku);
-                console.log('ProductModifications: Данные объекта:', this.modificationData);
             }
         }).catch(error => {
-            console.error('ProductModifications: Ошибка при загрузке модификаций:', error);
+            // Ошибка загрузки данных
         });
     }
 
@@ -76,8 +53,6 @@ class ProductModifications {
      */
     async loadModificationData() {
         try {
-            console.log('ProductModifications: Загрузка JSON файла с модификациями');
-            
             // Пробуем разные пути к JSON файлу
             let response;
             let data;
@@ -87,10 +62,9 @@ class ProductModifications {
                 response = await fetch('/all_products.json');
                 if (response.ok) {
                     data = await response.json();
-                    console.log('ProductModifications: Загружен all_products.json, элементов:', data.length || Object.keys(data).length);
                 }
             } catch (e) {
-                console.log('ProductModifications: all_products.json не найден, пробуем result.json');
+                // Пробуем result.json
             }
             
             // Если не получилось, пробуем result.json
@@ -99,10 +73,9 @@ class ProductModifications {
                     response = await fetch('/result.json');
                     if (response.ok) {
                         data = await response.json();
-                        console.log('ProductModifications: Загружен result.json, элементов:', data.length || Object.keys(data).length);
                     }
                 } catch (e) {
-                    console.log('ProductModifications: result.json не найден');
+                    // Не удалось загрузить
                 }
             }
             
@@ -111,19 +84,12 @@ class ProductModifications {
             }
             
             // Определяем структуру данных и находим товар
-            console.log('ProductModifications: Поиск товара с SKU:', this.productSku);
-            
             if (Array.isArray(data)) {
                 // Если данные в виде массива
-                this.modificationData = data.find(item => {
-                    const matches = item.sku === this.productSku;
-                    console.log('ProductModifications: Проверяем совпадение (массив):', item.sku, '===', this.productSku, matches);
-                    return matches;
-                });
+                this.modificationData = data.find(item => item.sku === this.productSku);
             } else if (typeof data === 'object') {
                 // Если данные в виде объекта с ключами
                 this.modificationData = data[this.productSku];
-                console.log('ProductModifications: Проверяем совпадение (объект):', this.productSku, 'найден:', !!this.modificationData);
                 
                 // Если найден, добавляем sku для совместимости
                 if (this.modificationData) {
@@ -131,10 +97,8 @@ class ProductModifications {
                 }
             }
             
-            console.log('ProductModifications: Результат поиска:', this.modificationData);
             return this.modificationData;
         } catch (error) {
-            console.error('Ошибка загрузки данных модификаций:', error);
             return null;
         }
     }

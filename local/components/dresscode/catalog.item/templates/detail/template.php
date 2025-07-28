@@ -170,26 +170,7 @@ if (!empty($arResult["EDIT_LINK"])) {
         </div>
         <!-- Конец таблицы модификаций -->
         
-        <!-- Блок выбора модификаций товара -->
-        <div class="product-modifications" style="display: none;">
-            <h3>Выберите модификацию товара:</h3>
-            
-            <!-- Контейнер для шаблона модификации -->
-            <div class="modification-template">
-                <h4>Шаблон модификации:</h4>
-                <div class="template-display" id="modification-template"></div>
-            </div>
-            
-            <!-- Контейнер для групп модификаций -->
-            <div class="modification-groups" id="modification-groups"></div>
-        </div>
         
-        <!-- Блок результата -->
-        <div class="modification-result-block" style="display: none;" id="result-block">
-            <div class="modification-result-title">Выбранная модификация:</div>
-            <div class="modification-result" id="modification-result"></div>
-        </div>
-        <!-- Конец блока выбора модификаций товара -->
         
         <!-- Таблица выбора артикла товара (Создано Егором) -->
 
@@ -1154,6 +1135,35 @@ if (!empty($arResult["EDIT_LINK"])) {
                         </form>
                     </div>
                 <? endif; ?>
+                
+                <!-- Скрываем старый блок модификаций в боковой колонке -->
+                <style>
+                    .secondCol .product-modifications {
+                        display: none !important;
+                    }
+                </style>
+                
+                <!-- Блок выбора модификаций товара -->
+                <div class="product-modifications-main" style="display: none;">
+                    <h3>Выберите модификацию товара:</h3>
+                    
+                    <!-- Контейнер для шаблона модификации -->
+                    <div class="modification-template">
+                        <h4>Шаблон модификации:</h4>
+                        <div class="template-display" id="modification-template"></div>
+                    </div>
+                    
+                    <!-- Контейнер для групп модификаций -->
+                    <div class="modification-groups" id="modification-groups"></div>
+                </div>
+                
+                <!-- Блок результата -->
+                <div class="modification-result-block" style="display: none;" id="result-block">
+                    <div class="modification-result-title">Выбранная модификация:</div>
+                    <div class="modification-result" id="modification-result"></div>
+                </div>
+                <!-- Конец блока выбора модификаций товара -->
+
                 <? if ($arResult["SHOW_SIMILAR"] == "Y"): ?>
                     <div id="similar">
                         <h2 class="heading"><?= Loc::getMessage("CATALOG_ELEMENT_SIMILAR") ?>
@@ -1537,7 +1547,7 @@ if (!empty($arResult["EDIT_LINK"])) {
             var productMods = new ProductModifications({
                 productSku: productSku,
                 resultSelector: '.modification-result',
-                modBlockSelector: '.product-modifications'
+                modBlockSelector: '.product-modifications-main'
             });
             productMods.init();
         } else {
@@ -1545,3 +1555,4 @@ if (!empty($arResult["EDIT_LINK"])) {
         }
     });
 </script>
+
