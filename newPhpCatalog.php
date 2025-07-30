@@ -104,6 +104,79 @@ if (!is_dir($docDir)) {
 }
 
 /**
+ * Функция для сбора всех цен из XML и определения минимальных цен для каждого товара
+ * @return array Массив с минимальными ценами по названиям товаров
+ */
+function collectMinPrices() {
+    global $xml;
+    
+    $pricesData = [];
+    
+    // Проходим по всем товарам и собираем цены
+    foreach($xml->categories->category as $cat) {
+        foreach($cat->items->item as $sub) {
+            foreach($sub->products->product as $p) {
+                // Проверяем наличие блока prices
+                if (isset($p->prices) && isset($p->prices->price)) {
+                    foreach($p->prices->price as $priceItem) {
+                        $productName = trim((string)$priceItem->name);
+                        $price = (float)$priceItem->price;
+                        $izdCode = trim((string)$priceItem->izd_code);
+                        
+                        // Пропускаем пустые названия или нулевые цены
+                        if (empty($productName) || $price <= 0) {
+                            continue;
+                        }
+                        
+                        // Сохраняем все цены для данного товара
+                        if (!isset($pricesData[$productName])) {
+                            $pricesData[$productName] = [];
+                        }
+                        
+                        $pricesData[$productName][] = [
+                            'price' => $price,
+                            'izd_code' => $izdCode
+                        ];
+                    }
+                }
+            }
+        }
+    }
+    
+    // Определяем минимальные цены для каждого товара
+    $minPrices = [];
+    foreach($pricesData as $productName => $prices) {
+        $minPrice = null;
+        foreach($prices as $priceData) {
+            if ($minPrice === null || $priceData['price'] < $minPrice) {
+                $minPrice = $priceData['price'];
+            }
+        }
+        
+        if ($minPrice !== null) {
+            // Округляем до 2 знаков после запятой
+            $minPrices[$productName] = number_format($minPrice, 2, '.', '');
+        }
+    }
+    
+    echo "<hr><strong>Собрано минимальных цен: " . count($minPrices) . "</strong><br>";
+    
+    // Выводим первые 10 цен для проверки
+    $counter = 0;
+    foreach($minPrices as $name => $price) {
+        if ($counter >= 10) break;
+        echo "Товар: {$name} - Мин. цена: {$price} руб.<br>";
+        $counter++;
+    }
+    
+    if (count($minPrices) > 10) {
+        echo "... и еще " . (count($minPrices) - 10) . " товаров<br>";
+    }
+    
+    return $minPrices;
+}
+
+/**
  * Функция для проверки соединения с БД и переподключения при необходимости
  */
 function checkDBConnection() {
@@ -288,9 +361,13 @@ function importProducts() {
     global $xml, $iblockId, $docDir;
     $el = new CIBlockElement;
     
-   
+    // Собираем минимальные цены из XML
+    echo "<h3>Этап 1: Сбор цен из XML-файла</h3>";
+    $minPrices = collectMinPrices();
+    
     $processedCount = 0;
     $totalProducts = 0;
+    $pricesUpdated = 0;
     
     
     foreach($xml->categories->category as $cat) {
@@ -299,6 +376,16 @@ function importProducts() {
                 $totalProducts++;
             }
         }
+    }
+    
+    echo "<h3>Этап 2: Обработка товаров и обновление цен</h3>";
+    echo "Всего товаров для обработки: {$totalProducts}<br><hr>";
+    
+    // Создаем массив для поиска цен по артикулу и названию
+    $pricesByArticle = [];
+    foreach($minPrices as $productName => $price) {
+        // Пытаемся извлечь артикул из названия (если есть)
+        $pricesByArticle[$productName] = $price;
     }
     
 
@@ -343,6 +430,9 @@ function importProducts() {
                 // Добавляем артикул в свойства
                 $propertyValues['CML2_ARTICLE'] = $article;
 
+                // ВНИМАНИЕ: Блок обработки документов и сертификатов закомментирован
+                // для предотвращения дублирования файлов при повторном запуске импорта
+                /*
                 // Обрабатываем документы и сертификаты
                 list($docsArray, $certsArray) = collectProductDocs($p);
                 
@@ -389,6 +479,7 @@ function importProducts() {
                         echo "</pre>";
                     }
                 }
+                */
 
                 // 4.1) Технические характеристики (HTML-свойство)
                 if ($specificText !== '') {
@@ -415,17 +506,63 @@ function importProducts() {
                     }
                 }
                 
+                // Поиск цены для данного товара
+                $productPrice = null;
+                
+                // Сначала ищем по точному названию товара
+                if (isset($pricesByArticle[$name])) {
+                    $productPrice = $pricesByArticle[$name];
+                    echo "Найдена цена по названию '{$name}': {$productPrice} руб.<br>";
+                } else {
+                    // Ищем по артикулу (xmlId)
+                    if (isset($pricesByArticle[$xmlId])) {
+                        $productPrice = $pricesByArticle[$xmlId];
+                        echo "Найдена цена по артикулу '{$xmlId}': {$productPrice} руб.<br>";
+                    } else {
+                        // Ищем по частичному совпадению названия
+                        foreach($pricesByArticle as $priceName => $price) {
+                            // Проверяем, содержится ли артикул в названии цены или наоборот
+                            if (stripos($priceName, $xmlId) !== false || stripos($xmlId, $priceName) !== false) {
+                                $productPrice = $price;
+                                echo "Найдена цена по частичному совпадению '{$priceName}' для товара '{$name}': {$productPrice} руб.<br>";
+                                break;
+                            }
+                            // Проверяем частичное совпадение названий
+                            if (stripos($priceName, $name) !== false || stripos($name, $priceName) !== false) {
+                                $productPrice = $price;
+                                echo "Найдена цена по частичному совпадению названия '{$priceName}' для товара '{$name}': {$productPrice} руб.<br>";
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                // Если цена найдена, добавляем её в свойства
+                if ($productPrice !== null) {
+                    $propertyValues['PRICE'] = $productPrice;
+                    $pricesUpdated++;
+                    echo "<strong>Цена обновлена: {$productPrice} руб.</strong><br>";
+                } else {
+                    echo "Цена для товара '{$name}' (артикул: '{$xmlId}') не найдена<br>";
+                }
+                
                 // Объединяем все свойства в один массив
                 $allProperties = $propertyValues;
                 
                 // Проверяем наличие свойств перед формированием загрузки
                 if (!empty($allProperties)) {
                     echo "<hr>Всего свойств для загрузки: " . count($allProperties) . "<br>";
+                    /*
+                    // Закомментировано для предотвращения дублирования файлов
                     if (isset($allProperties['DOCS'])) {
                         echo "Документы присутствуют: " . count($allProperties['DOCS']) . "<br>";
                     }
                     if (isset($allProperties['SERT'])) {
                         echo "Сертификаты присутствуют: " . count($allProperties['SERT']) . "<br>";
+                    }
+                    */
+                    if (isset($allProperties['PRICE'])) {
+                        echo "Цена: " . $allProperties['PRICE'] . " руб.<br>";
                     }
                 }
                 
@@ -478,6 +615,8 @@ function importProducts() {
                             // Устанавливаем свойства напрямую
                             CIBlockElement::SetPropertyValuesEx($resE["ID"], $iblockId, $allProperties);
                             
+                            /*
+                            // Закомментировано для предотвращения дублирования файлов
                             // Проверяем, сохранились ли документы
                             echo "<hr>Проверка сохранения документов:<br>";
                             $dbProps = CIBlockElement::GetProperty($iblockId, $resE["ID"], [], ["CODE" => "DOCS"]);
@@ -517,6 +656,7 @@ function importProducts() {
                             if ($certsCount === 0) {
                                 echo "Сертификаты не найдены в свойствах товара<br>";
                             }
+                            */
                             
                             // Проверяем сохранение свойства SPECIFICATIONS_TEXT
                             $dbSpecsProps = CIBlockElement::GetProperty($iblockId, $resE["ID"], [], ["CODE" => "SPECIFICATIONS_TEXT"]);
@@ -548,6 +688,8 @@ function importProducts() {
                             // Устанавливаем свойства напрямую
                             CIBlockElement::SetPropertyValuesEx($newElementId, $iblockId, $allProperties);
                             
+                            /*
+                            // Закомментировано для предотвращения дублирования файлов
                             // Проверяем, сохранились ли документы
                             echo "<hr>Проверка сохранения документов для нового товара:<br>";
                             $dbProps = CIBlockElement::GetProperty($iblockId, $newElementId, [], ["CODE" => "DOCS"]);
@@ -587,12 +729,20 @@ function importProducts() {
                             if ($certsCount === 0) {
                                 echo "Сертификаты не найдены в свойствах нового товара<br>";
                             }
+                            */
                         }
                     }
                 }
             }
         }
     }
+    
+    // Выводим итоговую статистику
+    echo "<hr><h3>Итоговая статистика обработки</h3>";
+    echo "Всего товаров обработано: {$totalProducts}<br>";
+    echo "Цен обновлено: {$pricesUpdated}<br>";
+    echo "Процент товаров с обновленными ценами: " . round(($pricesUpdated / $totalProducts) * 100, 2) . "%<br>";
+    echo "<hr>";
 }
 
 
