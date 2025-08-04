@@ -505,16 +505,6 @@ if (!empty($arResult["EDIT_LINK"])) {
             </table>
         </div>
 
-        <!-- Блок модификаций товара -->
-        <div class="product-modifications" style="display: none;">
-            <div class="modification-title">Выберите модификацию товара:</div>
-            <div class="modification-template"></div>
-            <div class="modification-groups"></div>
-            <div class="modification-result-block">
-                <div class="modification-result-label">Выбранная модификация:</div>
-                <div class="modification-result"></div>
-            </div>
-        </div>
 
                     </div>
                 </div>
@@ -1145,7 +1135,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                 
                 <!-- Блок выбора модификаций товара -->
                 <div class="product-modifications-main" style="display: none;">
-                    <h3>Выберите модификацию товара:</h3>
+                    <h3 clacc ="product-modifications-main-head">Выберите модификацию товара:</h3>
                     
                     <!-- Контейнер для шаблона модификации -->
                     <div class="modification-template">
@@ -1480,12 +1470,9 @@ if (!empty($arResult["EDIT_LINK"])) {
 
     // Инициализация модификаций товара
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM загружен, начинаем инициализацию модификаций товара');
         
-        // Отладка для всех свойств товара
-        console.log('Все свойства товара:', <?= json_encode(array_keys($arResult["PROPERTIES"] ?? [])) ?>);
-        console.log('Название товара:', <?= json_encode($arResult["NAME"]) ?>);
-        console.log('ID товара:', <?= json_encode($arResult["ID"]) ?>);
+        
+     
         
         // Получаем артикул товара из разных источников
         <? 
@@ -1510,32 +1497,26 @@ if (!empty($arResult["EDIT_LINK"])) {
         ?>
         var productSku = "<?= $productSku ?>";
         
-        console.log('Полученный артикул товара:', productSku);
+
         
         // Если артикул найден, инициализируем модификации
         if (productSku) {
             // Приведем артикул к нижнему регистру для соответствия с JSON
             productSku = productSku.toLowerCase();
-            console.log('Артикул в нижнем регистре:', productSku);
+
             
-            // Проверяем наличие блоков для модификаций
-            console.log('Блок модификаций:', document.querySelector('.product-modifications'));
-            console.log('Блок результата:', document.querySelector('.modification-result'));
             
             // Проверка наличия файла JSON
             fetch('/all_products.json')
                 .then(response => {
-                    console.log('Статус ответа JSON:', response.status);
                     if (!response.ok) {
                         console.error('Ошибка загрузки JSON файла, статус:', response.status);
                     }
                     return response.text();
                 })
                 .then(text => {
-                    console.log('Содержимое JSON файла (начало):', text.substring(0, 200));
                     try {
                         const json = JSON.parse(text);
-                        console.log('JSON успешно разобран, количество элементов:', json.length);
                     } catch(e) {
                         console.error('Ошибка разбора JSON:', e);
                     }

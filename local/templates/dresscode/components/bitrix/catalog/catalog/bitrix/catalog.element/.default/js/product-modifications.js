@@ -40,7 +40,7 @@ class ProductModifications {
                 // Показываем блок с результатом
                 const resultBlock = document.querySelector('.modification-result-block');
                 if (resultBlock) {
-                    resultBlock.style.display = 'block';
+                    resultBlock.style.display = 'none';
                 }
             }
         }).catch(error => {
@@ -107,7 +107,6 @@ class ProductModifications {
      * Отрисовывает блоки выбора модификаций
      */
     renderModificationBlocks() {
-        console.log('ProductModifications: Начало отрисовки блоков');
         
         if (!this.modificationData || !this.modificationData.template || !this.modificationData.mods) {
             console.error('ProductModifications: Нет данных о модификациях');
@@ -117,24 +116,23 @@ class ProductModifications {
         // Показываем основной блок модификаций
         if (this.modBlockElement) {
             this.modBlockElement.style.display = 'block';
-            console.log('ProductModifications: Основной блок модификаций показан');
         }
 
         // Отрисовываем шаблон модификации
-        console.log('ProductModifications: Отрисовка шаблона...');
+
         this.renderTemplate();
         
         // Отрисовываем группы выбора
-        console.log('ProductModifications: Отрисовка групп...');
+
         this.renderModificationGroups();
         
         // Инициализируем обработчики событий после отрисовки
         this.initEventListeners();
         
         // Не показываем результат до тех пор, пока не выбраны все модификации
-        console.log('ProductModifications: Блок результата скрыт до полного выбора модификаций');
+
         
-        console.log('ProductModifications: Отрисовка блоков завершена');
+
     }
     
     /**
@@ -147,7 +145,7 @@ class ProductModifications {
             return;
         }
         
-        console.log('ProductModifications: Отрисовка шаблона:', this.modificationData.template);
+
         
         let templateHtml = '';
         this.modificationData.template.forEach((item, index) => {
@@ -160,9 +158,9 @@ class ProductModifications {
             }
         });
         
-        console.log('ProductModifications: HTML шаблона:', templateHtml);
+
         templateContainer.innerHTML = templateHtml;
-        console.log('ProductModifications: Шаблон отрисован в контейнер');
+
     }
     
     /**
@@ -175,7 +173,6 @@ class ProductModifications {
             return;
         }
         
-        console.log('ProductModifications: Отрисовка групп модификаций:', this.modificationData.mods);
         
         let groupsHtml = '';
         
@@ -212,9 +209,9 @@ class ProductModifications {
         `;
     });
         
-        console.log('ProductModifications: HTML групп:', groupsHtml);
+
         groupsContainer.innerHTML = groupsHtml;
-        console.log('ProductModifications: Группы отрисованы в контейнер');
+
     }
 
     /**
@@ -223,17 +220,13 @@ class ProductModifications {
     initEventListeners() {
         // Защита от повторной инициализации
         if (this.eventListenersInitialized) {
-            console.log('ProductModifications: Обработчики событий уже инициализированы');
+            
             return;
         }
         this.eventListenersInitialized = true;
-        console.log('ProductModifications: Инициализация обработчиков событий');
         
         // Обработчики для кликов по шаблону
         document.addEventListener('click', (e) => {
-            console.log('ProductModifications: Клик по элементу:', e.target);
-            console.log('ProductModifications: Классы элемента:', e.target.classList);
-            console.log('ProductModifications: data-mod-id:', e.target.dataset.modId);
             
             if (e.target.dataset.modId && (e.target.classList.contains('clickable') || e.target.classList.contains('template-modifier'))) {
                 const modId = parseInt(e.target.dataset.modId);
@@ -241,15 +234,12 @@ class ProductModifications {
                 // Проверяем, выбрана ли уже эта модификация
                 if (this.selectedValues[modId] && e.target.classList.contains('selected')) {
                     // Если модификация уже выбрана, сбрасываем её
-                    console.log('ProductModifications: Сбрасываем выбранную модификацию для modId:', modId);
                     this.resetModification(modId);
                 } else {
                     // Иначе показываем группу для выбора
-                    console.log('ProductModifications: Показываем группу модификаций для modId:', modId);
                     this.showModificationGroup(modId);
                 }
             } else {
-                console.log('ProductModifications: Элемент не кликабельный или нет modId');
             }
         });
         
@@ -261,12 +251,7 @@ class ProductModifications {
                 const label = e.target.dataset.label || '';
                 const value = e.target.dataset.value || '';
                 
-                console.log('ProductModifications: Выбрана опция:', {
-                    modId: modId,
-                    optionId: optionId,
-                    value: value,
-                    label: label
-                });
+
                 
                 this.selectedValues[modId] = {
                     optionId: optionId,
@@ -274,7 +259,6 @@ class ProductModifications {
                     value: value
                 };
                 
-                console.log('ProductModifications: Обновленные выбранные значения:', this.selectedValues);
                 
                 this.updateResult();
                 this.updateTemplate();
@@ -286,22 +270,22 @@ class ProductModifications {
      * Показывает группу модификаций
      */
     showModificationGroup(modId) {
-        console.log('ProductModifications: Показываем группу для modId:', modId);
+
         
         // Скрываем все группы
         document.querySelectorAll('.modification-group').forEach(group => {
             group.style.display = 'none';
-            console.log('ProductModifications: Скрываем группу:', group.dataset.modId);
+
         });
         
         // Показываем нужную группу (ищем только среди .modification-group)
         const targetGroup = document.querySelector(`.modification-group[data-mod-id="${modId}"]`);
-        console.log('ProductModifications: Найденная группа:', targetGroup);
+   
         
         if (targetGroup) {
             targetGroup.style.display = 'block';
             targetGroup.classList.add('active');
-            console.log('ProductModifications: Группа показана:', modId);
+           
         } else {
             console.error('ProductModifications: Группа не найдена для modId:', modId);
         }
@@ -311,26 +295,26 @@ class ProductModifications {
      * Показывает следующую группу модификаций после выбора в текущей
      */
     showNextModificationGroup(currentModId) {
-        console.log('ProductModifications: Поиск следующей группы после modId:', currentModId);
+        
         
         // Находим следующую группу в шаблоне
         const templateModIds = this.modificationData.template
             .filter(item => item.modId !== null)
             .map(item => item.modId);
         
-        console.log('ProductModifications: modId в шаблоне:', templateModIds);
+      
         
         const currentIndex = templateModIds.indexOf(currentModId);
-        console.log('ProductModifications: Текущий индекс:', currentIndex);
+       
         
         if (currentIndex !== -1 && currentIndex < templateModIds.length - 1) {
             const nextModId = templateModIds[currentIndex + 1];
-            console.log('ProductModifications: Следующий modId:', nextModId);
+            
             
             // Показываем следующую группу
             this.showModificationGroup(nextModId);
         } else {
-            console.log('ProductModifications: Следующая группа не найдена или это последняя группа');
+            
         }
     }
 
@@ -338,7 +322,7 @@ class ProductModifications {
      * Сбрасывает выбор модификации (возвращает X)
      */
     resetModification(modId) {
-        console.log('ProductModifications: Сброс модификации для modId:', modId);
+      
         
         // Удаляем выбранное значение
         delete this.selectedValues[modId];
@@ -369,8 +353,7 @@ class ProductModifications {
             .filter(item => item.modId !== null)
             .map(item => item.modId);
         
-        console.log('ProductModifications: Обязательные modId:', requiredModIds);
-        console.log('ProductModifications: Выбранные modId:', Object.keys(this.selectedValues));
+       
         
         // Проверяем, что все обязательные modId выбраны
         return requiredModIds.every(modId => this.selectedValues.hasOwnProperty(modId));
@@ -386,7 +369,7 @@ class ProductModifications {
             return;
         }
         
-        console.log('ProductModifications: Обновление шаблона с выбранными значениями:', this.selectedValues);
+        
         
         let templateHtml = '';
         
@@ -408,7 +391,7 @@ class ProductModifications {
             }
         });
         
-        console.log('ProductModifications: Обновленный HTML шаблона:', templateHtml);
+        
         templateDisplay.innerHTML = templateHtml;
         
         // Обновляем результат
@@ -497,7 +480,7 @@ class ProductModifications {
             // Показываем блок результата и обновляем текст
             if (resultBlock) {
                 resultBlock.style.display = 'block';
-                console.log('ProductModifications: Показываем блок результата - все модификации выбраны');
+                
             }
             
             if (this.resultElement) {
@@ -507,7 +490,7 @@ class ProductModifications {
             // Скрываем блок результата, если не все модификации выбраны
             if (resultBlock) {
                 resultBlock.style.display = 'none';
-                console.log('ProductModifications: Скрываем блок результата - не все модификации выбраны');
+                
             }
         }
     }
@@ -518,7 +501,7 @@ class ProductModifications {
     formatModificationCode() {
         if (!this.modificationData || !this.modificationData.template) return '';
         
-        console.log('ProductModifications: Формирование кода модификации с выбранными значениями:', this.selectedValues);
+      
         
         let result = '';
         
@@ -537,7 +520,7 @@ class ProductModifications {
             }
         });
         
-        console.log('ProductModifications: Сформированный код:', result);
+       
         return result;
     }
 }
