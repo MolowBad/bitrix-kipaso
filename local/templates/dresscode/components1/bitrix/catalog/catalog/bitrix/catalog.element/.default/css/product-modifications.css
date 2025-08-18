@@ -1,0 +1,169 @@
+/* Стили для блока модификаций товара */
+.product-modifications {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e7e8ea;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.modification-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+/* Шаблон модификации */
+.modification-template {
+    margin-bottom: 20px;
+}
+
+.modification-template-display {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.template-text {
+    color: #333;
+}
+
+.template-modifier {
+    color: #e74c3c;
+    text-decoration: underline;
+    margin: 0 2px;
+}
+
+.template-modifier.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.template-modifier.clickable:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.template-modifier.selected {
+    background-color: #28a745;
+    color: white;
+}
+
+.template-modifier.empty-value {
+    /* Пустые значения не отображаются визуально, но остаются кликабельными */
+    background-color: transparent;
+    color: transparent;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.modification-group {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.modification-group-title {
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #e7e8ea;
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+.modification-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.modification-option {
+    position: relative;
+}
+
+.modification-option label {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: 1px solid #e7e8ea;
+    padding: 8px 12px;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    min-width: 150px;
+    height: 100%;
+}
+
+.modification-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.modification-option input[type="radio"]:checked + .mod-description {
+    color: #3498db;
+}
+
+.modification-option input[type="radio"]:checked ~ * {
+    border-color: #3498db !important;
+    box-shadow: 0 0 0 1px #3498db;
+}
+
+.modification-option label:has(input[type="radio"]:checked) {
+    border-color: #3498db;
+    box-shadow: 0 0 0 1px #3498db;
+    background-color: #ebf7ff;
+}
+
+.mod-value {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.mod-description {
+    font-size: 12px;
+    color: #777;
+}
+
+.modification-result-block {
+    margin-top: 20px;
+    border-top: 1px solid #e7e8ea;
+    padding-top: 15px;
+}
+
+.modification-result-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.modification-result {
+    padding: 10px;
+    border: 1px solid #3498db;
+    border-radius: 3px;
+    background-color: #ebf7ff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .modification-options {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

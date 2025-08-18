@@ -17,6 +17,7 @@ $this->addExternalJS($templateFolder . "/js/plus.js");
 $this->addExternalJS($templateFolder . "/js/tabs.js");
 $this->addExternalJS($templateFolder . "/js/sku.js");
 $this->addExternalJS($templateFolder . "/js/product-modifications.js");
+$this->addExternalJS($templateFolder . "/js/modification-cart.js");
 
 global $USER, $relatedFilter, $similarFilter, $servicesFilter;
 
@@ -1150,7 +1151,20 @@ if (!empty($arResult["EDIT_LINK"])) {
                 <!-- Блок результата -->
                 <div class="modification-result-block" style="display: none;" id="result-block">
                     <div class="modification-result-title">Выбранная модификация:</div>
-                    <div class="modification-result" id="modification-result"></div>
+                    <div class="modification-result-container">
+                        <div class="modification-result" id="modification-result"></div>
+                        <!-- Блок с ценой модификации -->
+                        <div class="modification-price-block" style="display: none;">
+                            <div class="modification-price-title priceContainer">Цена:</div>
+                            <div class="modification-price"></div>
+                        </div>
+                    </div>
+                    <!-- Кнопка покупки модификации -->
+                    <div class="modification-buy-block" style="display: none; margin-top: 15px;">
+                        <a href="#" class="addCart modificationAddCart" data-id="" data-modification="" data-price="">
+                            <span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="Купить" class="icon">Купить</span>
+                        </a>
+                    </div>
                 </div>
                 <!-- Конец блока выбора модификаций товара -->
 

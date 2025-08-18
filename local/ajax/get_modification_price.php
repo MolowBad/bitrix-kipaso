@@ -28,11 +28,34 @@ if (!file_exists($xmlFilePath)) {
     exit;
 }
 
+// Нормализация имени модификации: трим пробелов, унификация дефисов, срезание хвостовых точек/знаков
+function normalizeName(string $s): string {
+    // Трим пробелов (включая неразрывные) по краям
+    $s = preg_replace('/^[\p{Z}\s\x{00A0}\x{202F}]+|[\p{Z}\s\x{00A0}\x{202F}]+$/u', '', $s);
+    // Заменяем различные типы тире/дефисов на обычный '-'
+    $s = strtr($s, [
+        "\xE2\x80\x90" => '-', // hyphen
+        "\xE2\x80\x91" => '-', // non-breaking hyphen
+        "\xE2\x80\x92" => '-', // figure dash
+        "\xE2\x80\x93" => '-', // en dash
+        "\xE2\x80\x94" => '-', // em dash
+        "\xE2\x80\x95" => '-', // horizontal bar
+    ]);
+    // Сжимаем множественные пробелы до одного
+    $s = preg_replace('/[\x{00A0}\x{202F}\s]+/u', ' ', $s);
+    // Удаляем хвостовые пробелы и знаки препинания (точки, запятые, двоеточия, точка с запятой)
+    $s = preg_replace('/[\s\x{00A0}\x{202F}\.,;:]+$/u', '', $s);
+    return $s;
+}
+
+// Применяем нормализацию к входящему названию
+$modificationNameNormalized = normalizeName((string)$modificationName);
+
 // Результат поиска
 $result = [
     'success' => false,
     'price' => 0,
-    'modification_name' => $modificationName,
+    'modification_name' => $modificationNameNormalized,
     'product_id' => $productId
 ];
 
@@ -66,8 +89,10 @@ try {
             // Извлекаем элемент price как SimpleXML для удобства работы
             $priceXml = simplexml_load_string($reader->readOuterXml());
             
-            // Проверяем название модификации (поддержка тегов <name> и <n>)
-            if ((string)$priceXml->name == $modificationName || (string)$priceXml->n == $modificationName) {
+            // Проверяем название модификации (поддержка тегов <name> и <n>) с учётом нормализации
+            $xmlName1 = normalizeName((string)$priceXml->name);
+            $xmlName2 = normalizeName((string)$priceXml->n);
+            if ($xmlName1 === $modificationNameNormalized || $xmlName2 === $modificationNameNormalized) {
                 $result['success'] = true;
                 $result['price'] = (float)$priceXml->price;
                 $result['izd_code'] = (string)$priceXml->izd_code;

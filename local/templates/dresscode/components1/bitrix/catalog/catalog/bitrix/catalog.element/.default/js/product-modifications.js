@@ -474,68 +474,23 @@ class ProductModifications {
      * Обновляет результат выбора модификации
      */
     updateResult() {
-        if (this.resultElement) {
-            const allSelected = this.areAllModificationsSelected();
-            const resultBlock = document.querySelector('.modification-result-block');
-            const buyBlock = document.querySelector('.modification-buy-block');
-            const modificationAddCartBtn = document.querySelector('.modificationAddCart');
+        const resultBlock = document.querySelector('.modification-result-block');
+        
+        if (this.areAllModificationsSelected()) {
+            // Показываем блок результата и обновляем текст
+            if (resultBlock) {
+                resultBlock.style.display = 'block';
+                
+            }
             
-            if (allSelected) {
-                // Форматируем код модификации
-                const modificationCode = this.formatModificationCode();
+            if (this.resultElement) {
+                this.resultElement.textContent = this.formatModificationCode();
+            }
+        } else {
+            // Скрываем блок результата, если не все модификации выбраны
+            if (resultBlock) {
+                resultBlock.style.display = 'none';
                 
-                // Отображаем результат
-                this.resultElement.textContent = modificationCode;
-                
-                // Показываем блок результата
-                if (resultBlock) {
-                    resultBlock.style.display = 'block';
-                }
-                
-                // Загружаем цену для этой модификации
-                this.loadModificationPrice(modificationCode).then(priceData => {
-                    // Добавляем отладку
-                    console.log('Загружены данные о цене:', priceData);
-                    console.log('Блок покупки:', buyBlock);
-                    console.log('Кнопка покупки:', modificationAddCartBtn);
-                    
-                    // Если цена успешно загружена, показываем кнопку "Купить"
-                    if (priceData && priceData.success && buyBlock && modificationAddCartBtn) {
-                        // Устанавливаем данные для кнопки
-                        // Получаем идентификатор товара из скрытого поля (ID из БД)
-                        const productId = document.querySelector('input[name="product_id"]')?.value || window.productId || '';
-                        modificationAddCartBtn.dataset.id = productId;
-                        modificationAddCartBtn.dataset.sku = this.productSku;
-                        modificationAddCartBtn.dataset.modification = modificationCode;
-                        modificationAddCartBtn.dataset.price = priceData.price;
-                        modificationAddCartBtn.dataset.quantity = 1;
-                        
-                        console.log('Установлены данные для кнопки:', {
-                            id: productId,
-                            sku: this.productSku,
-                            modification: modificationCode,
-                            price: priceData.price,
-                            quantity: 1
-                        });
-                        
-                        // Теперь используем только делегированный обработчик из modification-cart.js
-                        console.log('Кнопка модификации готова к использованию');
-                        
-                        // Показываем кнопку
-                        buyBlock.style.display = 'block';
-                    }
-                });
-            } else {
-                // Скрываем блок результата
-                if (resultBlock) {
-                    resultBlock.style.display = 'none';
-                }
-                
-                // Скрываем цену и кнопку покупки
-                this.hideModificationPrice();
-                if (buyBlock) {
-                    buyBlock.style.display = 'none';
-                }
             }
         }
     }
@@ -567,88 +522,5 @@ class ProductModifications {
         
        
         return result;
-    }
-    /**
-     * Проверяет, выбраны ли все модификации
-     */
-    areAllModificationsSelected() {
-        // Проверяем, что количество выбранных значений равно количеству модификаций
-        return this.modificationData && 
-               this.modificationData.mods && 
-               Object.keys(this.selectedValues).length === this.modificationData.mods.length;
-    }
-    
-    /**
-     * Загружает цену для выбранной модификации
-     * @param {string} modificationCode - Код модификации (например, ТРМ12-Щ1.У2.РР.RS)
-     * @return {Promise} - Promise с данными о цене модификации
-     */
-    async loadModificationPrice(modificationCode) {
-        try {
-            const productId = this.productSku.toLowerCase();
-            const url = `/local/ajax/get_modification_price.php?product_id=${productId}&modification_name=${encodeURIComponent(modificationCode)}`;
-            
-            // Показываем индикатор загрузки
-            const priceBlock = document.querySelector('.modification-price-block');
-            const priceElement = document.querySelector('.modification-price');
-            
-            if (priceBlock && priceElement) {
-                priceElement.textContent = 'Загрузка...';
-                priceBlock.style.display = 'block';
-            }
-            
-            // Выполняем запрос
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Ошибка при получении цены модификации');
-            }
-            
-            const data = await response.json();
-            
-            if (data.success && data.price) {
-                // Форматируем цену
-                const formattedPrice = new Intl.NumberFormat('ru-RU', {
-                    style: 'currency',
-                    currency: 'RUB',
-                    minimumFractionDigits: 2
-                }).format(data.price);
-                
-                // Отображаем цену на странице
-                if (priceElement) {
-                    priceElement.textContent = formattedPrice;
-                    priceBlock.style.display = 'flex';
-                }
-                
-                // Возвращаем данные
-                return data;
-            } else {
-                // Если цена не найдена, показываем сообщение
-                if (priceElement) {
-                    priceElement.textContent = 'Цена не найдена';
-                    priceBlock.style.display = 'flex';
-                }
-                
-                return { success: false };
-            }
-        } catch (error) {
-            console.error('Ошибка при загрузке цены модификации:', error);
-            
-            const priceElement = document.querySelector('.modification-price');
-            if (priceElement) {
-                priceElement.textContent = 'Не удалось загрузить цену';
-            }
-            
-            return { success: false, error: error.message };
-        }
-    }
-    
-    /**
-     * Скрывает блок с ценой модификации
-     */
-    hideModificationPrice() {
-        const priceBlock = document.querySelector('.modification-price-block');
-        if (priceBlock) {
-            priceBlock.style.display = 'none';
-        }
     }
 }
