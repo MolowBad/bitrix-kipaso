@@ -1473,6 +1473,41 @@ if (!empty($arResult["EDIT_LINK"])) {
     };
 
     var elementAjaxPath = "<?= $templateFolder . "/ajax.php" ?>";
+    $(function () {
+        function placeSkuOffersAfterReviews() {
+        var $reviews = $('.reviewsBtnWrap').first();
+        if (!$reviews.length) return;
+
+        // Основной контейнер с предложениями
+        var $sku = $('#skuOffersTable');
+
+        // Если по какой-то причине используется другой контейнер — подстрахуемся:
+        if (!$sku.length) {
+            $sku = $('.offersTableContainer').first().closest('#skuOffersTable, .offersTableContainer, .offersTable');
+        }
+
+        if ($sku.length) {
+            // Переставляем строго после блока с отзывами
+            if (!$reviews.next().is($sku)) {
+            $reviews.after($sku);
+            }
+        }
+        }
+
+        // 1) При первой загрузке
+        placeSkuOffersAfterReviews();
+
+        // 2) После выбора SKU (sku.js обновляет DOM по клику)
+        $(document).on('click', '.elementSkuPropertyLink', function () {
+        setTimeout(placeSkuOffersAfterReviews, 150);
+        });
+
+        // 3) На любые динамические догрузки (перестраховка)
+        var mo = new MutationObserver(function () {
+        placeSkuOffersAfterReviews();
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+    });
     var catalogVariables = <?= \Bitrix\Main\Web\Json::encode($arParams["CATALOG_VARIABLES"]) ?>;
     var sectionPathList = <?= \Bitrix\Main\Web\Json::encode($arResult["SECTION_PATH_LIST"]) ?>;
     var lastSection = <?= \Bitrix\Main\Web\Json::encode($arResult["LAST_SECTION"]) ?>;
