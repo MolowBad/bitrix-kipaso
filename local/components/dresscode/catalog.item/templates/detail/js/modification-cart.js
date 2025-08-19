@@ -3,6 +3,18 @@
  */
 
 $(function() {
+    // Функция для нормализации названия модификации,был баг из за точки в конце названия
+    function normalizeModificationName(str) {
+        if (typeof str !== 'string') return '';
+        return str
+        .trim() 
+       
+        .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\u00AD]/g, '-')
+       
+        .replace(/\s*-\s*/g, '-')
+        
+        .replace(/[.\[,;:]+$/g, '');
+    }
   
     // Добавляем обработчик на клик по кнопке покупки модификации
     $(document).on("click", ".modificationAddCart", function(event) {
@@ -29,7 +41,13 @@ $(function() {
             const $modResult = $modBlock.find('#modification-result');
             if ($modResult.length) {
                 const txt = $modResult.text().trim();
-                if (txt) modification = txt;
+                const normalizedTxt = normalizeModificationName(txt);
+                if (normalizedTxt) {
+                    modification = normalizedTxt;
+                    if (txt !== normalizedTxt) {
+                        $modResult.text(normalizedTxt);
+                    }
+                }
             }
             const $priceEl = $modBlock.find('.modification-price');
             if ($priceEl.length) {
@@ -46,6 +64,7 @@ $(function() {
             $this.addClass("loading").html("Загружается...");
             
             // Сохраняем информацию о модификации в localStorage для использования на странице корзины
+            modification = normalizeModificationName(modification);
             setModificationData(productID, modification, price);
 
             

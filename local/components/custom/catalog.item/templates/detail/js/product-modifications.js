@@ -1,6 +1,25 @@
 /**
  * Обработка выбора модификаций товара
  */
+// Нормализация имени модификации: трим, унификация тире, удаление хвостовых знаков препинания
+function normalizeModificationName(name) {
+   if (!name) return '';
+   let s = String(name)
+     .replace(/\u00A0/g, ' ') // NBSP -> обычный пробел
+     .trim();
+
+   // Унифицируем разные виды тире/минусов в дефис '-'
+   s = s.replace(/[\u2012\u2013\u2014\u2015\u2212\-]+/g, '-');
+
+   // Убираем пробелы вокруг дефисов
+   s = s.replace(/\s*-\s*/g, '-');
+
+   // Удаляем завершающие знаки препинания и лишние пробелы
+   s = s.replace(/[.,;:]+$/g, '').trim();
+
+   return s;
+}
+
 class ProductModifications {
     constructor(options) {
         console.log('ProductModifications: Инициализация с параметрами:', options);
@@ -130,7 +149,7 @@ class ProductModifications {
         html += `
             <div class="modification-result-block">
                 <div class="modification-result-label">Выбранная модификация:</div>
-                <div class="modification-result">${this.formatModificationCode()}</div>
+                <div class="modification-result">${normalizeModificationName(this.formatModificationCode())}</div>
             </div>
         `;
         
@@ -165,7 +184,9 @@ class ProductModifications {
      */
     updateResult() {
         if (this.resultElement) {
-            this.resultElement.textContent = this.formatModificationCode();
+            const formatted = this.formatModificationCode();
+            const normalized = normalizeModificationName(formatted);
+            this.resultElement.textContent = normalized;
         }
     }
 
