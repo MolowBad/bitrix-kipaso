@@ -1,22 +1,4 @@
 <?php
-/**
- * Скрипт импорта торговых предложений из файлов:
- *  - Цены: catalogOven.xml (корень сайта)
- *  - Описания: "Краткое описание для сайта 12,08.csv" (UTF-8, разделитель запятая или точка с запятой)
- *
- * Запуск:
- *  - Dry-run (только лог без изменений): /import_offers_from_files.php?dry-run=Y
- *  - Боевой запуск: /import_offers_from_files.php
- *
- * Предполагается, что:
- *  - Товарный ИБ: ID = 16
- *  - Поиск товара по свойству артикула CML2_ARTICLE
- *  - Связка SKU-ИБ уже существует. Если нет — скрипт завершится с подсказкой.
- *
- * ВАЖНО: В Битрикс нельзя назначить ID элемента при создании. В качестве идентификатора
- * предложения используем XML_ID и CODE = <izd_code>.
- */
-
 use Bitrix\Main\Loader;
 
 @set_time_limit(0);
@@ -29,6 +11,40 @@ if (!file_exists($prolog)) {
     http_response_code(500);
     echo "Bitrix prolog not found: {$prolog}";
     exit;
+}
+
+/**
+ * Поиск существующих ТП по izd_code, с защитой от дублей.
+ * Возвращает: [первый_ID_или_null, массив_ID_дубликатов]
+ */
+function findExistingOffer(int $offersIblockId, int $linkPropId, int $productId, string $izd): array {
+    $ids = [];
+    // По XML_ID
+    $res1 = CIBlockElement::GetList([], [
+        'IBLOCK_ID' => $offersIblockId,
+        'XML_ID' => $izd,
+    ], false, false, ['ID']);
+    while ($r = $res1->GetNext()) { $ids[] = (int)$r['ID']; }
+
+    // По CODE (строгое сравнение)
+    $res2 = CIBlockElement::GetList([], [
+        'IBLOCK_ID' => $offersIblockId,
+        '=CODE' => $izd,
+    ], false, false, ['ID']);
+    while ($r = $res2->GetNext()) { $ids[] = (int)$r['ID']; }
+
+    // По связке с товаром + CODE (на случай разных XML_ID)
+    $res3 = CIBlockElement::GetList([], [
+        'IBLOCK_ID' => $offersIblockId,
+        'PROPERTY_' . $linkPropId => $productId,
+        '=CODE' => $izd,
+    ], false, false, ['ID']);
+    while ($r = $res3->GetNext()) { $ids[] = (int)$r['ID']; }
+
+    $ids = array_values(array_unique($ids));
+    if (empty($ids)) { return [null, []]; }
+    $first = array_shift($ids);
+    return [$first, $ids];
 }
 require_once $prolog;
 
@@ -246,34 +262,10 @@ foreach ($byArticle as $article => $offers) {
             continue;
         }
 
-        // Проверяем существование ТП по XML_ID или CODE = izd_code
-        $existingOfferId = null;
-        $resOffer = CIBlockElement::GetList(
-            [],
-            [
-                'IBLOCK_ID' => $OFFERS_IBLOCK_ID,
-                'XML_ID' => $izd,
-            ],
-            false,
-            ['nTopCount' => 1],
-            ['ID']
-        );
-        if ($o = $resOffer->GetNext()) {
-            $existingOfferId = (int)$o['ID'];
-        } else {
-            $resOffer2 = CIBlockElement::GetList(
-                [],
-                [
-                    'IBLOCK_ID' => $OFFERS_IBLOCK_ID,
-                    '=CODE' => $izd,
-                ],
-                false,
-                ['nTopCount' => 1],
-                ['ID']
-            );
-            if ($o2 = $resOffer2->GetNext()) {
-                $existingOfferId = (int)$o2['ID'];
-            }
+        // Ищем существующие ТП по XML_ID/CODE и по связке с товаром
+        [$existingOfferId, $duplicateIds] = findExistingOffer($OFFERS_IBLOCK_ID, $LINK_PROP_ID, $productId, $izd);
+        if (!empty($duplicateIds)) {
+            logm('[DUP] Найдено дублирующих ТП для izd=' . $izd . ': IDs=' . implode(',', $duplicateIds) . '. Обновляю первый из них.');
         }
 
         if ($existingOfferId) {
