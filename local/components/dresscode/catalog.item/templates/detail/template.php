@@ -41,7 +41,7 @@ if (!empty($arResult["EDIT_LINK"])) {
 
 <div id="<?= $this->GetEditAreaId($arResult["ID"]); ?>">
     <? $this->SetViewTarget("after_breadcrumb_container"); ?>
-    <h1 class="changeName"><?= $APPLICATION->GetTitle(false); ?></h1>
+    <h1 class="changeName changeNameTest"><?= $APPLICATION->GetTitle(false); ?></h1>
     <? $this->EndViewTarget(); ?>
 
     <div id="catalogElement" class="item<?= !empty($arResult["SKU_OFFERS"]) ? ' elementSku' : '' ?>"
@@ -392,7 +392,7 @@ if (!empty($arResult["EDIT_LINK"])) {
 
 
             <!--таблица предложений,перенесенная-->
-            <div class="product-variants-table">
+            <div class="product-variants-table" style="display: none;">
             <table class="variants-table">
                 <thead>
                     <tr>
@@ -1473,71 +1473,47 @@ if (!empty($arResult["EDIT_LINK"])) {
     };
 
     var elementAjaxPath = "<?= $templateFolder . "/ajax.php" ?>";
+
+
+
     $(function () {
-    var moveScheduled = false;
-    
+        function placeSkuOffersAfterReviews() {
+        var $reviews = $('.mainContainer').first();
+        if (!$reviews.length) return;
 
-    function placeAndCloneSkuOffers() {
-      var $firstAnchor = $('.changeName').first(); // 1-е место
-      var $secondAnchor = $('#browse'); // 2-е место (замените при необходимости)
+        // Основной контейнер с предложениями
+        var $sku = $('#skuOffersTable');
 
-      if (!$firstAnchor.length) return;
-
-      var $sku = $('#skuOffersTable');
-      if (!$sku.length) {
-        // fallback: попробуем найти контейнер таблицы
-        $sku = $('.offersTableContainer').first().closest('#skuOffersTable, .offersTableContainer, .offersTable');
-      }
-      if (!$sku.length) return;
-
-      // 1) Переместим оригинал после первого якоря
-      if (!$firstAnchor.next().is($sku)) {
-        $firstAnchor.after($sku);
-      }
-
-      // 2) Подготовим/обновим клон для второго места
-      if ($secondAnchor.length) {
-        var $existingClone = $('#skuOffersTableClone');
-
-        // Собираем новый клон (deep clone)
-        var $newClone = $sku.clone(true, true).attr('id', 'skuOffersTableClone');
-
-        // ВАЖНО: чтобы не было дублей внутренних id (если вдруг есть),
-        // можно снять id c вложенных элементов у клона:
-        // $newClone.find('[id]').removeAttr('id');
-
-        if ($existingClone.length) {
-          $existingClone.replaceWith($newClone);
-        } else {
-          $secondAnchor.after($newClone);
+        // Если по какой-то причине используется другой контейнер — подстрахуемся:
+        if (!$sku.length) {
+            $sku = $('.offersTableContainer').first().closest('#skuOffersTable, .offersTableContainer, .offersTable');
         }
-      }
-    }
 
-    function schedule() {
-      if (moveScheduled) return;
-      moveScheduled = true;
-      setTimeout(function () {
-        moveScheduled = false;
-        placeAndCloneSkuOffers();
-      }, 120);
-    }
+        if ($sku.length) {
+            // Переставляем строго после блока с отзывами
+            if (!$reviews.next().is($sku)) {
+            $reviews.after($sku);
+            }
+        }
+        }
 
-    // 1) При загрузке
-    placeAndCloneSkuOffers();
+        // 1) При первой загрузке
+        placeSkuOffersAfterReviews();
 
-    // 2) После изменения SKU (клики, ajax)
-    $(document).on('click', '.elementSkuPropertyLink', schedule);
+        // 2) После выбора SKU (sku.js обновляет DOM по клику)
+        $(document).on('click', '.elementSkuPropertyLink', function () {
+        setTimeout(placeSkuOffersAfterReviews, 150);
+        });
 
-    // 3) При динамических изменениях карточки
-    var root = document.querySelector('#catalogElement') || document.body;
-    var mo = new MutationObserver(schedule);
-    mo.observe(root, { childList: true, subtree: true });
-  });
-
-
+        // 3) На любые динамические догрузки (перестраховка)
+        var mo = new MutationObserver(function () {
+        placeSkuOffersAfterReviews();
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+    });
 
 
+    
     var catalogVariables = <?= \Bitrix\Main\Web\Json::encode($arParams["CATALOG_VARIABLES"]) ?>;
     var sectionPathList = <?= \Bitrix\Main\Web\Json::encode($arResult["SECTION_PATH_LIST"]) ?>;
     var lastSection = <?= \Bitrix\Main\Web\Json::encode($arResult["LAST_SECTION"]) ?>;
@@ -1585,25 +1561,18 @@ if (!empty($arResult["EDIT_LINK"])) {
 
             
             
-            // Проверка наличия файла JSON
+            // Лёгкая проверка доступности JSON (не блокирует инициализацию)
             fetch('/all_products.json')
-                .then(response => {
+                .then(function (response) {
                     if (!response.ok) {
-                        console.error('Ошибка загрузки JSON файла, статус:', response.status);
+                        console.warn('[SKU] all_products.json недоступен, status:', response.status);
                     }
-                    return response.text();
+                    return null;
                 })
-                .then(text => {
-                    try {
-                        const json = JSON.parse(text);
-                    } catch(e) {
-                        console.error('Ошибка разбора JSON:', e);
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка при загрузке JSON:', error);
+                .catch(function (e) {
+                    console.warn('[SKU] Ошибка запроса all_products.json:', e && e.message ? e.message : e);
                 });
-            
+
             var productMods = new ProductModifications({
                 productSku: productSku,
                 resultSelector: '.modification-result',
