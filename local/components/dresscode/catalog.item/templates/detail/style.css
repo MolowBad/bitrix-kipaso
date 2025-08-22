@@ -1,47 +1,3 @@
-/* Стиль оформления шапки как в kipservice для оперативного заказа товара (Создано Егором) */
-.product-variants-table {
-    margin-bottom: 20px;
-}
-.variants-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-.variants-table th, .variants-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-.variants-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-.inStock {
-    color: green;
-}
-.onOrder {
-    color: orange;
-}
-.outOfStock {
-    color: red;
-}
-.addCart {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #30ba0e;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-.addCart.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-.addCart .icon {
-    vertical-align: middle;
-    margin-right: 5px;
-}
-/* Стиль оформления шапки как в kipservice для оперативного заказа товара (Создано Егором) */
 #left {
 	position: relative;
 }
@@ -758,6 +714,13 @@
 	padding: 24px 0;
 	vertical-align: middle;
 }
+.col {
+	position: relative;
+	display: table-cell;
+	width: 50%;
+	padding: 24px 0;
+	vertical-align: middle;
+}
 
 #elementContainer .mainContainer .secondCol {
 	position: static;
@@ -769,7 +732,13 @@
 	display: none;
 }
 
+
 #elementContainer .mainContainer .col:first-child {
+	padding: 24px 12px;
+	text-align: center;
+	vertical-align: middle;
+}
+.col:first-child {
 	padding: 24px 12px;
 	text-align: center;
 	vertical-align: middle;
@@ -782,8 +751,15 @@
 #elementContainer #pictureContainer .pictureSlider .item:first-child {
 	display: block;
 }
+.item:first-child {
+	display: block;
+}
 
 #elementContainer #pictureContainer .pictureSlider .item {
+	display: none;
+	padding: 0 24px;
+}
+.item {
 	display: none;
 	padding: 0 24px;
 }
@@ -793,7 +769,17 @@
 	text-align: center;
 }
 
+.item a {
+	display: block;
+	text-align: center;
+}
 #elementContainer #pictureContainer .item a img {
+	max-width: 90%;
+	max-height: 100%;
+	vertical-align: middle;
+}
+
+.item a img {
 	max-width: 90%;
 	max-height: 100%;
 	vertical-align: middle;
@@ -1770,7 +1756,9 @@
 	box-sizing: border-box;
 	padding: 0 24px;
 }
-
+/* Егор правил размер текста отображения файлов в товаре, #files теги сохранил как было в комментарии */
+/* Было */
+/*
 #files {
 	margin-top: 24px;
 }
@@ -1845,6 +1833,17 @@
 	transition: all 0.2s ease-in-out;
 }
 
+
+#files .item .info .name {
+	display: block;
+	height: 25px;
+	overflow: hidden;
+	color: #000000;
+	font-size: 14px;
+	line-height: 25px;
+	transition: all 0.2s ease-in-out;
+}
+
 #files .item .info .name span {
 	display: inline-block;
 	line-height: 21px;
@@ -1854,6 +1853,96 @@
 #files .item small {
 	display: block;
 }
+*/
+/* Стало */
+#files {
+    margin-top: 24px;
+}
+
+#files .wrap {
+    box-sizing: border-box;
+    padding: 0 24px;
+}
+
+#files .heading {
+    display: block;
+    padding: 36px 24px;
+    font-weight: 800;
+    font-size: 20px;
+    font-family: robotobold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid #efefef;
+}
+
+#files .items {
+    overflow: hidden;
+}
+
+#files .item {
+    float: left;
+    width: 25%;
+    height: 150px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    display: flex; /* Добавлено для центрирования содержимого */
+    align-items: center; /* Вертикальное центрирование */
+    justify-content: flex-start; /* Горизонтальное выравнивание слева */
+}
+
+#files .item .tb {
+    display: flex; /* Замена table на flex */
+    width: 100%;
+    align-items: center; /* Центрирование по вертикали */
+}
+
+#files .item .tbr {
+    display: contents; /* Убираем table-row, сохраняя структуру */
+}
+
+#files .item .icon {
+    width: 20%;
+    margin-right: 4px; /* Отступ между иконкой и текстом */
+    text-align: center; /* Центрирование иконки */
+}
+
+#files .item .icon a {
+    display: block;
+}
+
+#files .item .icon img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+#files .item .info {
+    width: 50%;
+    padding-right: 18px;
+    display: flex; /* Flex для управления текстом */
+    flex-direction: column; /* Вертикальная компоновка */
+    justify-content: center; /* Центрирование по вертикали */
+}
+
+#files .item .info .name {
+    display: block;
+    color: #000000;
+    font-size: 14px;
+    line-height: 21px; /* Изменено для согласованности с span */
+    transition: all 0.2s ease-in-out;
+    word-break: break-word; /* Перенос длинных слов */
+    margin-bottom: 4px; /* Отступ между большим и малым текстом */
+}
+
+#files .item .info .name span {
+    display: inline-block;
+    line-height: 21px;
+    vertical-align: middle;
+}
+
+#files .item small {
+    display: block;
+}
+
 
 #video {
 	margin-top: 24px;
@@ -2030,229 +2119,7 @@
 	top: 13px;
 }
 
-#skuOffersTable {
-	box-sizing: border-box;
-	margin-bottom: 30px;
-}
 
-#skuOffersTable .offersTableContainer {
-	box-sizing: border-box;
-	padding: 0 24px;
-}
-
-#skuOffersTable .offersTableContainerBtn {
-	margin-top: 24px;
-	text-align: center;
-}
-
-#skuOffersTable .catalogProductOffersNext img {
-	display: inline-block;
-	margin-top: -2px;
-	margin-right: 8px;
-	vertical-align: middle;
-}
-
-#skuOffersTable .catalogProductOffersNext.btn-simple {
-	width: 156px;
-	border-radius: 4px;
-}
-
-#skuOffersTable .heading {
-	display: block;
-	padding: 36px 24px;
-	font-weight: 800;
-	font-size: 20px;
-	font-family: robotomedium;
-	text-transform: uppercase;
-	border-top: 1px solid #e7e8ea;
-}
-
-#skuOffersTable .offersTable {
-	width: 100%;
-}
-
-#skuOffersTable .tb {
-	width: 100%;
-	transition: all 0.2s ease-in-out;
-}
-
-#skuOffersTable .tableElem .tb:hover {
-	background-color: #fdfdfd;
-}
-
-#skuOffersTable .tc {
-	box-sizing: border-box;
-	padding: 8px 6px;
-	text-align: center;
-}
-
-#skuOffersTable .thead {
-	background: #f1f1f1;
-	border-radius: 4px;
-}
-
-#skuOffersTable .thead .tc {
-	padding: 12px 6px;
-}
-
-#skuOffersTable .tableElem {
-	margin-top: 8px;
-	border: 1px solid #f1f1f1;
-	border-radius: 4px;
-}
-
-#skuOffersTable .offersTable th,
-#skuOffersTable .offersTable td {
-	text-align: center;
-}
-
-#skuOffersTable .offersTable th {
-	padding: 12px 0;
-	color: #000000;
-	font-weight: 400;
-	font-size: 14px;
-	background-color: #f1f1f1;
-}
-
-#skuOffersTable .offersTable td {
-	padding-top: 8px;
-	padding-bottom: 8px;
-	border-top: 1px solid #f3f3f3;
-	border-bottom: 1px solid #f3f3f3;
-}
-
-#skuOffersTable .offersTable th {
-	border-top: 1px solid #f3f3f3;
-	border-bottom: 1px solid #f3f3f3;
-}
-
-#skuOffersTable .offersTable th:first-child,
-#skuOffersTable .offersTable td:first-child {
-	border-left: 1px solid #f3f3f3;
-}
-
-#skuOffersTable .offersTable th:last-child,
-#skuOffersTable .offersTable td:last-child {
-	border-right: 1px solid #f3f3f3;
-}
-
-#skuOffersTable .offersTable .offersName {
-	width: 220px;
-	text-align: left;
-}
-
-#skuOffersTable .offersTable .offersName + td {
-	padding-left: 12px;
-}
-
-#skuOffersTable .offersTable .offersPicture {
-	width: 96px;
-}
-
-#skuOffersTable .offersTable .offersPicture img {
-	width: auto;
-	max-width: 42px;
-	height: auto;
-	max-height: 54px;
-	vertical-align: middle;
-}
-
-#skuOffersTable .offersTable .priceWrap {
-	width: 184px;
-}
-
-#skuOffersTable .offersTable .quantity img {
-	display: inline-block;
-	margin-top: -4px;
-	padding-right: 6px;
-	vertical-align: middle;
-}
-
-#skuOffersTable .offersTable .price {
-	position: relative;
-	font-size: 16px;
-	font-family: robotomedium;
-}
-
-#skuOffersTable .offersTable .getPricesWindow .priceIcon {
-	display: none;
-}
-
-#skuOffersTable .offersTable .quanBaskWrap {
-	width: 250px;
-	padding: 0;
-}
-
-#skuOffersTable .offersTable .quanBaskWrap .tc {
-	width: 50%;
-}
-
-#skuOffersTable .offersTable .basket {
-	padding-right: 12px;
-}
-
-#skuOffersTable .offersTable .price .priceIcon {
-	margin-right: 6px;
-}
-
-#skuOffersTable .offersTable .price .lnk {
-	padding-bottom: 2px;
-	border-bottom: 1px dashed #000000;
-	transition: all 0.2s ease-in-out;
-}
-
-#skuOffersTable .offersTable .price:hover .lnk {
-	border-color: #888888;
-}
-
-#skuOffersTable .offersTable .property {
-	/* font-family: "robotobold"; */
-	font-size: 14px;
-}
-
-#skuOffersTable .offersTable .discount {
-	position: absolute;
-	top: -16px;
-	right: -12px;
-	display: block;
-	color: #888888;
-	font-size: 13px;
-	font-family: "roboto_ltregular";
-}
-
-#skuOffersTable .offersTable .basket .addCart {
-	display: inline-block;
-	height: 30px;
-	padding: 0 12px;
-	color: #ffffff;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 4px;
-
-	/* width: 76px; */
-	transition: all 0.2s ease-in-out;
-}
-
-#skuOffersTable .offersTable .basket .addCart.requestPrice {
-	margin-top: 0;
-}
-
-#skuOffersTable .offersTable .basket .addCart:active {
-	position: relative;
-	top: 1px;
-}
-
-#skuOffersTable .offersTable .basket .addCart img {
-	display: inline-block;
-	margin-top: -4px;
-	margin-right: 12px;
-	vertical-align: middle;
-}
-
-#skuOffersTable .outOfStock {
-	color: #888888;
-}
 
 #complect {
 	box-sizing: border-box;
