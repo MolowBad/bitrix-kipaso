@@ -1,0 +1,378 @@
+/* Основные стили для таблицы модификаций */
+#skuOffersTable {
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+#skuOffersTable .offersTableContainer {
+    box-sizing: border-box;
+    padding: 0 12px;
+}
+
+#skuOffersTable .offersTableContainerBtn {
+    margin-top: 24px;
+    text-align: center;
+}
+
+#skuOffersTable .catalogProductOffersNext.btn-simple {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 4px;
+    background-color: #30ba0e;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#skuOffersTable .catalogProductOffersNext.btn-simple:hover {
+    background-color: #0056b3;
+}
+
+#skuOffersTable .hideOffers.btn-simple {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 4px;
+    background-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#skuOffersTable .hideOffers.btn-simple:hover {
+    background-color: #5a6268;
+}
+
+#skuOffersTable .heading {
+    display: block;
+    padding: 24px 12px;
+    font-weight: 800;
+    font-size: 18px;
+    font-family: robotomedium, sans-serif;
+    text-transform: uppercase;
+    border-top: 1px solid #e7e8ea;
+}
+
+#skuOffersTable .offersTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#skuOffersTable .tb {
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+#skuOffersTable .tableElem .tb:hover {
+    background-color: #fdfdfd;
+}
+
+#skuOffersTable .tc {
+    box-sizing: border-box;
+    padding: 8px 6px;
+    text-align: center;
+}
+
+#skuOffersTable .thead {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#skuOffersTable .thead .tc {
+    padding: 12px 6px;
+    color: #000000;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#skuOffersTable .tableElem {
+    margin-top: 8px;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+}
+
+#skuOffersTable .offersTable th,
+#skuOffersTable .offersTable td {
+    text-align: center;
+}
+
+#skuOffersTable .offersTable td {
+    padding: 8px;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+#skuOffersTable .offersTable th {
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+#skuOffersTable .offersTable th:first-child,
+#skuOffersTable .offersTable td:first-child {
+    border-left: 1px solid #f3f3f3;
+}
+
+#skuOffersTable .offersTable th:last-child,
+#skuOffersTable .offersTable td:last-child {
+    border-right: 1px solid #f3f3f3;
+}
+
+#skuOffersTable .offersTable .offersName {
+    text-align: left;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+#skuOffersTable .offersTable .offersPicture {
+    width: 96px;
+}
+
+#skuOffersTable .offersTable .offersPicture img {
+    width: auto;
+    max-width: 42px;
+    height: auto;
+    max-height: 54px;
+    vertical-align: middle;
+}
+
+#skuOffersTable .offersTable .priceWrap {
+    min-width: 100px;
+}
+
+#skuOffersTable .offersTable .quantity img {
+    display: inline-block;
+    margin-top: -4px;
+    padding-right: 6px;
+    vertical-align: middle;
+}
+
+#skuOffersTable .offersTable .price {
+    position: relative;
+    font-size: 16px;
+    font-family: robotomedium, sans-serif;
+}
+
+#skuOffersTable .offersTable .price .lnk {
+    padding-bottom: 2px;
+    border-bottom: 1px dashed #000000;
+    transition: all 0.2s ease-in-out;
+}
+
+#skuOffersTable .offersTable .price:hover .lnk {
+    border-color: #888888;
+}
+
+#skuOffersTable .offersTable .discount {
+    position: absolute;
+    top: -16px;
+    right: -12px;
+    display: block;
+    color: #888888;
+    font-size: 13px;
+    font-family: "roboto_ltregular", sans-serif;
+}
+
+#skuOffersTable .offersTable .basket .addCart {
+    display: inline-block;
+    height: 30px;
+    padding: 0 12px;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+#skuOffersTable .offersTable .basket .addCart:active {
+    position: relative;
+    top: 1px;
+}
+
+#skuOffersTable .offersTable .basket .addCart img {
+    display: inline-block;
+    margin-top: -4px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+#skuOffersTable .outOfStock {
+    color: #888888;
+}
+
+/* Скрываем ненужные столбцы (изображения и свойства) по умолчанию */
+#skuOffersTable .offersTable .offersPicture,
+#skuOffersTable .offersTable .property {
+    display: none;
+}
+
+/* Показываем изображения для экранов ≥1024px */
+@media screen and (min-width: 1024px) {
+    #skuOffersTable .offersTable .offersPicture {
+        display: table-cell;
+    }
+}
+
+/* Адаптивные стили для экранов до 768px (планшеты) */
+@media screen and (max-width: 768px) {
+    #skuOffersTable .offersTable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #skuOffersTable .offersTable .offersName,
+    #skuOffersTable .offersTable .priceWrap,
+    #skuOffersTable .offersTable .quanBaskWrap {
+        min-width: 100px;
+    }
+
+    #skuOffersTable .offersTable .quanBaskWrap .tc {
+        min-width: 80px;
+    }
+
+    #skuOffersTable .heading {
+        font-size: 16px;
+        padding: 16px 12px;
+    }
+}
+
+/* Адаптивные стили для экранов до 600px (мобильные устройства) */
+@media screen and (max-width: 600px) {
+    #skuOffersTable .offersTable {
+        display: block;
+    }
+
+    #skuOffersTable .tb {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid #e7e8ea;
+        border-radius: 4px;
+    }
+
+    #skuOffersTable .tc {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #f3f3f3;
+    }
+
+    #skuOffersTable .thead {
+        display: none;
+    }
+
+    #skuOffersTable .offersTable .offersName {
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: 12px;
+        background: #f1f1f1;
+        border-radius: 4px 4px 0 0;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    #skuOffersTable .offersTable .priceWrap {
+        font-size: 15px;
+    }
+
+    #skuOffersTable .offersTable .quantity {
+        font-size: 14px;
+    }
+
+    #skuOffersTable .offersTable .basket .addCart {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    #skuOffersTable .offersTable .quanBaskWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+    }
+
+    #skuOffersTable .offersTable .quanBaskWrap .tc {
+        width: auto;
+        flex: 1;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    #skuOffersTable .catalogProductOffersNext.btn-simple,
+    #skuOffersTable .hideOffers.btn-simple {
+        width: 100%;
+        max-width: 180px;
+        font-size: 14px;
+    }
+}
+
+/* Адаптивные стили для очень маленьких экранов (до 360px, например, iPhone SE 2022) */
+@media screen and (max-width: 360px) {
+    #skuOffersTable .offersTable .tb {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid #e7e8ea;
+        border-radius: 4px;
+    }
+
+    #skuOffersTable .offersTable .offersName {
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 12px;
+        background: #f1f1f1;
+        border-radius: 4px 4px 0 0;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    #skuOffersTable .offersTable .priceWrap {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-bottom: 1px solid #f3f3f3;
+    }
+
+    #skuOffersTable .offersTable .quanBaskWrap {
+        display: block;
+        padding: 8px 12px;
+    }
+
+    #skuOffersTable .offersTable .quanBaskWrap .tc {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border-bottom: none;
+    }
+
+    #skuOffersTable .offersTable .quantity {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    #skuOffersTable .offersTable .basket .addCart {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 13px;
+        line-height: 28px;
+    }
+
+    #skuOffersTable .offersTable .priceWrap + .quanBaskWrap {
+        border-top: 1px solid #f3f3f3;
+    }
+
+    #skuOffersTable .catalogProductOffersNext.btn-simple,
+    #skuOffersTable .hideOffers.btn-simple {
+        max-width: 160px;
+        font-size: 13px;
+    }
+}
+
+/* Скрываем строки модификаций после первых 4 */
+#skuOffersTable .tableElem.hidden {
+    display: none;
+}

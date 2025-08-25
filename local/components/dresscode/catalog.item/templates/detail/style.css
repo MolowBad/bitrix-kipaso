@@ -124,15 +124,19 @@
 }
 
 #elementNavigation .tabs a {
-	display: inline-block;
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 15px;
 	padding: 16px 24px;
 	color: #000000;
-	font-size: 13px;
+	font-size: 20px;
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 }
 
 #elementNavigation .tabs .tab {
+	text-align: left;
 	padding: 0;
 	transition: all 0.2s ease-in-out;
 }
@@ -253,7 +257,7 @@
 	position: relative;
 	z-index: 1;
 	box-sizing: border-box;
-	width: 400px;
+	width: 14%;
 	padding: 24px 24px 0;
 	background-color: #fcfcfc;
 }
@@ -1121,6 +1125,7 @@
 }
 
 .reviewsBtnWrap {
+	display: none;
 	margin-top: 6px;
 	padding-bottom: 6px;
 	border-bottom: 1px dotted #f3f3f3;

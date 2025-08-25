@@ -4,7 +4,7 @@
 	}
 
 	#tableContainer .column:nth-child(2) {
-		width: 1124px;
+		width: 1224px;
 	}
 
 	#catalogElement .product:nth-child(5n + 5) {
@@ -16,11 +16,11 @@
 	}
 
 	#skuOffersTable .offersTable .offersName {
-		width: 22%;
+		width: 65%;
 	}
 
 	#skuOffersTable .offersTable .priceWrap {
-		width: 18%;
+		width: 50%;
 	}
 
 	#skuOffersTable .offersTable .quanBaskWrap {
@@ -250,9 +250,9 @@
 }
 
 @media all and (max-width: 1250px) {
-	#skuOffersTable {
+	/* #skuOffersTable {
 		display: none;
-	}
+	} */
 }
 
 @media all and (max-width: 1100px) {
@@ -471,6 +471,11 @@
 		box-sizing: border-box;
 		padding: 24px 24px 0;
 	}
+	.col {
+		box-sizing: border-box;
+		padding: 24px 24px 0;
+	}
+
 
 	#elementContainer .brandImage {
 		margin-bottom: 18px;
@@ -679,6 +684,12 @@
 	}
 
 	#elementContainer .mainContainer .col {
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+		padding: 24px 24px 0;
+	}
+	.col {
 		display: block;
 		box-sizing: border-box;
 		width: 100%;
