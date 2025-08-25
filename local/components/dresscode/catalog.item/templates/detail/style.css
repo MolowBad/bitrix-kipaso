@@ -759,10 +759,7 @@
 	display: none;
 	padding: 0 24px;
 }
-.item {
-	display: none;
-	padding: 0 24px;
-}
+
 
 #elementContainer #pictureContainer .item a {
 	display: block;
@@ -794,13 +791,29 @@
 	opacity: 0;
 	transition: all 0.3s ease-in-out;
 }
+#moreImagesCarousel {
+	position: relative;
+	margin-top: 24px;
+	padding-top: 24px;
+	overflow: hidden;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+}
 
 #elementContainer #moreImagesCarousel.show {
 	visibility: visible;
 	opacity: 1;
 }
+#moreImagesCarousel.show {
+	visibility: visible;
+	opacity: 1;
+}
 
 #elementContainer #moreImagesCarousel.hide {
+	display: none;
+}
+.hide {
 	display: none;
 }
 
@@ -840,8 +853,21 @@
 	margin: auto;
 	overflow: hidden;
 }
+.carouselWrapper {
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
 
 #elementContainer #moreImagesCarousel .slideBox {
+	position: relative;
+	height: 62px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
+}
+.slideBox {
 	position: relative;
 	height: 62px;
 	margin: 0;
@@ -859,12 +885,34 @@
 	opacity: 0.5;
 	transition: all 0.2s ease-in-out;
 }
+.slideBox .item {
+	position: relative;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	opacity: 0.5;
+	transition: all 0.2s ease-in-out;
+}
 
 #elementContainer #moreImagesCarousel .slideBox .item.selected {
 	opacity: 1;
 }
+.slideBox .item.selected {
+	opacity: 1;
+}
 
 #elementContainer #moreImagesCarousel .slideBox .item.selected::after {
+	position: absolute;
+	bottom: -12px;
+	left: 50%;
+	display: block;
+	width: 30%;
+	border-bottom: 2px solid #000000;
+	transform: translateX(-50%);
+	content: "";
+}
+.slideBox .item.selected::after {
 	position: absolute;
 	bottom: -12px;
 	left: 50%;
@@ -880,8 +928,20 @@
 	height: 50px;
 	line-height: 50px;
 }
+.slideBox .item a {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+}
 
 #elementContainer #moreImagesCarousel .slideBox .item img {
+	max-width: 100%;
+
+	/* margin-top: -4px; */
+	max-height: 100%;
+	vertical-align: middle;
+}
+.slideBox .item img {
 	max-width: 100%;
 
 	/* margin-top: -4px; */

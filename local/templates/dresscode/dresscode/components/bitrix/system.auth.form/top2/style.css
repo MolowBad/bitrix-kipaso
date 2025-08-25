@@ -1,0 +1,78 @@
+#subHeader8 .topAuthContainer {
+	position: relative;
+}
+
+#subHeader8 .topAuthIcon {
+	position: relative;
+}
+
+#subHeader8 .topAuthIcon .status {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	z-index: 22;
+	display: block;
+	width: 20px;
+	height: 20px;
+	color: #000000;
+	font-size: 14px;
+	line-height: 21px;
+	text-align: center;
+}
+
+#subHeader8.color_black .topAuthIcon .status {
+	color: #ffffff;
+}
+
+#subHeader8 .topAuthIcon .status.active {
+	color: #336600;
+}
+
+#subHeader8 .topAuthIcon .status:hover {
+	opacity: 0.8;
+}
+
+#subHeader8 #topAuth {
+	position: absolute;
+	top: 66px;
+	right: -63px;
+	z-index: 22;
+	display: none;
+	width: 150px;
+	background-color: #ffffff;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 10%);
+}
+
+#subHeader8 #topAuth ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#subHeader8 #topAuth ul li {
+	display: block;
+	font-size: 14px;
+	line-height: 21px;
+	text-align: left;
+}
+
+#subHeader8 #topAuth ul li a {
+	display: block;
+	padding: 8px 12px;
+	color: #000000;
+	text-decoration: none;
+	border-top: 1px solid #f3f3f3;
+}
+
+#subHeader8 #topAuth ul li:last-child a {
+	border-bottom: 1px solid #f3f3f3;
+}
+
+#subHeader8 #topAuth ul li a:hover {
+	opacity: 0.8;
+}
+
+#subHeader8 #topAuth ul li a:active {
+	position: relative;
+	top: 1px;
+}

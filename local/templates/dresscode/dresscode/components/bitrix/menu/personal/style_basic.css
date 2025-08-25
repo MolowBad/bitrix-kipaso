@@ -1,0 +1,41 @@
+#personalMenu {
+	margin: 0 0 24px;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
+	border-bottom: 1px solid #f1f1f1;
+}
+
+#personalMenu li {
+	float: left;
+	margin-right: 24px;
+	margin-bottom: 24px;
+}
+
+#personalMenu li:last-child {
+	margin-right: 0;
+}
+
+#personalMenu li a {
+	color: #000000;
+	font-size: 16px;
+
+	/* text-transform: uppercase; */
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+#personalMenu li a:active {
+	position: relative;
+	top: 1px;
+}
+
+#personalMenu li .selected {
+	padding-bottom: 4px;
+	font-family: robotobold;
+	border-bottom: 1px dashed #000000;
+}
+
+#personalMenu li .selected:hover {
+	color: #000000;
+}
