@@ -35,7 +35,7 @@
 								$this->AddEditAction("offers_".$arNextElement["ID"], $arNextElement["EDIT_LINK"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
 								$this->AddDeleteAction("offers_".$arNextElement["ID"], $arNextElement["DELETE_LINK"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array());
 							?>
-							<div class="tableElem" id="<?=$this->GetEditAreaId("offers_".$arNextElement["ID"]);?>">
+							<div class="tableElem" id="<?=$this->GetEditAreaId("offers_".$arNextElement["ID"]);?>" data-offer-image="<?=htmlspecialcharsbx($arNextElement["PICTURE"]["src"])?>">
 								<div class="tb">
 									<?if($arParams["DISPLAY_PICTURE_COLUMN"] == "Y"):?>
 										<div class="tc offersPicture" style="display: none;">
@@ -127,6 +127,56 @@
 		<script type="text/javascript">
 			var catalogProductOffersParams = '<?=\Bitrix\Main\Web\Json::encode($arParams);?>';
 			var catalogProductOffersAjaxDir = "<?=$this->GetFolder();?>";
+
+			// переключение фото по клику на модификацию,пока сделал по порядку,так как не понятно как делать соответствие
+				(function(){
+					var table = document.getElementById('skuOffersTable');
+					if(!table){
+						return;
+					}
+					table.addEventListener('click', function(e){
+						try{
+							var row = e.target && e.target.closest ? e.target.closest('.tableElem') : null;
+							if(!row){
+								return; // клик не по строке оффера
+							}
+
+							// Блокируем переходы по большинству ссылок внутри строки, кроме окон цен
+							if(e.target.tagName === 'A' && e.target.classList.contains('getPricesWindow') === false){
+								e.preventDefault();
+							}
+
+							// Ищем индекс строки среди всех .tableElem
+							var rows = table.querySelectorAll('.tableElem');
+							var index = Array.prototype.indexOf.call(rows, row);
+							if(index < 0){
+								return;
+							}
+
+							// Пытаемся переключить слайдер через клик по соответствующей миниатюре
+							var thumbs = document.querySelectorAll('#moreImagesCarousel .slideBox .item');
+							var thumbsCount = thumbs ? thumbs.length : 0;
+							if(thumbs && thumbsCount){
+								var thumbIndex = index % thumbsCount; // зацикливание индекса
+								thumbs[thumbIndex].dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true}));
+								return;
+							}
+
+							// Если миниатюр нет, двигаем основной слайдер напрямую
+							var pictureSlider = document.querySelector('#pictureContainer .pictureSlider');
+							if(pictureSlider){
+								var slides = pictureSlider.querySelectorAll('.item');
+								var slidesCount = slides ? slides.length : 0;
+								if(slidesCount > 0){
+									var slideIndex = index % slidesCount; // зацикливание индекса
+									pictureSlider.style.left = '-' + (slideIndex * 100) + '%';
+								}
+							}
+						}catch(err){
+							// silent
+						}
+					});
+				})();
 		</script>
 	<?endif;//empty($arParams["FROM_AJAX"])?>
 <?endif;?>
