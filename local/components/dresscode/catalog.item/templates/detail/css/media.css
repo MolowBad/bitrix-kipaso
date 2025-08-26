@@ -960,7 +960,7 @@
 	}
 
 	#catalogElement .heading:not(.noTabs) + div {
-		display: none;
+		/*display: none;*/
 	}
 
 	#elementContainer .new-list-items-wrap {
