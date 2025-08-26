@@ -95,6 +95,11 @@
     border-radius: 4px;
 }
 
+/* активная выбранная модификация */
+#skuOffersTable .tableElem.active {
+    border: 1px solid #008f86;
+}
+
 #skuOffersTable .offersTable th,
 #skuOffersTable .offersTable td {
     text-align: center;

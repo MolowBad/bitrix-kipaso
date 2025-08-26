@@ -111,7 +111,7 @@
 
 #elementNavigation {
 	position: relative;
-	width: 355px;
+	width: 455px;
 	padding-left: 24px;
 	text-align: right;
 	background-color: #fcfcfc;
@@ -130,7 +130,7 @@
     gap: 15px;
 	padding: 16px 24px;
 	color: #000000;
-	font-size: 20px;
+	font-size: 18px;
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 }
@@ -721,7 +721,7 @@
 .col {
 	position: relative;
 	display: table-cell;
-	width: 50%;
+	width: 100%;
 	padding: 24px 0;
 	vertical-align: middle;
 }

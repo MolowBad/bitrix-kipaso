@@ -153,6 +153,12 @@
 								return;
 							}
 
+							// визуально подсветить активную строку
+							for(var i=0; i<rows.length; i++){
+								rows[i].classList.remove('active');
+							}
+							row.classList.add('active');
+
 							// Пытаемся переключить слайдер через клик по соответствующей миниатюре
 							var thumbs = document.querySelectorAll('#moreImagesCarousel .slideBox .item');
 							var thumbsCount = thumbs ? thumbs.length : 0;
