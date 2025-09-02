@@ -57,7 +57,7 @@ if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
 // ------------------------ Конфигурация ------------------------
 $PRODUCT_IBLOCK_ID = 16;               // ИБ товаров
 $ARTICLE_PROPERTY_CODE = 'CML2_ARTICLE';
-$XLSX_BASENAME = 'Краткое описание для сайта 12,08';
+$XLSX_BASENAME = 'Для сайта 25.06';
 $CSV_PATH = $docRoot . '/' . $XLSX_BASENAME . '.csv';
 $XLSX_PATH = $docRoot . '/' . $XLSX_BASENAME . '.xlsx';
 $XML_PATH = $docRoot . '/catalogOven.xml';
@@ -140,23 +140,29 @@ if (file_exists($CSV_PATH)) {
     while (($data = fgetcsv($h, 0, $delimiter)) !== false) {
         $lineNo++;
         // Индексация столбцов: 1..N по заданию
-        // 2: izd_code, 3: article, 18: name
+        // Новая структура:
+        // 2: символьный код ТП (используем как izd_code/CODE/XML_ID)
+        // 3: краткое наименование модификации
+        // 18: полное название модификации
         $izd = isset($data[1]) ? trim($data[1]) : '';
-        $article = isset($data[2]) ? trim($data[2]) : '';
-        $name = isset($data[17]) ? trim($data[17]) : '';
+        $shortName = isset($data[2]) ? trim($data[2]) : '';
+        $fullName = isset($data[17]) ? trim($data[17]) : '';
+        $name = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
         if ($lineNo === 1) {
-            // Возможная шапка — пропускаем, если данные нечисловые в столбце 2
-            if ($izd === 'izd_code' || $izd === 'ИД' || !preg_match('/^\d+$/', $izd)) {
+            // Попытка идентифицировать шапку по ключевым словам
+            $headerSample = $izd . ' ' . $shortName . ' ' . $fullName;
+            if (preg_match('/символь|код|кратк|полное|назван/iu', $headerSample)) {
                 logm('[INFO] Пропущена строка-шапка CSV');
                 continue;
             }
         }
-        if ($izd === '' || $article === '' || $name === '') {
+        if ($izd === '' || $name === '') {
             continue;
         }
         $rows[] = [
             'izd_code' => $izd,
-            'article'  => $article,
+            // Артикул в новом файле отсутствует — будет резолвиться из XML по izd_code
+            'article'  => '',
             'name'     => $name,
         ];
     }
@@ -168,19 +174,23 @@ if (file_exists($CSV_PATH)) {
     foreach ($xlsxRows as $row) {
         $lineNo++;
         // 1-based индексация
+        // Новая структура колонок: 2=код ТП, 3=краткое имя, 18=полное имя
         $izd = isset($row[2]) ? trim($row[2]) : '';
-        $article = isset($row[3]) ? trim($row[3]) : '';
-        $name = isset($row[18]) ? trim($row[18]) : '';
+        $shortName = isset($row[3]) ? trim($row[3]) : '';
+        $fullName = isset($row[18]) ? trim($row[18]) : '';
+        $name = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
         if ($lineNo === 1) {
-            if ($izd === 'izd_code' || $izd === 'ИД' || !preg_match('/^\d+$/', (string)$izd)) {
+            $headerSample = $izd . ' ' . $shortName . ' ' . $fullName;
+            if (preg_match('/символь|код|кратк|полное|назван/iu', $headerSample)) {
                 logm('[INFO] Пропущена строка-шапка XLSX');
                 continue;
             }
         }
-        if ($izd === '' || $article === '' || $name === '') { continue; }
+        if ($izd === '' || $name === '') { continue; }
         $rows[] = [
             'izd_code' => (string)$izd,
-            'article'  => (string)$article,
+            // Артикул отсутствует в новом файле — резолвится из XML
+            'article'  => '',
             'name'     => (string)$name,
         ];
     }

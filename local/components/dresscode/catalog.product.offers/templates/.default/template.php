@@ -47,20 +47,9 @@
 										<div class="tc property"><?=$arNextPropertyFiltred["DISPLAY_VALUE"]?></div>
 									<?endforeach;?>
 									<div class="tc quantity">
-												<?if($arNextElement["CATALOG_QUANTITY"] > 0):?>
-													<?if(!empty($arNextElement["EXTRA_SETTINGS"]["STORES"]) && $arNextElement["EXTRA_SETTINGS"]["STORES_MAX_QUANTITY"] > 0):?>
-														<a href="#" data-id="<?=$arNextElement["ID"]?>" class="inStock label getStoresWindow"><img src="<?=SITE_TEMPLATE_PATH?>/images/inStock.svg" alt="<?=GetMessage("AVAILABLE")?>" class="icon"><span><?=GetMessage("AVAILABLE")?></span></a>
-													<?else:?>
-														<span class="inStock label"><img src="<?=SITE_TEMPLATE_PATH?>/images/inStock.svg" alt="<?=GetMessage("AVAILABLE")?>" class="icon"><span><?=GetMessage("AVAILABLE")?></span></span>
-													<?endif;?>
-												<?else:?>
-													<?if($arNextElement["CATALOG_AVAILABLE"] == "Y"):?>
-														<a class="onOrder label"><img src="<?=SITE_TEMPLATE_PATH?>/images/onOrder.svg" alt="<?=GetMessage("ON_ORDER")?>" class="icon"><?=GetMessage("ON_ORDER")?></a>
-													<?else:?>
-														<a class="outOfStock label"><img src="<?=SITE_TEMPLATE_PATH?>/images/outOfStock.svg" alt="<?=GetMessage("CATALOG_NO_AVAILABLE")?>" class="icon"><?=GetMessage("CATALOG_NO_AVAILABLE")?></a>
-													<?endif;?>
-												<?endif;?>
-											</div>
+                                        <? $qty = (int)$arNextElement["CATALOG_QUANTITY"]; ?>
+                                        <span class="stock-count"><?=$qty?> шт.</span>
+                                    </div>
 									
 									<div class="tc quanBaskWrap">
 										<div class="tb">

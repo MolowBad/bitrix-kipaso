@@ -86,7 +86,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                                 <!-- Наличие -->
                                 <td>
                                     <? if ($sku["CATALOG_QUANTITY"] > 0): ?>
-                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
+                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$sku["CATALOG_QUANTITY"] ?> шт.</span>
                                     <? elseif ($sku["CATALOG_AVAILABLE"] == "Y"): ?>
                                         <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                     <? else: ?>
@@ -131,7 +131,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                             <td><a href="<?= $arResult["DETAIL_PAGE_URL"] ?>"><?= $arResult["NAME"] ?></a></td>
                             <td>
                                 <? if ($arResult["CATALOG_QUANTITY"] > 0): ?>
-                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
+                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$arResult["CATALOG_QUANTITY"] ?> шт.</span>
                                 <? elseif ($arResult["CATALOG_AVAILABLE"] == "Y"): ?>
                                     <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                 <? else: ?>
@@ -422,7 +422,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                                 <!-- Наличие -->
                                 <td>
                                     <? if ($sku["CATALOG_QUANTITY"] > 0): ?>
-                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
+                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$sku["CATALOG_QUANTITY"] ?> шт.</span>
                                     <? elseif ($sku["CATALOG_AVAILABLE"] == "Y"): ?>
                                         <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                     <? else: ?>
@@ -467,7 +467,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                             <td><a href="<?= $arResult["DETAIL_PAGE_URL"] ?>"><?= $arResult["NAME"] ?></a></td>
                             <td>
                                 <? if ($arResult["CATALOG_QUANTITY"] > 0): ?>
-                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
+                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$arResult["CATALOG_QUANTITY"] ?> шт.</span>
                                 <? elseif ($arResult["CATALOG_AVAILABLE"] == "Y"): ?>
                                     <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                 <? else: ?>
