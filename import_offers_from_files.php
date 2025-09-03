@@ -57,12 +57,55 @@ if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
 // ------------------------ Конфигурация ------------------------
 $PRODUCT_IBLOCK_ID = 16;               // ИБ товаров
 $ARTICLE_PROPERTY_CODE = 'CML2_ARTICLE';
-$XLSX_BASENAME = 'Для сайта 25.06';
+$XLSX_BASENAME = '1c-stocks';
 $CSV_PATH = $docRoot . '/' . $XLSX_BASENAME . '.csv';
 $XLSX_PATH = $docRoot . '/' . $XLSX_BASENAME . '.xlsx';
 $XML_PATH = $docRoot . '/catalogOven.xml';
 $DRY_RUN = (isset($_GET['dry-run']) && strtoupper($_GET['dry-run']) === 'Y');
 $LOG = [];
+
+// ------------------------ Поддержка запуска из CLI ------------------------
+if (php_sapi_name() === 'cli') {
+    global $argv;
+    $cliArgs = $argv ?? [];
+    // Удалим имя скрипта
+    if (!empty($cliArgs)) { array_shift($cliArgs); }
+    foreach ($cliArgs as $arg) {
+        if (preg_match('/^--file=(.+)$/i', $arg, $m)) { $_GET['file'] = $m[1]; }
+        elseif (preg_match('/^--basename=(.+)$/i', $arg, $m)) { $_GET['basename'] = $m[1]; }
+        elseif ($arg === '--dry-run' || $arg === '--dry-run=Y' || $arg === '--dry-run=y') { $_GET['dry-run'] = 'Y'; }
+        elseif (preg_match('/^--limit=(\d+)$/i', $arg, $m)) { $_GET['limit'] = $m[1]; }
+        elseif (preg_match('/^--offset=(\d+)$/i', $arg, $m)) { $_GET['offset'] = $m[1]; }
+    }
+    if (!empty($cliArgs)) { logm('[INFO] CLI режим: параметры получены из аргументов командной строки'); }
+    // Обновим DRY_RUN после возможной подстановки из CLI
+    $DRY_RUN = (isset($_GET['dry-run']) && strtoupper($_GET['dry-run']) === 'Y');
+}
+
+// Переопределение пути к исходному файлу через параметры запроса
+$USER_FILE = isset($_GET['file']) ? trim((string)$_GET['file']) : '';
+$USER_BASENAME = isset($_GET['basename']) ? trim((string)$_GET['basename']) : '';
+if ($USER_FILE !== '') {
+    // Если путь начинается с '/', считаем относительным к DOCUMENT_ROOT
+    $abs = ($USER_FILE[0] === '/') ? ($docRoot . $USER_FILE) : ($docRoot . '/' . $USER_FILE);
+    $ext = strtolower(pathinfo($abs, PATHINFO_EXTENSION));
+    if ($ext === 'csv') {
+        $CSV_PATH = $abs;
+        $XLSX_PATH = '';
+    } elseif ($ext === 'xlsx') {
+        $XLSX_PATH = $abs;
+        $CSV_PATH = '';
+    } else {
+        logm('[ERR] Неверное расширение файла в параметре file. Ожидается .csv или .xlsx: ' . $USER_FILE);
+        flushLogAndExit(400);
+    }
+    logm('[INFO] Используется файл из параметра file: ' . $USER_FILE);
+} elseif ($USER_BASENAME !== '') {
+    $XLSX_BASENAME = $USER_BASENAME;
+    $CSV_PATH = $docRoot . '/' . $XLSX_BASENAME . '.csv';
+    $XLSX_PATH = $docRoot . '/' . $XLSX_BASENAME . '.xlsx';
+    logm('[INFO] Используется basename из параметра: ' . $XLSX_BASENAME);
+}
 
 function logm($msg) {
     global $LOG;
@@ -156,7 +199,8 @@ if (file_exists($CSV_PATH)) {
                 continue;
             }
         }
-        if ($izd === '' || $name === '') {
+        // Пропускаем строку, если пуст любой из требуемых столбцов (2,3,18)
+        if ($izd === '' || $shortName === '' || $fullName === '') {
             continue;
         }
         $rows[] = [
@@ -186,7 +230,8 @@ if (file_exists($CSV_PATH)) {
                 continue;
             }
         }
-        if ($izd === '' || $name === '') { continue; }
+        // Пропускаем строку, если пуст любой из требуемых столбцов (2,3,18)
+        if ($izd === '' || $shortName === '' || $fullName === '') { continue; }
         $rows[] = [
             'izd_code' => (string)$izd,
             // Артикул отсутствует в новом файле — резолвится из XML
@@ -203,6 +248,16 @@ if (file_exists($CSV_PATH)) {
 if (empty($rows)) {
     logm('[ERR] В исходных данных нет валидных строк для обработки.');
     flushLogAndExit(500);
+}
+// ------------------------ Ограничение объёма обработки ------------------------
+// Пагинация: offset и limit
+$OFFSET = isset($_GET['offset']) ? max(0, (int)$_GET['offset']) : 0;
+$LIMIT  = isset($_GET['limit'])  ? max(0, (int)$_GET['limit'])  : 0;
+if ($OFFSET > 0 || $LIMIT > 0) {
+    $before = count($rows);
+    if ($OFFSET > 0) { $rows = array_slice($rows, $OFFSET); }
+    if ($LIMIT > 0)  { $rows = array_slice($rows, 0, $LIMIT); }
+    logm('[INFO] Применена пагинация offset=' . $OFFSET . ', limit=' . $LIMIT . ', строк: ' . $before . ' → ' . count($rows));
 }
 
 // ------------------------ Индексация и группировка ------------------------
