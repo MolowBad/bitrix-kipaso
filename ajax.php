@@ -391,10 +391,24 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
 
     $item = $basket->createItem('catalog', $productId);
 
+    // Получим базовые поля товара для корректного заполнения названия
+    $baseFields = getProductBaseFields($productId);
+    $productName = '';
+    if (!empty($baseFields['NAME'])) {
+        $productName = (string)$baseFields['NAME'];
+    }
+    // Если выбрана модификация, добавим её к названию для лучшей читаемости
+    if ($productName !== '' && $modification !== '') {
+        $productName .= ' — ' . $modification;
+    }
+
     $fields = [
         'QUANTITY' => $quantity,
         'CURRENCY' => $currency,
         'LID' => $basket->getSiteId(),
+        // Важно: явно задаём провайдера каталога и название позиции
+        'PRODUCT_PROVIDER_CLASS' => '\\Bitrix\\Catalog\\Product\\CatalogProvider',
+        'NAME' => ($productName !== '' ? $productName : 'Товар #' . (int)$productId),
     ];
 
     
@@ -472,4 +486,29 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
 
     
     return (int)($item->getId() ?: $productId);
+}
+
+/**
+ * Возвращает базовые поля элемента инфоблока для формирования названия позиции в корзине.
+ *
+ * @param int $productId
+ * @return array
+ */
+function getProductBaseFields(int $productId): array
+{
+    if ($productId <= 0) { return []; }
+    if (!\Bitrix\Main\Loader::includeModule('iblock')) { return []; }
+
+    $result = [];
+    $res = \CIBlockElement::GetList(
+        [],
+        ['ID' => $productId],
+        false,
+        false,
+        ['ID', 'IBLOCK_ID', 'NAME', 'XML_ID']
+    );
+    if ($ar = $res->GetNext()) {
+        $result = $ar;
+    }
+    return $result;
 }

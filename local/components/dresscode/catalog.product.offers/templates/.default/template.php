@@ -30,6 +30,32 @@
 					</div>
 					<div class="skuOffersTableAjax">
 					<?endif;//empty($arParams["FROM_AJAX"])?>
+						<?php
+						// Сортировка офферов: сначала "В наличии" (QUANTITY>0), затем "Под заказ" (доступные при QUANTITY<=0), потом недоступные. Далее по названию.
+						if (!empty($arResult["ITEMS"]) && is_array($arResult["ITEMS"])) {
+							usort($arResult["ITEMS"], function($a, $b) {
+								$sa = isset($a["SORT"]) ? (int)$a["SORT"] : null;
+								$sb = isset($b["SORT"]) ? (int)$b["SORT"] : null;
+								if ($sa !== null && $sb !== null && $sa !== $sb) {
+									return $sa - $sb; // приоритет SORT из бэкенда
+								}
+
+								$rank = function($x) {
+									$q = isset($x["CATALOG_QUANTITY"]) ? (float)$x["CATALOG_QUANTITY"] : 0;
+									$avail = isset($x["CATALOG_AVAILABLE"]) ? (string)$x["CATALOG_AVAILABLE"] : "N";
+									if ($q > 0) return 0;                     // В наличии
+									if ($avail === "Y") return 1;              // Под заказ (доступен к заказу)
+									return 2;                                    // Недоступен
+								};
+								$ra = $rank($a);
+								$rb = $rank($b);
+								if ($ra !== $rb) return $ra - $rb;
+								$an = isset($a["NAME"]) ? (string)$a["NAME"] : "";
+								$bn = isset($b["NAME"]) ? (string)$b["NAME"] : "";
+								return strcasecmp($an, $bn);
+							});
+						}
+						?>
 						<?foreach ($arResult["ITEMS"] as $inx => $arNextElement):?>
 							<?
 								$this->AddEditAction("offers_".$arNextElement["ID"], $arNextElement["EDIT_LINK"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -47,9 +73,14 @@
 										<div class="tc property"><?=$arNextPropertyFiltred["DISPLAY_VALUE"]?></div>
 									<?endforeach;?>
 									<div class="tc quantity">
-                                        <? $qty = (int)$arNextElement["CATALOG_QUANTITY"]; ?>
-                                        <span class="stock-count"><?=$qty?> шт.</span>
-                                    </div>
+										<?if($arNextElement["CATALOG_QUANTITY"] > 0):?>
+											<span class="inStock label"><img src="<?=SITE_TEMPLATE_PATH?>/images/inStock.svg" alt="<?=GetMessage("AVAILABLE")?>" class="icon"><span><?=GetMessage("AVAILABLE")?></span></span>
+										<?elseif($arNextElement["CATALOG_AVAILABLE"] == "Y"):?>
+											<span class="onOrder label"><img src="<?=SITE_TEMPLATE_PATH?>/images/onOrder.svg" alt="<?=GetMessage("ON_ORDER")?>" class="icon"><?=GetMessage("ON_ORDER")?></span>
+										<?else:?>
+											<span class="outOfStock label"><img src="<?=SITE_TEMPLATE_PATH?>/images/outOfStock.svg" alt="<?=GetMessage("CATALOG_NO_AVAILABLE")?>" class="icon"><?=GetMessage("CATALOG_NO_AVAILABLE")?></span>
+										<?endif;?>
+									</div>
 									
 									<div class="tc quanBaskWrap">
 										<div class="tb">

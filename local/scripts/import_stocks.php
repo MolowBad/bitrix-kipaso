@@ -1,21 +1,4 @@
 <?php
-// Import stocks from 1C XML file (ДанныеПоОстаткам.xml) into Bitrix catalog quantities
-// Mapping:
-// - XML tag: <NOMENKLATUREWITHREMAINS articule="CODE" remains="QTY" date="YYYYMMDDHHIISS" guid="GUID"/>
-// - articule -> SKU element CODE (символьный код торгового предложения)
-// - remains -> QUANTITY for that SKU
-// - Optionally: sum remains per parent product and set parent QUANTITY
-// Usage:
-//   /local/scripts/import_stocks.php?run=1
-// Optional query params:
-//   dry=1         - dry run (no DB updates)
-//   log=1         - echo progress
-//   limit=1000    - process only first N records
-//
-// Requirements:
-// - Set SKU_IBLOCK_ID and PRODUCT_IBLOCK_ID to your actual IDs
-// - Ensure the XML path is correct
-
 use Bitrix\Main\Loader;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\SystemException;
@@ -143,7 +126,7 @@ if (!$reader->open($xmlFileAbs)) {
 $updated = 0;
 $processed = 0;
 $errors = 0;
-$parentsToSum = []; // parentId => sum
+$parentsToSum = []; // parentId => ['sum' => int, 'onOrder' => bool]
 
 function logm($msg, $log) {
     if ($log) { echo $msg . "\n"; }
@@ -189,27 +172,46 @@ while ($reader->read()) {
             continue;
         }
 
-        // Update SKU quantity
+        // Map remains to availability/status
+        $qty = ($remains > 0) ? $remains : 0;                 // only positive numbers become stock
+        $canBuyZero = ($remains <= 0) ? 'Y' : 'N';            // 0 or negative means on order
+        $status = ($remains > 0) ? 'in_stock' : 'on_order';
+
+        // Update SKU availability
         if (!$dry) {
             $r = ProductTable::update($skuId, [
-                'QUANTITY' => $remains,
+                'QUANTITY' => $qty,
                 'QUANTITY_TRACE' => 'Y',
-                'CAN_BUY_ZERO' => 'N',
+                'CAN_BUY_ZERO' => $canBuyZero,
             ]);
             if (!$r->isSuccess()) {
                 $errors++;
                 logm('ERR: update SKU '.$skuId.' failed: '.implode('; ', $r->getErrorMessages()), $log);
                 continue;
             }
+
+            // Backend sort: in stock first (lower SORT), then on order
+            $sortVal = ($qty > 0) ? 100 : 200;
+            try {
+                $es = ElementTable::update($skuId, ['SORT' => $sortVal]);
+                if (!$es->isSuccess()) {
+                    logm('WARN: update SORT for SKU '.$skuId.' failed: '.implode('; ', $es->getErrorMessages()), $log);
+                }
+            } catch (\Throwable $e) {
+                logm('WARN: exception while updating SORT for SKU '.$skuId.': '.$e->getMessage(), $log);
+            }
         }
         $updated++;
-        logm("OK: SKU {$skuId} CODE={$articule} => QUANTITY={$remains}", $log);
+        logm("OK: SKU {$skuId} CODE={$articule} remains={$remains} => status={$status}, QUANTITY={$qty}, CAN_BUY_ZERO={$canBuyZero}", $log);
 
         if (UPDATE_PARENT_SUM) {
             $parentId = getParentProductId($skuId);
             if ($parentId) {
-                if (!isset($parentsToSum[$parentId])) { $parentsToSum[$parentId] = 0; }
-                $parentsToSum[$parentId] += $remains;
+                if (!isset($parentsToSum[$parentId])) { $parentsToSum[$parentId] = ['sum' => 0, 'onOrder' => false]; }
+                // Sum only positive remains to parent's QUANTITY
+                if ($remains > 0) { $parentsToSum[$parentId]['sum'] += $remains; }
+                // Mark parent as on-order if any child is on-order (remains <= 0)
+                if ($remains <= 0) { $parentsToSum[$parentId]['onOrder'] = true; }
             }
         }
     }
@@ -218,13 +220,15 @@ $reader->close();
 
 // Update parents
 if (UPDATE_PARENT_SUM && !empty($parentsToSum)) {
-    foreach ($parentsToSum as $parentId => $sumQty) {
+    foreach ($parentsToSum as $parentId => $info) {
         if ($parentId <= 0) { continue; }
+        $sumQty = (int)($info['sum'] ?? 0);
+        $parentCanBuyZero = !empty($info['onOrder']) ? 'Y' : 'N';
         if (!$dry) {
             $r = ProductTable::update($parentId, [
-                'QUANTITY' => (int)$sumQty,
+                'QUANTITY' => $sumQty,
                 'QUANTITY_TRACE' => 'Y',
-                'CAN_BUY_ZERO' => 'N',
+                'CAN_BUY_ZERO' => $parentCanBuyZero,
             ]);
             if (!$r->isSuccess()) {
                 $errors++;
@@ -232,7 +236,7 @@ if (UPDATE_PARENT_SUM && !empty($parentsToSum)) {
                 continue;
             }
         }
-        logm("OK: PARENT {$parentId} => QUANTITY={$sumQty}", $log);
+        logm("OK: PARENT {$parentId} => QUANTITY={$sumQty}, CAN_BUY_ZERO={$parentCanBuyZero}", $log);
     }
 }
 

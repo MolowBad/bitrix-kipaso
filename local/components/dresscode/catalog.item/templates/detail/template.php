@@ -86,7 +86,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                                 <!-- Наличие -->
                                 <td>
                                     <? if ($sku["CATALOG_QUANTITY"] > 0): ?>
-                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$sku["CATALOG_QUANTITY"] ?> шт.</span>
+                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
                                     <? elseif ($sku["CATALOG_AVAILABLE"] == "Y"): ?>
                                         <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                     <? else: ?>
@@ -131,7 +131,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                             <td><a href="<?= $arResult["DETAIL_PAGE_URL"] ?>"><?= $arResult["NAME"] ?></a></td>
                             <td>
                                 <? if ($arResult["CATALOG_QUANTITY"] > 0): ?>
-                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$arResult["CATALOG_QUANTITY"] ?> шт.</span>
+                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
                                 <? elseif ($arResult["CATALOG_AVAILABLE"] == "Y"): ?>
                                     <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                 <? else: ?>
@@ -188,8 +188,64 @@ if (!empty($arResult["EDIT_LINK"])) {
                 </div>
             <? endif; ?>
         </div>
-        <div id="tableContainer">
+        <div class="limiter">
+        <div id="tableContainer" style="display: flex;justify-content: space-between;margin: 0 auto;">
             <div id="elementNavigation" class="column">
+                <div class="col">
+                    <? if (!empty($arResult["PROPERTIES"]["OFFERS"]["VALUE"])): ?>
+                        <div class="markerContainer">
+                            <? foreach ($arResult["PROPERTIES"]["OFFERS"]["VALUE"] as $ifv => $marker): ?>
+                                <div class="marker"
+                                    style="background-color: <?= strstr($arResult["PROPERTIES"]["OFFERS"]["VALUE_XML_ID"][$ifv], "#") ? $arResult["PROPERTIES"]["OFFERS"]["VALUE_XML_ID"][$ifv] : "#424242" ?>">
+                                    <?= $marker ?></div>
+                            <? endforeach; ?>
+                        </div>
+                    <? endif; ?>
+                    <div class="wishCompWrap">
+                        <a href="#" class="elem addWishlist" data-id="<?= $arResult["~ID"] ?>"
+                            title="<?= Loc::getMessage("PRODUCT_WISH_LIST_TITLE") ?>"></a>
+                        <a href="#" class="elem addCompare changeID" data-id="<?= $arResult["ID"] ?>"
+                            title="<?= Loc::getMessage("PRODUCT_COMPARE_TITLE") ?>"></a>
+                    </div>
+                    <? if (!empty($arResult["IMAGES"])): ?>
+                        <div id="pictureContainer">
+                            <div class="pictureSlider">
+                                <? foreach ($arResult["IMAGES"] as $ipr => $arNextPicture): ?>
+                                    <div class="item">
+                                        <a href="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
+                                            title="<?= Loc::getMessage("CATALOG_ELEMENT_ZOOM") ?>" class="zoom"
+                                            data-small-picture="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>"
+                                            data-large-picture="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"><img
+                                                src="<?= $arNextPicture["MEDIUM_IMAGE"]["SRC"] ?>"
+                                                alt="<? if (!empty($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"])): ?><?= $arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"] ?><? else: ?><?= $arResult["NAME"] ?><? endif; ?><? if (intval($ipr) > 0): ?> <?= Loc::getMessage("CATALOG_ELEMENT_DETAIL_PICTURE_LABEL") ?> <?= $ipr + 1 ?><? endif; ?>"
+                                                title="<? if (!empty($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TITLE"])): ?><?= $arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TITLE"] ?><? else: ?><?= $arResult["NAME"] ?><? endif; ?><? if (intval($ipr) > 0): ?> <?= Loc::getMessage("CATALOG_ELEMENT_DETAIL_PICTURE_LABEL") ?> <?= $ipr + 1 ?><? endif; ?>"></a>
+                                    </div>
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                        <div id="moreImagesCarousel" <? if (empty($arResult["IMAGES"]) || count($arResult["IMAGES"]) <= 1): ?> class="hide" <? endif; ?>>
+                            <div class="carouselWrapper">
+                                <div class="slideBox">
+                                    <? if (empty($arResult["IMAGES"]) || count($arResult["IMAGES"]) > 1): ?>
+                                        <? foreach ($arResult["IMAGES"] as $ipr => $arNextPicture): ?>
+                                            <div class="item">
+                                                <a href="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
+                                                    data-large-picture="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
+                                                    data-small-picture="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>">
+                                                    <img src="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>" alt="">
+                                                </a>
+                                            </div>
+                                        <? endforeach; ?>
+                                    <? endif; ?>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <a href="#" id="moreImagesLeftButton"></a>
+                                <a href="#" id="moreImagesRightButton"></a>
+                            </div>
+                        </div>
+                    <? endif; ?>
+                </div>
                 <? if (!empty($arResult["TABS"])): ?>
                     <div class="tabs changeTabs">
                         <? foreach ($arResult["TABS"] as $it => $arTab): ?>
@@ -203,61 +259,6 @@ if (!empty($arResult["EDIT_LINK"])) {
             </div>
             <div id="elementContainer" class="column">
                 <div class="mainContainer" id="browse">
-                    <div class="col">
-                        <? if (!empty($arResult["PROPERTIES"]["OFFERS"]["VALUE"])): ?>
-                            <div class="markerContainer">
-                                <? foreach ($arResult["PROPERTIES"]["OFFERS"]["VALUE"] as $ifv => $marker): ?>
-                                    <div class="marker"
-                                        style="background-color: <?= strstr($arResult["PROPERTIES"]["OFFERS"]["VALUE_XML_ID"][$ifv], "#") ? $arResult["PROPERTIES"]["OFFERS"]["VALUE_XML_ID"][$ifv] : "#424242" ?>">
-                                        <?= $marker ?></div>
-                                <? endforeach; ?>
-                            </div>
-                        <? endif; ?>
-                        <div class="wishCompWrap">
-                            <a href="#" class="elem addWishlist" data-id="<?= $arResult["~ID"] ?>"
-                                title="<?= Loc::getMessage("PRODUCT_WISH_LIST_TITLE") ?>"></a>
-                            <a href="#" class="elem addCompare changeID" data-id="<?= $arResult["ID"] ?>"
-                                title="<?= Loc::getMessage("PRODUCT_COMPARE_TITLE") ?>"></a>
-                        </div>
-                        <? if (!empty($arResult["IMAGES"])): ?>
-                            <div id="pictureContainer">
-                                <div class="pictureSlider">
-                                    <? foreach ($arResult["IMAGES"] as $ipr => $arNextPicture): ?>
-                                        <div class="item">
-                                            <a href="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
-                                                title="<?= Loc::getMessage("CATALOG_ELEMENT_ZOOM") ?>" class="zoom"
-                                                data-small-picture="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>"
-                                                data-large-picture="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"><img
-                                                    src="<?= $arNextPicture["MEDIUM_IMAGE"]["SRC"] ?>"
-                                                    alt="<? if (!empty($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"])): ?><?= $arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"] ?><? else: ?><?= $arResult["NAME"] ?><? endif; ?><? if (intval($ipr) > 0): ?> <?= Loc::getMessage("CATALOG_ELEMENT_DETAIL_PICTURE_LABEL") ?> <?= $ipr + 1 ?><? endif; ?>"
-                                                    title="<? if (!empty($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TITLE"])): ?><?= $arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TITLE"] ?><? else: ?><?= $arResult["NAME"] ?><? endif; ?><? if (intval($ipr) > 0): ?> <?= Loc::getMessage("CATALOG_ELEMENT_DETAIL_PICTURE_LABEL") ?> <?= $ipr + 1 ?><? endif; ?>"></a>
-                                        </div>
-                                    <? endforeach; ?>
-                                </div>
-                            </div>
-                            <div id="moreImagesCarousel" <? if (empty($arResult["IMAGES"]) || count($arResult["IMAGES"]) <= 1): ?> class="hide" <? endif; ?>>
-                                <div class="carouselWrapper">
-                                    <div class="slideBox">
-                                        <? if (empty($arResult["IMAGES"]) || count($arResult["IMAGES"]) > 1): ?>
-                                            <? foreach ($arResult["IMAGES"] as $ipr => $arNextPicture): ?>
-                                                <div class="item">
-                                                    <a href="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
-                                                        data-large-picture="<?= $arNextPicture["LARGE_IMAGE"]["SRC"] ?>"
-                                                        data-small-picture="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>">
-                                                        <img src="<?= $arNextPicture["SMALL_IMAGE"]["SRC"] ?>" alt="">
-                                                    </a>
-                                                </div>
-                                            <? endforeach; ?>
-                                        <? endif; ?>
-                                    </div>
-                                </div>
-                                <div class="controls">
-                                    <a href="#" id="moreImagesLeftButton"></a>
-                                    <a href="#" id="moreImagesRightButton"></a>
-                                </div>
-                            </div>
-                        <? endif; ?>
-                    </div>
                     <div
                         class="secondCol col<? if (empty($arResult["PREVIEW_TEXT"]) && empty($arResult["SKU_OFFERS"]) && empty($arResult["PROPERTIES"])): ?> hide<? endif; ?>">
                         <div class="brandImageWrap">
@@ -422,7 +423,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                                 <!-- Наличие -->
                                 <td>
                                     <? if ($sku["CATALOG_QUANTITY"] > 0): ?>
-                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$sku["CATALOG_QUANTITY"] ?> шт.</span>
+                                        <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
                                     <? elseif ($sku["CATALOG_AVAILABLE"] == "Y"): ?>
                                         <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                     <? else: ?>
@@ -467,7 +468,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                             <td><a href="<?= $arResult["DETAIL_PAGE_URL"] ?>"><?= $arResult["NAME"] ?></a></td>
                             <td>
                                 <? if ($arResult["CATALOG_QUANTITY"] > 0): ?>
-                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?>: <?= (int)$arResult["CATALOG_QUANTITY"] ?> шт.</span>
+                                    <span class="inStock"><?= Loc::getMessage("AVAILABLE") ?></span>
                                 <? elseif ($arResult["CATALOG_AVAILABLE"] == "Y"): ?>
                                     <span class="onOrder"><?= Loc::getMessage("ON_ORDER") ?></span>
                                 <? else: ?>
@@ -1388,6 +1389,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                     <? require($_SERVER["DOCUMENT_ROOT"] . "/" . $templateFolder . "/include/right_section.php"); ?>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
