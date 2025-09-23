@@ -5,7 +5,12 @@ use Bitrix\Main\Loader;
 @ini_set('display_errors', 1);
 
 // Подготовка Bitrix окружения
-$docRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? __DIR__, '/');
+$docRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/');
+if ($docRoot === '') {
+    // Fallback для CLI: берём директорию скрипта как DOCUMENT_ROOT
+    $docRoot = realpath(__DIR__);
+    $_SERVER['DOCUMENT_ROOT'] = $docRoot;
+}
 $prolog = $docRoot . '/bitrix/modules/main/include/prolog_before.php';
 if (!file_exists($prolog)) {
     http_response_code(500);
@@ -57,7 +62,7 @@ if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
 // ------------------------ Конфигурация ------------------------
 $PRODUCT_IBLOCK_ID = 16;               // ИБ товаров
 $ARTICLE_PROPERTY_CODE = 'CML2_ARTICLE';
-$XLSX_BASENAME = '1c-stocks';
+$XLSX_BASENAME = 'uploud-1c/1c-stocks';
 $CSV_PATH = $docRoot . '/' . $XLSX_BASENAME . '.csv';
 $XLSX_PATH = $docRoot . '/' . $XLSX_BASENAME . '.xlsx';
 $XML_PATH = $docRoot . '/catalogOven.xml';
@@ -190,7 +195,7 @@ if (file_exists($CSV_PATH)) {
         $izd = isset($data[1]) ? trim($data[1]) : '';
         $shortName = isset($data[2]) ? trim($data[2]) : '';
         $fullName = isset($data[17]) ? trim($data[17]) : '';
-        $name = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
+        $nameLong = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
         if ($lineNo === 1) {
             // Попытка идентифицировать шапку по ключевым словам
             $headerSample = $izd . ' ' . $shortName . ' ' . $fullName;
@@ -207,7 +212,8 @@ if (file_exists($CSV_PATH)) {
             'izd_code' => $izd,
             // Артикул в новом файле отсутствует — будет резолвиться из XML по izd_code
             'article'  => '',
-            'name'     => $name,
+            'name_short' => $shortName,
+            'name_long'  => $nameLong,
         ];
     }
     fclose($h);
@@ -222,7 +228,7 @@ if (file_exists($CSV_PATH)) {
         $izd = isset($row[2]) ? trim($row[2]) : '';
         $shortName = isset($row[3]) ? trim($row[3]) : '';
         $fullName = isset($row[18]) ? trim($row[18]) : '';
-        $name = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
+        $nameLong = trim($shortName . ($shortName !== '' && $fullName !== '' ? ' ' : '') . $fullName);
         if ($lineNo === 1) {
             $headerSample = $izd . ' ' . $shortName . ' ' . $fullName;
             if (preg_match('/символь|код|кратк|полное|назван/iu', $headerSample)) {
@@ -236,7 +242,8 @@ if (file_exists($CSV_PATH)) {
             'izd_code' => (string)$izd,
             // Артикул отсутствует в новом файле — резолвится из XML
             'article'  => '',
-            'name'     => (string)$name,
+            'name_short' => (string)$shortName,
+            'name_long'  => (string)$nameLong,
         ];
     }
     logm('[OK] Загружено строк из XLSX: ' . count($rows));
@@ -319,7 +326,8 @@ foreach ($byArticle as $article => $offers) {
     // Обработаем каждое предложение из CSV для данного артикула
     foreach ($offers as $offerRow) {
         $izd = $offerRow['izd_code'];
-        $name = $offerRow['name'];
+        $nameShort = $offerRow['name_short'];
+        $nameLong  = $offerRow['name_long'];
         $priceVal = $xmlPriceByIzd[$izd] ?? null;
         if ($priceVal === null) {
             $noPrice++;
@@ -334,10 +342,10 @@ foreach ($byArticle as $article => $offers) {
         }
 
         if ($existingOfferId) {
-            // Обновим имя и связь (на всякий), цену
+            // Обновим короткое имя (NAME), связь и цену; длинное имя положим в свойство 'modific'
             $el = new CIBlockElement();
             $updateFields = [
-                'NAME' => $name,
+                'NAME' => $nameShort,
                 'CODE' => $izd,
                 'XML_ID' => $izd,
             ];
@@ -345,18 +353,19 @@ foreach ($byArticle as $article => $offers) {
                 $el->Update($existingOfferId, $updateFields, false, false, true);
                 CIBlockElement::SetPropertyValuesEx($existingOfferId, $OFFERS_IBLOCK_ID, [
                     $LINK_PROP_ID => $productId,
+                    'modific' => $nameLong,
                 ]);
                 upsertPrice($existingOfferId, $priceVal, $basePriceTypeId);
             }
             $updated++;
-            logm("[UPD] ТП {$existingOfferId} (izd={$izd}) обновлено. Товар ID={$productId}, цена={$priceVal}");
+            logm("[UPD] ТП {$existingOfferId} (izd={$izd}) обновлено. Товар ID={$productId}, цена={$priceVal}, NAME='{$nameShort}', modific='{$nameLong}'");
         } else {
             // Создаём новое ТП
             $el = new CIBlockElement();
             $fields = [
                 'IBLOCK_ID' => $OFFERS_IBLOCK_ID,
                 'ACTIVE' => 'Y',
-                'NAME' => $name,
+                'NAME' => $nameShort,
                 'CODE' => $izd,      // не уникально глобально, но обычно достаточно
                 'XML_ID' => $izd,    // используем как внешний ID
                 'PROPERTY_VALUES' => [
@@ -373,10 +382,14 @@ foreach ($byArticle as $article => $offers) {
                 }
                 // Обеспечим каталожную запись
                 ensureCatalogProduct($newId);
+                // Установим свойство с длинным названием модификации
+                CIBlockElement::SetPropertyValuesEx($newId, $OFFERS_IBLOCK_ID, [
+                    'modific' => $nameLong,
+                ]);
                 upsertPrice($newId, $priceVal, $basePriceTypeId);
             }
             $created++;
-            logm("[ADD] Создано ТП ID={$newId} (izd={$izd}). Товар ID={$productId}, цена={$priceVal}");
+            logm("[ADD] Создано ТП ID={$newId} (izd={$izd}). Товар ID={$productId}, цена={$priceVal}, NAME='{$nameShort}', modific='{$nameLong}'");
         }
     }
 }

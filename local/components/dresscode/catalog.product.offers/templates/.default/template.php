@@ -68,7 +68,11 @@
 											<img src="<?=$arNextElement["PICTURE"]["src"]?>" alt="<?=$arNextElement["NAME"]?>">
 										</div>
 									<?endif;?>
-									<div class="tc offersName"><?=$arNextElement["NAME"]?></div>
+									<div class="tc offersName"><?=
+                                        !empty($arNextElement['PROPERTIES']['modific']['VALUE'])
+                                            ? $arNextElement['PROPERTIES']['modific']['VALUE']
+                                            : $arNextElement["NAME"]
+                                    ?></div>
 									<?foreach ($arNextElement["PROPERTIES_FILTRED"] as $arNextPropertyFiltred):?>
 										<div class="tc property"><?=$arNextPropertyFiltred["DISPLAY_VALUE"]?></div>
 									<?endforeach;?>
