@@ -7,19 +7,21 @@ use Bitrix\Iblock\ElementTable;
 use Bitrix\Catalog\StoreProductTable;
 use Bitrix\Catalog\ProductTable;
 
+//после подключения снимаем лимиты
+// возможно в перспективе нужно вернуть
 @set_time_limit(0);
 @ini_set('memory_limit', '1024M');
 
-// Configuration
-const XML_PATH = '/1c-exchange/date-stock.xml';
-const SKU_IBLOCK_ID = 17;          // TODO: set real SKU iblock ID
-const PRODUCT_IBLOCK_ID = 16;      // TODO: set real Product iblock ID
-const UPDATE_PARENT_SUM = true;   // Sum SKU quantities into parent product
 
-// Bootstrap Bitrix
+const XML_PATH = '/1c-exchange/date-stock.xml';
+const SKU_IBLOCK_ID = 17;          
+const PRODUCT_IBLOCK_ID = 16;     
+const UPDATE_PARENT_SUM = true;   
+
+
 $docRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/');
 if ($docRoot === '') {
-    // Fallback for CLI
+    
     $docRoot = realpath(__DIR__ . '/../../..');
     $_SERVER['DOCUMENT_ROOT'] = $docRoot;
 }
@@ -52,36 +54,36 @@ if (SKU_IBLOCK_ID <= 0) {
     exit;
 }
 
-// Resolve XML path with fallbacks
-$xmlRel = isset($_GET['xml']) && $_GET['xml'] !== '' ? $_GET['xml'] : XML_PATH; // allow override via ?xml=/1c-exchange/file.xml
+// тка как путь у нас статичный возможно тут нужно будет переделать 
+$xmlRel = isset($_GET['xml']) && $_GET['xml'] !== '' ? $_GET['xml'] : XML_PATH; 
 if ($xmlRel === '' || $xmlRel[0] !== '/') { $xmlRel = '/' . ltrim($xmlRel, '/'); }
 
-// Helper: swap Cyrillic 'с' (U+0441) and Latin 'c' ONLY in directory names, not filename
+
 function swapCyrLatCDir(string $dir): array {
-    $cyr = 'с'; // U+0441
+    $cyr = 'с'; 
     $lat = 'c';
-    $v1 = str_replace($cyr, $lat, $dir); // cyr->lat
-    $v2 = str_replace($lat, $cyr, $dir); // lat->cyr
+    $v1 = str_replace($cyr, $lat, $dir); 
+    $v2 = str_replace($lat, $cyr, $dir); 
     return array_values(array_unique([$dir, $v1, $v2]));
 }
 
-// Split into dir + filename to avoid mutating filename
+
 $pi = pathinfo($xmlRel);
 $dir = isset($pi['dirname']) ? ($pi['dirname'] === '.' ? '/' : $pi['dirname']) : '/';
 $base = $pi['basename'] ?? 'ДанныеПоОстаткам.xml';
 
 $candidates = [];
-// 1) original full path and url-decoded
+
 $candidates[] = $xmlRel;
 $candidates[] = urldecode($xmlRel);
-// 2) variants with swapped c/с in dir only
+
 foreach (swapCyrLatCDir($dir) as $d) {
     $rel = rtrim($d, '/') . '/' . $base;
     $candidates[] = $rel;
     $candidates[] = urldecode($rel);
 }
 
-// Deduplicate candidates
+
 $candidates = array_values(array_unique($candidates));
 
 $xmlFileAbs = '';
@@ -100,7 +102,7 @@ if ($xmlFileAbs === '') {
     foreach ($candidates as $rel) {
         echo ' - ' . ($docRoot . $rel) . "\n";
     }
-    // small diagnostic directory listing to help identify actual folder name
+    
     if (!empty($log)) {
         echo "\nDocumentRoot: {$docRoot}\n";
         $rootList = @scandir($docRoot) ?: [];
@@ -115,7 +117,7 @@ if ($xmlFileAbs === '') {
     exit;
 }
 
-// Parse XML efficiently
+
 $reader = new XMLReader();
 if (!$reader->open($xmlFileAbs)) {
     http_response_code(500);
@@ -126,13 +128,13 @@ if (!$reader->open($xmlFileAbs)) {
 $updated = 0;
 $processed = 0;
 $errors = 0;
-$parentsToSum = []; // parentId => ['sum' => int, 'onOrder' => bool]
+$parentsToSum = []; 
 
 function logm($msg, $log) {
     if ($log) { echo $msg . "\n"; }
 }
 
-// Helper: find SKU ID by CODE
+
 function findSkuIdByCode(string $code): ?int {
     if ($code === '') { return null; }
     $row = ElementTable::getRow([
@@ -143,9 +145,9 @@ function findSkuIdByCode(string $code): ?int {
     return $row ? (int)$row['ID'] : null;
 }
 
-// Helper: get parent product ID for SKU
+
 function getParentProductId(int $skuId): ?int {
-    // Try via property CML2_LINK
+   
     $res = CIBlockElement::GetByID($skuId);
     if ($el = $res->GetNextElement()) {
         $props = $el->GetProperties(['SORT' => 'ASC'], ['CODE' => 'CML2_LINK']);
@@ -156,7 +158,7 @@ function getParentProductId(int $skuId): ?int {
     return null;
 }
 
-// Iterate XML
+
 while ($reader->read()) {
     if ($reader->nodeType === XMLReader::ELEMENT && $reader->name === 'NOMENKLATUREWITHREMAINS') {
         $articule = $reader->getAttribute('articule') ?: '';
@@ -172,12 +174,12 @@ while ($reader->read()) {
             continue;
         }
 
-        // Map remains to availability/status
-        $qty = ($remains > 0) ? $remains : 0;                 // only positive numbers become stock
-        $canBuyZero = ($remains <= 0) ? 'Y' : 'N';            // 0 or negative means on order
+        
+        $qty = ($remains > 0) ? $remains : 0;                
+        $canBuyZero = ($remains <= 0) ? 'Y' : 'N';            
         $status = ($remains > 0) ? 'in_stock' : 'on_order';
 
-        // Update SKU availability
+       
         if (!$dry) {
             $r = ProductTable::update($skuId, [
                 'QUANTITY' => $qty,
@@ -190,7 +192,7 @@ while ($reader->read()) {
                 continue;
             }
 
-            // Backend sort: in stock first (lower SORT), then on order
+            
             $sortVal = ($qty > 0) ? 100 : 200;
             try {
                 $es = ElementTable::update($skuId, ['SORT' => $sortVal]);
@@ -208,9 +210,9 @@ while ($reader->read()) {
             $parentId = getParentProductId($skuId);
             if ($parentId) {
                 if (!isset($parentsToSum[$parentId])) { $parentsToSum[$parentId] = ['sum' => 0, 'onOrder' => false]; }
-                // Sum only positive remains to parent's QUANTITY
+                
                 if ($remains > 0) { $parentsToSum[$parentId]['sum'] += $remains; }
-                // Mark parent as on-order if any child is on-order (remains <= 0)
+                
                 if ($remains <= 0) { $parentsToSum[$parentId]['onOrder'] = true; }
             }
         }
@@ -218,7 +220,7 @@ while ($reader->read()) {
 }
 $reader->close();
 
-// Update parents
+
 if (UPDATE_PARENT_SUM && !empty($parentsToSum)) {
     foreach ($parentsToSum as $parentId => $info) {
         if ($parentId <= 0) { continue; }

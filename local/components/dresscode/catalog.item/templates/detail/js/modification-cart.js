@@ -332,18 +332,13 @@ $(function() {
         // Преобразуем в число
         price = parseFloat(price);
         
-        // Форматируем с разделителями и знаком валюты
+        // Форматируем до двух знаков после запятой без разделителей тысяч
         let formattedPrice = price.toFixed(2);
         
         // Заменяем точку на запятую (для русской локали)
         formattedPrice = formattedPrice.replace('.', ',');
         
-        // Добавляем пробелы между разрядами для тысяч
-        let parts = formattedPrice.split(',');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "&nbsp;");
-        formattedPrice = parts.join(',');
-        
-        // Добавляем знак рубля
+        // Возвращаем без разделителей тысяч и без неразрывных пробелов
         return formattedPrice + " ₽";
     }
     

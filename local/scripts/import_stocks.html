@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Документация: import_stocks.php — загрузка остатков в Битрикс</title>
+  <style>
+    :root {
+      --bg: #0f1221; /* тёмная тема, чтобы удобно читать в IDE */
+      --panel: #151935;
+      --text: #e8ecf1;
+      --muted: #aab3c5;
+      --accent: #6ea8fe;
+      --ok: #7bd389;
+      --warn: #ffd166;
+      --err: #ef476f;
+      --code: #0b0e1b;
+      --border: #2a3158;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif;
+      color: var(--text); background: linear-gradient(180deg, var(--bg), #0b0e1b 60%);
+    }
+    .container { max-width: 1024px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1, h2, h3 { color: #fff; margin: 1.2em 0 .5em; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; border-left: 3px solid var(--accent); padding-left: 10px; }
+    h3 { font-size: 18px; color: #f2f3f7; }
+    p { color: var(--text); line-height: 1.6; }
+    .panel {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 18px; margin: 16px 0; box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+    .kbd { background: #1d2346; border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    pre { background: var(--code); color: #e6edf3; border: 1px solid var(--border); border-radius: 10px; padding: 14px; overflow: auto; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); color: var(--muted); }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .err { color: var(--err); }
+    ul { margin: .5em 0 .5em 1.2em; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    hr { border: none; height: 1px; background: var(--border); margin: 28px 0; }
+    .small { color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>import_stocks.php — Загрузка остатков (stocks) из date-stock.xml в Битрикс</h1>
+    <p class="small">Путь к файлу кода: <span class="kbd">/local/scripts/import_stocks.php</span></p>
+
+    <div class="panel">
+      <p><strong>Назначение:</strong> скрипт импортирует остатки по торговым предложениям (SKU) из XML-файла <span class="kbd">/1c-exchange/date-stock.xml</span> в базу каталога Битрикс. Для каждого найденного SKU обновляются поля <span class="kbd">QUANTITY</span>, <span class="kbd">QUANTITY_TRACE</span> и <span class="kbd">CAN_BUY_ZERO</span>. Опционально суммируются остатки на уровне родительского товара.</p>
+      <p><strong>Цель документа:</strong> объяснить пошагово, как работает код, что за чем следует и почему, чтобы было понятно, как реализована загрузка остатков.</p>
+    </div>
+
+    <h2>1. Быстрый обзор</h2>
+    <ul>
+      <li><strong>Источник данных:</strong> XML <span class="kbd">/1c-exchange/date-stock.xml</span> (можно переопределить через <span class="kbd">?xml=...</span>)</li>
+      <li><strong>Запуск:</strong> через браузер: <span class="kbd">/local/scripts/import_stocks.php?run=1</span> (+ опции <span class="kbd">dry</span>, <span class="kbd">log</span>, <span class="kbd">limit</span>, <span class="kbd">xml</span>)</li>
+      <li><strong>Идентификация SKU:</strong> по символьному коду (атрибут XML <span class="kbd">articule</span>) — поле <span class="kbd">CODE</span> в ИБ предложений</li>
+      <li><strong>Правка остатков:</strong> <span class="kbd">Bitrix\Catalog\ProductTable::update()</span> для SKU и, при включенной опции, для родителя</li>
+      <li><strong>Результат:</strong> JSON с количеством обработанных, обновлённых и ошибок</li>
+    </ul>
+
+    <h2>2. Зависимости и окружение</h2>
+    <ul>
+      <li><strong>Модули:</strong> <span class="kbd">iblock</span>, <span class="kbd">catalog</span> (подключаются через <span class="kbd">Loader::includeModule()</span>)</li>
+      <li><strong>Память/время:</strong> скрипт увеличивает лимиты (<span class="kbd">set_time_limit(0)</span>, <span class="kbd">memory_limit=1024M</span>)</li>
+      <li><strong>Запуск:</strong> HTTP (с прототипом совместимости для CLI); пронициализируется <span class="kbd">$_SERVER['DOCUMENT_ROOT']</span> и подключается <span class="kbd">prolog_before.php</span></li>
+      <li><strong>БД каталога:</strong> должна быть корректно настроена связка товаров/ТП (SKU) и наличие самих SKU с <span class="kbd">CODE</span>=артикул</li>
+    </ul>
+
+    <h2>3. Конфигурация в коде</h2>
+    <div class="panel">
+      <pre><code>// Константы в начале файла
+const XML_PATH = '/1c-exchange/date-stock.xml';
+const SKU_IBLOCK_ID = 17;          // ИБ торговых предложений (нужно указать реальный ID)
+const PRODUCT_IBLOCK_ID = 16;      // ИБ товаров (используется при суммировании остатков у родителя)
+const UPDATE_PARENT_SUM = true;    // Суммировать ли остатки детей в родительский товар</code></pre>
+      <p class="small">Важно: перед использованием замените <span class="kbd">SKU_IBLOCK_ID</span> и <span class="kbd">PRODUCT_IBLOCK_ID</span> на реальные ID ваших инфоблоков.</p>
+    </div>
+
+    <h2>4. Параметры запуска (HTTP GET)</h2>
+    <ul>
+      <li><strong>run</strong> (0/1) — обязательный триггер запуска. Без <span class="kbd">?run=1</span> скрипт только печатает подсказку.</li>
+      <li><strong>dry</strong> (0/1) — «сухой прогон»: считать и логировать, но не вносить изменения в БД.</li>
+      <li><strong>log</strong> (0/1) — подробный лог в plaintext.</li>
+      <li><strong>limit</strong> (N) — ограничение на число записей, полезно для тестирования.</li>
+      <li><strong>xml</strong> (путь) — относительный путь к XML; позволяет переопределить <span class="kbd">XML_PATH</span>.</li>
+    </ul>
+
+    <h2>5. Поиск и открытие XML (устойчивость к ошибкам пути)</h2>
+    <p>Чтобы повысить шанс найти файл даже при несоответствии латинской/кириллической буквы «c/с» в названии папок, код генерирует несколько кандидатов путей.</p>
+    <div class="panel">
+      <pre><code>// Переопределение пути через ?xml=...
+$xmlRel = isset($_GET['xml']) ? $_GET['xml'] : XML_PATH;
+// Разделение на каталог и имя, генерация вариантов c/с только для каталога
+function swapCyrLatCDir(string $dir): array { /* ... возвращает [$dir, cyr-&gt;lat, lat-&gt;cyr] ... */ }
+// Перебор кандидатов и выбор первого существующего
+foreach ($candidates as $rel) {
+  $abs = $docRoot . $rel;
+  if (File::isFileExists($abs)) { $xmlFileAbs = $abs; break; }
+}
+if ($xmlFileAbs === '') { /* 404 + диагностический вывод */ }
+</code></pre>
+    </div>
+
+    <h2>6. Потоковый разбор XML и основная итерация</h2>
+    <p>Используется <span class="kbd">XMLReader</span> для эффективного чтения больших файлов. Скрипт обрабатывает элементы <span class="kbd">&lt;NOMENKLATUREWITHREMAINS&gt;</span>, читая атрибуты:</p>
+    <ul>
+      <li><strong>articule</strong> — символьный код ТП (совпадает с <span class="kbd">CODE</span> в ИБ предложений)</li>
+      <li><strong>remains</strong> — количество остатков (может быть ≤ 0)</li>
+    </ul>
+    <div class="panel">
+      <pre><code>while ($reader-&gt;read()) {
+  if ($reader-&gt;nodeType === XMLReader::ELEMENT &amp;&amp; $reader-&gt;name === 'NOMENKLATUREWITHREMAINS') {
+    $articule = $reader-&gt;getAttribute('articule') ?: '';
+    $remains  = (int)($reader-&gt;getAttribute('remains') ?: 0);
+    // ... пропуск при пустом коду, поиск SKU по CODE ...
+  }
+}</code></pre>
+    </div>
+
+    <h2>7. Нахождение SKU и обновление остатков</h2>
+    <p>SKU ищется по <span class="kbd">CODE</span> в инфоблоке ТП (<span class="kbd">SKU_IBLOCK_ID</span>):</p>
+    <div class="panel">
+      <pre><code>function findSkuIdByCode(string $code): ?int {
+  $row = ElementTable::getRow([
+    'select' =&gt; ['ID', 'IBLOCK_ID'],
+    'filter' =&gt; ['=IBLOCK_ID' =&gt; SKU_IBLOCK_ID, '=CODE' =&gt; $code, '=ACTIVE' =&gt; 'Y'],
+    'cache'  =&gt; ['ttl' =&gt; 300],
+  ]);
+  return $row ? (int)$row['ID'] : null;
+}</code></pre>
+    </div>
+    <p>Далее рассчитываются значения для каталога:</p>
+    <ul>
+      <li><strong>qty</strong> = <span class="kbd">max($remains, 0)</span></li>
+      <li><strong>CAN_BUY_ZERO</strong> = 'Y' если остатков нет (≤ 0) — это режим «Под заказ»</li>
+      <li><strong>QUANTITY_TRACE</strong> = 'Y' — включаем контроль остатков</li>
+    </ul>
+    <div class="panel">
+      <pre><code>ProductTable::update($skuId, [
+  'QUANTITY'        =&gt; $qty,
+  'QUANTITY_TRACE'  =&gt; 'Y',
+  'CAN_BUY_ZERO'    =&gt; $canBuyZero,
+]);
+// Для удобства сортировки в админке: in-stock выше, on-order ниже
+ElementTable::update($skuId, ['SORT' =&gt; ($qty &gt; 0 ? 100 : 200)]);
+</code></pre>
+    </div>
+
+    <h2>8. Суммирование остатков на родителе (опция)</h2>
+    <p>Если <span class="kbd">UPDATE_PARENT_SUM=true</span>, скрипт:</p>
+    <ol>
+      <li>Определяет <strong>parentId</strong> по свойству <span class="kbd">CML2_LINK</span> у SKU</li>
+      <li>Копит сумму положительных остатков детей и флаг «есть ли дети без остатков»</li>
+      <li>После парсинга обновляет родителя: <span class="kbd">QUANTITY=sum</span>, <span class="kbd">CAN_BUY_ZERO</span>='Y' если у любого ребёнка остаток ≤ 0</li>
+    </ol>
+    <div class="panel">
+      <pre><code>$parentsToSum[$parentId] = ['sum' =&gt; 0, 'onOrder' =&gt; false];
+// ...
+ProductTable::update($parentId, [
+  'QUANTITY'        =&gt; (int)$sumQty,
+  'QUANTITY_TRACE'  =&gt; 'Y',
+  'CAN_BUY_ZERO'    =&gt; $parentCanBuyZero,
+]);
+</code></pre>
+    </div>
+
+    <h2>9. Лимиты, dry-run и лог</h2>
+    <ul>
+      <li><strong>limit=N</strong> — обрывает цикл после N записей (для быстрых проверок).</li>
+      <li><strong>dry=1</strong> — все вычисления и логирование без <em>записи</em> в БД (обновления пропускаются).</li>
+      <li><strong>log=1</strong> — подробные строки лога по каждому SKU/родителю. Лог печатается построчно в stdout.</li>
+    </ul>
+
+    <h2>10. Выход и формат ответа</h2>
+    <p>По завершении краткая сводка в JSON (HTTP <span class="kbd">200</span>):</p>
+    <div class="panel">
+      <pre><code>{
+  "processed": &lt;сколько элементов встретили&gt;,
+  "updated": &lt;сколько SKU/родителей обновили&gt;,
+  "errors": &lt;количество ошибок&gt;,
+  "parents_updated": &lt;сколько родителей обработали&gt;,
+  "dry": true|false
+}
+</code></pre>
+    </div>
+    <p>Если файл не найден или модули не подключены — возвращаются коды <span class="kbd">404/500</span> и текст ошибки.</p>
+
+    <h2>11. Примеры запуска</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>HTTP — ознакомительный режим</h3>
+        <pre><code>/local/scripts/import_stocks.php
+→ выводит подсказку; запустите с параметрами:</code></pre>
+        <pre><code>/local/scripts/import_stocks.php?run=1&amp;dry=1&amp;log=1&amp;limit=100
+/local/scripts/import_stocks.php?run=1&amp;xml=/1c-exchange/date-stock.xml
+</code></pre>
+      </div>
+      <div class="panel">
+        <h3>HTTP — применение изменений</h3>
+        <pre><code>/local/scripts/import_stocks.php?run=1&amp;log=1
+</code></pre>
+      </div>
+    </div>
+
+    <h2>12. Как это отображается на сайте</h2>
+    <p>Шаблоны витрины читают поля каталога, обновлённые скриптом:</p>
+    <ul>
+      <li><strong>CATALOG_QUANTITY</strong> &gt; 0 → «В наличии»</li>
+      <li><strong>CATALOG_AVAILABLE</strong> == 'Y' при нуле и <span class="kbd">CAN_BUY_ZERO='Y'</span> → «Под заказ»</li>
+      <li>Иначе → «Нет в наличии»</li>
+    </ul>
+    <p>Пример файла: <span class="kbd">/bitrix/components/dresscode/catalog.product.offers/templates/.default/template.php</span> — блок с проверками <span class="kbd">CATALOG_QUANTITY</span> и <span class="kbd">CATALOG_AVAILABLE</span>.</p>
+
+    <h2>13. Частые проблемы и диагностика</h2>
+    <ul>
+      <li><strong class="err">XML не найден</strong>: проверьте реальный путь и регистр папок, используйте <span class="kbd">?xml=...</span>, включите <span class="kbd">log=1</span> для диагностического листинга корня.</li>
+      <li><strong class="warn">SKU не найден по CODE</strong>: убедитесь, что <em>символьный код</em> ТП равен атрибуту <span class="kbd">articule</span> в XML и элемент активен.</li>
+      <li><strong class="warn">Не обновляется родитель</strong>: включите <span class="kbd">UPDATE_PARENT_SUM=true</span>, у SKU должна быть связь <span class="kbd">CML2_LINK</span>.</li>
+      <li><strong class="warn">На витрине статус не меняется</strong>: проверьте <span class="kbd">QUANTITY_TRACE</span>='Y' и <span class="kbd">CAN_BUY_ZERO</span> для SKU/родителя.</li>
+      <li><strong class="warn">Производительность</strong>: для больших XML используйте <span class="kbd">limit</span> для тестов; XMLReader уже обеспечивает потоковый разбор.</li>
+    </ul>
+
+    <h2>14. Настройка под ваш проект</h2>
+    <ul>
+      <li>Задайте актуальные <span class="kbd">SKU_IBLOCK_ID</span> и <span class="kbd">PRODUCT_IBLOCK_ID</span>.</li>
+      <li>При несовпадении структуры XML — адаптируйте имена узлов и атрибутов в секции парсинга.</li>
+      <li>Если хотите хранить «под заказ» иначе — измените правило вычисления <span class="kbd">CAN_BUY_ZERO</span>.</li>
+      <li>Для более гибкой сортировки каталога измените установку поля <span class="kbd">SORT</span>.</li>
+    </ul>
+
+    <hr />
+    <p class="small">Версия документа: 1.0. Основано на коде <span class="kbd">import_stocks.php</span> в текущем репозитории. Если скрипт изменится, обновите и этот файл.</p>
+  </div>
+</body>
+</html>
