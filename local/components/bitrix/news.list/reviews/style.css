@@ -1,0 +1,619 @@
+.shop-reviews-list {
+	margin-top: 24px;
+	overflow: hidden;
+}
+
+.shop-reviews-list-item {
+	border-right: 1px solid #f1f1f1;
+	border-bottom: 1px solid #f1f1f1;
+	border-left: 1px solid #f1f1f1;
+}
+
+.shop-reviews-list-item:first-child {
+	border-top: 1px solid #f1f1f1;
+}
+
+.shop-review-item-table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+.shop-review-item-cell {
+	display: table-cell;
+	padding: 24px 0;
+	vertical-align: middle;
+}
+
+.shop-reviews-text {
+	margin-top: 24px;
+	color: #333333;
+}
+
+.shop-reviews-container {
+	padding-bottom: 1px;
+	overflow: hidden;
+}
+
+.shop-reviews-container-left {
+	float: left;
+	width: 300px;
+}
+
+.shop-reviews-container-right {
+	display: block;
+}
+
+.shop-review-top-new-button {
+	display: inline-block;
+	height: 55px;
+	padding: 0 48px;
+	line-height: 55px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 2px;
+	transition: all 0.1s ease-in-out;
+}
+
+.shop-review-top-new-button:active {
+	position: relative;
+	top: 1px;
+}
+
+.shop-reviews-heading {
+	margin-bottom: 12px;
+	font-size: 18px;
+	font-family: robotoMedium;
+}
+
+.shop-reviews-rating-count,
+.shop-reviews-top-rating {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.shop-reviews-rating-count {
+	margin-right: 12px;
+}
+
+.shop-review-item-col-autor {
+	width: 340px;
+	padding-right: 24px;
+	text-align: center;
+}
+
+.shop-review-item-col-text {
+	padding-right: 24px;
+}
+
+.shop-review-item-date {
+	margin-bottom: 12px;
+	color: #878787;
+}
+
+.shop-review-item-rating {
+	margin-bottom: 24px;
+}
+
+.shop-review-item-author {
+	margin-bottom: 6px;
+}
+
+.shop-review-item-utile-heading {
+	margin-bottom: 12px;
+}
+
+.shop-review-item-utile-bad {
+	margin-left: 6px;
+	color: #c41a46;
+	text-decoration: none;
+	border: 1px solid #c41a46;
+}
+
+.shop-review-item-utile-good {
+	margin-right: 6px;
+	color: #108f28;
+	text-decoration: none;
+	border: 1px solid #108f28;
+}
+
+.shop-review-item-utile-bad,
+.shop-review-item-utile-good {
+	display: inline-block;
+	height: 35px;
+	padding: 0 12px;
+	line-height: 35px;
+	border-radius: 2px;
+	transition: all 0.2s ease-in-out;
+}
+
+.shop-review-item-utile-bad:hover,
+.shop-review-item-utile-good:hover {
+	opacity: 0.7;
+}
+
+.shop-review-item-utile-bad:active,
+.shop-review-item-utile-good:active {
+	position: relative;
+	top: 1px;
+}
+
+.shop-reviews-rating {
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	width: 79px;
+	height: 15px;
+	margin-top: -4px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.shop-reviews-rating i {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 79px;
+	height: 15px;
+	background: url("images/rating.png") repeat 0 0 transparent;
+}
+
+.shop-reviews-rating i.m {
+	z-index: 10;
+	width: 0;
+	background: url("images/rating.png") repeat 0 -14px transparent;
+}
+
+.shop-review-item-text {
+	color: #111111;
+	line-height: 26px;
+}
+
+.shop-review-item-answer {
+	margin-top: 24px;
+}
+
+.shop-review-item-answer-link {
+	position: relative;
+	display: inline-block;
+	color: #000000;
+	font-family: robotoMedium;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.shop-review-item-answer-link::after {
+	position: absolute;
+	bottom: 0;
+	display: block;
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px dashed #000000;
+	transition: all 0.2s ease-in-out;
+	content: "";
+}
+
+.shop-review-item-answer-text {
+	margin-top: 12px;
+	color: #555555;
+}
+
+.shop-review-form-container {
+	margin-top: 24px;
+	padding: 30px;
+	border: 1px solid #f3f3f3;
+}
+
+.shop-review-form-heading {
+	margin-bottom: 24px;
+	font-weight: 800;
+	font-size: 20px;
+	font-family: robotobold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.shop-review-form-in {
+	margin-bottom: 24px;
+	overflow: hidden;
+}
+
+.shop-review-form-in-left,
+.shop-review-form-in-right {
+	float: left;
+	box-sizing: border-box;
+	width: 50%;
+}
+
+.shop-review-form-in-left {
+	padding-right: 12px;
+}
+
+.shop-review-form-in-right {
+	padding-left: 12px;
+}
+
+.shop-review-form label {
+	display: block;
+	margin-bottom: 12px;
+}
+
+.shop-review-form input,
+.shop-review-form select,
+.shop-review-form textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 12px;
+	color: #000000;
+	font-size: 14px;
+	font-family: "roboto_ltregular";
+	background-color: #f9f9f9;
+	border: 1px solid #e7e8ea;
+	border-radius: 2px;
+	outline: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.shop-review-form input,
+.shop-review-form select {
+	height: 50px;
+}
+
+.shop-review-form textarea {
+	height: 250px;
+	padding-top: 12px;
+	background-color: #f5f5f5;
+	border: 1px solid #e7e8ea;
+	resize: none;
+}
+
+.shop-review-form input:focus,
+.shop-review-form select:focus {
+	background-color: #f5f5f5;
+	border: 1px solid #e7e8ea;
+}
+
+.shop-review-form textarea:focus {
+	background-color: #f1f1f1;
+	border: 1px solid #eeeeee;
+}
+
+.shop-review-form input.error,
+.shop-review-form select.error,
+.shop-review-form textarea.error {
+	border: 1px solid #ff0000;
+}
+
+.shop-review-form-submit-container {
+	position: relative;
+	margin-top: 24px;
+	text-align: center;
+}
+
+.shop-review-form .shop-review-form-submit {
+	display: inline-block;
+	width: 225px;
+	height: 55px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.shop-review-form .shop-review-form-submit:active {
+	position: relative;
+	top: 1px;
+}
+
+.shop-review-message-window {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 998;
+	display: none;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0 0 0 / 29.8%);
+}
+
+.shop-review-message-window.visible {
+	display: block;
+}
+
+.shop-review-message-window-cn {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	z-index: 999;
+	box-sizing: border-box;
+	width: 300px;
+	overflow: hidden;
+	color: #000000;
+	background-color: #ffffff;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 50%);
+	transform: translateX(-50%) translateY(-50%);
+	animation-name: zoomIn;
+	animation-duration: 0.2s;
+	animation-fill-mode: both;
+}
+
+.shop-review-message-window-heading {
+	position: relative;
+	display: block;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	color: #eeeeee;
+	font-size: 16px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #424242;
+}
+
+.shop-review-message-window-close {
+	position: absolute;
+	top: 16px;
+	right: 24px;
+	display: block;
+	width: 21px;
+	height: 21px;
+}
+
+.shop-review-message-window-close {
+	background: url("images/exit.png") 0 0 no-repeat transparent;
+}
+
+.shop-review-message-window-close:hover {
+	background-position: 0 -21px;
+}
+
+.shop-review-message-window-close:active {
+	background-position: 0 -42px;
+}
+
+.shop-review-message-window-message {
+	padding: 24px;
+	color: #333333;
+	text-align: center;
+}
+
+.shop-review-message-exit-cn {
+	text-align: center;
+}
+
+.shop-review-message-window-exit {
+	display: inline-block;
+	height: 35px;
+	margin-bottom: 24px;
+	padding: 0 24px;
+	color: #ffffff;
+	line-height: 35px;
+	text-align: center;
+	text-decoration: none;
+	background: #424242;
+	transition: all 0.2s ease-in-out;
+}
+
+.shop-review-message-window-exit:hover {
+	background: #2b2b2b;
+}
+
+.shop-review-message-window-exit:active {
+	position: relative;
+	top: 1px;
+}
+
+.shop-review-form-submit.loading {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.shop-review-form-submit.loading + #shop-review-form-submit-fast-loader {
+	display: block;
+	opacity: 1;
+}
+
+#shop-review-form-submit-fast-loader {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	display: none;
+	width: 48px;
+	height: 48px;
+	margin-left: -24px;
+	transform: scale(0.6);
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.f_circleG2 {
+	position: absolute;
+	display: block;
+	width: 9px;
+	height: 9px;
+	background-color: rgb(255 255 255);
+	border-radius: 4px;
+	animation-name: f_fadeG2;
+	animation-duration: 0.522s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+}
+
+#frotateG2_01 {
+	top: 19px;
+	left: 0;
+	animation-delay: 0.1995s;
+}
+
+#frotateG2_02 {
+	top: 6px;
+	left: 6px;
+	animation-delay: 0.256s;
+}
+
+#frotateG2_03 {
+	top: 0;
+	left: 19px;
+	animation-delay: 0.3225s;
+}
+
+#frotateG2_04 {
+	top: 6px;
+	right: 6px;
+	animation-delay: 0.389s;
+}
+
+#frotateG2_05 {
+	top: 19px;
+	right: 0;
+	animation-delay: 0.4555s;
+}
+
+#frotateG2_06 {
+	right: 6px;
+	bottom: 6px;
+	animation-delay: 0.522s;
+}
+
+#frotateG2_07 {
+	bottom: 0;
+	left: 19px;
+	animation-delay: 0.5885s;
+}
+
+#frotateG2_08 {
+	bottom: 6px;
+	left: 6px;
+	animation-delay: 0.645s;
+}
+
+@keyframes f_fadeG2 {
+	0% {
+		background-color: rgb(0 0 0);
+	}
+
+	100% {
+		background-color: rgb(255 255 255);
+	}
+}
+
+@keyframes f_fadeG2 {
+	0% {
+		background-color: rgb(0 0 0);
+	}
+
+	100% {
+		background-color: rgb(255 255 255);
+	}
+}
+
+@keyframes f_fadeG2 {
+	0% {
+		background-color: rgb(0 0 0);
+	}
+
+	100% {
+		background-color: rgb(255 255 255);
+	}
+}
+
+@keyframes f_fadeG2 {
+	0% {
+		background-color: rgb(0 0 0);
+	}
+
+	100% {
+		background-color: rgb(255 255 255);
+	}
+}
+
+@keyframes f_fadeG2 {
+	0% {
+		background-color: rgb(0 0 0);
+	}
+
+	100% {
+		background-color: rgb(255 255 255);
+	}
+}
+
+@media all and (max-width: 1600px) {
+	.shop-review-item-col-autor {
+		width: 250px;
+	}
+}
+
+@media all and (max-width: 1366px) {
+	.shop-review-item-col-autor {
+		width: 200px;
+	}
+
+	.shop-review-form textarea {
+		height: 150px;
+	}
+}
+
+@media all and (max-width: 600px) {
+	.shop-reviews-list-item {
+		border-top: 0;
+		border-right: 0;
+		border-left: 0;
+	}
+
+	.shop-review-item-cell {
+		display: block;
+		width: 100%;
+	}
+
+	.shop-review-item-utile {
+		display: none;
+	}
+
+	.shop-review-item-rating {
+		margin-bottom: 0;
+	}
+
+	.shop-review-item-col-autor {
+		padding: 12px 0;
+		text-align: left;
+	}
+
+	.shop-review-item-text,
+	.shop-review-item-answer {
+		padding: 0;
+	}
+
+	.shop-review-item-col-text {
+		padding-top: 0;
+		padding-bottom: 12px;
+	}
+
+	.shop-review-form-in-left,
+	.shop-review-form-in-right {
+		float: none;
+		width: 100%;
+	}
+
+	.shop-review-form-in-left {
+		padding-right: 0;
+	}
+
+	.shop-review-form-in-right {
+		margin-top: 24px;
+		padding-left: 0;
+	}
+}
+
+@media all and (max-width: 550px) {
+	.shop-review-top-new-button {
+		float: none;
+		margin-top: 24px;
+	}
+
+	.shop-reviews-container-left {
+		float: none;
+	}
+}

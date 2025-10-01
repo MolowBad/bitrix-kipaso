@@ -1,0 +1,143 @@
+.bx-auth .bx-auth-type-select {
+	line-height: normal;
+	margin-bottom: 18px;
+	font-size: 0;
+}
+
+.bx-auth .bx-auth-type-select .bx-auth-type-select-item {
+	vertical-align: middle;
+	display: inline-block;
+	font-size: 14px;
+}
+
+.bx-auth .bx-auth-type-select .bx-auth-type-select-item {
+	margin-left: 12px;
+}
+
+.bx-auth .bx-auth-type-select .bx-auth-type-select-item:first-child {
+	margin-left: 0px;
+}
+
+.bx-auth .bx-auth-type-select .bx-auth-type-select-link {
+	padding-right: 24px;
+	padding-left: 24px;
+	min-width: auto;
+}
+
+.bx-auth .bx-auth-type-item {
+	display: none;
+}
+
+.bx-auth .bx-auth-type-item.active {
+	display: block;
+}
+
+.bx-auth .emailAuth .bx-captcha {
+	margin-top: 0px;
+}
+
+.bx-auth-error-item {
+	margin-top: 12px;
+	display: block;
+}
+
+.bx-auth .dbg_captha {
+	margin-top: 12px;
+}
+
+.bx-auth .dbg_captha .bx-captcha {
+	margin-bottom: 12px;
+	margin-top: 0px;
+}
+
+.bx-auth .sendForm.loading {
+	background-image: url(images/spin.svg);
+	color: rgba(255, 255, 255, 0.6);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	-webkit-transition: none;
+	pointer-events: none;
+	-o-transition: none;
+	transition: none;
+	opacity: 0.65;
+}
+
+.bx-auth .bx-title {
+	font-size: 14px;
+}
+
+.bx-auth .bx-auth-error-item {
+	text-transform: lowercase;
+	border: 1px solid #f00;
+	background-color: #fff;
+	margin-bottom: 0px;
+	line-height: 21px;
+	margin-top: 12px;
+	max-width: 100%;
+	padding: 12px;
+	width: auto;
+}
+
+.bx-auth .bx-auth-error-item:first-letter {
+	text-transform: capitalize;
+}
+
+.bx-auth input:-webkit-autofill,
+.bx-auth input:-webkit-autofill:hover,
+.bx-auth input:-webkit-autofill:focus,
+.bx-auth input:-webkit-autofill,
+.bx-auth textarea:-webkit-autofill,
+.bx-auth textarea:-webkit-autofill:hover,
+.bx-auth textarea:-webkit-autofill:focus,
+.bx-auth select:-webkit-autofill,
+.bx-auth select:-webkit-autofill:hover,
+.bx-auth select:-webkit-autofill:focus {
+	background-color: #f3f3f3 !important;
+	-webkit-box-shadow: 0 0 0 30px #f3f3f3 inset !important;
+}
+
+@media screen and (max-width: 750px) {
+	#main .bx-auth .leftContainer {
+		margin-right: 0px;
+		float: none;
+	}
+
+	#main .bx-auth input[type="text"],
+	#main .bx-auth input[type="password"] {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#main h1 {
+		margin-bottom: 12px;
+	}
+
+	#authMenu {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	#main .bx-auth .submit,
+	.popup-window .btn {
+		min-width: 170px;
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#main .bx-auth .bx-auth-type-select .bx-auth-type-select-link {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+
+	#main .bx-auth .submit,
+	.popup-window .btn {
+		box-sizing: border-box;
+		padding-right: 12px;
+		padding-left: 12px;
+		min-width: 120px;
+		width: auto;
+	}
+}
