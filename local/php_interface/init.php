@@ -2,6 +2,7 @@
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Diag\Debug;
+use Bitrix\Main\Page\Asset;
 
 // В init.php не ставим жёсткую проверку B_PROLOG_INCLUDED —
 // в некоторых сценариях админской части или спец. скриптов она может быть не определена к моменту подключения
@@ -498,6 +499,29 @@ if (function_exists('AddEventHandler')) {
     AddEventHandler('main', 'OnEndBufferContent', 'kipasoOnEndBufferContent', 1);
 }
 
+// ----------------------------------------------------------------------------
+// Подключение автозаполнения реквизитов по ИНН на странице заказа
+// ----------------------------------------------------------------------------
+try {
+    $reqUri = $_SERVER['REQUEST_URI'] ?? '';
+    if (strpos($reqUri, '/personal/cart/order/') === 0) {
+        // Конфигурация точных селекторов для автозаполнения
+        Asset::getInstance()->addString('<script>window.EGRUL_AUTOFILL_CONFIG = {
+            debug: false,
+            innSelector:    "#soa-property-10, input[name=\\"ORDER_PROP_10\\"]",
+            companyNameSelector: "#soa-property-8, input[name=\\"ORDER_PROP_8\\"]",
+            legalAddressSelector: "#soa-property-9, textarea[name=\\"ORDER_PROP_9\\"]",
+            kppSelector:    "#soa-property-11, input[name=\\"ORDER_PROP_11\\"]",
+            contactPersonSelector: "#soa-property-12, input[name=\\"ORDER_PROP_12\\"]",
+            endpoint: "/local/ajax/egrul_lookup.php",
+            debounceMs: 500
+        };</script>');
+        Asset::getInstance()->addJs('/local/scripts/EGRUL-INN/egrul-autofill.js');
+    }
+} catch (\Throwable $e) {
+    // silent
+}
+
 // ============================================================================
 // ОБРАБОТКА АДРЕСА СДЭК ПРИ ОФОРМЛЕНИИ ЗАКАЗА
 // ============================================================================
@@ -545,7 +569,8 @@ if (!function_exists('parseCdekAddress')) {
             $addressPart = $parts[2];
             
             // Извлекаем номер дома
-            if (preg_match('/(?:^|д\.?\s*|дом\s*)(\d+[а-яА-Яa-zA-Z]*)/ui', $addressPart, $matches)) {
+            // Поддержка дробных номеров: 58/20, 10-2, 7А/1, 15Б-2 и т.п.
+            if (preg_match('/(?:^|\bд\.?\s*|\bдом\s*)(\d+[\da-zA-Zа-яА-Я]*?(?:[\/\.\-]\d+[\da-zA-Zа-яА-Я]*)*)/ui', $addressPart, $matches)) {
                 $result['HOUSE'] = $matches[1];
             }
             
