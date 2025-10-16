@@ -82,10 +82,18 @@
     if (!sel) return false;
     var el = $(sel);
     if (!el) return false;
+    var v = (val==null? '' : String(val)).trim();
+    if (v === '') return false; // не перезаписываем пустыми значениями
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      if (el.value !== String(val)) { el.value = String(val||''); el.dispatchEvent(new Event('input', {bubbles:true})); }
+      if (el.value !== v) {
+        el.value = v;
+        el.dispatchEvent(new Event('input', {bubbles:true}));
+        el.dispatchEvent(new Event('change', {bubbles:true}));
+        // некоторые темы реагируют на blur
+        try { el.blur(); setTimeout(function(){ el.focus(); }, 0); } catch(e){}
+      }
     } else {
-      el.textContent = String(val||'');
+      if (el.textContent !== v) el.textContent = v;
     }
     return true;
   }
@@ -129,8 +137,17 @@
     return u.toString();
   }
 
+  var LAST_DATA = null;
+
   function applyData(d){
     if (!d) return;
+    // Запомним последний результат для повторного применения
+    LAST_DATA = {
+      company_name: d.company_name || '',
+      legal_address: d.legal_address || '',
+      kpp: d.kpp || '',
+      contact_person: d.contact_person || ''
+    };
     // Компания
     if (!fillValue(CFG.companyNameSelector, d.company_name || '')){
       var el1 = findByLabelText(['Название','Наименование']); if (el1){ el1.value = d.company_name||''; el1.dispatchEvent(new Event('input',{bubbles:true})); }
@@ -156,6 +173,8 @@
       if (!res || res.success !== true) throw new Error(res && res.error ? res.error : 'Unknown error');
       if (!res.data) { log('Нет результатов'); return; }
       applyData(res.data);
+      // Повторные применения через несколько интервалов — на случай перерисовок формы Bitrix
+      [200, 500, 1000, 1600].forEach(function(ms){ setTimeout(function(){ applyData(LAST_DATA); }, ms); });
     }).catch(function(e){ log('Ошибка', e && e.message ? e.message : e); });
   }
 
@@ -198,8 +217,12 @@
       var mo = new MutationObserver(function(){
         var current = $(CFG.innSelector) || findByLabelText(['ИНН']);
         if (current && current !== BOUND_INN_EL) {
-          log('Обнаружено новое поле ИНН после перерисовки, перепривязываем');
           bindInnField(current);
+          // При появлении новых полей попробуем повторно применить последние данные, если они есть
+          if (LAST_DATA) { applyData(LAST_DATA); }
+        } else if (LAST_DATA) {
+          // Даже без смены input могли перерисоваться другие поля — обновим их при наличии данных
+          applyData(LAST_DATA);
         }
       });
       mo.observe(document.body, { childList: true, subtree: true });
