@@ -72,7 +72,6 @@ $(function() {
                 act: "addCart",
                 id: productID,
                 modification: modification,
-                modification_price: price,
                 q: quantity,
                 site_id: SITE_ID
             };
@@ -132,6 +131,16 @@ $(function() {
                         }
                     }
                     
+                    // Определяем серверную цену из ответа (если доступна)
+                    var serverPrice = null;
+                    if (response && typeof response.server_price !== 'undefined' && response.server_price !== null) {
+                        serverPrice = parseFloat(response.server_price);
+                        if (!isNaN(serverPrice)) {
+                            // Перезаписываем локально известную цену серверным значением
+                            price = serverPrice;
+                        }
+                    }
+
                     // Показываем всплывающее окно корзины, если оно есть в ответе
                     if (response && response.status === true && response.window_component) {
                         // Добавляем компонент окна корзины в DOM
@@ -139,7 +148,7 @@ $(function() {
                         
                         // Добавляем информацию о модификации в окно корзины
                         setTimeout(function() {
-                            updateModificationInfoInBasket(productID, modification, price);
+                            updateModificationInfoInBasket(productID, modification, serverPrice !== null ? serverPrice : price);
                         }, 100);
                     } else {
                         
@@ -161,7 +170,7 @@ $(function() {
                                 
                                 // Добавляем информацию о модификации
                                 setTimeout(function() {
-                                    updateModificationInfoInBasket(productID, modification, price);
+                                    updateModificationInfoInBasket(productID, modification, serverPrice !== null ? serverPrice : price);
                                 }, 100);
                             }
                         });

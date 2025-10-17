@@ -624,7 +624,7 @@ class ProductModifications {
             } else {
                 // Если цена не найдена, показываем сообщение
                 if (priceElement) {
-                    priceElement.textContent = 'Цена не найдена';
+                    priceElement.textContent = 'Цена по запросу';
                     priceBlock.style.display = 'flex';
                 }
                 
@@ -635,7 +635,7 @@ class ProductModifications {
             
             const priceElement = document.querySelector('.modification-price');
             if (priceElement) {
-                priceElement.textContent = 'Не удалось загрузить цену';
+                priceElement.textContent = 'Обратитесь к менеджеру для уточнения цены';
             }
             
             return { success: false, error: error.message };

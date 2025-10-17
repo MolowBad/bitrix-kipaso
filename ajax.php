@@ -36,12 +36,12 @@ try {
 
         
         $modification = trim((string)$request->get('modification'));
-        $modPrice = $request->get('modification_price');
-        $modPrice = ($modPrice !== null && $modPrice !== '') ? (float)$modPrice : null;
+        // Безопасность: игнорируем клиентскую modification_price, цену определяем на сервере
+        $modPrice = null;
 
         // DEBUG: Логируем входящие данные запроса addCart
         $dbgFile = $_SERVER['DOCUMENT_ROOT'] . '/upload/basket_debug.log';
-        $dbgLine = date('Y-m-d H:i:s') . ' - addCart: id=' . $idsRaw . ', q=' . var_export($qRaw, true) . ', modification=' . $modification . ', modification_price=' . var_export($modPrice, true) . ', site_id=' . $siteId . "\n";
+        $dbgLine = date('Y-m-d H:i:s') . ' - addCart: id=' . $idsRaw . ', q=' . var_export($qRaw, true) . ', modification=' . $modification . ', modification_price(ignored)=' . var_export($modPrice, true) . ', site_id=' . $siteId . "\n";
         @file_put_contents($dbgFile, $dbgLine, FILE_APPEND);
 
         if ($idsRaw === '') {
@@ -98,6 +98,7 @@ try {
             $debugItemId = (int)end($added);
             $result['debug_item_id'] = $debugItemId;
             $debugProps = [];
+            $serverPrice = null; $serverCurrency = null;
             foreach ($basket->getBasketItems() as $bi) {
                 if ((int)$bi->getId() === $debugItemId) {
                     $props = $bi->getPropertyCollection()->getPropertyValues();
@@ -107,10 +108,16 @@ try {
                             $debugProps[$code] = $p['VALUE'];
                         }
                     }
+                    $serverPrice = (float)$bi->getPrice();
+                    $serverCurrency = (string)$bi->getCurrency();
                     break;
                 }
             }
             $result['debug_props'] = $debugProps;
+            if ($serverPrice !== null) {
+                $result['server_price'] = $serverPrice;
+                if ($serverCurrency !== null) { $result['server_currency'] = $serverCurrency; }
+            }
         }
 
         
@@ -360,7 +367,72 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
 
     if ($productId <= 0) { return false; }
 
-    
+    // Подготовим нормализованную модификацию и серверную цену ДО проверки слияния
+    $normalizedMod = '';
+    if ($modification !== '') {
+        $normalize = static function(string $s): string {
+            $s = preg_replace('/^[\p{Z}\s\x{00A0}\x{202F}]+|[\p{Z}\s\x{00A0}\x{202F}]+$/u', '', $s);
+            $s = strtr($s, [
+                "\xE2\x80\x90" => '-', "\xE2\x80\x91" => '-', "\xE2\x80\x92" => '-',
+                "\xE2\x80\x93" => '-', "\xE2\x80\x94" => '-', "\xE2\x80\x95" => '-',
+            ]);
+            $s = preg_replace('/[\x{00A0}\x{202F}\s]+/u', ' ', $s);
+            $s = preg_replace('/[\s\x{00A0}\x{202F}\.,;:]+$/u', '', $s);
+            return $s;
+        };
+        $normalizedMod = $normalize($modification);
+    }
+
+    // Определим ключ для поиска в XML: CML2_ARTICLE/ARTNUMBER -> XML_ID -> ID
+    $productKey = '';
+    if (\Bitrix\Main\Loader::includeModule('iblock')) {
+        $rsProp = \CIBlockElement::GetProperty(false, $productId, [], [ 'CODE' => 'CML2_ARTICLE' ]);
+        if ($arProp = $rsProp->Fetch()) { $productKey = (string)$arProp['VALUE']; }
+        if ($productKey === '') {
+            $rsProp2 = \CIBlockElement::GetProperty(false, $productId, [], [ 'CODE' => 'ARTNUMBER' ]);
+            if ($arProp2 = $rsProp2->Fetch()) { $productKey = (string)$arProp2['VALUE']; }
+        }
+    }
+    if ($productKey === '') {
+        // Получим XML_ID через getProductBaseFields ниже, если потребуется
+        $baseTmp = getProductBaseFields($productId);
+        if (!empty($baseTmp['XML_ID'])) { $productKey = (string)$baseTmp['XML_ID']; }
+    }
+    if ($productKey === '') { $productKey = (string)$productId; }
+
+    $serverModPrice = null;
+    if ($normalizedMod !== '') {
+        $xmlFilePath = $_SERVER['DOCUMENT_ROOT'] . '/catalogOven.xml';
+        if (is_file($xmlFilePath) && is_readable($xmlFilePath)) {
+            try {
+                $reader = new \XMLReader();
+                if ($reader->open($xmlFilePath)) {
+                    $foundProduct = false; $inPrices = false; $priceFound = null;
+                    $productKeyLower = mb_strtolower($productKey);
+                    while ($reader->read()) {
+                        if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'id' && !$foundProduct) {
+                            $idVal = $reader->readString();
+                            if (mb_strtolower((string)$idVal) === $productKeyLower) { $foundProduct = true; }
+                        }
+                        if ($foundProduct && $reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'prices') { $inPrices = true; }
+                        if ($foundProduct && $inPrices && $reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'price') {
+                            $priceXml = simplexml_load_string($reader->readOuterXml());
+                            $xmlName1 = $normalize((string)$priceXml->name);
+                            $xmlName2 = $normalize((string)$priceXml->n);
+                            if ($xmlName1 === $normalizedMod || $xmlName2 === $normalizedMod) {
+                                $priceFound = (float)$priceXml->price;
+                                break;
+                            }
+                        }
+                        if ($foundProduct && $inPrices && $reader->nodeType === \XMLReader::END_ELEMENT && $reader->name === 'prices') { break; }
+                    }
+                    $reader->close();
+                    if ($priceFound !== null) { $serverModPrice = (float)$priceFound; }
+                }
+            } catch (\Throwable $e) { /* ignore */ }
+        }
+    }
+
     $existing = null;
     foreach ($basket->getBasketItems() as $bi) {
         if ((int)$bi->getProductId() === $productId) {
@@ -369,8 +441,8 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
             $biMod = isset($props['MODIFICATION']['VALUE']) ? (string)$props['MODIFICATION']['VALUE'] : '';
             $biModPrice = isset($props['MODIFICATION_PRICE']['VALUE']) ? (float)$props['MODIFICATION_PRICE']['VALUE'] : null;
 
-            $curMod = (string)$modification;
-            $curModPrice = ($modPrice !== null) ? (float)$modPrice : null;
+            $curMod = ($normalizedMod !== '' ? $normalizedMod : (string)$modification);
+            $curModPrice = ($serverModPrice !== null) ? (float)$serverModPrice : null;
 
             $modsMatch = ($biMod === $curMod);
             $pricesMatch = ($biModPrice === $curModPrice);
@@ -411,13 +483,14 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
         'NAME' => ($productName !== '' ? $productName : 'Товар #' . (int)$productId),
     ];
 
-    
-    if ($modPrice !== null) {
-        $fields['PRICE'] = $modPrice;
-        $fields['BASE_PRICE'] = $modPrice;
+    // serverModPrice уже рассчитан выше
+
+    if ($serverModPrice !== null) {
+        $fields['PRICE'] = $serverModPrice;
+        $fields['BASE_PRICE'] = $serverModPrice;
         $fields['CUSTOM_PRICE'] = 'Y';
     } else {
-        
+        // Фоллбек на обычную ценовую логику Bitrix
         if (\Bitrix\Main\Loader::includeModule('catalog')) {
             global $USER;
             $optimal = \CCatalogProduct::GetOptimalPrice($productId, $quantity, is_object($USER) ? $USER->GetUserGroupArray() : [2], 'N', [], $basket->getSiteId());
@@ -438,7 +511,7 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
     $logFile = $_SERVER['DOCUMENT_ROOT'] . '/upload/basket_debug.log';
     file_put_contents($logFile, date('Y-m-d H:i:s') . " - Первое сохранение элемента корзины: " . ($firstSave->isSuccess() ? 'УСПЕШНО' : 'ОШИБКА') . ", ID: " . (int)$item->getId() . "\n", FILE_APPEND);
 
-    if ($modification !== '' || $modPrice !== null) {
+    if ($modification !== '' || $serverModPrice !== null) {
         $propCollection = $item->getPropertyCollection();
 
         // Сформируем массив свойств и установим одним вызовом
@@ -447,19 +520,19 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
             $set[] = [
                 'NAME' => 'Modification',
                 'CODE' => 'MODIFICATION',
-                'VALUE' => $modification,
+                'VALUE' => $normalizedMod ?? $modification,
                 'SORT' => 100,
             ];
             file_put_contents($logFile, date('Y-m-d H:i:s') . " - Готовим свойство MODIFICATION: $modification\n", FILE_APPEND);
         }
-        if ($modPrice !== null) {
+        if ($serverModPrice !== null) {
             $set[] = [
                 'NAME' => 'Modification price',
                 'CODE' => 'MODIFICATION_PRICE',
-                'VALUE' => $modPrice,
+                'VALUE' => $serverModPrice,
                 'SORT' => 110,
             ];
-            file_put_contents($logFile, date('Y-m-d H:i:s') . " - Готовим свойство MODIFICATION_PRICE: $modPrice\n", FILE_APPEND);
+            file_put_contents($logFile, date('Y-m-d H:i:s') . " - Готовим свойство MODIFICATION_PRICE(serverside): $serverModPrice\n", FILE_APPEND);
         }
 
         if (!empty($set)) {
