@@ -31,7 +31,6 @@ const PROP_CODES_OFFICE = ['OFFICE','ОФИС','КВАРТИРА'];
 const PROP_CODES_ZIP = ['ZIP','INDEX','ПОЧТОВЫЙ_ИНДЕКС','ПОЧТОВЫЙ ИНДЕКС'];
 const PROP_CODES_COUNTRY = ['COUNTRY','СТРАНА'];
 
-// Лог факта загрузки init.php (однократно на запрос)
 try {
     \Bitrix\Main\Diag\Debug::writeToFile([
         'stage' => 'init_loaded',
@@ -42,7 +41,7 @@ try {
 
 if (!function_exists('kipasoOnEndBufferContent')) {
     function kipasoOnEndBufferContent(&$content): void {
-    // Обрабатываем только /bitrix/admin/1c_exchange.php?type=sale&mode=query
+    
     $uri = $_SERVER['REQUEST_URI'] ?? '';
     $script = $_SERVER['SCRIPT_NAME'] ?? ($_SERVER['PHP_SELF'] ?? '');
     $is1cScript = (stripos($uri, '/bitrix/admin/1c_exchange.php') !== false) || (stripos($script, '1c_exchange.php') !== false);
@@ -56,7 +55,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
     }
     @ini_set('display_errors', '0');
 
-    // Лог входящего состояния (для диагностики)
+    
     Debug::writeToFile([
         'stage' => 'before_parse',
         'uri' => $uri,
@@ -69,7 +68,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
     $dom->preserveWhiteSpace = false;
     $loaded = @$dom->loadXML($content);
     if (!$loaded) {
-        // Попытка принудительно привести к UTF-8, если объявление кодировки отсутствует/некорректно
+        
         $try = @mb_convert_encoding($content, 'UTF-8');
         $loaded = $try ? @$dom->loadXML($try) : false;
         if (!$loaded) {
@@ -81,7 +80,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
     $xp = new \DOMXPath($dom);
 
     foreach ($xp->query('//КоммерческаяИнформация/Документ') as $docNode) {
-        // ID заказа
+       
         $idNode = $xp->query('./Ид', $docNode)->item(0);
         if (!$idNode) { continue; }
         $orderId = (int)trim($idNode->nodeValue);
@@ -93,7 +92,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         $isYL = ((int)$order->getPersonTypeId() === PT_YL);
         $payerValue = $isYL ? 'Юридическое лицо' : 'Физическое лицо';
 
-        // Чтение свойств заказа
+     
         $props = $order->getPropertyCollection();
         $getPropByCodes = function(array $codes) use ($props): string {
             $upper = array_map(static fn($s) => mb_strtoupper($s), $codes);
@@ -129,7 +128,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         $addrZip = $getPropByCodes(PROP_CODES_ZIP);
         $addrCountry = $getPropByCodes(PROP_CODES_COUNTRY);
 
-        // Реквизиты уровня документа (старые) — соберём в карту для переноса в новые теги
+        
         $req = $xp->query('./ЗначенияРеквизитов', $docNode)->item(0);
         $reqMap = [];
         if ($req) {
@@ -140,12 +139,12 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             }
         }
 
-        // Поместим "Тип плательщика (для обмена)" при необходимости (оставим для совместимости, но перенесём также в Контрагент)
+        
         if (!isset($reqMap['Тип плательщика (для обмена)'])) {
             $reqMap['Тип плательщика (для обмена)'] = $payerValue;
         }
 
-        // Хелпер: получить/создать одиночный дочерний узел
+     
         $ensureChild = function(\DOMNode $parent, string $name, ?string $value = null) use ($dom, $xp): \DOMElement {
             $node = $xp->query('./'.$name, $parent)->item(0);
             if (!$node) { $node = $dom->createElement($name); $parent->appendChild($node); }
@@ -172,11 +171,10 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             if (isset($reqMap[$old])) { $ensureChild($docNode, $new, (string)$reqMap[$old]); }
         }
 
-        // Адрес доставки -> АдресДоставки (структурированный контейнер)
-        // Приоритет: отдельные свойства заказа; если они не полные — дополняем из текстового реквизита "Адрес доставки" (например, адрес ПВЗ СДЭК)
+       
         $hasAddrParts = ($addrCity !== '' || $addrStreet !== '' || $addrHouse !== '' || $addrKorpus !== '' || $addrBuilding !== '' || $addrOffice !== '' || $addrZip !== '' || $addrCountry !== '');
 
-        // Попытка дополнить недостающие части из текстового адреса, если он похож на адрес СДЭК (содержит код #XXXX)
+        
         $addrText = $reqMap['Адрес доставки'] ?? '';
         if (($addrStreet === '' || $addrHouse === '' || $addrCity === '') && $addrText !== '' && preg_match('/#[A-Z0-9]+$/u', $addrText)) {
             $parsedPickup = parseCdekAddress($addrText);
@@ -193,7 +191,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             if ($parsedPickup['KORPUS'] !== '' && $addrKorpus === '') { $addrKorpus = $parsedPickup['KORPUS']; }
             if ($parsedPickup['BUILDING'] !== '' && $addrBuilding === '') { $addrBuilding = $parsedPickup['BUILDING']; }
             if ($parsedPickup['OFFICE'] !== '' && $addrOffice === '') { $addrOffice = $parsedPickup['OFFICE']; }
-            // переоценим наличие частей после дополнения
+           
             $hasAddrParts = ($addrCity !== '' || $addrStreet !== '' || $addrHouse !== '' || $addrKorpus !== '' || $addrBuilding !== '' || $addrOffice !== '' || $addrZip !== '' || $addrCountry !== '');
         }
 
@@ -220,7 +218,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 $ensureChild($addr, 'Строение', $addrBuilding);
                 $ensureChild($addr, 'Офис', $addrOffice);
             } else {
-                // Фолбэк на старый текстовый адрес
+                
                 $ensureChild($addr, 'Представление', (string)$reqMap['Адрес доставки']);
                 $val = (string)$reqMap['Адрес доставки'];
                 if (preg_match('/\b(\d{6})\b/u', $val, $m)) { $ensureChild($addr, 'ПочтовыйИндекс', $m[1]); }
@@ -237,9 +235,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         // После переноса удаляем старые ЗначенияРеквизитов целиком
         if ($req && $req->parentNode === $docNode) { $docNode->removeChild($req); $req = null; }
 
-        // ВОССТАНОВИМ документный блок ЗначенияРеквизитов с единственным реквизитом:
-        //  Тип плательщика (для обмена) = {Физическое лицо|Юридическое лицо}
-        // Реквизит определяется ТОЛЬКО по типу плательщика заказа и не зависит от пользовательского свойства.
+        
         $reqDoc = $dom->createElement('ЗначенияРеквизитов');
         $zr = $dom->createElement('ЗначениеРеквизита');
         $zr->appendChild($dom->createElement('Наименование', 'Тип плательщика (для обмена)'));
@@ -247,7 +243,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         $reqDoc->appendChild($zr);
         $docNode->appendChild($reqDoc);
 
-        // Обновим блок Контрагента под новую схему
+     
         $buyer = $xp->query('./Контрагенты/Контрагент', $docNode)->item(0);
         if ($buyer) {
             // Наименование/ПолноеНаименование
@@ -255,13 +251,13 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             $displayName = $nameNode ? trim($nameNode->nodeValue) : '';
             if ($isYL && $org !== '') { $displayName = $org; $ensureChild($buyer, 'Наименование', $displayName); }
             $ensureChild($buyer, 'ПолноеНаименование', $displayName);
-            // Имя (для ФЛ можно продублировать отображаемое имя)
+            
             if (!$isYL) { $ensureChild($buyer, 'Имя', $displayName); }
             // ИНН/КПП
             $ensureChild($buyer, 'ИНН', $isYL ? $inn : ($inn ?: ''));
             $ensureChild($buyer, 'КПП', $isYL ? $kpp : '');
 
-            // АдресРегистрации из ЮридическийАдрес или Адрес
+           
             $addrReg = $ensureChild($buyer, 'АдресРегистрации');
             $legalAddr = $xp->query('./ЮридическийАдрес', $buyer)->item(0) ?: $xp->query('./Адрес', $buyer)->item(0);
             $presentation = '';
@@ -291,7 +287,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             $ensureChild($addrReg, 'Строение');
             $ensureChild($addrReg, 'Офис');
 
-            // Контакты -> ЭлектроннаяПочта/НомерТелефона
+           
             $email = $emailProp !== '' ? $emailProp : '';
             if ($email === '') {
                 $emailNode = $xp->query('./Контакты/Контакт[Тип="Почта"]/Значение', $buyer)->item(0);
@@ -308,14 +304,14 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             }
             if ($phone !== '') { $ensureChild($buyer, 'НомерТелефона', $phone); }
 
-            // Удалим старые ЮридическийАдрес/Адрес/Контакты чтобы соответствовать новой схеме
+           
             foreach (['ЮридическийАдрес','Адрес','Контакты'] as $legacy) {
                 $n = $xp->query('./'.$legacy, $buyer)->item(0);
                 if ($n && $n->parentNode === $buyer) { $buyer->removeChild($n); }
             }
         }
 
-        // КонтактноеЛицо: сформировать и разместить сразу после блока Контрагенты
+        
         if ($contactFioProp !== '' || $contactPosProp !== '' || $phoneProp !== '') {
             
             $existingCl = $xp->query('./КонтактноеЛицо', $docNode)->item(0);
@@ -340,14 +336,14 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             }
         }
 
-        // Лог (на время отладки)
+       
         Debug::writeToFile(
             ['ORDER_ID'=>$orderId,'PT'=>$payerValue,'INN'=>$inn,'KPP'=>$kpp,'ORG'=>$org],
             'PAYER_TYPE_XML_PLUS',
             $_SERVER['DOCUMENT_ROOT'].'/upload/payer_type_xml.log'
         );
 
-        // 5) На уровне позиций заказа: добавить "Символьный код товара"
+        
         foreach ($xp->query('./Товары/Товар', $docNode) as $itemNode) {
             // Достаём/создаём контейнер ЗначенияРеквизитов для конкретного товара
             $itemReq = $xp->query('./ЗначенияРеквизитов', $itemNode)->item(0);
@@ -356,7 +352,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 $itemNode->appendChild($itemReq);
             }
 
-            // Хелпер добавления реквизита для товара без дублей
+            
             $addItemReq = function(string $name, string $value) use ($dom, $xp, $itemReq): void {
                 foreach ($xp->query('./ЗначениеРеквизита/Наименование', $itemReq) as $n) {
                     if (trim($n->nodeValue) === $name) { return; }
@@ -367,19 +363,19 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 $itemReq->appendChild($zr);
             };
 
-            // Определяем XML_ID товара/предложения
+     
             $idNode = $xp->query('./Ид', $itemNode)->item(0);
             $primaryXmlId = $idNode ? trim($idNode->nodeValue) : '';
             $offerXmlIdFromComposite = '';
             if ($primaryXmlId !== '' && strpos($primaryXmlId, '#') !== false) {
-                // В CML часто используется формат PROD_XML#OFFER_XML
+                
                 $parts = explode('#', $primaryXmlId, 2);
                 $offerXmlIdFromComposite = trim($parts[1] ?? '');
             }
 
-            // Возможные кандидаты XML_ID из значений реквизитов позиции (если присутствуют)
+            
             $candidates = [];
-            // приоритет: PRODUCT.XML_ID (элемент), затем Ид позиции, затем CATALOG.XML_ID
+           
             foreach ($xp->query('./ЗначенияРеквизитов/ЗначениеРеквизита', $itemNode) as $zr) {
                 $name = trim((string)$xp->query('./Наименование', $zr)->item(0)?->nodeValue);
                 $val  = trim((string)$xp->query('./Значение', $zr)->item(0)?->nodeValue);
@@ -400,13 +396,13 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             $symbolicCode = '';
             $symbolicSource = '';
 
-            // Простой кейс: если Ид имел вид PROD#OFFER, часто OFFER = символьный код (артикул). Используем напрямую.
+            
             if ($offerXmlIdFromComposite !== '') {
                 $symbolicCode = $offerXmlIdFromComposite;
                 $symbolicSource = 'from_composite_id_right_part';
             }
 
-            // Если не удалось — ищем элемент по XML_ID и берем его CODE
+            
             if ($symbolicCode === '') {
                 foreach ($tryOrder as $xmlIdCandidate) {
                     $res = \CIBlockElement::GetList([], ['=XML_ID' => $xmlIdCandidate], false, ['nTopCount' => 1], ['ID','IBLOCK_ID','CODE']);
@@ -418,7 +414,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 }
             }
 
-            // Если всё ещё пусто — попробуем точно так же искать по CODE (бывают выгрузки, где в Ид кладут CODE)
+            
             if ($symbolicCode === '') {
                 foreach ($tryOrder as $codeCandidate) {
                     $res = \CIBlockElement::GetList([], ['=CODE' => $codeCandidate], false, ['nTopCount' => 1], ['ID','IBLOCK_ID','CODE']);
@@ -430,7 +426,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 }
             }
 
-            // В новую схему добавляем отдельный тег Артикул
+           
             if ($symbolicCode !== '') {
                 // Запишем как отдельный тег
                 $artNode = $xp->query('./Артикул', $itemNode)->item(0);
@@ -439,7 +435,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 $artNode->appendChild($dom->createTextNode($symbolicCode));
             }
 
-            // Если в ЗначенияРеквизитов была НомерПозицииКорзины — поднимем в отдельный тег
+           
             $cartPos = '';
             foreach ($xp->query('./ЗначенияРеквизитов/ЗначениеРеквизита', $itemNode) as $zr) {
                 $n = trim((string)$xp->query('./Наименование', $zr)->item(0)?->nodeValue);
@@ -453,7 +449,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                 $numNode->appendChild($dom->createTextNode($cartPos));
             }
 
-            // GUID_1c — если сможем получить из XML_ID товара (UUID-образный), добавим
+            
             $guid = '';
             foreach ([$offerXmlIdFromComposite, $primaryXmlId] as $cand) {
                 if ($guid === '' && preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/', (string)$cand)) { $guid = (string)$cand; }
@@ -472,11 +468,11 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                     $n = trim((string)$xp->query('./Наименование', $zr)->item(0)?->nodeValue);
                     if (in_array($n, ['Артикул','НомерПозицииКорзины'], true)) { $itemReq->removeChild($zr); }
                 }
-                // Удалим контейнер, если он опустел
+               
                 if (!$xp->query('./ЗначениеРеквизита', $itemReq)->length) { $itemNode->removeChild($itemReq); }
             }
 
-            // Отладочный лог по позиции
+           
             Debug::writeToFile([
                 'ORDER_ID' => $orderId,
                 'ITEM_XML_ID_PRIMARY' => $primaryXmlId,
@@ -488,12 +484,12 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         }
     }
 
-    // Возвращаем валидный XML (с декларацией)
+  
     $content = $dom->saveXML();
     }
 }
 
-// Регистрируем обработчик и через D7 EventManager, и через старый AddEventHandler
+
 EventManager::getInstance()->addEventHandler('main', 'OnEndBufferContent', 'kipasoOnEndBufferContent', false, 1);
 if (function_exists('AddEventHandler')) {
     AddEventHandler('main', 'OnEndBufferContent', 'kipasoOnEndBufferContent', 1);
@@ -505,14 +501,37 @@ if (function_exists('AddEventHandler')) {
 try {
     $reqUri = $_SERVER['REQUEST_URI'] ?? '';
     if (strpos($reqUri, '/personal/cart/order/') === 0) {
-        // Конфигурация точных селекторов для автозаполнения
+      
         Asset::getInstance()->addString('<script>window.EGRUL_AUTOFILL_CONFIG = {
             debug: false,
-            innSelector:    "#soa-property-10, input[name=\\"ORDER_PROP_10\\"]",
-            companyNameSelector: "#soa-property-8, input[name=\\"ORDER_PROP_8\\"]",
-            legalAddressSelector: "#soa-property-9, textarea[name=\\"ORDER_PROP_9\\"]",
-            kppSelector:    "#soa-property-11, input[name=\\"ORDER_PROP_11\\"]",
-            contactPersonSelector: "#soa-property-12, input[name=\\"ORDER_PROP_12\\"]",
+            innSelector:    "#soa-property-10, input[name=\"ORDER_PROP_10\"]",
+            companyNameSelector: "#soa-property-8, input[name=\"ORDER_PROP_8\"]",
+            legalAddressSelector: "#soa-property-9, textarea[name=\"ORDER_PROP_9\"]",
+            kppSelector:    "#soa-property-11, input[name=\"ORDER_PROP_11\"]",
+            contactPersonSelector: "#soa-property-12, input[name=\"ORDER_PROP_12\"]",
+            postalCodeSelector: "input[name=\"ORDER_PROP_16\"], input[name*=\"INDEX\" i], input[name*=\"ZIP\" i]",
+            endpoint: "/local/ajax/egrul_lookup.php",
+            debounceMs: 500
+        };</script>');
+        Asset::getInstance()->addJs('/local/scripts/EGRUL-INN/egrul-autofill.js');
+    }
+    // Подключение на странице редактирования профиля юр. лица
+    if (strpos($reqUri, '/personal/profile/') === 0) {
+        // Фиксируем точные селекторы для полей профиля ЮЛ (есть дублирующиеся ID, поэтому приоритет по name)
+        Asset::getInstance()->addString('<script>window.EGRUL_AUTOFILL_CONFIG = {
+            debug: false,
+            // ИНН
+            innSelector: "input[name=\"ORDER_PROP_10\"], #sppd-property-2",
+            // Название компании
+            companyNameSelector: "input[name=\"ORDER_PROP_8\"], #sppd-property-0",
+            // Юридический адрес (textarea)
+            legalAddressSelector: "textarea[name=\"ORDER_PROP_9\"], #sppd-property-1",
+            // КПП
+            kppSelector: "input[name=\"ORDER_PROP_11\"], #sppd-property-3",
+            // Контактное лицо (ID дублируется, используем name)
+            contactPersonSelector: "input[name=\"ORDER_PROP_12\"]",
+            // Индекс
+            postalCodeSelector: "input[name=\"ORDER_PROP_16\"]",
             endpoint: "/local/ajax/egrul_lookup.php",
             debounceMs: 500
         };</script>');
@@ -522,9 +541,9 @@ try {
     // silent
 }
 
-// ============================================================================
+
 // ОБРАБОТКА АДРЕСА СДЭК ПРИ ОФОРМЛЕНИИ ЗАКАЗА
-// ============================================================================
+
 
 /**
  * Парсит адрес пункта выдачи СДЭК на составные части
@@ -545,52 +564,51 @@ if (!function_exists('parseCdekAddress')) {
             'CODE' => ''
         ];
         
-        // Удаляем код пункта выдачи (#SVRN129)
+       
         if (preg_match('/#([A-Z0-9]+)$/u', $fullAddress, $matches)) {
             $result['CODE'] = $matches[1];
             $fullAddress = trim(preg_replace('/#[A-Z0-9]+$/u', '', $fullAddress));
         }
         
-        // Разбираем адрес по запятым
+    
         $parts = array_map('trim', explode(',', $fullAddress));
         
         if (count($parts) >= 1) {
-            // Первая часть - город (убираем префиксы "г.", "город")
+            
             $result['CITY'] = preg_replace('/^(г\.?|город)\s*/ui', '', $parts[0]);
         }
         
         if (count($parts) >= 2) {
-            // Вторая часть - улица (убираем префиксы "ул.", "улица", "пр.", "проспект")
+           
             $result['STREET'] = preg_replace('/^(ул\.?|улица|пр\.?|проспект|пер\.?|переулок)\s*/ui', '', $parts[1]);
         }
         
         if (count($parts) >= 3) {
-            // Третья часть - может содержать дом, корпус, строение
+            
             $addressPart = $parts[2];
             
-            // Извлекаем номер дома
-            // Поддержка дробных номеров: 58/20, 10-2, 7А/1, 15Б-2 и т.п.
+            
             if (preg_match('/(?:^|\bд\.?\s*|\bдом\s*)(\d+[\da-zA-Zа-яА-Я]*?(?:[\/\.\-]\d+[\da-zA-Zа-яА-Я]*)*)/ui', $addressPart, $matches)) {
                 $result['HOUSE'] = $matches[1];
             }
             
-            // Извлекаем корпус
+            
             if (preg_match('/(?:к\.?|корп\.?|корпус)\s*(\d+[а-яА-Яa-zA-Z]*)/ui', $addressPart, $matches)) {
                 $result['KORPUS'] = $matches[1];
             }
             
-            // Извлекаем строение
+            
             if (preg_match('/(?:с\.?|стр\.?|строение)\s*(\d+[а-яА-Яa-zA-Z]*)/ui', $addressPart, $matches)) {
                 $result['BUILDING'] = $matches[1];
             }
             
-            // Извлекаем офис/квартиру
+            
             if (preg_match('/(?:оф\.?|офис|кв\.?|квартира)\s*(\d+[а-яА-Яa-zA-Z]*)/ui', $addressPart, $matches)) {
                 $result['OFFICE'] = $matches[1];
             }
         }
         
-        // Обработка дополнительных частей адреса (если разделены запятыми)
+        
         if (count($parts) > 3) {
             for ($i = 3; $i < count($parts); $i++) {
                 $part = $parts[$i];
@@ -633,7 +651,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 return;
             }
             
-            // Получаем свойство с полным адресом доставки
+       
             $addressProperty = null;
             $allProps = [];
             
@@ -642,19 +660,19 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 $name = (string)$property->getField('NAME');
                 $value = trim((string)$property->getValue());
                 
-                // Собираем все свойства для логирования
+             
                 $allProps[] = [
                     'CODE' => $code,
                     'NAME' => $name,
-                    'VALUE' => mb_substr($value, 0, 100) // Ограничиваем для лога
+                    'VALUE' => mb_substr($value, 0, 100) 
                 ];
                 
-                // Ищем свойство "Адрес доставки"
+               
                 if (in_array(mb_strtoupper($code), ['ADDRESS', 'DELIVERY_ADDRESS', 'АДРЕС_ДОСТАВКИ', 'LOCATION', 'COMPANY_ADR'], true) ||
                     mb_stripos($name, 'Адрес доставки') !== false ||
                     (mb_stripos($name, 'адрес') !== false && mb_stripos($name, 'юридический') === false)) {
                     
-                    // Проверяем, содержит ли значение код СДЭК
+                    
                     if (!empty($value) && preg_match('/#[A-Z0-9]+$/u', $value)) {
                         $addressProperty = $property;
                         break;
@@ -673,9 +691,9 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
             
             $fullAddress = trim((string)$addressProperty->getValue());
             
-            // Проверяем, что это адрес СДЭК (содержит код пункта #XXX)
+            
             if (empty($fullAddress) || !preg_match('/#[A-Z0-9]+$/u', $fullAddress)) {
-                // Это не адрес СДЭК, пропускаем
+               
                 \Bitrix\Main\Diag\Debug::writeToFile([
                     'ORDER_ID' => method_exists($order, 'getId') ? $order->getId() : 'new',
                     'ERROR' => 'Address does not contain CDEK code',
@@ -684,7 +702,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 return;
             }
             
-            // Парсим адрес
+            
             $parsed = parseCdekAddress($fullAddress);
             
             // Вспомогательная функция для поиска свойства по кодам
@@ -696,7 +714,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                         return $p;
                     }
                 }
-                // Если по коду не найдено, ищем по названию
+                
                 foreach ($propertyCollection as $p) {
                     $name = (string)$p->getField('NAME');
                     if ($name !== '' && in_array(mb_strtoupper($name), $upper, true)) {
@@ -708,7 +726,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
             
             $updated = false;
             
-            // Заполняем город
+            
             if ($parsed['CITY'] && ($cityProp = $getPropByCodes(PROP_CODES_CITY))) {
                 $currentValue = trim((string)$cityProp->getValue());
                 if (empty($currentValue) || $currentValue === $fullAddress) {
@@ -717,7 +735,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Заполняем улицу
+      
             if ($parsed['STREET'] && ($streetProp = $getPropByCodes(PROP_CODES_STREET))) {
                 $currentValue = trim((string)$streetProp->getValue());
                 if (empty($currentValue) || $currentValue === $fullAddress) {
@@ -726,7 +744,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Заполняем дом
+           
             if ($parsed['HOUSE'] && ($houseProp = $getPropByCodes(PROP_CODES_HOUSE))) {
                 $currentValue = trim((string)$houseProp->getValue());
                 if (empty($currentValue) || $currentValue === $fullAddress) {
@@ -735,7 +753,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Заполняем корпус
+           
             if ($parsed['KORPUS'] && ($korpusProp = $getPropByCodes(PROP_CODES_KORPUS))) {
                 $currentValue = trim((string)$korpusProp->getValue());
                 if (empty($currentValue)) {
@@ -744,7 +762,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Заполняем строение
+          
             if ($parsed['BUILDING'] && ($buildingProp = $getPropByCodes(PROP_CODES_BUILDING))) {
                 $currentValue = trim((string)$buildingProp->getValue());
                 if (empty($currentValue)) {
@@ -753,7 +771,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Заполняем офис/квартиру
+            
             if ($parsed['OFFICE'] && ($officeProp = $getPropByCodes(PROP_CODES_OFFICE))) {
                 $currentValue = trim((string)$officeProp->getValue());
                 if (empty($currentValue)) {
@@ -762,9 +780,9 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 }
             }
             
-            // Не нужно сохранять заказ - он еще не создан, изменения будут применены автоматически
             
-            // Лог для отладки
+            
+           
             \Bitrix\Main\Diag\Debug::writeToFile([
                 'ORDER_ID' => method_exists($order, 'getId') ? $order->getId() : 'new',
                 'FULL_ADDRESS' => $fullAddress,
@@ -774,7 +792,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
             ], 'CDEK_ADDRESS_PARSER', $_SERVER['DOCUMENT_ROOT'].'/upload/cdek_parser.log');
             
         } catch (\Throwable $e) {
-            // Логируем ошибки, но не прерываем выполнение
+           
             \Bitrix\Main\Diag\Debug::writeToFile([
                 'ERROR' => $e->getMessage(),
                 'FILE' => $e->getFile(),
@@ -785,7 +803,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
     }
 }
 
-// Регистрируем обработчик события обработки заказа (срабатывает ДО сохранения)
+
 EventManager::getInstance()->addEventHandler(
     'sale',
     'OnSaleComponentOrderOneStepProcess',

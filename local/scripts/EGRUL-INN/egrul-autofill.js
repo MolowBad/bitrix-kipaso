@@ -47,6 +47,13 @@
       'input[name^="ORDER_PROP_" i][data-name*="Контактное лицо" i]',
       'input[placeholder*="Контактное лицо" i]'
     ].join(', ').trim(),
+    // Индекс (почтовый)
+    postalCodeSelector: [
+      'input[name*="ZIP" i]',
+      'input[name*="INDEX" i]',
+      'input[name^="ORDER_PROP_" i][placeholder*="Индекс" i]',
+      'input[name^="ORDER_PROP_" i][data-name*="Индекс" i]'
+    ].join(', ').trim(),
 
     // URL AJAX-эндпоинта
     endpoint: '/local/ajax/egrul_lookup.php',
@@ -162,6 +169,8 @@
     if (!fillValue(CFG.contactPersonSelector, d.contact_person || '')){
       var el4 = findByLabelText(['Контактное лицо','ФИО']); if (el4){ el4.value = d.contact_person||''; el4.dispatchEvent(new Event('input',{bubbles:true})); }
     }
+    // Индекс
+    if (d.postal_code) { fillValue(CFG.postalCodeSelector, d.postal_code); }
   }
 
   function onInnChanged(value){
@@ -209,7 +218,8 @@
       companyName: $(CFG.companyNameSelector) || findByLabelText(['Название','Наименование']),
       legalAddress: $(CFG.legalAddressSelector) || findByLabelText(['Юридический адрес','Адрес регистрации']),
       kpp: $(CFG.kppSelector) || findByLabelText(['КПП']),
-      contactPerson: $(CFG.contactPersonSelector) || findByLabelText(['Контактное лицо','ФИО'])
+      contactPerson: $(CFG.contactPersonSelector) || findByLabelText(['Контактное лицо','ФИО']),
+      postalCode: $(CFG.postalCodeSelector) || findByLabelText(['Индекс','Почтовый индекс'])
     });
 
     // На страницах Bitrix order форма может перерисовываться. Следим за DOM и перепривязываем при необходимости.
