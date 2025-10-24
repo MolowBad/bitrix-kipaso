@@ -537,6 +537,32 @@ try {
         };</script>');
         Asset::getInstance()->addJs('/local/scripts/EGRUL-INN/egrul-autofill.js');
     }
+    // Подсказки адресов DaData на странице оформления заказа
+    if (strpos($reqUri, '/personal/cart/order/') === 0) {
+        Asset::getInstance()->addString('<script>window.ADDRESS_SUGGEST_CONFIG = {
+            debug: false,
+            endpoint: "/local/ajax/dadata_address.php",
+            // Селекторы по умолчанию покрывают большинство шаблонов Bitrix, при необходимости можно уточнить
+            citySelector: "#soa-property-17, input[name=\\"ORDER_PROP_17\\"]",
+            streetSelector: "#soa-property-31, input[name=\\"ORDER_PROP_31\\"]",
+            houseSelector: "#soa-property-32, input[name=\\"ORDER_PROP_32\\"]",
+            count: 10,
+            language: "ru",
+            debounceMs: 250
+        };</script>');
+        Asset::getInstance()->addJs('/local/scripts/DADATA-ADDRESS/address-suggest.js');
+    }
+    // Подсказки адресов DaData на странице профиля
+    if (strpos($reqUri, '/personal/profile/') === 0) {
+        Asset::getInstance()->addString('<script>window.ADDRESS_SUGGEST_CONFIG = {
+            debug: false,
+            endpoint: "/local/ajax/dadata_address.php",
+            count: 10,
+            language: "ru",
+            debounceMs: 250
+        };</script>');
+        Asset::getInstance()->addJs('/local/scripts/DADATA-ADDRESS/address-suggest.js');
+    }
 } catch (\Throwable $e) {
     // silent
 }
