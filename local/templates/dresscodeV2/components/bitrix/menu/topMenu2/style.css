@@ -1,0 +1,23 @@
+#subMenu {
+	margin: 0;
+	padding: 0;
+	visibility: hidden;
+}
+
+#subMenu ul {
+	margin: 0;
+	padding: 0;
+}
+
+#subMenu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#subMenu li a {
+	display: inline-block;
+	padding: 0 36px;
+	text-decoration: none;
+}

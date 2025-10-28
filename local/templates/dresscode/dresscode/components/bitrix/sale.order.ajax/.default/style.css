@@ -2660,11 +2660,13 @@ label[data-bx-user-consent] input {
 }
 
 #bx-soa-order {
-	display: grid;
-	grid-template-columns: 1fr 345px;
-	gap: 24px;
-	padding-right: 20px;
-	margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: 1fr 345px;
+    gap: 24px;
+    padding-right: 20px;
+    margin-bottom: 18px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .bx-soa .bx-soa-customer-label,

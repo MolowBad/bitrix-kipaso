@@ -130,7 +130,15 @@
   function bindCity(input){
     if (!input) return;
     var dd = createDropdown(input);
+    let justPicked = false;//переменная для прекращения посторного появдения блока
+      
     var handler = debounce(function(){
+      //тут я добавилл проверку ,был баг когда после выбора адреса выпадающий список продолжал появляться
+        if (justPicked === true){
+        justPicked = false;
+        hideDropdown(dd);
+        return;
+      }//
       var q = (input.value||'').trim();
       if (q.length < 2){ hideDropdown(dd); return; }
       fetchJSON(CFG.endpoint, {
@@ -142,6 +150,7 @@
       }).then(function(res){
         var items = (res && res.suggestions) ? res.suggestions : [];
         renderItems(dd, items, function(s){
+          justPicked = true;
           input.value = s.data.city_with_type || s.value || '';
           input.dispatchEvent(new Event('input',{bubbles:true}));
           input.dispatchEvent(new Event('change',{bubbles:true}));
@@ -150,14 +159,21 @@
       }).catch(function(){ hideDropdown(dd); });
     }, CFG.debounceMs);
     input.addEventListener('input', handler);
-    input.addEventListener('focus', handler);
+    //input.addEventListener('focus', handler);
     document.addEventListener('click', function(e){ if (!dd.contains(e.target) && e.target!==input) hideDropdown(dd); });
   }
 
   function bindStreet(input, cityInput){
     if (!input) return;
     var dd = createDropdown(input);
+    let justPicked = false;//переменная для прекращения посторного появдения блока
     var handler = debounce(function(){
+      //тут я добавилл проверку ,был баг когда после выбора адреса выпадающий список продолжал появляться
+        if (justPicked === true){
+        justPicked = false;
+        hideDropdown(dd);
+        return;
+      }//
       var q = (input.value||'').trim();
       if (q.length < 2){ hideDropdown(dd); return; }
       var locations = [];
@@ -177,6 +193,7 @@
       }).then(function(res){
         var items = (res && res.suggestions) ? res.suggestions : [];
         renderItems(dd, items, function(s){
+          justPicked = true;
           input.value = s.data.street_with_type || s.value || '';
           input.dispatchEvent(new Event('input',{bubbles:true}));
           input.dispatchEvent(new Event('change',{bubbles:true}));
@@ -192,7 +209,14 @@
   function bindHouse(input, cityInput, streetInput){
     if (!input) return;
     var dd = createDropdown(input);
+    let justPicked = false;//переменная для прекращения посторного появдения блока
     var handler = debounce(function(){
+      //тут я добавилл проверку ,был баг когда после выбора адреса выпадающий список продолжал появляться
+        if (justPicked === true){
+        justPicked = false;
+        hideDropdown(dd);
+        return;
+      }//
       var q = (input.value||'').trim();
       if (q.length < 1){ hideDropdown(dd); return; }
       var locations = [];
@@ -217,6 +241,7 @@
       fetchJSON(CFG.endpoint, payload).then(function(res){
         var items = (res && res.suggestions) ? res.suggestions : [];
         renderItems(dd, items, function(s){
+          justPicked = true;
           input.value = s.data.house || s.value || '';
           input.dispatchEvent(new Event('input',{bubbles:true}));
           input.dispatchEvent(new Event('change',{bubbles:true}));

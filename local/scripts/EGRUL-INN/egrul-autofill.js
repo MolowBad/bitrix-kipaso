@@ -1,8 +1,6 @@
 /*
   /local/js/egrul-autofill.js
   Автозаполнение реквизитов компании по ИНН на странице оформления заказа.
-
-  Настройка селекторов ниже. Можно переопределить через window.EGRUL_AUTOFILL_CONFIG до загрузки этого скрипта.
 */
 (function(){
   'use strict';
@@ -64,14 +62,14 @@
     // Минимальная длина ИНН для запроса (10 или 12)
     minInnLength: 10,
 
-    // Включить лог в консоль
+    // Включить лог в консоль ,это надо удалить после теста 
     debug: false,
   };
 
   var CFG = window.EGRUL_AUTOFILL_CONFIG ? Object.assign({}, DEFAULTS, window.EGRUL_AUTOFILL_CONFIG) : DEFAULTS;
 
   // Полностью отключаем вывод в консоль для безопасности
-  function log(){ /* no-op */ }
+  function log(){ try { if (CFG.debug && window.console && console.log) console.log.apply(console, arguments); } catch(e){} }
 
   function $(sel){ return document.querySelector(sel); }
   function $all(sel){ try { return Array.prototype.slice.call(document.querySelectorAll(sel)); } catch(e){ return []; } }
@@ -96,8 +94,6 @@
         el.value = v;
         el.dispatchEvent(new Event('input', {bubbles:true}));
         el.dispatchEvent(new Event('change', {bubbles:true}));
-        // некоторые темы реагируют на blur
-        try { el.blur(); setTimeout(function(){ el.focus(); }, 0); } catch(e){}
       }
     } else {
       if (el.textContent !== v) el.textContent = v;
@@ -113,13 +109,11 @@
       var t = (labels[i].textContent || '').trim();
       for (var j=0; j<texts.length; j++){
         if (t.toLowerCase().indexOf(String(texts[j]).toLowerCase()) !== -1){
-          // По for="id"
           var forId = labels[i].getAttribute('for');
           if (forId){
             var byId = document.getElementById(forId);
             if (byId && (byId.tagName === 'INPUT' || byId.tagName === 'TEXTAREA')) return byId;
           }
-          // По близости в DOM
           var candidate = labels[i].nextElementSibling;
           while (candidate){
             if (candidate.tagName === 'INPUT' || candidate.tagName === 'TEXTAREA') return candidate;
@@ -148,7 +142,6 @@
 
   function applyData(d){
     if (!d) return;
-    // Запомним последний результат для повторного применения
     LAST_DATA = {
       company_name: d.company_name || '',
       legal_address: d.legal_address || '',
@@ -175,15 +168,15 @@
 
   function onInnChanged(value){
     var inn = onlyDigits(value);
-    if (inn.length !== 10 && inn.length !== 12) { log('ИНН не полной длины, пропуск'); return; }
+    if (inn.length < (CFG.minInnLength || 0)) { log('ИНН короче порога, ожидание'); return; }
+    if (inn.length !== 10 && inn.length !== 12) { log('Длина ИНН не 10/12, ожидание'); return; }
     var url = buildUrl(CFG.endpoint, { inn: inn });
     log('Запрос', url);
     fetchJSON(url).then(function(res){
       if (!res || res.success !== true) throw new Error(res && res.error ? res.error : 'Unknown error');
       if (!res.data) { log('Нет результатов'); return; }
       applyData(res.data);
-      // Повторные применения через несколько интервалов — на случай перерисовок формы Bitrix
-      [200, 500, 1000, 1600].forEach(function(ms){ setTimeout(function(){ applyData(LAST_DATA); }, ms); });
+      setTimeout(function(){ applyData(LAST_DATA); }, 300);
     }).catch(function(e){ log('Ошибка', e && e.message ? e.message : e); });
   }
 
@@ -195,14 +188,12 @@
     try { if (BOUND_INN_EL && BOUND_INN_EL.__egrulHandler) {
       BOUND_INN_EL.removeEventListener('input', BOUND_INN_EL.__egrulHandler);
       BOUND_INN_EL.removeEventListener('change', BOUND_INN_EL.__egrulHandler);
-      BOUND_INN_EL.removeEventListener('blur', BOUND_INN_EL.__egrulHandler);
     } } catch(e){}
 
     var handler = debounce(function(){ onInnChanged(innInput.value); }, CFG.debounceMs);
     innInput.__egrulHandler = handler;
     innInput.addEventListener('input', handler);
     innInput.addEventListener('change', handler);
-    innInput.addEventListener('blur', handler);
     BOUND_INN_EL = innInput;
     log('Привязали обработчики к полю ИНН', innInput);
     if (innInput.value) handler();
@@ -210,10 +201,8 @@
   }
 
   function init(){
-    // первая попытка найти поле
     var found = bindInnField($(CFG.innSelector) || findByLabelText(['ИНН']));
 
-    // Диагностика: покажем, какие элементы будут заполняться
     log('Поля автозаполнения:', {
       companyName: $(CFG.companyNameSelector) || findByLabelText(['Название','Наименование']),
       legalAddress: $(CFG.legalAddressSelector) || findByLabelText(['Юридический адрес','Адрес регистрации']),
@@ -222,17 +211,12 @@
       postalCode: $(CFG.postalCodeSelector) || findByLabelText(['Индекс','Почтовый индекс'])
     });
 
-    // На страницах Bitrix order форма может перерисовываться. Следим за DOM и перепривязываем при необходимости.
     try {
       var mo = new MutationObserver(function(){
         var current = $(CFG.innSelector) || findByLabelText(['ИНН']);
         if (current && current !== BOUND_INN_EL) {
           bindInnField(current);
-          // При появлении новых полей попробуем повторно применить последние данные, если они есть
           if (LAST_DATA) { applyData(LAST_DATA); }
-        } else if (LAST_DATA) {
-          // Даже без смены input могли перерисоваться другие поля — обновим их при наличии данных
-          applyData(LAST_DATA);
         }
       });
       mo.observe(document.body, { childList: true, subtree: true });

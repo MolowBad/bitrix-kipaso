@@ -2,7 +2,7 @@
 // /local/ajax/dadata_address.php
 // Прокси к DaData Suggestions API: подсказки адресов
 
-header('Content-Type: application/json; charset=UTF-8');
+header('Content-Type: application/json; charset=UTF-8');// тут задается кодировка ,чтобы на фронте не было проблем
 header('X-Content-Type-Options: nosniff');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -39,7 +39,7 @@ try {
         'count' => $count,
     ];
 
-    // Прозрачно пробрасываем поддерживаемые параметры DaData Suggestions
+    // пробрасываем поддерживаемые параметры DaData Suggestions
     $passKeys = [
         'language', 'division', 'locations', 'locations_geo', 'locations_boost',
         'from_bound', 'to_bound', 'restrict_value', 'bounds', 'street_q'
