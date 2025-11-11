@@ -111,27 +111,28 @@
 						<a class="price"><?=GetMessage("REQUEST_PRICE_LABEL")?><s class="discount"></s></a>
 					<?endif;?>
 					<div class="addCartContainer">
+						<!--
 						<?if(!empty($arResult["PRICE"])):?>
 							<?if($arResult["CATALOG_AVAILABLE"] != "Y"):?>
 								<?//addCart button?>
 								<?if($arResult["CATALOG_SUBSCRIBE"] == "Y"):?>
-									<a href="#" class="addCart subscribe" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/subscribe.svg" alt="<?=GetMessage("SUBSCRIBE_LABEL")?>" class="icon"><?=GetMessage("SUBSCRIBE_LABEL")?></span></a>
+									<a href="#" class="addCart subscribe" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/subscribe.svg" alt="<?=GetMessage("SUBSCRIBE_LABEL")?>" class="icon"><?=
+GetMessage("SUBSCRIBE_LABEL")?></span></a>
 								<?else:?>
-									<a href="#" class="addCart disabled" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="<?=GetMessage("ADDCART_LABEL")?>" class="icon"><?=GetMessage("ADDCART_LABEL")?></span></a>
+									<a href="#" class="addCart disabled" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="<?=GetMessage("ADDCART_LABEL")?>" class="icon"><?=
+GetMessage("ADDCART_LABEL")?></span></a>
 								<?endif;?>
 							<?else:?>
-								<a href="#" class="addCart" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="<?=GetMessage("ADDCART_LABEL")?>" class="icon"><?=GetMessage("ADDCART_LABEL")?></span></a>
+								<a href="#" class="addCart" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="<?=GetMessage("ADDCART_LABEL")?>" class="icon"><?=
+GetMessage("ADDCART_LABEL")?></span></a>
 							<?endif;?>
 						<?else:?>
-							<a href="#" class="addCart disabled requestPrice" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/request.svg" alt="" class="icon"><?=GetMessage("REQUEST_PRICE_BUTTON_LABEL")?></span></a>
+							<a href="#" class="addCart disabled requestPrice" data-id="<?=$arResult["ID"]?>"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/request.svg" alt="" class="icon"><?=
+GetMessage("REQUEST_PRICE_BUTTON_LABEL")?></span></a>
 						<?endif;?>
-						<div class="quantityContainer">
-							<div class="quantityWrapper">
-								<a href="#" class="minus"></a><input type="text" class="quantity"<?if(!empty($arResult["PRICE"]["EXTENDED_PRICES"])):?> data-extended-price='<?=\Bitrix\Main\Web\Json::encode($arResult["PRICE"]["EXTENDED_PRICES"])?>'<?endif;?> value="<?=$arResult["EXTRA_SETTINGS"]["BASKET_STEP"]?>" data-step="<?=$arResult["EXTRA_SETTINGS"]["BASKET_STEP"]?>" data-max-quantity="<?=$arResult["CATALOG_QUANTITY"]?>" data-enable-trace="<?=(($arResult["CATALOG_QUANTITY_TRACE"] == "Y" && $arResult["CATALOG_CAN_BUY_ZERO"] == "N") ? "Y" : "N")?>"><a href="#" class="plus"></a>
-							</div>
-						</div>
+						-->
+						<a href="<?=$arResult["DETAIL_PAGE_URL"]?>" class="addCart" onclick="event.stopImmediatePropagation();"><span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="Подробнее" class="icon">Подробнее</span></a>
 					</div>
-					<a href="<?=$arResult["DETAIL_PAGE_URL"]?>" class="btn-simple add-cart"><?=GetMessage("SEE_ON_PAGE")?></a>
 		    	</div>
 		    </div>
 			<div class="optional">

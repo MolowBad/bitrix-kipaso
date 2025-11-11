@@ -503,6 +503,15 @@ else
 					<div class="bx-soa-section-content container-fluid"></div>
 				</div>
 
+				<!--	BUYER PROPS BLOCK	-->
+				<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
+					<div class="bx-soa-section-title-container">
+						<h2 class="bx-soa-section-title"><?=$arParams['MESS_BUYER_BLOCK_NAME']?></h2>
+						<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
+					</div>
+					<div class="bx-soa-section-content container-fluid"></div>
+				</div>
+
 				<? if ($arParams['DELIVERY_TO_PAYSYSTEM'] === 'p2d'): ?>
 					<!--	PAY SYSTEMS BLOCK	-->
 					<div id="bx-soa-paysystem" data-visited="false" class="bx-soa-section bx-active">
@@ -558,14 +567,6 @@ else
 						<div class="bx-soa-section-content container-fluid"></div>
 					</div>
 				<? endif ?>
-				<!--	BUYER PROPS BLOCK	-->
-				<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
-					<div class="bx-soa-section-title-container">
-						<h2 class="bx-soa-section-title"><?=$arParams['MESS_BUYER_BLOCK_NAME']?></h2>
-						<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
-					</div>
-					<div class="bx-soa-section-content container-fluid"></div>
-				</div>
 
 				<? if ($arParams['BASKET_POSITION'] === 'after'): ?>
 					<!--	BASKET ITEMS BLOCK	-->

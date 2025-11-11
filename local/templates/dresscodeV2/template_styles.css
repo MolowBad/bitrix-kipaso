@@ -4799,8 +4799,8 @@ strong {
 
 .product .addCartContainer.viewed span,
 .product .addCartContainer:hover span {
-	left: 0%;
-	transform: translate(24px, -50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .product .addCart.added span,
@@ -6660,7 +6660,7 @@ body.panels_white #homeCatalog #captionCarousel::before {
 
 	.product .addCartContainer.viewed span,
 	.product .addCartContainer:hover span {
-		transform: translate(18px, -50%);
+		transform: translate(-50%, -50%);
 	}
 
 	.product .addCart.added span,

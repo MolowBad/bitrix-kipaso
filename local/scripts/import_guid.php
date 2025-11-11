@@ -185,7 +185,9 @@ logMessage('info', 'map size=' . $size, $verbose, $logPath);
 $shown = 0;
 foreach ($map as $k => $v) {
     logMessage('info', 'SAMPLE ' . $k . ' => ' . $v, true, $logPath);
-    if (++$shown >= 5) { break; }
+    if (++$shown >= 5) { 
+        break; 
+    }
 }
 echo "Диагностика карты завершена. Запись в БД пока не выполняется.\n";
 exit(0);

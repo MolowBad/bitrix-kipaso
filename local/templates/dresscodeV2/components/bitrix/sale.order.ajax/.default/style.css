@@ -341,6 +341,7 @@ input[type="radio"] {
 
 #bx-soa-order * {
 	font-weight: 400 !important;
+	max-width: 900px;
 }
 
 .bx-soa-section {
