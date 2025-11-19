@@ -36,6 +36,7 @@ try {
 
         
         $modification = trim((string)$request->get('modification'));
+        $offerIdParam = (int)$request->get('offer_id');
         // Безопасность: игнорируем клиентскую modification_price, цену определяем на сервере
         $modPrice = null;
 
@@ -71,7 +72,7 @@ try {
             foreach ($ids as $sid) {
                 $pid = (int)$sid;
                 $qty = !empty($qtyMap[$pid]) ? (float)$qtyMap[$pid] : 1.0;
-                $itemId = addToBasket($basket, $pid, $qty, $currency, $modification, $modPrice);
+                $itemId = addToBasket($basket, $pid, $qty, $currency, $modification, $modPrice, $offerIdParam);
                 if ($itemId) { $added[] = $itemId; }
                 $lastProductId = $pid; 
             }
@@ -79,7 +80,7 @@ try {
             $pid = (int)$idsRaw;
             $qty = $qRaw !== null ? (float)$qRaw : 1.0;
             if ($qty <= 0) { $qty = 1.0; }
-            $itemId = addToBasket($basket, $pid, $qty, $currency, $modification, $modPrice);
+            $itemId = addToBasket($basket, $pid, $qty, $currency, $modification, $modPrice, $offerIdParam);
             if ($itemId) { $added[] = $itemId; }
             $lastProductId = $pid;
         }
@@ -121,13 +122,17 @@ try {
         }
 
         
+        // Для корректного отображения остатков и статуса наличия
+        // передаём в окно корзины именно ID оффера, если он был передан в запросе.
+        $windowProductId = ($offerIdParam > 0 ? (int)$offerIdParam : (int)$lastProductId);
+
         ob_start();
         $APPLICATION->IncludeComponent(
             "dresscode:sale.basket.window",
             ".default",
             [
                 "SITE_ID" => $siteId,
-                "PRODUCT_ID" => (int)$lastProductId,
+                "PRODUCT_ID" => $windowProductId,
             ],
             false
         );
@@ -351,18 +356,19 @@ die();
  * Add product to basket, optionally with custom modification price and properties.
  *
  * @param \Bitrix\Sale\Basket $basket
- * @param int $productId
+ * @param int $productId  ID базового товара (для обратной совместимости)
  * @param float $quantity
  * @param string $currency
  * @param string $modification
  * @param float|null $modPrice
+ * @param int|null $offerId ID торгового предложения, если модификация должна добавляться как оффер
  * @return int|false New or updated basket item ID on success
  */
-function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantity, string $currency, string $modification = '', ?float $modPrice = null)
+function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantity, string $currency, string $modification = '', ?float $modPrice = null, ?int $offerId = null)
 {
     // DEBUG: Логируем входные данные
     $logFile = $_SERVER['DOCUMENT_ROOT'] . '/upload/basket_debug.log';
-    $logData = date('Y-m-d H:i:s') . " - Добавление товара ID: $productId, Кол-во: $quantity, Модификация: $modification, Цена модификации: $modPrice\n";
+    $logData = date('Y-m-d H:i:s') . " - Добавление товара ID: $productId, OfferID: $offerId, Кол-во: $quantity, Модификация: $modification, Цена модификации: $modPrice\n";
     file_put_contents($logFile, $logData, FILE_APPEND);
 
     if ($productId <= 0) { return false; }
@@ -400,15 +406,22 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
     }
     if ($productKey === '') { $productKey = (string)$productId; }
 
+    // Если передан offerId, используем его как реальный PRODUCT_ID позиции корзины
+    $basketProductId = ($offerId && $offerId > 0) ? (int)$offerId : $productId;
+
+    // Цена модификации, рассчитанная по данным из БД Bitrix через XML/izd_code.
+    // Выполняем эту логику только когда offerId НЕ передан (обратная совместимость со старым калькулятором).
     $serverModPrice = null;
-    if ($normalizedMod !== '') {
+    if ($normalizedMod !== '' && (!$offerId || $offerId <= 0)) {
         $xmlFilePath = $_SERVER['DOCUMENT_ROOT'] . '/catalogOven.xml';
+        $izdCode = null;
+
+        // 1. Находим izd_code по коду товара (productKey) и названию модификации
         if (is_file($xmlFilePath) && is_readable($xmlFilePath)) {
             try {
                 $reader = new \XMLReader();
                 if ($reader->open($xmlFilePath)) {
-                    $foundProduct = false; $inPrices = false; $priceFound = null;
-                    $productKeyLower = mb_strtolower($productKey);
+                    $foundProduct = false; $inPrices = false; $productKeyLower = mb_strtolower($productKey);
                     while ($reader->read()) {
                         if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'id' && !$foundProduct) {
                             $idVal = $reader->readString();
@@ -420,22 +433,58 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
                             $xmlName1 = $normalize((string)$priceXml->name);
                             $xmlName2 = $normalize((string)$priceXml->n);
                             if ($xmlName1 === $normalizedMod || $xmlName2 === $normalizedMod) {
-                                $priceFound = (float)$priceXml->price;
+                                $izdCode = (string)$priceXml->izd_code;
                                 break;
                             }
                         }
                         if ($foundProduct && $inPrices && $reader->nodeType === \XMLReader::END_ELEMENT && $reader->name === 'prices') { break; }
                     }
                     $reader->close();
-                    if ($priceFound !== null) { $serverModPrice = (float)$priceFound; }
                 }
-            } catch (\Throwable $e) { /* ignore */ }
+            } catch (\Throwable $e) { /* ignore XML errors here */ }
+        }
+
+        // 2. Если нашли izd_code, ищем торговое предложение и цену в БД Bitrix
+        if (!empty($izdCode)
+            && \Bitrix\Main\Loader::includeModule('iblock')
+            && \Bitrix\Main\Loader::includeModule('catalog')
+        ) {
+            $xmlOfferId = null;
+            $offerRes = \CIBlockElement::GetList(
+                [],
+                [
+                    '=CODE' => $izdCode,
+                    'IBLOCK_ID' => 17, // инфоблок торговых предложений
+                ],
+                false,
+                ['nTopCount' => 1],
+                ['ID', 'IBLOCK_ID', 'NAME']
+            );
+            if ($offerRow = $offerRes->Fetch()) {
+                $xmlOfferId = (int)$offerRow['ID'];
+            }
+
+            if ($xmlOfferId > 0) {
+                global $USER;
+                $priceData = \CCatalogProduct::GetOptimalPrice(
+                    $xmlOfferId,
+                    $quantity,
+                    is_object($USER) ? $USER->GetUserGroupArray() : [2],
+                    'N',
+                    [],
+                    $basket->getSiteId()
+                );
+                if (is_array($priceData) && !empty($priceData['RESULT_PRICE'])) {
+                    $resPrice = $priceData['RESULT_PRICE'];
+                    $serverModPrice = (float)$resPrice['DISCOUNT_PRICE'];
+                }
+            }
         }
     }
 
     $existing = null;
     foreach ($basket->getBasketItems() as $bi) {
-        if ((int)$bi->getProductId() === $productId) {
+        if ((int)$bi->getProductId() === $basketProductId) {
             // Сравниваем строго по модификации и цене модификации
             $props = $bi->getPropertyCollection()->getPropertyValues();
             $biMod = isset($props['MODIFICATION']['VALUE']) ? (string)$props['MODIFICATION']['VALUE'] : '';
@@ -458,13 +507,13 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
     if ($existing) {
         $existing->setField('QUANTITY', (float)$existing->getQuantity() + $quantity);
         
-        return (int)($existing->getId() ?: $productId);
+        return (int)($existing->getId() ?: $basketProductId);
     }
 
-    $item = $basket->createItem('catalog', $productId);
+    $item = $basket->createItem('catalog', $basketProductId);
 
     // Получим базовые поля товара для корректного заполнения названия
-    $baseFields = getProductBaseFields($productId);
+    $baseFields = getProductBaseFields($basketProductId);
     $productName = '';
     if (!empty($baseFields['NAME'])) {
         $productName = (string)$baseFields['NAME'];
@@ -480,7 +529,7 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
         'LID' => $basket->getSiteId(),
         // Важно: явно задаём провайдера каталога и название позиции
         'PRODUCT_PROVIDER_CLASS' => '\\Bitrix\\Catalog\\Product\\CatalogProvider',
-        'NAME' => ($productName !== '' ? $productName : 'Товар #' . (int)$productId),
+        'NAME' => ($productName !== '' ? $productName : 'Товар #' . (int)$basketProductId),
     ];
 
     // serverModPrice уже рассчитан выше
@@ -493,7 +542,7 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
         // Фоллбек на обычную ценовую логику Bitrix
         if (\Bitrix\Main\Loader::includeModule('catalog')) {
             global $USER;
-            $optimal = \CCatalogProduct::GetOptimalPrice($productId, $quantity, is_object($USER) ? $USER->GetUserGroupArray() : [2], 'N', [], $basket->getSiteId());
+            $optimal = \CCatalogProduct::GetOptimalPrice($basketProductId, $quantity, is_object($USER) ? $USER->GetUserGroupArray() : [2], 'N', [], $basket->getSiteId());
             if (is_array($optimal) && !empty($optimal['RESULT_PRICE'])) {
                 $fields['PRICE'] = (float)$optimal['RESULT_PRICE']['DISCOUNT_PRICE'];
                 $fields['BASE_PRICE'] = (float)$optimal['RESULT_PRICE']['BASE_PRICE'];
@@ -558,7 +607,7 @@ function addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantit
     }
 
     
-    return (int)($item->getId() ?: $productId);
+    return (int)($item->getId() ?: $basketProductId);
 }
 
 /**

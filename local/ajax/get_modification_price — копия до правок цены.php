@@ -58,42 +58,50 @@ $result = [
     'modification_name' => $modificationNameNormalized,
     'product_id' => $productId
 ];
- 
-// 1. Ищем izd_code в XML по коду модификации
-$izdCode = null;
 
+// Пытаемся найти товар и его цену (использование SimpleXML)
 try {
+    // Создаем объект для чтения XML по частям (для больших файлов)
     $reader = new XMLReader();
     $reader->open($xmlFilePath);
 
+    // Флаг для определения, нашли ли мы нужный товар
     $foundProduct = false;
     $inPricesSection = false;
 
+    // Перебираем XML
     while ($reader->read()) {
-        if ($reader->nodeType === XMLReader::ELEMENT && $reader->name === 'id' && !$foundProduct) {
+        // Если нашли начало элемента id, проверяем его значение
+        if ($reader->nodeType == XMLReader::ELEMENT && $reader->name == 'id' && !$foundProduct) {
             $id = $reader->readString();
             if ($id == $productId) {
                 $foundProduct = true;
             }
         }
 
-        if ($foundProduct && $reader->nodeType === XMLReader::ELEMENT && $reader->name === 'prices') {
+        // Если нашли товар и входим в секцию prices
+        if ($foundProduct && $reader->nodeType == XMLReader::ELEMENT && $reader->name == 'prices') {
             $inPricesSection = true;
         }
 
-        if ($foundProduct && $inPricesSection && $reader->nodeType === XMLReader::ELEMENT && $reader->name === 'price') {
+        // Если нашли товар и мы в секции prices, ищем нужную модификацию
+        if ($foundProduct && $inPricesSection && $reader->nodeType == XMLReader::ELEMENT && $reader->name == 'price') {
+            // Извлекаем элемент price как SimpleXML для удобства работы
             $priceXml = simplexml_load_string($reader->readOuterXml());
-
+            
+            // Проверяем название модификации (поддержка тегов <name> и <n>) с учётом нормализации
             $xmlName1 = normalizeName((string)$priceXml->name);
             $xmlName2 = normalizeName((string)$priceXml->n);
-
             if ($xmlName1 === $modificationNameNormalized || $xmlName2 === $modificationNameNormalized) {
-                $izdCode = (string)$priceXml->izd_code;
-                break;
+                $result['success'] = true;
+                $result['price'] = (float)$priceXml->price;
+                $result['izd_code'] = (string)$priceXml->izd_code;
+                break; // Нашли нужную цену, выходим из цикла
             }
         }
 
-        if ($foundProduct && $inPricesSection && $reader->nodeType === XMLReader::END_ELEMENT && $reader->name === 'prices') {
+        // Если вышли из секции prices, значит нужной модификации нет
+        if ($foundProduct && $inPricesSection && $reader->nodeType == XMLReader::END_ELEMENT && $reader->name == 'prices') {
             break;
         }
     }
@@ -101,78 +109,7 @@ try {
     $reader->close();
 } catch (Exception $e) {
     $result['error'] = 'Ошибка при обработке XML: ' . $e->getMessage();
-    echo json_encode($result);
-    exit;
 }
-
-// Если не нашли izd_code — модификация в XML не найдена
-if ($izdCode === null || $izdCode === '') {
-    echo json_encode($result);
-    exit;
-}
-
-// 2. Ищем торговое предложение по CODE = izd_code
-$offerId = null;
-
-if (\Bitrix\Main\Loader::includeModule('iblock')) {
-    $offerRes = \CIBlockElement::GetList(
-        [],
-        [
-            '=CODE' => $izdCode,
-            'IBLOCK_ID' => 17,
-        ],
-        false,
-        ['nTopCount' => 1],
-        ['ID', 'IBLOCK_ID', 'NAME']
-    );
-    if ($offerRow = $offerRes->Fetch()) {
-        $offerId = (int)$offerRow['ID'];
-    }
-}
-
-if (!$offerId) {
-    $result['error'] = 'Торговое предложение для модификации не найдено';
-    $result['izd_code'] = $izdCode;
-    echo json_encode($result);
-    exit;
-}
-
-// 3. Получаем цену/валюту/НДС из каталога Bitrix
-if (!\Bitrix\Main\Loader::includeModule('catalog')) {
-    $result['error'] = 'Модуль catalog не загружен';
-    echo json_encode($result);
-    exit;
-}
-
-global $USER;
-
-$priceData = \CCatalogProduct::GetOptimalPrice(
-    $offerId,
-    1,
-    is_object($USER) ? $USER->GetUserGroupArray() : [2],
-    'N'
-);
-
-if (!$priceData || empty($priceData['RESULT_PRICE'])) {
-    $result['error'] = 'Цена не найдена';
-    $result['izd_code'] = $izdCode;
-    $result['offer_id'] = $offerId;
-    echo json_encode($result);
-    exit;
-}
-
-$resPrice = $priceData['RESULT_PRICE'];
-
-// Заполняем результат данными из БД
-$result['success'] = true;
-$result['price'] = (float)$resPrice['DISCOUNT_PRICE'];
-$result['base_price'] = (float)$resPrice['BASE_PRICE'];
-$result['currency'] = (string)$resPrice['CURRENCY'];
-$result['izd_code'] = $izdCode;
-$result['offer_id'] = $offerId;
-
-$result['vat_rate'] = isset($resPrice['VAT_RATE']) ? (float)$resPrice['VAT_RATE'] : null;
-$result['vat_included'] = isset($resPrice['VAT_INCLUDED']) ? $resPrice['VAT_INCLUDED'] : null;
 
 // Возвращаем результат
 echo json_encode($result);

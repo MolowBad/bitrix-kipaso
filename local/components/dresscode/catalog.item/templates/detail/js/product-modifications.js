@@ -502,16 +502,23 @@ class ProductModifications {
                     // Если цена успешно загружена, показываем кнопку "Купить"
                     if (priceData && priceData.success && buyBlock && modificationAddCartBtn) {
                         // Устанавливаем данные для кнопки
-                        // Получаем идентификатор товара из скрытого поля (ID из БД)
+                        // productId - ID базового товара (как раньше)
                         const productId = document.querySelector('input[name="product_id"]')?.value || window.productId || '';
+                        // offerId - ID торгового предложения из ответа PHP
+                        const offerId = priceData.offer_id || priceData.offerId || '';
+
                         modificationAddCartBtn.dataset.id = productId;
                         modificationAddCartBtn.dataset.sku = this.productSku;
                         modificationAddCartBtn.dataset.modification = modificationCode;
                         modificationAddCartBtn.dataset.price = priceData.price;
                         modificationAddCartBtn.dataset.quantity = 1;
-                        
+                        if (offerId) {
+                            modificationAddCartBtn.dataset.offerId = offerId;
+                        }
+
                         console.log('Установлены данные для кнопки:', {
                             id: productId,
+                            offerId: offerId,
                             sku: this.productSku,
                             modification: modificationCode,
                             price: priceData.price,

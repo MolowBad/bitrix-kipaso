@@ -21,12 +21,19 @@ $(function() {
         event.preventDefault();
         
         const $this = $(this);
-        // Получаем ID товара из разных источников
+        // ID базового товара (для совместимости и локального хранения)
         let productID = $this.data("id");
-        
-        // Если ID не указан или неверный формат, берем ID из главного элемента страницы
+        // ID торгового предложения, если его передал калькулятор
+        const offerID = $this.data("offerId");
+
+        // Если ID базового товара не указан или неверный формат,
+        // но есть корректный ID оффера, используем его как productID
         if (!productID || productID === "" || isNaN(parseInt(productID))) {
-            productID = $("#catalogElement").data("product-id");
+            if (offerID && !isNaN(parseInt(offerID))) {
+                productID = String(offerID);
+            } else {
+                productID = "";
+            }
         }
         
         // Берём актуальные значения модификации и цены из DOM рядом с кнопкой,
@@ -70,11 +77,18 @@ $(function() {
             
             const ajaxData = {
                 act: "addCart",
-                id: productID,
+                // В ajax.php всегда передаём id, но для добавления модификации как ТП
+                // дополнительно отправляем offer_id. На сервере он будет использован
+                // как основной PRODUCT_ID для позиции корзины.
+                id: productID || (offerID ? String(offerID) : ""),
                 modification: modification,
                 q: quantity,
                 site_id: SITE_ID
             };
+
+            if (offerID) {
+                ajaxData.offer_id = offerID;
+            }
 
             if (typeof BX !== "undefined") {
                 if (typeof BX.bitrix_sessid === "function") {
@@ -152,14 +166,14 @@ $(function() {
                         }, 100);
                     } else {
                         
-                        // Отправляем запрос за информацией о товаре
+                        // Отправляем запрос за информацией о товаре (предпочтительно по ID оффера)
                         $.ajax({
                             url: targetAjax,
                             type: "GET",
                             dataType: "html",
                             data: {
                                 act: "getProductWindow",
-                                id: productID
+                                id: offerID || productID
                             },
                             success: function(windowHTML) {
                                 // Удаляем старое окно, если есть
