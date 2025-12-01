@@ -258,8 +258,6 @@
     var streetEl = $(CFG.streetSelector) || findByLabelText(['Улица']);
     var houseEl  = $(CFG.houseSelector) || findByLabelText(['Дом']);
 
-    if (!cityEl && !streetEl && !houseEl) return;
-
     bindCity(cityEl);
     bindStreet(streetEl, cityEl);
     bindHouse(houseEl, cityEl, streetEl);

@@ -2899,7 +2899,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				},
 				onError: function (response) {
 					var errorDiv = BX("bx_register_error");
-					var errorNode = BX.findChildByClassName(errorDiv, "errortext");
+					var errorNode = BX.findChild(errorDiv, "errortext");
 					errorNode.innerHTML = "";
 
 					for (var i = 0; i < response.errors.length; i++) {
@@ -3977,7 +3977,9 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			} else if (column.id === "DETAIL_PICTURE") {
 				(logotype = this.getImageSources(allData.data, column.id)),
 					(img = BX.create("IMG", {
-						props: { src: (logotype && logotype.src_1x) || this.defaultBasketItemLogo }
+						props: {
+							src: (logotype && logotype.src_1x) || this.defaultBasketItemLogo
+						}
 					}));
 
 				if (logotype && logotype.src_1x && logotype.src_orig) {
@@ -5371,15 +5373,12 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				}
 			});
 
-			// if (logotype && logotype.src_2x)
-			// {
+			// if (logotype) {
 			// 	logoNode.setAttribute('style',
 			// 		'background-image: url("' + logotype.src_1x + '");' +
 			// 		'background-image: -webkit-image-set(url("' + logotype.src_1x + '") 1x, url("' + logotype.src_2x + '") 2x)'
 			// 	);
-			// }
-			// else
-			// {
+			// } else {
 			// 	logotype = logotype && logotype.src_1x || this.defaultPaySystemLogo;
 			// 	logoNode.setAttribute('style', 'background-image: url("' + logotype + '");');
 			// }
@@ -5833,8 +5832,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 			if (active) this.editActiveDeliveryBlock(true);
 			else this.editFadeDeliveryBlock();
-
-			this.checkPickUpShow();
 
 			this.initialized.delivery = true;
 		},
@@ -7257,12 +7254,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 				propsContent.appendChild(propsNode);
 				this.getBlockFooter(propsContent);
-
-				// if (this.propsBlockNode.getAttribute('data-visited') === 'true')
-				// {
-				// 	validationErrors = this.isValidPropertiesBlock(true);
-				// 	if (validationErrors.length)
-				// 		BX.addClass(this.propsBlockNode, 'bx-step-error');
 				// 	else
 				// 		BX.removeClass(this.propsBlockNode, 'bx-step-error');
 				// }

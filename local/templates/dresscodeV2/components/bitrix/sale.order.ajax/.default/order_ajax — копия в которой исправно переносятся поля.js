@@ -502,6 +502,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 			this.createFakeSelect();
 			this.checkMinimumPrice();
+			this.relocateAddressProps && this.relocateAddressProps();
 
 			return true;
 		},
@@ -5835,8 +5836,179 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			else this.editFadeDeliveryBlock();
 
 			this.checkPickUpShow();
+			this.relocateAddressProps && this.relocateAddressProps();
 
 			this.initialized.delivery = true;
+		},
+
+		relocateAddressProps: function () {
+			try {
+				var propIds = [17, 31, 32]; // ID свойств: Город, Улица, Дом
+				if (!this.orderBlockNode || !this.deliveryBlockNode || !this.propsBlockNode) {
+					return;
+				}
+
+				var currentDelivery = this.getSelectedDelivery && this.getSelectedDelivery();
+				var propsContainer = this.propsBlockNode.querySelector(".bx-soa-customer");
+				if (!propsContainer) {
+					// блок свойств ещё не отрисован
+					return;
+				}
+
+				var isOurDelivery = currentDelivery && parseInt(currentDelivery.ID, 10) === 76;
+				var deliveryCompany = this.deliveryBlockNode.querySelector(
+					".bx-soa-pp-desc-container .bx-soa-pp-company"
+				);
+				var extraContainer = null;
+				var ppBlock = this.deliveryBlockNode.querySelector(".bx-soa-pp");
+
+				if (window.console && console.log) {
+					console.log("relocateAddressProps", {
+						currentDelivery: currentDelivery ? currentDelivery.ID : null,
+						isOurDelivery: isOurDelivery,
+						propsContainerFound: !!propsContainer,
+						deliveryCompanyFound: !!deliveryCompany
+					});
+				}
+
+				// Если выбрана не наша доставка или нет описания доставки — показываем оригинальные поля и убираем копии
+				if (!isOurDelivery || !deliveryCompany) {
+					extraContainer = this.deliveryBlockNode.querySelector(".delivery-address-extra");
+					for (var j = 0; j < propIds.length; j++) {
+						var pid = propIds[j];
+						var originalRow = this.orderBlockNode.querySelector(
+							'[data-property-id-row="' + pid + '"]'
+						);
+						if (originalRow) {
+							// показываем оригинальное поле в блоке покупателя
+							originalRow.style.display = "";
+							// восстанавливаем исходные id и name инпута, если меняли их
+							var origInput = originalRow.querySelector("input, textarea, select");
+							if (origInput) {
+								var baseId = origInput.getAttribute("data-delivery-orig-id");
+								if (baseId) {
+									origInput.id = baseId;
+								}
+								var baseName = origInput.getAttribute("data-delivery-orig-name");
+								if (baseName) {
+									origInput.name = baseName;
+								}
+							}
+						}
+						if (extraContainer) {
+							var cloneNode = extraContainer.querySelector(
+								'[data-delivery-prop-id="' + pid + '"]'
+							);
+							if (cloneNode && cloneNode.parentNode) {
+								cloneNode.parentNode.removeChild(cloneNode);
+							}
+						}
+					}
+					return;
+				}
+
+				// Наша доставка (ID 76): создаём контейнер и копии полей, оригиналы прячем
+				extraContainer = this.deliveryBlockNode.querySelector(".delivery-address-extra");
+				if (!extraContainer) {
+					extraContainer = BX.create("DIV", {
+						props: { className: "delivery-address-extra" }
+					});
+					// Размещаем контейнер сразу после блока .bx-soa-pp (между .bx-soa-pp и купонами)
+					if (ppBlock && ppBlock.parentNode) {
+						if (ppBlock.nextSibling) {
+							ppBlock.parentNode.insertBefore(extraContainer, ppBlock.nextSibling);
+						} else {
+							ppBlock.parentNode.appendChild(extraContainer);
+						}
+					} else if (deliveryCompany) {
+						// запасной вариант: если по какой-то причине нет .bx-soa-pp
+						deliveryCompany.appendChild(extraContainer);
+					}
+				}
+
+				for (var i = 0; i < propIds.length; i++) {
+					var id = propIds[i];
+					// Ищем оригинальную строку только в блоке покупателя
+					var row = propsContainer.querySelector(
+						'[data-property-id-row="' + id + '"]'
+					);
+
+					if (window.console && console.log) {
+						console.log("relocateAddressProps row", {
+							id: id,
+							found: !!row,
+							inProps: !!row,
+							inDelivery: false,
+							parentClass: row && row.parentNode && row.parentNode.className
+						});
+					}
+
+					if (!row) {
+						continue;
+					}
+
+					// Прячем оригинальную строку в блоке покупателя
+					row.style.display = "none";
+
+					var originalInput = row.querySelector("input, textarea, select");
+					if (!originalInput) {
+						continue;
+					}
+
+					// Сохраняем исходный id и переносим его на клон, чтобы DaData работала по #soa-property-XX
+					var baseId = originalInput.getAttribute("data-delivery-orig-id") || originalInput.id || "";
+					if (!originalInput.getAttribute("data-delivery-orig-id") && baseId) {
+						originalInput.setAttribute("data-delivery-orig-id", baseId);
+					}
+					if (baseId) {
+						originalInput.id = baseId + "-orig";
+					}
+
+					// Ищем уже созданную копию для этого свойства
+					var clone = extraContainer.querySelector(
+						'[data-delivery-prop-id="' + id + '"]'
+					);
+					var cloneInput;
+
+					if (!clone) {
+						clone = row.cloneNode(true);
+						// Клон должен быть видимым
+						clone.style.display = "";
+						clone.setAttribute("data-delivery-prop-id", id);
+						// чтобы не путать поиск оригинала и копии
+						clone.removeAttribute("data-property-id-row");
+
+						cloneInput = clone.querySelector("input, textarea, select");
+						if (cloneInput) {
+							// переносим исходные id и name на клон, чтобы селекторы DaData указывали на поле доставки
+							if (baseId) {
+								cloneInput.id = baseId;
+							}
+							if (baseName) {
+								cloneInput.name = baseName;
+							}
+							cloneInput.value = originalInput.value;
+							(function (orig) {
+								BX.bind(cloneInput, "input", function (e) {
+									// обновляем оригинальное поле при вводе в копию
+									orig.value = e.target.value;
+									BX.fireEvent(orig, "change");
+								});
+							})(originalInput);
+						}
+						extraContainer.appendChild(clone);
+					} else {
+						cloneInput = clone.querySelector("input, textarea, select");
+						if (cloneInput) {
+							cloneInput.value = originalInput.value;
+						}
+					}
+				}
+			} catch (e) {
+				if (window.console && console.error) {
+					console.error("relocateAddressProps error", e);
+				}
+			}
 		},
 
 		editActiveDeliveryBlock: function (activeNodeMode) {
@@ -6007,67 +6179,11 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			);
 			deliveryNode.appendChild(deliveryInfoContainer);
 
-			this.editAddressPropsForDelivery(deliveryNode, currentDelivery);
-
 			if (this.params.DELIVERY_NO_AJAX != "Y")
 				this.deliveryCachedInfo[currentDelivery.ID] = currentDelivery;
-			
+			// !!!
 			if (this.selectedDeliveryID != currentDelivery.ID)
 				this.selectedDeliveryID = currentDelivery.ID;
-		},
-
-		editAddressPropsForDelivery: function (deliveryNode, currentDelivery) {
-			var propIds = [17, 31, 32],
-				extraContainer,
-				groupIterator,
-				group,
-				propsIterator,
-				property,
-				propertyId,
-				parentNode,
-				i;
-
-			if (!deliveryNode || !currentDelivery) return;
-
-			parentNode = deliveryNode.parentNode;
-			if (!parentNode) return;
-
-			extraContainer = deliveryNode.nextElementSibling;
-			if (extraContainer && !BX.hasClass(extraContainer, "delivery-address-extra")) {
-				extraContainer = null;
-			}
-
-			if (parseInt(currentDelivery.ID) !== 76) {
-				if (extraContainer && BX.hasClass(extraContainer, "delivery-address-extra")) {
-					BX.remove(extraContainer);
-				}
-				return;
-			}
-
-			if (!this.propertyCollection) return;
-
-			if (!extraContainer) {
-				extraContainer = BX.create("DIV", {
-					props: { className: "delivery-address-extra" }
-				});
-				parentNode.insertBefore(extraContainer, deliveryNode.nextSibling);
-			} else {
-				BX.cleanNode(extraContainer);
-			}
-
-			groupIterator = this.propertyCollection.getGroupIterator();
-			while ((group = groupIterator())) {
-				propsIterator = group.getIterator();
-				while ((property = propsIterator())) {
-					propertyId = parseInt(property.getId());
-					for (i = 0; i < propIds.length; i++) {
-						if (propertyId === propIds[i]) {
-							this.getPropertyRowNode(property, extraContainer, false);
-							break;
-						}
-					}
-				}
-			}
 		},
 
 		getDeliveryPriceNodes: function (delivery) {
@@ -7313,6 +7429,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 				propsContent.appendChild(propsNode);
 				this.getBlockFooter(propsContent);
+				this.relocateAddressProps && this.relocateAddressProps();
 
 				// if (this.propsBlockNode.getAttribute('data-visited') === 'true')
 				// {
@@ -7414,18 +7531,10 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			while ((group = groupIterator())) {
 				propsIterator = group.getIterator();
 				while ((property = propsIterator())) {
-					var propertyId = parseInt(property.getId());
 					if (
-						this.deliveryLocationInfo.loc == propertyId ||
-						this.deliveryLocationInfo.zip == propertyId ||
-						this.deliveryLocationInfo.city == propertyId
-					)
-						continue;
-
-					if (
-						propertyId === 17 ||
-						propertyId === 31 ||
-						propertyId === 32
+						this.deliveryLocationInfo.loc == property.getId() ||
+						this.deliveryLocationInfo.zip == property.getId() ||
+						this.deliveryLocationInfo.city == property.getId()
 					)
 						continue;
 
