@@ -6017,7 +6017,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		},
 
 		editAddressPropsForDelivery: function (deliveryNode, currentDelivery) {
-			var propIds = [17, 31, 32],
+			var propIds = [5, 33, 34, 17, 31, 32],
 				extraContainer,
 				groupIterator,
 				group,
@@ -7423,6 +7423,9 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 						continue;
 
 					if (
+						propertyId === 5 ||
+						propertyId === 33 ||
+						propertyId === 34 ||
 						propertyId === 17 ||
 						propertyId === 31 ||
 						propertyId === 32

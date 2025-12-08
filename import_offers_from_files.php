@@ -20,7 +20,7 @@ if (!file_exists($prolog)) {
 
 /**
  * Поиск существующих ТП по izd_code, с защитой от дублей.
- * Возвращает: [первый_ID_или_null, массив_ID_дубликатов]
+ * Возвращает: [первый_ID_или_null, массив_ID_дубликатов]что
  */
 function findExistingOffer(int $offersIblockId, int $linkPropId, int $productId, string $izd): array {
     $ids = [];

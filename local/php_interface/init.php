@@ -19,6 +19,7 @@ const PROP_CODES_KPP = ['KPP','КПП','UF_KPP','COMPANY_KPP'];
 const PROP_CODES_ORG = ['COMPANY','COMPANY_NAME','ORG_NAME','COMPANY_TITLE','COMPANY_FULL_NAME','НАЗВАНИЕ_ОРГАНИЗАЦИИ'];
 const PROP_CODES_EMAIL = ['EMAIL','E-MAIL','E_MAIL','MAIL','ПОЧТА','ЭЛЕКТРОННАЯ ПОЧТА'];
 const PROP_CODES_PHONE = ['PHONE','TEL','TELEPHONE','ТЕЛЕФОН','НОМЕР ТЕЛЕФОНА'];
+const PROP_CODES_USER_FIO = ['FIO','ФИО','Ф.И.О.'];
 const PROP_CODES_CONTACT_FIO = ['CONTACT_PERSON','CONTACT_FIO','CONTACT','КОНТАКТНОЕ ЛИЦО','ФИО'];
 const PROP_CODES_CONTACT_POSITION = ['POSITION','ДОЛЖНОСТЬ'];
 // Адресные свойства заказа
@@ -34,7 +35,6 @@ const PROP_CODES_COUNTRY = ['COUNTRY','СТРАНА'];
 require_once __DIR__.'/lib/onec_exchange_handler.php';
 require_once __DIR__.'/lib/assets_autoload.php';
 require_once __DIR__.'/lib/cdek_address.php';
-require_once __DIR__.'/lib/order_email_handler.php';
 
   try {
       \Bitrix\Main\Diag\Debug::writeToFile([
@@ -399,6 +399,10 @@ if (!function_exists('kipasoOnOrderNewSendEmail')) {
             if (!$order) {
                 return;
             }
+            $personTypeId = (int)$order->getPersonTypeId();
+            $payerTypeText = ($personTypeId === PT_YL) ? 'Юридическое лицо' : 'Физическое лицо';
+            $arFields['ORDER_PAYER_TYPE'] = $payerTypeText;
+            
             $props = $order->getPropertyCollection();
             if (!$props) {
                 return;
@@ -425,6 +429,7 @@ if (!function_exists('kipasoOnOrderNewSendEmail')) {
             $org = $getPropByCodes(PROP_CODES_ORG);
             $emailProp = $getPropByCodes(PROP_CODES_EMAIL);
             $phoneProp = $getPropByCodes(PROP_CODES_PHONE);
+            $userFio = $getPropByCodes(PROP_CODES_USER_FIO);
             $contactFioProp = $getPropByCodes(PROP_CODES_CONTACT_FIO);
             $contactPosProp = $getPropByCodes(PROP_CODES_CONTACT_POSITION);
             $addrCity = $getPropByCodes(PROP_CODES_CITY);
@@ -462,6 +467,9 @@ if (!function_exists('kipasoOnOrderNewSendEmail')) {
             }
             if ($phoneProp !== '') {
                 $arFields['ORDER_PHONE'] = $phoneProp;
+            }
+            if ($userFio !== '') {
+                $arFields['ORDER_USER'] = $userFio;
             }
             if ($contactFioProp !== '') {
                 $arFields['ORDER_CONTACT_FIO'] = $contactFioProp;

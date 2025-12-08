@@ -16,6 +16,11 @@ if (!function_exists('kipasoOnOrderNewSendEmail')) {
             if (!$order) {
                 return;
             }
+
+            $personTypeId = (int)$order->getPersonTypeId();
+            $payerTypeText = ($personTypeId === PT_YL) ? 'Юридическое лицо' : 'Физическое лицо';
+            $arFields['ORDER_PAYER_TYPE'] = $payerTypeText;
+
             $props = $order->getPropertyCollection();
             if (!$props) {
                 return;
