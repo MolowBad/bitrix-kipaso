@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест данных товара</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест данных товара: dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj</h1>
+    
+    <div id="results"></div>
+    
+    <script>
+        const productSku = 'dtshh5_termosoprotivleniya_s_kommutatcionnoj_golovkoj';
+        const resultsDiv = document.getElementById('results');
+        
+        async function testProductData() {
+            try {
+                resultsDiv.innerHTML += '<div class="section"><h2>Загрузка данных...</h2></div>';
+                
+                // Загружаем JSON
+                const response = await fetch('/all_products.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                resultsDiv.innerHTML += `<div class="section success"><h2>✓ JSON загружен успешно</h2><p>Всего товаров: ${data.length}</p></div>`;
+                
+                // Ищем товар
+                const product = data.find(item => item.sku === productSku);
+                
+                if (!product) {
+                    resultsDiv.innerHTML += `<div class="section error"><h2>✗ Товар не найден!</h2><p>SKU: ${productSku}</p></div>`;
+                    return;
+                }
+                
+                resultsDiv.innerHTML += `<div class="section success">
+                    <h2>✓ Товар найден</h2>
+                    <p><strong>SKU:</strong> ${product.sku}</p>
+                    <p><strong>URL:</strong> ${product.url}</p>
+                    <p><strong>Template элементов:</strong> ${product.template?.length || 0}</p>
+                    <p><strong>Модификаций (mods):</strong> ${product.mods?.length || 0}</p>
+                </div>`;
+                
+                // Проверяем template
+                if (product.template) {
+                    const templateMod1379 = product.template.find(t => t.modId === 1379);
+                    if (templateMod1379) {
+                        resultsDiv.innerHTML += `<div class="section success">
+                            <h3>✓ В template есть ссылка на modId 1379</h3>
+                            <pre>${JSON.stringify(templateMod1379, null, 2)}</pre>
+                        </div>`;
+                    } else {
+                        resultsDiv.innerHTML += `<div class="section warning">
+                            <h3>⚠ В template НЕТ ссылки на modId 1379</h3>
+                        </div>`;
+                    }
+                }
+                
+                // Проверяем mods
+                if (product.mods) {
+                    resultsDiv.innerHTML += '<div class="section"><h3>Список модификаций:</h3><ul>';
+                    product.mods.forEach((mod, idx) => {
+                        const isTarget = mod.id === 1379;
+                        resultsDiv.innerHTML += `<li ${isTarget ? 'class="success" style="font-weight: bold;"' : ''}>
+                            ${idx + 1}. id: ${mod.id}, title: "${mod.title}", options: ${mod.options?.length || 0}
+                            ${isTarget ? ' <-- ЭТО ЦЕЛЕВАЯ МОДИФИКАЦИЯ!' : ''}
+                        </li>`;
+                    });
+                    resultsDiv.innerHTML += '</ul></div>';
+                    
+                    // Детальная проверка модификации 1379
+                    const mod1379 = product.mods.find(m => m.id === 1379);
+                    if (mod1379) {
+                        resultsDiv.innerHTML += `<div class="section success">
+                            <h2>✓ Модификация с id 1379 НАЙДЕНА!</h2>
+                            <p><strong>Title:</strong> ${mod1379.title}</p>
+                            <p><strong>Количество опций:</strong> ${mod1379.options?.length || 0}</p>
+                            ${mod1379.options && mod1379.options.length > 0 ? `
+                                <h4>Первые 5 опций:</h4>
+                                <pre>${JSON.stringify(mod1379.options.slice(0, 5), null, 2)}</pre>
+                                <h4>Последние 3 опции:</h4>
+                                <pre>${JSON.stringify(mod1379.options.slice(-3), null, 2)}</pre>
+                            ` : '<p class="error">Опции отсутствуют!</p>'}
+                        </div>`;
+                    } else {
+                        resultsDiv.innerHTML += `<div class="section error">
+                            <h2>✗ Модификация с id 1379 НЕ НАЙДЕНА в массиве mods!</h2>
+                            <p>Это основная проблема! Данные не загружены в структуру товара.</p>
+                        </div>`;
+                    }
+                }
+                
+                // Выводим полную структуру товара
+                resultsDiv.innerHTML += `<div class="section">
+                    <h3>Полная структура товара (JSON):</h3>
+                    <pre>${JSON.stringify(product, null, 2)}</pre>
+                </div>`;
+                
+            } catch (error) {
+                resultsDiv.innerHTML += `<div class="section error">
+                    <h2>✗ ОШИБКА!</h2>
+                    <p>${error.message}</p>
+                    <pre>${error.stack}</pre>
+                </div>`;
+            }
+        }
+        
+        // Запускаем тест
+        testProductData();
+    </script>
+</body>
+</html>

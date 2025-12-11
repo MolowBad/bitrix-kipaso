@@ -1162,8 +1162,8 @@ if (!empty($arResult["EDIT_LINK"])) {
                     </div>
                     <!-- Кнопка покупки модификации -->
                     <div class="modification-buy-block" style="display: none; margin-top: 15px;">
-                        <a href="#" class="addCart modificationAddCart" data-id="" data-modification="" data-price="">
-                            <span><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="Купить" class="icon">Купить</span>
+                        <a href="#" class="addCart modificationAddCart modificationCallbackBtn" data-id="" data-modification="" data-price="">
+                            <span class="spanaAddCart" ><img src="<?=SITE_TEMPLATE_PATH?>/images/incart.svg" alt="Купить" class="icon">Купить</span>
                         </a>
                     </div>
                 </div>

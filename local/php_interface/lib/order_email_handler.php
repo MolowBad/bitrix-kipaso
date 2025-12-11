@@ -275,7 +275,7 @@ if (!function_exists('kipasoOnOrderNewSendEmail')) {
                     'ERROR' => $e->getMessage(),
                     'FILE' => $e->getFile(),
                     'LINE' => $e->getLine(),
-                ], 'ORDER_NEW_SEND_EMAIL', $_SERVER['DOCUMENT_ROOT'].'/upload/order_email_ext.log');
+                ], 'ORDER_NEW_SEND_EMAIL', '/upload/order_email_ext.log');
             } catch (\Throwable $e2) {
             }
         }

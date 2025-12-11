@@ -290,34 +290,7 @@ class ProductModifications {
             console.error('ProductModifications: Группа не найдена для modId:', modId);
         }
     }
-
-    /**
-     * Показывает следующую группу модификаций после выбора в текущей
-     */
-    showNextModificationGroup(currentModId) {
-        
-        
-        // Находим следующую группу в шаблоне
-        const templateModIds = this.modificationData.template
-            .filter(item => item.modId !== null)
-            .map(item => item.modId);
-        
-      
-        
-        const currentIndex = templateModIds.indexOf(currentModId);
-       
-        
-        if (currentIndex !== -1 && currentIndex < templateModIds.length - 1) {
-            const nextModId = templateModIds[currentIndex + 1];
-            
-            
-            // Показываем следующую группу
-            this.showModificationGroup(nextModId);
-        } else {
-            
-        }
-    }
-
+ 
     /**
      * Сбрасывает выбор модификации (возвращает X)
      */
@@ -397,78 +370,6 @@ class ProductModifications {
         // Обновляем результат
         this.updateResult();
     }
-    
-    /**
-     * Получает сокращенное значение для отображения в шаблоне
-     */
-    getShortValue(modId, optionId) {
-        const mod = this.modificationData.mods.find(m => m.id === modId);
-        if (!mod) return 'X';
-        
-        const option = mod.options.find(o => o.id === optionId);
-        if (!option) return 'X';
-        
-        // Универсальная логика на основе названий групп
-        const groupTitle = (mod.title || '').toLowerCase();
-        const optionLabel = (option.label || '').toLowerCase();
-        
-        // Тип корпуса - всегда Щ + номер по порядку
-        if (groupTitle.includes('тип корпуса') || groupTitle.includes('корпус')) {
-            const optionIndex = mod.options.findIndex(o => o.id === optionId);
-            return 'Щ' + (optionIndex + 1);
-        }
-        
-        // Тип индикации - 1 для красных, 2 для зеленых
-        if (groupTitle.includes('индикация') || groupTitle.includes('цвет')) {
-            if (optionLabel.includes('красн')) return '1';
-            if (optionLabel.includes('зелен')) return '2';
-            // По умолчанию первая опция = 1, остальные = 2
-            const optionIndex = mod.options.findIndex(o => o.id === optionId);
-            return optionIndex === 0 ? '1' : '2';
-        }
-        
-        // Тип выхода - P для реле, T для транзистора
-        if (groupTitle.includes('выход') || groupTitle.includes('тип выхода')) {
-            if (optionLabel.includes('реле')) return 'P';
-            if (optionLabel.includes('транзистор')) return 'T';
-            // По умолчанию первая опция = P, вторая = T
-            const optionIndex = mod.options.findIndex(o => o.id === optionId);
-            return optionIndex === 0 ? 'P' : 'T';
-        }
-        
-        // Питание - извлекаем числа из описания
-        if (groupTitle.includes('питание') || groupTitle.includes('напряжение')) {
-            const voltageMatch = optionLabel.match(/(\d+)/);
-            if (voltageMatch) {
-                return voltageMatch[1];
-            }
-            // По умолчанию стандартные значения
-            const optionIndex = mod.options.findIndex(o => o.id === optionId);
-            const defaultVoltages = ['85', '24', '12'];
-            return defaultVoltages[optionIndex] || '85';
-        }
-        
-        // Интерфейс - сокращения на основе названий
-        if (groupTitle.includes('интерфейс') || groupTitle.includes('связь')) {
-            if (optionLabel.includes('rs-485') || optionLabel.includes('rs485')) return 'RS';
-            if (optionLabel.includes('ethernet')) return 'E';
-            if (optionLabel.includes('wi-fi') || optionLabel.includes('wifi')) return 'W';
-            if (optionLabel.includes('без') || optionLabel.includes('нет')) return '';
-            // Если не распознали, возвращаем первые буквы
-            const words = optionLabel.split(/[\s-]+/);
-            return words.map(w => w.charAt(0).toUpperCase()).join('').substring(0, 2);
-        }
-        
-        // Для неизвестных типов - пытаемся извлечь первые символы или цифры
-        const numberMatch = optionLabel.match(/(\d+)/);
-        if (numberMatch) {
-            return numberMatch[1];
-        }
-        
-        // Возвращаем номер опции по порядку
-        const optionIndex = mod.options.findIndex(o => o.id === optionId);
-        return (optionIndex + 1).toString();
-    }
 
     /**
      * Обновляет результат выбора модификации
@@ -530,6 +431,20 @@ class ProductModifications {
                         
                         // Показываем кнопку
                         buyBlock.style.display = 'block';
+                    } else {
+                        if (buyBlock) {
+                            buyBlock.innerHTML = '<a href="#" class="addCart modificationCallbackBtn" style="background-color: green;max-width: 200px;border-radius: 10px;text-decoration: none;"><span style="display: flex;padding: 10px;gap: 10px;color: white;font-size: 15px;"><img src="/local/templates/dresscodeV2/images/incart.svg" alt="Уточнить цену" class="icon">Уточнить цену</span></a>';
+                            buyBlock.style.display = 'block';
+
+                            const callbackBtn = buyBlock.querySelector('.modificationCallbackBtn');
+                            if (callbackBtn) {
+                                callbackBtn.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                    // Логика обработки звонка
+                                    this.openNoPriceCallbackPopup();
+                                });
+                            }
+                        }
                     }
                 });
             } else {
@@ -575,16 +490,7 @@ class ProductModifications {
        
         return result;
     }
-    /**
-     * Проверяет, выбраны ли все модификации
-     */
-    areAllModificationsSelected() {
-        // Проверяем, что количество выбранных значений равно количеству модификаций
-        return this.modificationData && 
-               this.modificationData.mods && 
-               Object.keys(this.selectedValues).length === this.modificationData.mods.length;
-    }
-    
+
     /**
      * Загружает цену для выбранной модификации
      * @param {string} modificationCode - Код модификации (например, ТРМ12-Щ1.У2.РР.RS)
@@ -646,6 +552,15 @@ class ProductModifications {
             }
             
             return { success: false, error: error.message };
+        }
+    }
+
+        openNoPriceCallbackPopup() {
+        const callbackLink = document.querySelector('.openWebFormModal.link.callBack[data-id="2"]');
+        if (callbackLink) {
+            callbackLink.click();
+        } else {
+            console.warn('ProductModifications: ссылка для попапа обратного звонка не найдена');
         }
     }
     

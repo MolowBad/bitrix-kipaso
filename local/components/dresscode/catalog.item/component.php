@@ -8,6 +8,11 @@ use Bitrix\Iblock;
 
 global $USER, $APPLICATION;
 
+// Отключаем кэширование для администратора, чтобы избежать переполнения памяти при записи тяжёлого кэша
+if (is_object($USER) && $USER->IsAdmin()) {
+    $arParams["CACHE_TYPE"] = "N";
+}
+
 if (!isset($arParams["CACHE_TIME"])) {
 	$arParams["CACHE_TIME"] = 36000000;
 }

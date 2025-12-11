@@ -9,11 +9,11 @@ if (!function_exists('kipasoOnEndBufferContent')) {
         $script = $_SERVER['SCRIPT_NAME'] ?? ($_SERVER['PHP_SELF'] ?? '');
         $is1cScript = (stripos($uri, '/bitrix/admin/1c_exchange.php') !== false) || (stripos($script, '1c_exchange.php') !== false);
         if (!$is1cScript) {
-            Debug::writeToFile(['stage' => 'skip_not_1c', 'uri' => $uri, 'script' => $script], 'PAYER_TYPE_XML_PLUS', $_SERVER['DOCUMENT_ROOT'].'/upload/payer_type_xml.log');
+            Debug::writeToFile(['stage' => 'skip_not_1c', 'uri' => $uri, 'script' => $script], 'PAYER_TYPE_XML_PLUS', '/upload/payer_type_xml.log');
             return;
         }
         if (($_GET['type'] ?? '') !== 'sale' || ($_GET['mode'] ?? '') !== 'query') {
-            Debug::writeToFile(['stage' => 'skip_not_sale_query', 'get' => $_GET], 'PAYER_TYPE_XML_PLUS', $_SERVER['DOCUMENT_ROOT'].'/upload/payer_type_xml.log');
+            Debug::writeToFile(['stage' => 'skip_not_sale_query', 'get' => $_GET], 'PAYER_TYPE_XML_PLUS', '/upload/payer_type_xml.log');
             return;
         }
         @ini_set('display_errors', '0');
@@ -23,7 +23,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             'uri' => $uri,
             'script' => $script,
             'len' => strlen($content),
-        ], 'PAYER_TYPE_XML_PLUS', $_SERVER['DOCUMENT_ROOT'].'/upload/payer_type_xml.log');
+        ], 'PAYER_TYPE_XML_PLUS', '/upload/payer_type_xml.log');
 
         $dom = new \DOMDocument();
         $dom->preserveWhiteSpace = false;
@@ -32,7 +32,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             $try = @mb_convert_encoding($content, 'UTF-8');
             $loaded = $try ? @$dom->loadXML($try) : false;
             if (!$loaded) {
-                Debug::writeToFile(['error' => 'XML parse failed'], 'PAYER_TYPE_XML_PLUS', $_SERVER['DOCUMENT_ROOT'].'/upload/payer_type_xml.log');
+                Debug::writeToFile(['error' => 'XML parse failed'], 'PAYER_TYPE_XML_PLUS', '/upload/payer_type_xml.log');
                 return;
             }
         }
@@ -363,7 +363,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
             Debug::writeToFile(
                 ['ORDER_ID' => $orderId, 'PT' => $payerValue, 'INN' => $inn, 'KPP' => $kpp, 'ORG' => $org],
                 'PAYER_TYPE_XML_PLUS',
-                $_SERVER['DOCUMENT_ROOT'] . '/upload/payer_type_xml.log'
+                '/upload/payer_type_xml.log'
             );
 
             foreach ($xp->query('./Товары/Товар', $docNode) as $itemNode) {
@@ -524,7 +524,7 @@ if (!function_exists('kipasoOnEndBufferContent')) {
                     'ITEM_XML_CANDIDATES' => $tryOrder,
                     'ITEM_CODE' => $symbolicCode,
                     'ITEM_CODE_SOURCE' => $symbolicSource,
-                ], 'PAYER_TYPE_XML_PLUS_ITEM', $_SERVER['DOCUMENT_ROOT'] . '/upload/payer_type_xml.log');
+                ], 'PAYER_TYPE_XML_PLUS_ITEM', '/upload/payer_type_xml.log');
             }
         }
 

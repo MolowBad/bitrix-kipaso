@@ -112,7 +112,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                     'ORDER_ID' => method_exists($order, 'getId') ? $order->getId() : 'new',
                     'ERROR' => 'Address property with CDEK code not found',
                     'ALL_PROPS' => $allProps,
-                ], 'CDEK_ADDRESS_PARSER', $_SERVER['DOCUMENT_ROOT'].'/upload/cdek_parser.log');
+                ], 'CDEK_ADDRESS_PARSER', '/upload/cdek_parser.log');
                 return;
             }
 
@@ -123,7 +123,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                     'ORDER_ID' => method_exists($order, 'getId') ? $order->getId() : 'new',
                     'ERROR' => 'Address does not contain CDEK code',
                     'ADDRESS' => $fullAddress,
-                ], 'CDEK_ADDRESS_PARSER', $_SERVER['DOCUMENT_ROOT'].'/upload/cdek_parser.log');
+                ], 'CDEK_ADDRESS_PARSER', '/upload/cdek_parser.log');
                 return;
             }
 
@@ -203,7 +203,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 'PARSED' => $parsed,
                 'UPDATED' => $updated,
                 'TIMESTAMP' => date('Y-m-d H:i:s'),
-            ], 'CDEK_ADDRESS_PARSER', $_SERVER['DOCUMENT_ROOT'].'/upload/cdek_parser.log');
+            ], 'CDEK_ADDRESS_PARSER', '/upload/cdek_parser.log');
 
         } catch (\Throwable $e) {
             \Bitrix\Main\Diag\Debug::writeToFile([
@@ -211,7 +211,7 @@ if (!function_exists('kipasoOnSaleComponentOrderProcess')) {
                 'FILE' => $e->getFile(),
                 'LINE' => $e->getLine(),
                 'TRACE' => $e->getTraceAsString(),
-            ], 'CDEK_ADDRESS_PARSER_ERROR', $_SERVER['DOCUMENT_ROOT'].'/upload/cdek_parser.log');
+            ], 'CDEK_ADDRESS_PARSER_ERROR', '/upload/cdek_parser.log');
         }
     }
 }
