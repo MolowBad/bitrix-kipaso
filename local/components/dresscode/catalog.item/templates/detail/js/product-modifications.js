@@ -12,6 +12,7 @@ class ProductModifications {
         this.modBlockElement = document.querySelector(this.options.modBlockSelector || '.product-modifications-main');
         this.templateElement = document.querySelector('.modification-template');
         this.groupsElement = document.querySelector('.modification-groups');
+        this.buyBlockOriginalHtml = null;
         
         this.init();
     }
@@ -379,7 +380,11 @@ class ProductModifications {
             const allSelected = this.areAllModificationsSelected();
             const resultBlock = document.querySelector('.modification-result-block');
             const buyBlock = document.querySelector('.modification-buy-block');
-            const modificationAddCartBtn = document.querySelector('.modificationAddCart');
+            let modificationAddCartBtn = document.querySelector('.modificationAddCart');
+
+            if (buyBlock && this.buyBlockOriginalHtml === null) {
+                this.buyBlockOriginalHtml = buyBlock.innerHTML;
+            }
             
             if (allSelected) {
                 // Форматируем код модификации
@@ -401,7 +406,17 @@ class ProductModifications {
                     console.log('Кнопка покупки:', modificationAddCartBtn);
                     
                     // Если цена успешно загружена, показываем кнопку "Купить"
-                    if (priceData && priceData.success && buyBlock && modificationAddCartBtn) {
+                    if (priceData && priceData.success && buyBlock) {
+                        if (!buyBlock.querySelector('.modificationAddCart') && this.buyBlockOriginalHtml) {
+                            buyBlock.innerHTML = this.buyBlockOriginalHtml;
+                        }
+
+                        modificationAddCartBtn = buyBlock.querySelector('.modificationAddCart');
+                        if (!modificationAddCartBtn) {
+                            console.warn('ProductModifications: Кнопка \'Купить\' не найдена в buyBlock');
+                            return;
+                        }
+
                         // Устанавливаем данные для кнопки
                         // productId - ID базового товара (как раньше)
                         const productId = document.querySelector('input[name="product_id"]')?.value || window.productId || '';

@@ -6,10 +6,6 @@
  * и другими данными из XML-файла meyertec.
  */
 
-// Включаем отображение ошибок для отладки
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Увеличиваем лимиты времени и памяти для больших XML
 ini_set('memory_limit', '512M');
@@ -55,7 +51,7 @@ function logMessage($message) {
     global $LOG_FILE;
     $logMessage = date('[Y-m-d H:i:s] ') . $message . PHP_EOL;
     
-    if (!empty($LOG_FILE)) {
+    if (!empty($LOG_FILE)) {    
         try {
             // Создаем директорию для логов, если не существует
             $logDir = dirname($LOG_FILE);
