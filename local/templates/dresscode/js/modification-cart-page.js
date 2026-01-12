@@ -113,79 +113,39 @@ $(function() {
     }
     
     /**
- * Добавляет информацию о модификации к товару в корзине
- * @param {jQuery} $tabloid Элемент товара в корзине
- * @param {string} modification Код модификации
- * @param {string} price Цена модификации
- */
-function addModificationInfo($tabloid, modification, price) {
-    console.log('Добавляем информацию о модификации:', modification, price);
-    
-    if (modification) {
-        // Проверяем, есть ли уже блок информации о модификации
-        const $existingInfo = $tabloid.find('.itemModification');
+     * Добавляет информацию о модификации к товару в корзине
+     * @param {jQuery} $tabloid Элемент товара в корзине
+     * @param {string} modification Код модификации
+     * @param {string} price Цена модификации
+     */
+    function addModificationInfo($tabloid, modification, price) {
+        console.log('Добавляем информацию о модификации:', modification, price);
         
-        // Если блок уже есть, обновляем его
-        if ($existingInfo.length > 0) {
-            console.log('Обновляем существующий блок модификации');
-            $existingInfo.find('.modificationName').text('Модификация: ' + modification);
-            $existingInfo.find('.modificationPrice').text('Цена модификации: ' + price);
-        } else {
-            // Ищем разные возможные места для добавления информации о модификации
+        if (modification) {
+            // Проверяем, есть ли уже блок информации о модификации
+            const $existingInfo = $tabloid.find('.itemModification');
             
-            // Создаем блок модификации
-            const $modificationBlock = $('<div class="itemModification" style="margin-top: 8px; font-size: 13px; color: #555; font-weight: bold;"><div class="modificationName">Модификация: ' + modification + '</div><div class="modificationPrice">Цена модификации: ' + price + '</div></div>');
-            
-            // Список возможных мест для добавления
-            let inserted = false;
-            
-            // 1. Добавляем после ссылки на название в разных форматах
-            const nameSelectors = [
-                '.productColText .name',               // Для squares шаблона
-                '.name a', 
-                'a.name',
-                '.name span',
-                '.name'
-            ];
-            
-            // Перебираем селекторы, пока не найдем подходящий
-            for (let i = 0; i < nameSelectors.length; i++) {
-                const $nameBlock = $tabloid.find(nameSelectors[i]);
-                if ($nameBlock.length > 0) {
-                    console.log('Добавляем модификацию после:', nameSelectors[i]);
-                    $nameBlock.after($modificationBlock);
-                    inserted = true;
-                    break;
-                }
-            }
-            
-            // 2. Если не нашли название, пробуем добавить перед ценой
-            if (!inserted) {
-                const priceSelectors = ['.price', '.priceContainer', '.basketQty'];
+            // Если блок уже есть, обновляем его
+            if ($existingInfo.length > 0) {
+                console.log('Обновляем существующий блок модификации');
+                $existingInfo.find('.modificationName').text('Модификация: ' + modification);
+                $existingInfo.find('.modificationPrice').text('Цена модификации: ' + price);
+            } else {
+                // Ищем разные возможные места для добавления информации о модификации
+                    .css({
+                        "margin-top": "8px",
+                        "font-size": "13px",
+                        "color": "#555",
+                        "font-weight": "bold"
+                    })
+                    .html("Модификация: " + modification);
                 
-                for (let i = 0; i < priceSelectors.length; i++) {
-                    const $priceBlock = $tabloid.find(priceSelectors[i]);
-                    if ($priceBlock.length > 0) {
-                        console.log('Добавляем модификацию перед:', priceSelectors[i]);
-                        $priceBlock.before($modificationBlock);
-                        inserted = true;
-                        break;
-                    }
-                }
+                // Добавляем блок в начало колонки с текстом
+                $productColText.prepend($modificationInfo);
+                console.log('Добавлена информация о модификации в колонку с текстом:', modification);
             }
-            
-            // 3. В крайнем случае добавляем в начало блока товара
-            if (!inserted) {
-                console.log('Добавляем модификацию в начало блока');
-                $tabloid.prepend($modificationBlock);
-            }
-            
-            // Сохраняем данные о модификации в data-атрибутах
-            $tabloid.attr('data-modification', modification);
-            $tabloid.attr('data-modification-price', price.replace(/[^0-9,.]/g, ''));
         }
     }
-}
     
     /**
      * Обновляет общую сумму корзины

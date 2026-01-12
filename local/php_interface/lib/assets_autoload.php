@@ -46,10 +46,10 @@ try {
         Asset::getInstance()->addString('<script>window.ADDRESS_SUGGEST_CONFIG = {
             debug: false,
             endpoint: "/local/ajax/dadata_address.php",
-            // Юрлица: ID 17/31/32, физлица: ID 5/33/34
-            citySelector: "#soa-property-17, input[name=\\\"ORDER_PROP_17\\\"], #soa-property-5, input[name=\\\"ORDER_PROP_5\\\"]",
-            streetSelector: "#soa-property-31, input[name=\\\"ORDER_PROP_31\\\"], #soa-property-33, input[name=\\\"ORDER_PROP_33\\\"]",
-            houseSelector: "#soa-property-32, input[name=\\\"ORDER_PROP_32\\\"], #soa-property-34, input[name=\\\"ORDER_PROP_34\\\"]",
+            // Селекторы по умолчанию покрывают большинство шаблонов Bitrix, при необходимости можно уточнить
+            citySelector: "#soa-property-17, input[name=\\\"ORDER_PROP_17\\\"]",
+            streetSelector: "#soa-property-31, input[name=\\\"ORDER_PROP_31\\\"]",
+            houseSelector: "#soa-property-32, input[name=\\\"ORDER_PROP_32\\\"]",
             count: 10,
             language: "ru",
             debounceMs: 250

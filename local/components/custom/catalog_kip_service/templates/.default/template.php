@@ -17,14 +17,16 @@ $this->setFrameMode(true);
 <?php if (!empty($arResult["SECTIONS"])): ?>
     <div class="accordion-catalog">
         <?php foreach ($arResult["SECTIONS"] as $section): ?>
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    <div class="accordion-toggle">
-                        <span class="accordion-icon"></span>
-                        <?= $section["NAME"] ?>
+            <div class="accordion-item">  
+                    <div class="accordion-header">
+                        <div class="wrapper-accordion-header limiter">
+                            <div class="accordion-toggle">
+                                <span class="accordion-icon"></span>
+                                <?= $section["NAME"] ?>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="accordion-content">
+                <div class="accordion-content limiter">
                     <div class="catalog-categories-container">
                         <!-- Бренд слева -->
                         <div class="brands-container">

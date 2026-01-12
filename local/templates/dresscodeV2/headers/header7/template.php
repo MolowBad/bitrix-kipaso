@@ -37,12 +37,22 @@
 				</div>
 				<div id="geoPosition"<?if(!empty($TEMPLATE_SUBHEADER_COLOR)):?> class="color_<?=$TEMPLATE_SUBHEADER_COLOR?>"<?endif;?>>
 					<ul>
-						<?$APPLICATION->IncludeComponent("dresscode:sale.geo.positiion", "", array(),
-							false,
-							array(
-							"ACTIVE_COMPONENT" => "Y"
-							)
-						);?>
+						<?$APPLICATION->IncludeComponent(
+	"dresscode:sale.geo.positiion", 
+	".default", 
+	array(
+		"COMPONENT_TEMPLATE" => ".default",
+		"GEO_IP_PARAMS" => "YANDEX",
+		"DISABLE_CONFIRMATION_WINDOW" => "N",
+		"YANDEX_API_KEY" => "",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "2385912"
+	),
+	false,
+	array(
+		"ACTIVE_COMPONENT" => "Y"
+	)
+);?>
 					</ul>
 				</div>
 				<!-- Егор убрал включение отображения соцсетей в хедере, учитывайте что для каждого хедера компонента DELUXE (то есть отображение шапок сайта их выбор) распределен каждая в своей папке -->

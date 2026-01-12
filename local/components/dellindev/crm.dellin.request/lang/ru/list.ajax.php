@@ -1,0 +1,3 @@
+<?
+$MESS["CRM_ORDER_SHIPMENT_LIST_ROW_COUNT"] = "Р’СЃРµРіРѕ: #ROW_COUNT#";
+?>

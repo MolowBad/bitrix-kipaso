@@ -115,11 +115,12 @@
 		</div>
 	</div>
 </div>
+<!--Егор внес правки в отображение правого меня о "Нашли дешевле" "Поделиться" и "Соцсети"   -->
 <div class="secondTool">
 	<?if(!empty($arParams["DISPLAY_CHEAPER"]) && $arParams["DISPLAY_CHEAPER"] == "Y" && !empty($arParams["CHEAPER_FORM_ID"])):?>
-		<div class="row cheaper-container">
+		<!-- <div class="row cheaper-container">
 			<a href="#" class="cheaper label openWebFormModal<?if(empty($arResult["PRICE"]) || $arResult["CATALOG_AVAILABLE"] != "Y"):?> disabled<?endif;?>" data-id="<?=$arParams["CHEAPER_FORM_ID"]?>"><img src="<?=SITE_TEMPLATE_PATH?>/images/cheaper.svg" alt="<?=GetMessage("CHEAPER_LABEL")?>" class="icon"><?=GetMessage("CHEAPER_LABEL")?></a>
-		</div>
+		</div> -->
 	<?endif;?>
 	<?if(empty($arParams["HIDE_DELIVERY_CALC"]) || !empty($arParams["HIDE_DELIVERY_CALC"]) && $arParams["HIDE_DELIVERY_CALC"] == "N"):?>
 		<div class="row delivery-button-container">
@@ -141,8 +142,8 @@
 			<?endif;?>
 		<?endif;?>
 	</div>
-	<div class="row share-items">
+	<!-- <div class="row share-items">
 		<div class="ya-share-label"><?=GetMessage("SHARE_LABEL")?></div>
 		<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,twitter"></div>
-	</div>
+	</div> -->
 </div>

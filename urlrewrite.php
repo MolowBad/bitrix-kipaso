@@ -1,5 +1,13 @@
 <?php
 $arUrlRewrite=array (
+  14 => 
+  array (
+    'CONDITION' => '#^/razdel-s-katalogami-na-zamenu-slayderu/#',
+    'RULE' => '',
+    'ID' => 'dresscode:catalog',
+    'PATH' => '/razdel-s-katalogami-na-zamenu-slayderu/index.php',
+    'SORT' => 100,
+  ),
   0 => 
   array (
     'CONDITION' => '#^\\/?\\/mobileapp/jn\\/(.*)\\/.*#',
@@ -40,11 +48,11 @@ $arUrlRewrite=array (
     'PATH' => '/services/index.php',
     'SORT' => 100,
   ),
-  6 => 
+  15 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
-    'ID' => 'bitrix:catalog',
+    'ID' => 'dresscode:catalog',
     'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),

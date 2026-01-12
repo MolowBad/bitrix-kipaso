@@ -296,6 +296,13 @@
 			"ID" => "video"
 		);
 
+		// Егор добавляет якорьную ссылку "Модификации"
+		$arResult["TABS"]["CATALOG_ELEMENT_MODIFICATIONS"] = array(
+			"DISABLED" => !empty($arResult['SKU_OFFERS']) ? "N" : "Y", // Отключаем, если нет торговых предложений
+			"PICTURE" => SITE_TEMPLATE_PATH."/images/elementNavIconModification.svg", // Иконка для вкладки
+			"NAME" => GetMessage("CATALOG_ELEMENT_MODIFICATIONS"), // Название (нужно добавить в языковые файлы)
+			"ID" => "mod-owen"
+		);
 	}
 
 ?>

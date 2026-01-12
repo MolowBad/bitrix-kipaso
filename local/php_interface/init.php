@@ -1,11 +1,4 @@
 <?php
-file_put_contents($_SERVER['DOCUMENT_ROOT'].'/debug_init.log', date('c')." init start\n", FILE_APPEND);
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-ini_set('memory_limit', '512M');
-
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Diag\Debug;

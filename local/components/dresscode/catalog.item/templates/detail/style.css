@@ -772,7 +772,6 @@
 
 .item a {
 	display: block;
-	
 }
 #elementContainer #pictureContainer .item a img {
 	max-width: 90%;
@@ -2606,6 +2605,20 @@
 	border-bottom: 1px dashed #000000;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
+}
+
+.modificationCallbackBtn {
+	background-color: #28ae61;
+    max-width: 200px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.spanaAddCart {
+	display: flex;
+    padding: 10px;
+    gap: 10px;
+    color: white;
+    font-size: 15px;
 }
 
 @keyframes fadein {

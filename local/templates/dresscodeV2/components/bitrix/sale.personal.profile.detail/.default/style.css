@@ -41,6 +41,11 @@
 	margin-bottom: 12px;
 }
 
+.sale-profile-detail-form {
+	max-width: 700px;
+    margin: 0 auto;
+}
+
 .sale-profile-detail-form input[type="text"]:not(.bx-ui-sls-fake) {
 	-webkit-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
@@ -54,7 +59,7 @@
 	padding: 0 12px;
 	height: 48px;
 	width: 100%;
-	border: 0;
+	border: 1px solid #00000038;
 }
 
 .sale-profile-detail-form input[type="text"]:focus:not(.bx-ui-sls-fake) {

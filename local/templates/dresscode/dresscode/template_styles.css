@@ -2329,7 +2329,7 @@ strong {
 
 #appBasket .picture {
 	position: relative;
-	float: left;
+	/* float: left; */
 	width: 300px;
 	height: 280px;
 	line-height: 280px;

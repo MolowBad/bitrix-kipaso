@@ -1,12 +1,4 @@
 <?
-	$MESS["TABLE_HEADER_NAME"] = "Наименование";
-	$MESS["TABLE_HEADER_AVAILABILITY"] = "Наличие";
-	$MESS["TABLE_HEADER_PRICE"] = "Цена с НДС";
-	$MESS["TABLE_HEADER_ADD_TO_CART"] = "В корзину";
-	$MESS["AVAILABLE"] = "В наличии";
-	$MESS["ON_ORDER"] = "Под заказ";
-	$MESS["NOAVAILABLE"] = "Нет в наличии";
-	$MESS["REQUEST_PRICE_LABEL"] = "Цена по запросу";
 	$MESS["ADDCART_LABEL"] = "В корзину";
 	$MESS["FASTBACK_LABEL"] = "Купить в 1 клик";
 	$MESS["WISHLIST_LABEL"] = "В избранное";
@@ -87,7 +79,7 @@
 	$MESS["TIMER_HOUR_LABEL"] = "Часов";
 	$MESS["TIMER_MINUTE_LABEL"] = "Минут";
 	$MESS["TIMER_SECOND_LABEL"] = "Секунд";
-	$MESS["ELEMENT_SKU_OFFERS_TABLE_HEADING"] = "Другие варианты товара";
+	$MESS["ELEMENT_SKU_OFFERS_TABLE_HEADING"] = "Другие варианты товараааа";
 	$MESS["ELEMENT_SKU_OFFERS_TABLE_TITLE"] = "Наименование";
 	$MESS["ELEMENT_SKU_OFFERS_TABLE_PROPERTY"] = "Свойство";
 	$MESS["ELEMENT_SKU_OFFERS_TABLE_PRICE"] = "Стоимость";
@@ -100,4 +92,5 @@
 	$MESS["CATALOG_ELEMENT_TAGS_MORE_BUTTON_HIDE"] = "Скрыть";
 	$MESS["CATALOG_ELEMENT_TAGS_MORE_BUTTON"] = "Показать все";
 	$MESS["AJAX_PAYSYSTEMS_EDIT_TITLE"] = "Редактировать текст для способов оплаты.";
+	$MESS['CATALOG_ELEMENT_MODIFICATIONS'] = "Модификации";
 ?>
