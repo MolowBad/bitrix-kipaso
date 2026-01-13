@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Документация: Отображение модификации товара в корзине</title>
+  <style>
+    :root { --fg:#222; --muted:#666; --accent:#0b6efd; --bg:#fff; --code:#f6f8fa; --ok:#0a7c2f; --warn:#b35c00; --err:#b00020; }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    .container{max-width:980px;margin:0 auto;padding:32px 20px}
+    h1{font-size:28px;margin:0 0 12px}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:18px;margin:22px 0 8px}
+    p{margin:10px 0}
+    code,kbd,.mono{font-family:ui-monospace,Consolas,Monaco,Menlo,monospace}
+    pre{background:var(--code);border:1px solid #e5e7eb;border-radius:6px;padding:12px;overflow:auto}
+    pre code{white-space:pre}
+    .muted{color:var(--muted)}
+    .list{margin:8px 0 16px;padding-left:20px}
+    .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid #e5e7eb;background:#fafafa;color:#444}
+    .kv{display:grid;grid-template-columns:180px 1fr;gap:8px 16px}
+    .kv div{padding:2px 0}
+    .callout{border-left:4px solid var(--accent);background:#f3f8ff;padding:12px 14px;border-radius:4px;margin:12px 0}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .footer{margin-top:36px;padding-top:12px;border-top:1px dashed #ddd;color:var(--muted);font-size:14px}
+    table{border-collapse:collapse;width:100%;}
+    th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left}
+    th{background:#fafafa}
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Отображение модификации товара в корзине</h1>
+  <div class="muted">Проект: Bitrix (sale + catalog), шаблоны dresscode • Дата: 2025‑08‑13</div>
+
+  <h2>1. Цель</h2>
+  <ul class="list">
+    <li><b>Сохранять</b> свойства модификации при добавлении товара в корзину.</li>
+    <li><b>Читать и выводить</b> модификацию в шаблонах корзины.</li>
+    <li><b>Скрывать</b> блок модификации для товаров без модификаций.</li>
+  </ul>
+
+  <h2>2. Структура решения</h2>
+  <h3>2.1. Фронтенд</h3>
+  <div class="kv">
+    <div>Файл</div><div><code>/local/components/dresscode/catalog.item/templates/detail/js/modification-cart.js</code></div>
+    <div>Назначение</div><div>Отправка AJAX на <code>ajax.php?act=addCart</code> с полями <code>id</code>, <code>q</code>, <code>modification</code>, <code>modification_price</code>. Если <code>ajaxPath</code> не задан — используется <code>/ajax.php</code>.</div>
+  </div>
+
+  <h3>2.2. Бэкенд</h3>
+  <div class="kv">
+    <div>Файл</div><div><code>/ajax.php</code></div>
+    <div>Ключевая функция</div><div><code>addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantity, string $currency, string $modification = '', ?float $modPrice = null)</code></div>
+  </div>
+  <p><b>Алгоритм addToBasket:</b></p>
+  <ol class="list">
+    <li><b>Поиск</b> существующего элемента с тем же PRODUCT_ID и <span class="badge">MODIFICATION</span> — увеличение количества, иначе создание нового.</li>
+    <li><b>Цена</b>:
+      <ul class="list">
+        <li>Если передан <code>modification_price</code> → <code>PRICE</code>, <code>BASE_PRICE</code>, <code>CUSTOM_PRICE='Y'</code>.</li>
+        <li>Иначе — <code>CCatalogProduct::GetOptimalPrice()</code>.</li>
+      </ul>
+    </li>
+    <li><b>Порядок сохранения (важно):</b>
+      <ul class="list">
+        <li><code>$item->setFields($fields)</code>, затем <code>$item->save()</code> — получить валидный <b>BASKET_ID</b>.</li>
+        <li>Сформировать свойства и выполнить <code>$propCollection->setProperty([MODIFICATION, MODIFICATION_PRICE])</code>.</li>
+        <li><code>$propCollection->save()</code> и повторное <code>$item->save()</code>.</li>
+      </ul>
+    </li>
+    <li><b>Логирование</b> в <code>/upload/basket_debug.log</code> + контрольная выборка из <code>Bitrix\Sale\Internals\BasketPropertyTable</code>.</li>
+  </ol>
+
+  <div class="callout">
+    <b>Диагностические эндпоинты:</b>
+    <ul class="list">
+      <li><code>/ajax.php?act=listBasketItems</code> — все элементы корзины текущего пользователя со свойствами.</li>
+      <li><code>/ajax.php?act=getBasketProps&basket_id=ID</code> — свойства конкретного элемента из таблицы.</li>
+      <li><code>/ajax.php?act=getBasketDebugLog&lines=N</code> — последние N строк лога.</li>
+    </ul>
+  </div>
+
+  <h3>2.3. Шаблоны корзины</h3>
+  <div class="kv">
+    <div>Файлы</div>
+    <div>
+      <div><code>/local/templates/.default/components/dresscode/sale.basket.basket/standartOrder/view_templates/basket_table.php</code></div>
+      <div><code>/local/templates/.default/components/dresscode/sale.basket.basket/standartOrder/view_templates/basket_squares.php</code></div>
+    </div>
+    <div>Чтение свойств</div>
+    <div>
+      Прямая выборка <code>BasketPropertyTable</code> по <code>BASKET_ID</code> текущего элемента. Резерв: <code>$arElement['PROPS']</code> и D7 <code>getPropertyCollection()</code>.
+    </div>
+    <div>Отображение</div><div>Блок выводится, если найдена <code>MODIFICATION</code>. Если есть <code>MODIFICATION_PRICE</code> — также показывается цена модификации.</div>
+  </div>
+
+  <h2>3. Сигнатуры и свойства</h2>
+  <pre><code>addToBasket(\Bitrix\Sale\Basket $basket, int $productId, float $quantity,
+            string $currency, string $modification = '', ?float $modPrice = null)
+
+Свойства корзины:
+- CODE=MODIFICATION (string)
+- CODE=MODIFICATION_PRICE (decimal как string; приводится при выводе)
+</code></pre>
+
+  <h2>4. Поток добавления</h2>
+  <ol class="list">
+    <li>JS отправляет запрос на <code>/ajax.php?act=addCart</code> с <code>id</code>, <code>q</code>, <code>modification</code>, <code>modification_price</code>.</li>
+    <li>PHP создаёт/обновляет элемент корзины, сохраняет свойства и логирует.</li>
+    <li>Шаблон корзины читает свойства по <code>BASKET_ID</code> и отображает блок модификации.</li>
+  </ol>
+
+  <h2>5. Быстрая проверка</h2>
+  <pre><code>GET /ajax.php?act=listBasketItems
+GET /ajax.php?act=getBasketProps&amp;basket_id={ID}
+GET /ajax.php?act=getBasketDebugLog&amp;lines=200
+</code></pre>
+
+  <h2>6. Типовые проблемы и решения</h2>
+  <ul class="list">
+    <li><b>Свойства не видны:</b> элемент создан до фикса порядка сохранения. Удалить позицию и добавить снова.</li>
+    <li><b>Несовпадает BASKET_ID:</b> сверить с <code>listBasketItems</code>. Шаблон должен использовать актуальный ID.</li>
+    <li><b>Кеш мешает чтению:</b> предусмотрена очистка тегированного кеша <code>sale_basket</code> перед выборкой.</li>
+  </ul>
+
+  <div class="footer">
+    Логи: <code>/upload/basket_debug.log</code> • Обработчик: <code>/ajax.php</code> • Шаблоны: см. пути выше
+  </div>
+</div>
+</body>
+</html>

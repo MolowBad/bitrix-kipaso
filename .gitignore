@@ -8,6 +8,9 @@
 !/local/
 !/local/**
 
+!/dopiski/
+!/dopiski/**
+
 # 4. Разрешить файлы в корне
 !/*.php
 !/*.html
