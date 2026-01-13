@@ -46,4 +46,5 @@
 
 # Не хранить черновики/архивы в репозитории
 *.zip
+/meyertecAPI.xml
 /newPhpCatalog*.php
