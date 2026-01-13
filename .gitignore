@@ -7,8 +7,8 @@
 # 3. Разрешить папку local и всё её содержимое
 !/local/
 !/local/**
+
 # 4. Разрешить файлы в корне
-#    подставьте расширения, которые нужны вашему проекту
 !/*.php
 !/*.html
 !/*.css
@@ -16,11 +16,10 @@
 !/*.json
 !/*.xml
 !/*.txt
-!/*.zip
 !/.htaccess
 !/robots.txt
 
-/meyertecAPI.xml
+# Bitrix core / secrets
 /bitrix/
 /bitrix/php_interface/
 /bitrix/.settings.php
@@ -31,6 +30,7 @@
 /local/php_interface/after_connect_d7.php
 /local/php_interface/after_connect.php
 /local/.settings.php
+
 /.env
 .env.*
 *.key
@@ -42,5 +42,8 @@
 *.sqlite3
 *.log
 *.bak
-
 .DS_Store
+
+# Не хранить черновики/архивы в репозитории
+*.zip
+/newPhpCatalog*.php
