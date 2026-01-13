@@ -16,6 +16,7 @@
 !/*.json
 !/*.xml
 !/*.txt
+!/*.zip
 !/.htaccess
 !/robots.txt
 
