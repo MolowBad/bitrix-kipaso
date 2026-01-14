@@ -19,7 +19,7 @@ if (!file_exists($prologPath)) {
 require $prologPath;
 
 if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
-    exit("Не удалось подключить модуль iblock\n");
+    exit("Не удалось подключить модуль iblock или catalog\n");
 }
 
 
