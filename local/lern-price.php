@@ -1,6 +1,7 @@
 <?php
 
 use Bitrix\Main\Loader;
+use Bitrix\Main\Context;
 
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
@@ -14,10 +15,19 @@ if ($docRoot === '') {
 $prologPath = $docRoot . '/bitrix/modules/main/include/prolog_before.php';
 
 if (!file_exists($prologPath)) {
-    exit("Не найден файл prolog_before.php по пути: {$prologPath}\n");
+    die("Не найден файл prolog_before.php по пути: {$prologPath}\n");
 }
 require $prologPath;
 
 if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
-    exit ("Не удалось подключить модуль iblock или catalog\n");
+    die ("Не удалось подключить модуль iblock или catalog\n");
 }
+
+$request = Context::getCurrent()->getRequest();
+$codeRaw = trim((string) $request->getQuery('code'));
+$code = preg_replace('~[^a-zA-Z0-9_-]~', '', $codeRaw);
+
+if ($code === '') {
+    die ("символьный код не найдет");
+}
+
