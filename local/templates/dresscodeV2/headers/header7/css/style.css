@@ -27,6 +27,7 @@
 #headerLine4 .subTableColumn {
 	display: table-cell;
 	vertical-align: middle;
+	padding: 0% 1% 0% 1%;
 }
 
 #headerLine4 .subTableColumn:first-child {
