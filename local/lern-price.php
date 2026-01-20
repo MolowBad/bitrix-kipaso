@@ -3,6 +3,7 @@
 use Bitrix\Main\Loader;
 use Bitrix\Main\Context;
 use Bitrix\Iblock\ElementTable;
+use Bitrix\Catalog\CatalogIblockTable;
 
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
@@ -28,9 +29,17 @@ if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
     die ("Не удалось подключить модуль iblock или catalog\n");
 }
 
+/*возможно на удаление*/
 $request = Context::getCurrent()->getRequest();
 $codeRaw = trim((string) $request->getQuery('code'));
 $code = preg_replace('~[^a-zA-Z0-9_-]~', '', $codeRaw);
+
+
+if (PHP_SAPI === 'cli' && empty($argv[1]->$codeRaw = $argv[1])) {
+    $codeRaw = trim((string) $request->getQuery('code'));
+    $code = preg_replace('~[^a-zA-Z0-9_-]~', '', $codeRaw);
+}
+
 
 
 if ($code === '') {
@@ -44,7 +53,7 @@ function ElementIdByCode( string $code, int $iblockId) : int {
         'filter' => [
             '=IBLOCK_ID' => $iblockId,
             '=CODE' => $code,
-            'ACTIVE' => 'Y',
+            '=ACTIVE' => 'Y',
         ],
         'select' => ['ID'],
         'limit' => 1,
@@ -53,7 +62,11 @@ function ElementIdByCode( string $code, int $iblockId) : int {
     if (!$productId) {
         die("Товар с кодом {$code} не найден");
     }
-    return (int)$row['ID'];
+    return (int)$productId['ID'];
 }
-$productId = getElementIdByCode($code, $iblockId);
+$productId = ElementIdByCode($code, $iblockId);
 echo "ID товара: {$productId}<br>";
+
+function CatalogTable()
+
+
