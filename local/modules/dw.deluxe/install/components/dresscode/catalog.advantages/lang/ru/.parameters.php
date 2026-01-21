@@ -1,0 +1,4 @@
+<?
+	$MESS["CATALOG_ADVANTAGES_IBLOCK_ID"] = "Инфоблок";
+	$MESS["CATALOG_ADVANTAGES_IBLOCK_TYPE"] = "Тип Инфоблока";
+?>

@@ -1,0 +1,1 @@
+<?$APPLICATION->AddChainItem(GetMessage("REGISTER_TITLE"), "");?>

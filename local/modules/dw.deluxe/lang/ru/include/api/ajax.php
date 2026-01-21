@@ -1,0 +1,20 @@
+<?php
+$MESS["AI0_DW_DELUXE_API_ERROR_TITLE"] = "Ошибка";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_ERROR_PHONE_REQUIRED"] = "Укажите номер телефона";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_ERROR_PRODUCT_REQUIRED"] = "Не указан товар";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_ERROR_PRODUCT_NOT_FOUND"] = "Товар не найден";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_EVENT_NAME"] = "Запрос цены на товар";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_EMAIL_SUBJECT"] = "Запрос цены на товар";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_EMAIL_TEMPLATE"] = "<h3>С сайта #SITE# поступил запрос цены на товар.</h3><p>Товар: <b>#PRODUCT#</b><br />Имя: <b>#NAME#</b><br />Телефон: <b>#PHONE#</b><br />Комментарий: #COMMENT#</p>";
+$MESS["AI0_DW_DELUXE_API_REQUEST_PRICE_SUCCESS_MESSAGE"] = "Ваш запрос успешно отправлен. Мы свяжемся с вами в ближайшее время.";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_PHONE_REQUIRED"] = "Укажите номер телефона";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_PRODUCT_REQUIRED"] = "Не указан товар";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_PRODUCT_NOT_FOUND"] = "Товар не найден";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_NO_PERSON_TYPE"] = "В системе не настроены типы плательщиков";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_NO_ACTIVE_PERSON_TYPE"] = "Нет активных типов плательщиков";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_ERROR_ORDER_CREATE"] = "Ошибка создания заказа";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_EVENT_NAME"] = "Купить в один клик";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_EMAIL_SUBJECT"] = "Покупка товара в один клик";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_EMAIL_TEMPLATE"] = "<h3>С сайта #SITE# поступил новый заказ в 1 клик.</h3><p>Товар: <b>#PRODUCT#</b><br />Имя: <b>#NAME#</b><br />Телефон: <b>#PHONE#</b><br />Ссылка: #PRODUCT_URL#<br />Комментарий: #COMMENT#</p>";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_SUCCESS_TITLE"] = "Ваш заказ успешно отправлен";
+$MESS["AI0_DW_DELUXE_API_PRODUCT_QUICK_BUY_SUCCESS_MESSAGE"] = "В ближайшее время Вам перезвонит наш менеджер для уточнения деталей заказа.";

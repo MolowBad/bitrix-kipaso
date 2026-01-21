@@ -1,0 +1,6 @@
+<?php
+
+$MESS["CN0_COOKIE_NOTICE_DEFAULT_PARAMETER_HEADING"] = "Заголовок";
+$MESS["CN0_COOKIE_NOTICE_DEFAULT_PARAMETER_TEXT"] = "Текст уведомления (можно использовать #PRIVACY_POLICY_URL#)";
+$MESS["CN0_COOKIE_NOTICE_DEFAULT_PARAMETER_PRIVACY_POLICY_URL"] = "Ссылка на политику конфиденциальности (можно использовать #SITE_DIR#)";
+$MESS["CN0_COOKIE_NOTICE_DEFAULT_PARAMETER_CONFIRM_BUTTON_TEXT"] = "Текст кнопки";

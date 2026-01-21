@@ -1,0 +1,4 @@
+<?php
+
+$MESS["PV0_CATALOG_PRICES_VIEW_COMPONENT_NAME"] = "Цены товара — DW24";
+$MESS["PV0_CATALOG_PRICES_VIEW_COMPONENT_DESCRIPTION"] = "Компонент выводит цены товара";

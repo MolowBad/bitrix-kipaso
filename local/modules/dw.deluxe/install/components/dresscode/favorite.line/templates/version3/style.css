@@ -1,0 +1,50 @@
+.topWishlist {
+	display: inline-block;
+}
+
+.topWishlist .text {
+	display: block;
+	color: #000000;
+	opacity: 0.5;
+	transition: all 0.2s ease-in-out;
+}
+
+.topWishlist .text.active {
+	opacity: 1;
+}
+
+.topWishlist .text.active:hover {
+	opacity: 0.8;
+}
+
+.topWishlist .text.active:active {
+	position: relative;
+	top: 1px;
+}
+
+.topWishlist .icon,
+.topWishlist .label,
+.topWishlist .value {
+	float: left;
+}
+
+.topWishlist .icon {
+	width: 50px;
+	height: 50px;
+	background: url("images/wishlistH3.svg") 0 0 no-repeat transparent;
+	border-radius: 0;
+}
+
+.topWishlist .label {
+	margin-right: 12px;
+}
+
+.topWishlist .value {
+	height: 26px;
+	margin-top: 10px;
+	padding: 0 8px;
+	line-height: 27px;
+	text-align: center;
+	border: 1px solid #f3f3f3;
+	border-radius: 50%;
+}

@@ -1,0 +1,43 @@
+.advantagesDetail {
+	border-top: 1px solid #e7e8ea;
+	padding: 24px;
+}
+
+.advantagesDetail .advantagesItem {
+	vertical-align: middle;
+	display: inline-block;
+	text-align: center;
+}
+
+.advantagesDetail .advantagesPicture {
+	margin-bottom: 12px;
+}
+
+.advantagesDetail .advantagesName {
+	display: inline-block;
+	max-width: 200px;
+}
+
+@media all and (max-width: 700px) {
+	.advantagesDetail .advantagesItem {
+		text-align: left;
+	}
+}
+
+@media all and (max-width: 500px) {
+	.advantagesDetail .advantagesItem {
+		text-align: center;
+	}
+}
+
+@media all and (max-width: 450px) {
+	.advantagesDetail .advantagesItem {
+		text-align: left;
+	}
+}
+
+@media all and (max-width: 360px) {
+	.advantagesDetail .advantagesName {
+		max-width: 170px;
+	}
+}

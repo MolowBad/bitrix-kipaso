@@ -1,0 +1,8 @@
+CODE;NAME.RU.NAME;NAME.EN.NAME;NAME.DE.NAME;NAME.UA.NAME;SORT;SELECTORLEVEL;DEFAULTSELECT
+COUNTRY;РЎС‚СЂР°РЅР°;Country;Land;;100;1;0
+COUNTRY_DISTRICT;РћРєСЂСѓРі;District;Bundesland;;200;2;0
+REGION;РћР±Р»Р°СЃС‚СЊ;Region;Landkreis;;300;3;0
+SUBREGION;Р Р°Р№РѕРЅ РѕР±Р»Р°СЃС‚Рё;Area;Region;;500;4;0
+CITY;Р“РѕСЂРѕРґ;City;Stadt;;600;5;1
+VILLAGE;РЎРµР»Рѕ;Town;Gemeinde;;700;6;0
+STREET;РЈР»РёС†Р°;Street;StraГџe;;1000;9;0

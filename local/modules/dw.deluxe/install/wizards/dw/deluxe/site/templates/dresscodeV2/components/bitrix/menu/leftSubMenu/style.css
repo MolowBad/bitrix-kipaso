@@ -1,0 +1,19 @@
+#subLeftMenu {
+	margin: 0 0 24px;
+	padding: 12px 24px;
+	list-style: none;
+	background: #2b2b2b;
+	border-top: 1px solid #484848;
+}
+
+#subLeftMenu a {
+	display: block;
+	padding: 4px 0;
+	color: #888888;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+#subLeftMenu a:hover {
+	color: #ffffff;
+}

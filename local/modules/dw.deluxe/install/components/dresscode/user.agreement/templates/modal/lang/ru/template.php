@@ -1,0 +1,3 @@
+<?php
+
+$MESS["UA0_USER_AGREEMENT_MODAL_CLOSE_BUTTON_TEXT"] = "Закрыть окно";

@@ -1,0 +1,459 @@
+#mainMenuContainer {
+	height: 50px;
+}
+
+#mainMenuContainer .minCatalogButton {
+	display: none;
+	height: 65px;
+	padding-left: 24px;
+	font-weight: 400;
+	font-size: 18px;
+	font-family: "roboto_ltregular";
+	line-height: 65px;
+	text-decoration: none;
+}
+
+#mainMenuContainer .minCatalogButton img {
+	margin-top: -2px;
+	padding-right: 12px;
+	vertical-align: middle;
+}
+
+#menuCatalogSection {
+	float: left;
+	height: 50px;
+	border-left: 1px solid #222222;
+}
+
+#menuCatalogSection .catalogButton {
+	display: block;
+	padding: 0 32px;
+	color: #ffffff;
+	line-height: 50px;
+	text-transform: uppercase;
+	text-decoration: none;
+	background-color: #111111;
+	transition: all 0.2s ease-in-out;
+}
+
+#menuCatalogSection .catalogButton:hover {
+	background-color: #000000;
+}
+
+#menuCatalogSection .catalogButton:active {
+	position: relative;
+	top: 1px;
+}
+
+#menuCatalogSection .catalogButton img {
+	margin-top: -2px;
+	padding-right: 12px;
+	vertical-align: middle;
+}
+
+#mainMenu {
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
+}
+
+#mainMenu .removedItemsLink > a {
+	float: left;
+	width: 40px;
+	height: 60px;
+	background: url("images/menuSlicedIcon.svg") 50% 50% no-repeat transparent;
+	transition: all 0.2s ease-in-out;
+}
+
+#mainMenu .removedItemsLink > a:hover {
+	opacity: 0.8;
+}
+
+#mainMenu .removedItemsLink .removedItemsList {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	z-index: 100;
+	display: none;
+	width: 300px;
+	margin: 0 0 0 -211px;
+	padding: 0;
+	list-style: none;
+	background-color: #1a1a1a;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 20%);
+}
+
+#mainMenu .removedItemsLink:hover .removedItemsList {
+	display: block;
+}
+
+#mainMenu .removed {
+	border-top: 1px solid #222222;
+	transition: all 0.2s ease-in-out;
+}
+
+#mainMenu .removed:hover {
+	background-color: #202020;
+}
+
+/* #mainMenu .removed:first-child{
+	border-top: 0px;
+}
+*/
+#mainMenu .removed a {
+	display: block;
+	padding: 18px 24px;
+	line-height: 24px;
+	text-decoration: none;
+}
+
+#mainMenu a {
+	display: block;
+	transition: all 0.2s ease-in-out;
+}
+
+#mainMenu > li {
+	float: left;
+	line-height: 60px;
+	border-right: 1px solid #222222;
+	transition: all 0.2s ease-in-out;
+}
+
+#mainMenu > li:first-child {
+	border-left: 1px solid #222222;
+}
+
+#mainMenu > li:hover {
+	background-color: #202020;
+}
+
+#mainMenu > li:first-child {
+	margin-left: 0;
+}
+
+#mainMenu > li > a {
+	padding: 0 24px;
+	text-decoration: none;
+}
+
+#mainMenu > li img {
+	padding-right: 12px;
+	vertical-align: middle;
+	transition: all 0.2s ease-in-out;
+}
+
+#mainMenu > li a:hover img {
+	opacity: 0.8;
+}
+
+#menuCatalogSection .sectionMenuArrow {
+	padding-left: 12px;
+}
+
+/* drop sections */
+#menuCatalogSection .drop {
+	position: absolute;
+	top: 150px;
+	left: 0;
+	z-index: 100;
+	display: none;
+	width: 100%;
+	padding: 24px 0;
+	background-color: #ffffff;
+	border-bottom: 1px solid #dddddd;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 20%);
+}
+
+#menuCatalogSection .drop ul {
+	margin: -24px 0 0;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
+}
+
+#menuCatalogSection .drop .menuSectionContainer {
+	overflow: hidden;
+}
+
+#menuCatalogSection .drop ul li {
+	float: left;
+	box-sizing: border-box;
+	width: 20%;
+	height: 180px;
+	margin-top: 24px;
+	line-height: 180px;
+	text-align: center;
+}
+
+#menuCatalogSection .drop ul li:nth-child(5n + 1) {
+	border-left: 0;
+}
+
+#menuCatalogSection .drop ul li .container {
+	display: inline-block;
+	width: auto !important;
+	line-height: 21px;
+	vertical-align: middle;
+}
+
+#menuCatalogSection .drop ul li a {
+	display: block;
+	color: #000000;
+	font-size: 14px;
+	font-family: robotobold;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+#menuCatalogSection .drop ul li .picture {
+	height: 130px;
+	margin-bottom: 12px;
+	line-height: 130px;
+}
+
+#menuCatalogSection .drop ul li .picture img {
+	vertical-align: middle;
+}
+
+#menuCatalogSection .drop ul li .picture:hover {
+	opacity: 0.9;
+}
+
+#mainMenu .drop {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	z-index: 99;
+	display: none;
+	width: 100%;
+	padding: 24px 0;
+	background-color: #ffffff;
+	border-bottom: 1px solid #dddddd;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 20%);
+}
+
+#mainMenu .drop .nextColumn {
+	float: left;
+	width: 20%;
+	margin: 0;
+	padding: 0;
+	line-height: 21px;
+	list-style: none;
+}
+
+#mainMenu .drop .nextColumn > li {
+	display: block;
+	margin-top: 12px;
+}
+
+#mainMenu .drop .nextColumn > li:first-child {
+	margin-top: 0;
+}
+
+#mainMenu .drop .nextColumn > li > a {
+	color: #000000;
+	font-family: robotobold;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+#mainMenu .drop .nextColumn .menu2Link {
+	box-sizing: border-box;
+	padding-right: 12px;
+	overflow: hidden;
+}
+
+#mainMenu .drop .nextColumn .menu2Link img {
+	padding-bottom: 12px;
+}
+
+#mainMenu .drop .nextColumn ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#mainMenu .drop .nextColumn ul li {
+	display: block;
+	margin-top: 12px;
+}
+
+#mainMenu .drop .nextColumn ul li a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#mainMenu .dropdown,
+#mainMenu .back {
+	display: none;
+}
+
+@media screen and (max-width: 1024px) {
+	#mainMenu {
+		background: #ffffff;
+		box-shadow: 12px 12px 12px rgb(0 0 0 / 5%);
+	}
+
+	#mainMenu > li:first-child {
+		border-top: 0;
+	}
+
+	#mainMenu > li {
+		box-sizing: border-box;
+		border-top: 1px solid rgb(136 136 136 / 10%);
+		border-right: 0;
+	}
+
+	#mainMenu .drop .nextColumn .menu2Link,
+	#mainMenu li.eChild a {
+		padding-right: 48px;
+	}
+
+	#mainMenu .drop .nextColumn .menu2Link {
+		padding-left: 0;
+	}
+
+	#mainMenu li.eChild a {
+		position: relative;
+		color: #000000;
+		font-size: 13px;
+	}
+
+	#mainMenu a:hover,
+	#mainMenu li:hover a,
+	#mainMenu .drop ul li a:hover,
+	#mainMenu .drop .nextColumn ul li a:hover {
+		color: #000000;
+		background: transparent !important;
+	}
+
+	#mainMenu li:hover {
+		background-color: transparent !important;
+	}
+
+	#mainMenu .drop {
+		position: static;
+		display: block !important;
+		box-sizing: border-box;
+		width: auto;
+		margin: 0;
+		padding: 0;
+		background: none !important;
+		border: 0;
+		box-shadow: none;
+	}
+
+	#mainMenu .drop .limiter {
+		min-width: unset;
+	}
+
+	#mainMenu .drop .picture {
+		display: none;
+	}
+
+	#mainMenu .drop .nextColumn ul,
+	#mainMenu .drop .nextColumn {
+		display: none;
+		float: none;
+		width: 100%;
+	}
+
+	#mainMenu .opened .drop .nextColumn {
+		display: block;
+		box-sizing: border-box;
+		padding-left: 36px;
+	}
+
+	#mainMenu .opened .drop .nextColumn .opened ul {
+		display: block;
+		padding-left: 24px;
+	}
+
+	#mainMenu .opened .drop {
+		border-top: 1px solid #8888881a;
+	}
+
+	#mainMenu .drop .has-image {
+		display: none;
+	}
+
+	#mainMenu .drop .nextColumn ul li,
+	#mainMenu .drop .nextColumn > li {
+		box-sizing: border-box;
+		margin: 0;
+	}
+
+	#mainMenu .drop .nextColumn .menu2Link,
+	#mainMenu .opened .drop {
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	#mainMenu .drop .nextColumn > li > a {
+		padding: 6px 0;
+		font-family: "roboto_ltregular";
+		text-transform: none;
+	}
+
+	#mainMenu > li.opened > a {
+		padding-left: 60px;
+	}
+
+	#mainMenu > li.opened .back {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 18px;
+		height: 100%;
+		margin-left: 24px;
+		background: url("images/arrow-back-menu-black.svg") 50% 50% no-repeat transparent;
+	}
+
+	#mainMenu > li.opened img {
+		display: none;
+	}
+
+	#mainMenu .allow-dropdown .dropdown {
+		position: absolute;
+		top: 50%;
+		right: 12px;
+		display: block;
+		width: 30px;
+		min-width: unset;
+		height: 30px;
+		margin-top: -15px;
+		padding: 0;
+		line-height: normal;
+		background-image: url("images/arrow-dropdown-white.svg");
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		border-radius: 15px;
+		transition: transform 0.15s ease-in-out;
+		pointer-events: none;
+	}
+
+	#mainMenu li:not(.opened) .dropdown {
+		background-color: transparent;
+		background-image: url("images/arrow-dropdown-black.svg");
+		border: 0;
+	}
+
+	#mainMenu li.opened > a .dropdown {
+		right: 15px;
+		width: 24px;
+		transform: rotate(-90deg);
+	}
+
+	/*	#mainMenu li li.opened + .allow-dropdown,
+	#mainMenu li li.opened + .allow-dropdown .menuDropItems{
+		display: block;
+	}
+
+	#mainMenu li li + .allow-dropdown{
+		display: none;
+	} */
+}

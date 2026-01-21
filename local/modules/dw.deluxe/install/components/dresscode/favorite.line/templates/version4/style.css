@@ -1,0 +1,59 @@
+.topWishlist .text {
+	position: relative;
+	display: block;
+}
+
+.topWishlist .icon {
+	display: inline-block;
+	width: 60px;
+	height: 40px;
+	background: url("images/wishlistH4.svg") 50% 50% no-repeat transparent;
+}
+
+#subHeader4.color_black .topWishlist .icon,
+#subHeader4.color_theme .topWishlist .icon,
+#subHeader5.color_black .topWishlist .icon,
+#subHeader5.color_theme .topWishlist .icon,
+#subHeader7.color_black .topWishlist .icon,
+#subHeader7.color_theme .topWishlist .icon,
+#subHeader9.color_black .topWishlist .icon,
+#subHeader9.color_theme .topWishlist .icon {
+	display: inline-block;
+	width: 60px;
+	height: 40px;
+	background: url("images/wishlistH4w.svg") 50% 50% no-repeat transparent;
+}
+
+.topWishlist .active .icon:hover {
+	opacity: 0.7;
+}
+
+.topWishlist .active .icon:active {
+	position: relative;
+	top: 1px;
+}
+
+.topWishlist .value {
+	position: absolute;
+	top: 0;
+	right: 8px;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	color: #d1d1d1;
+	font-size: 12px;
+	text-align: center;
+	background-color: #ffffff;
+	border: 2px solid #d1d1d1;
+	border-radius: 50%;
+}
+
+#subHeader5.color_black .topWishlist .value,
+#subHeader7.color_black .topWishlist .value,
+#subHeader9.color_black .topWishlist .value {
+	background-color: #2b2b2b;
+}
+
+.topWishlist .active .value:active {
+	top: 1px;
+}
