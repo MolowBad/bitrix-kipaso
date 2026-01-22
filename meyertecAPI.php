@@ -1,31 +1,30 @@
 <?php
-/**
- * Скрипт импорта товаров из meyertec XML
- * 
- * Импортирует категории и товары с изображениями, характеристиками
- * и другими данными из XML-файла meyertec.
- */
 
+
+// Включаем отображение ошибок для отладки
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Увеличиваем лимиты времени и памяти для больших XML
 ini_set('memory_limit', '512M');
 set_time_limit(1800); // 30 минут
 
-// Подключаем ядро Bitrix
+
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
-// Проверяем наличие необходимых модулей
+
 try {
     if (!CModule::IncludeModule("iblock")) {
         throw new Exception("Ошибка подключения модуля iblock");
     }
     
     if (!CModule::IncludeModule("catalog")) {
-        // Если модуль каталога не установлен, продолжаем без него
+        
         logMessage("Модуль catalog не подключен, некоторые функции будут недоступны");
     }
     
-    // Подключаем другие модули, если они есть
+    
     if (CModule::IncludeModule("sale")) {
         logMessage("Модуль sale подключен");
     }
@@ -33,27 +32,53 @@ try {
     die($e->getMessage());
 }
 
-// Настройки
+
 $XML_URL = "https://meyertec.owen.ru/export/catalog.xml?host=owen.kipaso.ru&key=afOavhVgttik-rIgesgbk6Zkk-Y_by8W";
 
 
-// Жёстко задаём наш инфоблок а не ищем как было до этого
-$IBLOCK_ID         = 16;
-$SECTION_IBLOCK_ID = 16;
+$res = CIBlock::GetList(
+    array(),
+    array('TYPE' => 'catalog', 'SITE_ID' => SITE_ID),
+    true
+);
+if ($ar_res = $res->Fetch()) {
+    $IBLOCK_ID = $ar_res['ID'];
+    $SECTION_IBLOCK_ID = $ar_res['ID'];
+} else {
+    
+    $IBLOCK_ID = 2; 
+    $SECTION_IBLOCK_ID = 2;
+}
 
 
-// Путь к логам
-// Жёстко задаём путь к файлу логов в корне сайта
-$LOG_FILE = $_SERVER["DOCUMENT_ROOT"] . "/meyertec_import_log.txt";
+try {
+    
+    if (!empty($_SERVER["DOCUMENT_ROOT"])) {
+        $LOG_FILE = $_SERVER["DOCUMENT_ROOT"] . "/meyertec_import_log.txt";
+    } else {
+        
+        $LOG_FILE = dirname(__FILE__) . "/meyertec_import_log.txt";
+    }
+    
+    
+    $logDir = dirname($LOG_FILE);
+    if (!is_dir($logDir) || !is_writable($logDir)) {
+        
+        $LOG_FILE = sys_get_temp_dir() . "/meyertec_import_log.txt";
+    }
+} catch (Exception $e) {
+    // В случае ошибки используем текущую директорию
+    $LOG_FILE = dirname(__FILE__) . "/meyertec_import_log.txt";
+}
 
 // Логирование
 function logMessage($message) {
     global $LOG_FILE;
     $logMessage = date('[Y-m-d H:i:s] ') . $message . PHP_EOL;
     
-    if (!empty($LOG_FILE)) {    
+    if (!empty($LOG_FILE)) {
         try {
-            // Создаем директорию для логов, если не существует
+            
             $logDir = dirname($LOG_FILE);
             if (!is_dir($logDir)) {
                 @mkdir($logDir, 0755, true);
@@ -62,26 +87,26 @@ function logMessage($message) {
             if (is_writable($logDir)) {
                 file_put_contents($LOG_FILE, $logMessage, FILE_APPEND);
             } else {
-                // Если директория недоступна, запишем во временную директорию
+                
                 $tempFile = sys_get_temp_dir() . "/meyertec_import_log.txt";
                 @file_put_contents($tempFile, $logMessage, FILE_APPEND);
             }
         } catch (Throwable $e) {
-            // Перехватываем все возможные ошибки, включая Fatal error
+            
             echo "Ошибка записи лога: " . $e->getMessage() . "<br>";
         }
     }
     
     echo $message . "<br>";
     
-    // Flush output для лучшего отображения прогресса
+    
     if (ob_get_level() > 0) {
         @ob_flush();
     }
     @flush();
 }
 
-// Функция проверки соединения с БД перед работой с файлами
+
 function checkDBConnection() {
     global $DB;
     if (!is_object($DB)) {
@@ -91,7 +116,7 @@ function checkDBConnection() {
     try {
         $result = $DB->Query('SELECT 1', true);
         if ($result === false) {
-            // Если запрос не выполнен, пытаемся переподключиться
+            
             if (method_exists($DB, 'DoConnect')) {
                 $DB->DoConnect();
                 logMessage("Соединение с базой данных восстановлено");
@@ -108,126 +133,10 @@ function checkDBConnection() {
     }
 }
 
-// Исправленная функция для загрузки изображений с явным скачиванием файла
+
 function downloadAndSaveImage($imageUrl) {
     if (empty($imageUrl)) {
-        logMessage("Пустой URL изображения");
-        return false;
-    }
-    
-    try {
-        // Явно скачиваем файл вместо использования ссылки
-        $ext = pathinfo($imageUrl, PATHINFO_EXTENSION);
-        if (empty($ext)) {
-            $ext = 'jpg'; // По умолчанию jpg
-        }
-        
-        // Создаем временный файл
-        $tempFile = $_SERVER['DOCUMENT_ROOT'] . '/upload/temp_' . md5(microtime() . $imageUrl) . '.' . $ext;
-        
-        // Скачиваем файл напрямую
-        if (!function_exists('curl_init')) {
-            $fileContent = file_get_contents($imageUrl);
-            if ($fileContent === false) {
-                logMessage("Не удалось загрузить изображение: {$imageUrl}");
-                return false;
-            }
-            file_put_contents($tempFile, $fileContent);
-        } else {
-            // Используем CURL для более надежной загрузки
-            $ch = curl_init($imageUrl);
-            $fp = fopen($tempFile, 'wb');
-            curl_setopt($ch, CURLOPT_FILE, $fp);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-            curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            fclose($fp);
-            
-            if ($httpCode != 200) {
-                unlink($tempFile);
-                logMessage("Неудачный запрос, HTTP код: {$httpCode} для URL: {$imageUrl}");
-                return false;
-            }
-        }
-        
-        // Проверяем, что файл существует
-        if (!file_exists($tempFile) || filesize($tempFile) == 0) {
-            logMessage("Не удалось сохранить изображение во временный файл: {$tempFile}");
-            if (file_exists($tempFile)) unlink($tempFile);
-            return false;
-        }
-        
-        // Устанавливаем максимальные права доступа к файлу
-        chmod($tempFile, 0666);
-        
-        // Создаем массив для CFile из локального файла
-        $fileArray = CFile::MakeFileArray($tempFile);
-        
-        if (!$fileArray || !is_array($fileArray) || empty($fileArray)) {
-            logMessage("Не удалось создать массив файла для {$tempFile}");
-            if (file_exists($tempFile)) unlink($tempFile);
-            return false;
-        }
-        
-        // Устанавливаем необходимые параметры
-        $fileArray["MODULE_ID"] = "iblock";
-        
-        // Устанавливаем имя файла
-        $fileName = basename($imageUrl);
-        if (empty($fileName) || strpos($fileName, '?') !== false) {
-            $fileName = "image_{$ext}_" . time() . ".{$ext}";
-        }
-        $fileArray["name"] = $fileName;
-        
-        // Устанавливаем тип файла
-        $fileArray["type"] = "image/" . (strtolower($ext) == 'jpg' ? 'jpeg' : strtolower($ext));
-        
-        // Добавляем публичные параметры
-        $fileArray["PUBLIC"] = "Y";
-
-        
-        // Сохраняем файл в Bitrix и получаем ID
-        $fileId = CFile::SaveFile($fileArray, "iblock");
-        
-        if ($fileId) {
-            logMessage("Успешно сохранено изображение, ID: {$fileId}, Тип: {$fileArray['type']}");
-            return $fileId;
-        } else {
-            logMessage("Ошибка при сохранении файла через CFile::SaveFile");
-            return false;
-        }
-    } catch (Exception $e) {
-        logMessage("Ошибка при загрузке изображения: " . $e->getMessage());
-        return false;
-    }
-}
-
-// Функция для загрузки файла по URL
-function downloadFile($url) {
-    try {
-        $tempName = tempnam(sys_get_temp_dir(), 'meyertec_');
-        
-        // Настройка клиента с увеличенным таймаутом
-        $client = new \Bitrix\Main\Web\HttpClient(array(
-            'socketTimeout' => 30,
-            'streamTimeout' => 30,
-            'disableSslVerification' => true
-        ));
-        
-        if ($client->download($url, $tempName)) {
-            $fileInfo = pathinfo($url);
-            $extension = isset($fileInfo['extension']) ? $fileInfo['extension'] : 'jpg';
-            
-            $fileArray = CFile::MakeFileArray($tempName);
-            if ($fileArray) {
-                $fileArray['name'] = md5(microtime() . $url) . '.' . $extension;
-                return $fileArray;
-            } else {
-                logMessage("Ошибка создания массива файла для: " . $url);
-            }
+        logM}
         } else {
             logMessage("Ошибка загрузки файла: " . $url . ". Ошибка: " . $client->getError());
         }
@@ -242,7 +151,7 @@ function downloadFile($url) {
 function findOrCreateSection($name, $parentId = 0, $xml_id = '') {
     global $SECTION_IBLOCK_ID;
     
-    // Проверяем соединение с БД
+    
     if (!checkDBConnection()) {
         logMessage("Ошибка соединения с БД при работе с разделом: " . $name);
         return false;
@@ -265,20 +174,20 @@ function findOrCreateSection($name, $parentId = 0, $xml_id = '') {
     } else {
         $bs = new CIBlockSection;
         
-        // Формируем символьный код
+        
         $code = '';
         
-        // Если xml_id содержит число, используем его
+        
         if (is_numeric($xml_id)) {
             $code = 'category_' . $xml_id;
         } else {
-            // Иначе транслитерируем название
+            
             $code = CUtil::translit($name, "ru", array(
                 "replace_space" => "-", 
                 "replace_other" => "-"
             ));
             
-            // Если и это не работает, создадим уникальный код
+            
             if (empty($code)) {
                 $code = 'category_' . md5($name . time());
             }
@@ -288,7 +197,7 @@ function findOrCreateSection($name, $parentId = 0, $xml_id = '') {
             "ACTIVE" => "Y",
             "IBLOCK_ID" => $SECTION_IBLOCK_ID,
             "NAME" => $name,
-            "CODE" => $code, // Добавляем символьный код
+            "CODE" => $code, 
             "SORT" => 500,
             "XML_ID" => $xml_id,
         );

@@ -5398,7 +5398,7 @@ body.panels_white #homeCatalog #captionCarousel::before {
 .limiter {
 	clear: both;
 	min-width: 320px;
-	max-width: 1420px;
+	max-width: 1920px;
 	margin: auto;
 	padding: 0 24px;
 }

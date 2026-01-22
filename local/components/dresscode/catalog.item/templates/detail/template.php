@@ -1136,7 +1136,7 @@ if (!empty($arResult["EDIT_LINK"])) {
                 </style>
                 
                 <!-- Блок выбора модификаций товара -->
-                <div class="product-modifications-main" style="display: none;">
+                <div class="product-modifications-main" id="mod-owen" style="display: none;">
                     <h3 clacc ="product-modifications-main-head">Выберите модификацию товара:</h3>
                     
                     <!-- Контейнер для шаблона модификации -->

@@ -1,4 +1,53 @@
 /* Скрываем блок с дублирующимися характеристиками товара */
-.changePropertiesNoGroup {
+.changePropertiesGroup {
     display: none !important;
+}
+
+/* 1) Ставим .gray обратно в табличный режим */
+.gray {
+    width: 1000px;
+    /* display:flex и related-свойства удалены */
+  }
+  
+  /* 2) Сужаем глобальный селектор или убираем border */
+  tr > td {
+    border-top: 0;
+    border-right: 0;
+    /* border:1px solid black; убрано */
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+  
+  /* 3) Сбрасываем бордюры в outer table */
+table.stats td {
+    border: none !important;
+}
+
+/* 4) Конфигурируем вложенную table-base */
+.table-base {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+}
+
+.td-header {
+    background-color: #e5e5e5;
+}
+
+.table-base td {
+    border: 1px solid #9e9e9e;
+}
+
+.propertyTable {
+    width: 90% !important;
+    display: flex !important;
+    flex-direction: column;
+}
+
+.propertyValue {
+    width: 90% !important;
+    overflow: visible !important;
+}
+.table-base {
+    width: 100%;
 }

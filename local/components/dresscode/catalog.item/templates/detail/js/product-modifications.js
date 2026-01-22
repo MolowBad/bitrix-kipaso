@@ -12,7 +12,6 @@ class ProductModifications {
         this.modBlockElement = document.querySelector(this.options.modBlockSelector || '.product-modifications-main');
         this.templateElement = document.querySelector('.modification-template');
         this.groupsElement = document.querySelector('.modification-groups');
-        this.buyBlockOriginalHtml = null;
         
         this.init();
     }
@@ -380,11 +379,7 @@ class ProductModifications {
             const allSelected = this.areAllModificationsSelected();
             const resultBlock = document.querySelector('.modification-result-block');
             const buyBlock = document.querySelector('.modification-buy-block');
-            let modificationAddCartBtn = document.querySelector('.modificationAddCart');
-
-            if (buyBlock && this.buyBlockOriginalHtml === null) {
-                this.buyBlockOriginalHtml = buyBlock.innerHTML;
-            }
+            const modificationAddCartBtn = document.querySelector('.modificationAddCart');
             
             if (allSelected) {
                 // Форматируем код модификации
@@ -406,17 +401,7 @@ class ProductModifications {
                     console.log('Кнопка покупки:', modificationAddCartBtn);
                     
                     // Если цена успешно загружена, показываем кнопку "Купить"
-                    if (priceData && priceData.success && buyBlock) {
-                        if (!buyBlock.querySelector('.modificationAddCart') && this.buyBlockOriginalHtml) {
-                            buyBlock.innerHTML = this.buyBlockOriginalHtml;
-                        }
-
-                        modificationAddCartBtn = buyBlock.querySelector('.modificationAddCart');
-                        if (!modificationAddCartBtn) {
-                            console.warn('ProductModifications: Кнопка \'Купить\' не найдена в buyBlock');
-                            return;
-                        }
-
+                    if (priceData && priceData.success && buyBlock && modificationAddCartBtn) {
                         // Устанавливаем данные для кнопки
                         // productId - ID базового товара (как раньше)
                         const productId = document.querySelector('input[name="product_id"]')?.value || window.productId || '';
@@ -448,7 +433,7 @@ class ProductModifications {
                         buyBlock.style.display = 'block';
                     } else {
                         if (buyBlock) {
-                            buyBlock.innerHTML = '<a href="#" class="addCart modificationCallbackBtn" style="background-color: green;max-width: 200px;border-radius: 10px;text-decoration: none;"><span style="display: flex;padding: 10px;gap: 10px;color: white;font-size: 15px;"><img src="/local/templates/dresscodeV2/images/incart.svg" alt="Уточнить цену" class="icon">Уточнить цену</span></a>';
+                            buyBlock.innerHTML = '<a href="#" class="addCart modificationCallbackBtn"><span class="spanaAddCart"><img src="/local/templates/dresscodeV2/images/incart.svg" alt="Уточнить цену" class="icon">Уточнить цену</span></a>';
                             buyBlock.style.display = 'block';
 
                             const callbackBtn = buyBlock.querySelector('.modificationCallbackBtn');

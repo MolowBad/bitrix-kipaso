@@ -183,7 +183,7 @@ if (empty($map)) {
 $size = count($map);
 logMessage('info', 'map size=' . $size, $verbose, $logPath);
 $shown = 0;
-foreach ($map as $k => $v) {
+foreach ($map as $k => $v) {// перебираем массив map ключ articule так как именно его будем сапоставлять
     logMessage('info', 'SAMPLE ' . $k . ' => ' . $v, true, $logPath);
     if (++$shown >= 5) { 
         break; 

@@ -6,7 +6,7 @@
 ?>
 <noindex>
 	<ul class="sn">
-		<?if(!empty($arTemplateSettings["TEMPLATE_TELEGRAM_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_TELEGRAM_LINK"]?>" class="telegram" rel="nofollow"></a></li><?endif;?>
+		<!-- <?if(!empty($arTemplateSettings["TEMPLATE_TELEGRAM_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_TELEGRAM_LINK"]?>" class="telegram" rel="nofollow"></a></li><?endif;?>
 		<?if(!empty($arTemplateSettings["TEMPLATE_WHATSAPP_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_WHATSAPP_LINK"]?>" class="whatsapp" rel="nofollow"></a></li><?endif;?>
 		<?if(!empty($arTemplateSettings["TEMPLATE_RUTUBE_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_RUTUBE_LINK"]?>" class="rutube" rel="nofollow"></a></li><?endif;?>
 		<?if(!empty($arTemplateSettings["TEMPLATE_DZEN_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_DZEN_LINK"]?>" class="dzen" rel="nofollow"></a></li><?endif;?>
@@ -17,6 +17,6 @@
 		<?if(!empty($arTemplateSettings["TEMPLATE_ODNOKLASSNIKI_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_ODNOKLASSNIKI_LINK"]?>" class="od" rel="nofollow"></a></li><?endif;?>
 		<?if(!empty($arTemplateSettings["TEMPLATE_TWITTER_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_TWITTER_LINK"]?>" class="tw" rel="nofollow"></a></li><?endif;?>
 		<?if(!empty($arTemplateSettings["TEMPLATE_INSTAGRAM_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_INSTAGRAM_LINK"]?>" class="go" rel="nofollow"></a></li><?endif;?>
-		<?if(!empty($arTemplateSettings["TEMPLATE_YOUTUBE_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_YOUTUBE_LINK"]?>" class="yo" rel="nofollow"></a></li><?endif;?>
+		<?if(!empty($arTemplateSettings["TEMPLATE_YOUTUBE_LINK"])):?><li><a href="<?=$arTemplateSettings["TEMPLATE_YOUTUBE_LINK"]?>" class="yo" rel="nofollow"></a></li><?endif;?> -->
 	</ul>
 </noindex>

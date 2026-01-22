@@ -8,8 +8,10 @@
 !/local/
 !/local/**
 
+!/dopiski/
+!/dopiski/**
+
 # 4. Разрешить файлы в корне
-#    подставьте расширения, которые нужны вашему проекту
 !/*.php
 !/*.html
 !/*.css
@@ -20,8 +22,33 @@
 !/.htaccess
 !/robots.txt
 
+# Bitrix core / secrets
+/bitrix/
+/bitrix/php_interface/
+/bitrix/.settings.php
+/bitrix/php_interface/dbconn.php
+/bitrix/license_key.php
 
+/local/php_interface/dbconn.php
+/local/php_interface/after_connect_d7.php
+/local/php_interface/after_connect.php
+/local/.settings.php
+
+/.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.sql
+*.sqlite
+*.sqlite3
+*.log
+*.bak
+.DS_Store
+**/.DS_Store
+
+# Не хранить черновики/архивы в репозитории
+*.zip
 /meyertecAPI.xml
-*.DS_Store
-
-
+/newPhpCatalog*.php

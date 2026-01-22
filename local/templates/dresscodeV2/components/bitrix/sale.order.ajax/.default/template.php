@@ -522,7 +522,7 @@ else
 						<div class="bx-soa-section-content container-fluid"></div>
 					</div>
 					<!--	DELIVERY BLOCK	-->
-					<div id="bx-soa-delivery"  data-visited="false" class="bx-soa-section bx-active" <?=($hideDelivery ? 'style="display:none"' : '')?>>
+					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active" <?=($hideDelivery ? 'style="display:none"' : '')?>>
 						<div class="bx-soa-section-title-container">
 							<h2 class="bx-soa-section-title"><?=$arParams['MESS_DELIVERY_BLOCK_NAME']?></h2>
 							<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
