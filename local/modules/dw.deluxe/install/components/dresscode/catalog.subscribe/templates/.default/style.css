@@ -1,0 +1,356 @@
+.catalogSubscribe {
+	margin: 24px 0px;
+}
+
+.catalogSubscribeContainer {
+	background-color: #f9f9f9;
+	border-collapse: separate;
+	box-sizing: border-box;
+	padding: 48px 36px;
+	display: table;
+	width: 100%;
+}
+
+.catalogSubscribeColumn {
+	vertical-align: middle;
+	display: table-cell;
+	width: 50%;
+}
+
+.catalogSubscribeColumn:first-child {
+	padding-right: 12px;
+}
+
+.catalogSubscribeColumn:last-child {
+	padding-left: 12px;
+	text-align: right;
+}
+
+.catalogSubscribeHeading {
+	font-family: "robotobold";
+	font-size: 21px;
+}
+
+.catalogSubscribeDescription {
+	line-height: 21px;
+	margin-top: 12px;
+	font-size: 14px;
+}
+
+.catalogSubscribeRotator {
+	line-height: normal;
+	font-size: 0px;
+}
+
+.catalogSubscribeRotatorContainer {
+	display: inline-block;
+}
+
+.catalogSubscribeRotatorBg {
+	background-color: #ffffff;
+	box-sizing: border-box;
+	table-layout: fixed;
+	padding: 12px 18px;
+	border-radius: 4px;
+	display: table;
+	width: 100%;
+}
+
+.catalogSubscribeRotatorBg.error {
+	border: 1px solid #ff0000;
+}
+
+.catalogSubscribeRotatorBg.success {
+	border: 1px solid #91c409;
+}
+
+.catalogSubscribeLabel,
+.catalogSubscribeField,
+.catalogSubscribeButtons {
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 14px;
+}
+
+.catalogSubscribeLabel {
+	width: 25px;
+}
+
+.catalogSubscribeField input {
+	background-color: transparent;
+	box-sizing: border-box;
+	padding-right: 12px;
+	padding-left: 12px;
+	margin-right: 12px;
+	line-height: 30px;
+	height: 30px;
+	width: 100%;
+	border: 0;
+}
+
+.catalogSubscribeLabel img,
+.catalogSubscribeLabel span {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.catalogSubscribeButtons {
+	width: 120px;
+}
+
+.catalogSubscribeSend .icon {
+	display: none;
+}
+
+.catalogSubscribePersonal {
+	line-height: normal;
+	text-align: left;
+	margin-top: 18px;
+	font-size: 14px;
+}
+
+.catalogSubscribePersonal input,
+.catalogSubscribePersonal label {
+	vertical-align: middle;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+.catalogSubscribePersonal input {
+	border: 1px solid #e7e8ea;
+	box-sizing: border-box;
+	margin-top: -1px;
+	height: 14px;
+	width: 14px;
+}
+
+.catalogSubscribePersonal input.error + label:before {
+	border: 1px solid #ff0000;
+	border-radius: 4px;
+}
+
+.catalogSubscribePersonal a {
+	border-bottom: 1px dashed #e7e8ea;
+}
+
+.catalogSubscribePersonal input[type="checkbox"] + label {
+	cursor: pointer;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:not(checked) {
+	position: absolute;
+	opacity: 0;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:not(checked) + label {
+	position: relative;
+	padding-left: 28px;
+}
+
+.catalogSubscribePersonal input[type="checkbox"] + label:before {
+	background: url(images/checkBox.png) 0 0 no-repeat transparent;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:not(checked) + label:before {
+	position: absolute;
+	content: " ";
+	height: 17px;
+	width: 17px;
+	left: 0px;
+	top: -1px;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:not(checked) + label:hover:before {
+	background-position: 0 -17px;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:checked + label:before {
+	background-position: 0 -34px;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:checked + label:hover:before {
+	background-position: 0 -51px;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:disabled + label {
+	cursor: default;
+}
+
+.catalogSubscribePersonal input[type="checkbox"]:disabled + label:before {
+	background-position: 0 -68px !important;
+}
+
+.catalogSubscribeSuccess,
+.catalogSubscribeError {
+	box-shadow: 1px 1px 12px rgba(60, 60, 60, 0.3);
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-animation-duration: 0.2s;
+	animation-duration: 0.2s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-name: zoomIn;
+	animation-name: zoomIn;
+	background-color: #fff;
+	box-sizing: border-box;
+	padding: 24px 24px;
+	text-align: center;
+	min-height: 300px;
+	overflow: hidden;
+	position: fixed;
+	display: none;
+	z-index: 9999;
+	width: 420px;
+	left: 50%;
+	top: 50%;
+}
+
+.catalogSubscribeSuccess.open,
+.catalogSubscribeError.open {
+	display: block;
+}
+
+.catalogSubscribeSuccessHeading,
+.catalogSubscribeErrorHeading {
+	font-family: "robotomedium";
+	line-height: 26px;
+	margin-top: 12px;
+	font-size: 24px;
+}
+
+.catalogSubscribeSuccessText,
+.catalogSubscribeErrorText {
+	line-height: 18px;
+	margin-top: 12px;
+	font-size: 13px;
+}
+
+.catalogSubscribeSuccessClose,
+.catalogSubscribeErrorClose {
+	margin-top: 12px;
+}
+
+.catalogSubscribeSuccessButton,
+.catalogSubscribeErrorButton {
+	text-decoration: none;
+	line-height: 50px;
+	padding: 0px;
+	height: 50px;
+}
+
+@media screen and (max-width: 1380px) {
+	.catalogSubscribeHeading {
+		font-size: 18px;
+	}
+
+	.catalogSubscribeContainer {
+		padding: 36px;
+	}
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1250px) {
+	.catalogSubscribeColumn {
+		display: block;
+		padding: 0px;
+		width: 100%;
+	}
+
+	.catalogSubscribeColumn:first-child {
+		padding-right: 0px;
+	}
+
+	.catalogSubscribeColumn:last-child {
+		padding-left: 0px;
+		margin-top: 12px;
+	}
+}
+
+@media screen and (max-width: 940px) {
+	.catalogSubscribeColumn {
+		display: block;
+		padding: 0px;
+		width: 100%;
+	}
+
+	.catalogSubscribeColumn:first-child {
+		padding-right: 0px;
+	}
+
+	.catalogSubscribeColumn:last-child {
+		padding-left: 0px;
+		margin-top: 12px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.catalogSubscribeContainer {
+		padding: 24px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.catalogSubscribeHeading {
+		font-size: 16px;
+	}
+}
+
+@media all and (max-width: 500px) {
+	.catalog-subscribe-success,
+	.catalog-subscribe-error {
+		width: 380px;
+	}
+}
+
+@media all and (max-width: 420px) {
+	.catalog-subscribe-success,
+	.catalog-subscribe-error {
+		width: 290px;
+	}
+}
+
+@media screen and (max-width: 418px) {
+	.catalogSubscribeField input {
+		padding-left: 0px;
+	}
+
+	.catalogSubscribeLabel {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.catalogSubscribeButtons {
+		width: 40px;
+	}
+
+	.catalogSubscribeButtons .catalogSubscribeSend.btn-simple {
+		line-height: 26px;
+		min-width: auto;
+		padding: 0px;
+		width: 40px;
+	}
+
+	.catalogSubscribeSend .text {
+		display: none;
+	}
+
+	.catalogSubscribeSend .icon {
+		background: url(images/sub_arrow.png) 50% 50% no-repeat transparent;
+		vertical-align: middle;
+		display: inline-block;
+		text-indent: -9999px;
+		font-size: 0px;
+		height: 8px;
+		width: 5px;
+	}
+
+	.catalogSubscribeRotatorBg {
+		padding: 8px 12px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.catalogSubscribeContainer {
+		padding: 12px;
+	}
+}

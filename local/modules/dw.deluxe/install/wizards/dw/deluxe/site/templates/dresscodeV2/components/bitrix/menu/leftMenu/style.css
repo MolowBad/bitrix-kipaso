@@ -1,0 +1,219 @@
+#leftMenu {
+	position: relative;
+	z-index: 33;
+	margin: 0;
+	padding: 12px 0;
+	list-style: none;
+	background: #2b2b2b;
+}
+
+#leftMenu li {
+	list-style: none;
+}
+
+#leftMenu > li:first-child {
+	border: 0;
+}
+
+#leftMenu > li {
+	display: block;
+	background: #2b2b2b;
+	transition: all 0.1s ease;
+}
+
+#leftMenu > li:hover,
+#leftMenu .activeDrop {
+	background: #ffffff;
+}
+
+#leftMenu li:hover .menuLink,
+#leftMenu .activeDrop .menuLink {
+	color: #000000;
+}
+
+#leftMenu li .menuLink {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	padding-right: 8px;
+	color: #ffffff;
+	font-size: 13px;
+	line-height: 18px;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+#leftMenu .menuLink img {
+	vertical-align: middle;
+}
+
+#leftMenu li .tb {
+	display: table;
+	width: 100%;
+}
+
+#leftMenu .pc,
+#leftMenu .tx {
+	display: table-cell;
+	padding: 8px;
+	vertical-align: middle;
+}
+
+#leftMenu li .pc {
+	width: 24px;
+	height: 21px;
+	padding-left: 18px;
+	text-align: center;
+	transition: all 0.1s;
+}
+
+#leftMenu .pc img {
+	max-width: 100%;
+}
+
+#leftMenu ul {
+	margin: 0;
+	padding: 0;
+}
+
+#leftMenu .drop {
+	position: absolute;
+	top: 0%;
+	left: 100%;
+	z-index: 999999;
+	display: none;
+	width: 1%;
+	min-height: 400px;
+	overflow: hidden;
+	table-layout: fixed;
+	background: #ffffff;
+	border-collapse: collapse;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 40%);
+}
+
+#leftMenu .menuItems {
+	display: table-cell;
+	width: 245px;
+	padding: 12px;
+	vertical-align: top;
+	background-color: #ffffff;
+	border-right: 1px solid #e7e8ea;
+}
+
+#leftMenu .menuItems > li:first-child {
+	margin-top: 0;
+}
+
+#leftMenu .menuItems > li {
+	position: relative;
+	margin-top: 8px;
+}
+
+#leftMenu .menuItems span {
+	color: #444444;
+	font-size: 14px;
+	font-family: robotobold;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+}
+
+#leftMenu .menuItems small {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	height: 22px;
+	margin-top: -11px;
+	color: #888888;
+	line-height: 22px;
+}
+
+#leftMenu .menuItems a {
+	display: block;
+	color: #000000;
+	line-height: 21px;
+	transition: all 0.2s ease-in-out;
+}
+
+#leftMenu .menuItems a:hover {
+	color: #999999;
+}
+
+#leftMenu .menuSlider {
+	position: relative;
+	display: table-cell;
+	width: 280px;
+	overflow: hidden;
+	vertical-align: middle;
+	background: #ffffff; /* Old browsers */
+	background: linear-gradient(top, #ffffff 50%, #f9fafc 100%); /* FF3.6+ */
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(50%, #ffffff),
+		color-stop(100%, #f9fafc)
+	); /* Chrome,Safari4+ */
+
+	background: linear-gradient(top, #ffffff 50%, #f9fafc 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(top, #ffffff 50%, #f9fafc 100%); /* Opera 11.10+ */
+	background: linear-gradient(top, #ffffff 50%, #f9fafc 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 50%, #f9fafc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9fafc',GradientType=0 ); /* IE6-9 */
+}
+
+#leftMenu .menuSlider > ul {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#leftMenu .menuSlider > ul > li {
+	position: relative;
+	float: left;
+}
+
+#leftMenu .menuSlider .slideBtnLeft,
+#leftMenu .menuSlider .slideBtnRight {
+	position: absolute;
+	top: 30%;
+	z-index: 99;
+	width: 14px;
+	height: 16px;
+	margin-top: 3px;
+	background: url("images/slideArrow.png") 0 0 no-repeat transparent;
+	opacity: 0.5;
+}
+
+#leftMenu .menuSlider .slideBtnLeft:hover,
+#leftMenu .menuSlider .slideBtnRight:hover {
+	opacity: 0.8;
+}
+
+#leftMenu .menuSlider .slideBtnLeft:active,
+#leftMenu .menuSlider .slideBtnRight:active {
+	opacity: 1;
+}
+
+#leftMenu .menuSlider .slideBtnLeft {
+	left: 12px;
+}
+
+#leftMenu .menuSlider .slideBtnRight {
+	right: 12px;
+	background-position: -14px 0;
+}
+
+#leftMenu .product {
+	position: relative !important;
+	width: 100% !important;
+	height: auto !important;
+	border: 0 !important;
+}
+
+#leftMenu .product .tabloid {
+	position: static !important;
+	height: auto !important;
+	background: transparent !important;
+	border: 0 !important;
+}

@@ -1,0 +1,15 @@
+<?php
+
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FORM_TITLE"] = "Купить товар в 1 клик";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FORM_SUBTITLE"] = "Заполните данные для заказа";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FIELD_NAME"] = "Имя";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FIELD_PHONE"] = "Номер телефона*";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FIELD_EMAIL"] = "Адрес электронной почты";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_FIELD_COMMENT"] = "Комментарий";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_AGREEMENT_TEXT"] = "Я согласен на #LINK#";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_AGREEMENT_LINK"] = "обработку персональных данных.";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_SUBMIT_BUTTON"] = "Купить в 1 клик";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_CLOSE_WINDOW"] = "Закрыть окно";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_SUCCESS_TITLE"] = "Спасибо за Ваш заказ";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_SUCCESS_ORDER_LABEL"] = "Номер вашего заказа:";
+$MESS["PQ0_PRODUCT_QUICK_BUY_FORM_MODAL_SUCCESS_MESSAGE"] = "В ближайшее время Вам перезвонит наш менеджер для уточнения деталей заказа.";

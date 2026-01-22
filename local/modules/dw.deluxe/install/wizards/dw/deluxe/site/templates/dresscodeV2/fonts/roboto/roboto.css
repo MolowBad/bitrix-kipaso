@@ -1,0 +1,55 @@
+@font-face {
+	font-weight: normal;
+	font-family: robotobold;
+	font-style: normal;
+	src: url("roboto-bold.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: bold;
+	font-family: robotomedium;
+	font-style: normal;
+	src: url("roboto-medium.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: normal;
+	font-family: "roboto_condensedlight";
+	font-style: normal;
+	src: url("robotocondensed-light.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: normal;
+	font-family: "roboto_cnregular";
+	font-style: normal;
+	src: url("roboto-condensed.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: normal;
+	font-family: "roboto_ltregular";
+	font-style: normal;
+	src: url("roboto-light.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: normal;
+	font-family: robotoregular;
+	font-style: normal;
+	src: url("roboto-regular.woff2") format("woff2");
+	font-display: fallback;
+}
+
+@font-face {
+	font-weight: normal;
+	font-family: "roboto_thregular";
+	font-style: normal;
+	src: url("roboto-thin.woff2") format("woff2");
+	font-display: fallback;
+}

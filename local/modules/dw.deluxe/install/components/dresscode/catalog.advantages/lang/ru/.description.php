@@ -1,0 +1,4 @@
+<?php
+
+$MESS["CA0_CATALOG_ADVANTAGES_COMPONENT_NAME"] = "Преимущества — DW24";
+$MESS["CA0_CATALOG_ADVANTAGES_COMPONENT_DESCRIPTION"] = "Компонент вывод преимущества";

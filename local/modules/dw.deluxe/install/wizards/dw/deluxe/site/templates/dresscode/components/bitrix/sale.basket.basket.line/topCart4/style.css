@@ -1,0 +1,37 @@
+.cart .countLink {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 40px;
+	background: url("images/cartH4.svg") 50% 50% no-repeat transparent;
+}
+
+#subHeader4.color_black .cart .countLink,
+#subHeader4.color_theme .cart .countLink,
+#subHeader8.color_theme .cart .countLink,
+#subHeader8.color_black .cart .countLink {
+	background: url("images/cartH4w.svg") 50% 50% no-repeat transparent;
+}
+
+.cart .countLink.active:hover {
+	opacity: 0.7;
+}
+
+.cart .countLink.active:active {
+	top: 1px;
+}
+
+.cart .count {
+	position: absolute;
+	top: 0;
+	right: 8px;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	color: #d1d1d1;
+	font-size: 12px;
+	text-align: center;
+	background-color: #ffffff;
+	border: 2px solid #d1d1d1;
+	border-radius: 50%;
+}

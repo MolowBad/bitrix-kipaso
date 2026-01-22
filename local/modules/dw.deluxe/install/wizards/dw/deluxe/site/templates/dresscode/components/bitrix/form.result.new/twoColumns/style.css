@@ -1,0 +1,421 @@
+.webFormDw form {
+	transition: all 0.2s ease-in-out;
+}
+
+.webFormDw form.loading {
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.webFormHeading {
+	margin: 0;
+	font-weight: normal;
+	font-size: 16px;
+	font-family: robotoMedium;
+}
+
+.webFormDescription {
+	max-width: 800px;
+	margin: 24px 0 0;
+}
+
+.webFormItemsColumns {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.webFormItemsColumns .webFormItem {
+	margin-top: 14px;
+}
+
+.webFormItemsColumn {
+	display: table-cell;
+	width: 50%;
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+.webFormItemsColumn:first-child {
+	padding: 0 10px 0 0;
+}
+
+.webFormItemsColumn .webFormItemField textarea {
+	height: 265px;
+}
+
+.webFormItem {
+	margin-top: 24px;
+}
+
+.webFormItemCaption {
+	margin-bottom: 12px;
+	font-family: robotoMedium;
+	line-height: 21px;
+}
+
+.webFormItemImage {
+	display: inline-block;
+	padding-right: 6px;
+	vertical-align: middle;
+}
+
+.webFormItemLabel {
+	display: inline-block;
+	color: #555555;
+	vertical-align: middle;
+}
+
+.webFormItemRequired {
+	display: inline-block;
+	padding-left: 4px;
+	color: #ff0000;
+}
+
+.webFormItemFieldVariant {
+	display: inline-block;
+	margin-left: 12px;
+}
+
+.webFormItemFieldVariant:first-child {
+	margin-left: 0;
+}
+
+.webFormItemField input[type="password"],
+.webFormItemField input[type="text"],
+.webFormItemField select {
+	box-sizing: border-box;
+	width: 100%;
+
+	/* max-width: 600px; */
+	max-width: 100%;
+	height: 55px;
+	padding-left: 12px;
+	color: #555555;
+	font-size: 14px;
+	font-family: "roboto_ltregular";
+	line-height: 55px;
+	border: 1px solid #e7e7e7;
+	outline: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.webFormItemField textarea {
+	box-sizing: border-box;
+	width: 100%;
+
+	/* max-width: 600px; */
+	max-width: 100%;
+	height: 200px;
+	padding-top: 12px;
+	padding-left: 12px;
+	color: #555555;
+	font-size: 14px;
+	font-family: "roboto_ltregular";
+	line-height: 21px;
+	border: 1px solid #e7e7e7;
+	outline: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.webFormItemField input[id*="form_date_"] {
+	margin-bottom: 6px;
+}
+
+.webFormItemField input[type="text"]:focus,
+.webFormItemField input[type="password"]:focus,
+.webFormItemField textarea:focus {
+	border: 1px solid #aaaaaa;
+}
+
+.webFormItemField input[type="checkbox"] + label,
+.webFormItemField input[type="radio"] + label {
+	cursor: pointer;
+}
+
+.webFormItemField input[type="checkbox"]:not(checked),
+.webFormItemField input[type="radio"]:not(checked) {
+	position: absolute;
+	opacity: 0;
+}
+
+.webFormItemField input[type="checkbox"]:not(checked) + label,
+.webFormItemField input[type="radio"]:not(checked) + label {
+	position: relative;
+	padding-left: 28px;
+}
+
+.webFormItemField input[type="checkbox"].error + label::before {
+	border: 1px solid #ff0000 !important;
+}
+
+.webFormItemField input[type="checkbox"] + label::before {
+	background: url("images/checkBox.png") 0 0 no-repeat transparent;
+}
+
+.webFormItemField input[type="radio"] + label::before {
+	background: url("images/radio.png") 0 0 no-repeat transparent;
+}
+
+.webFormItemField input[type="checkbox"]:not(checked) + label::before,
+.webFormItemField input[type="radio"]:not(checked) + label::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 17px;
+	height: 17px;
+	content: " ";
+}
+
+.webFormItemField input[type="checkbox"]:not(checked) + label:hover::before,
+.webFormItemField input[type="radio"]:not(checked) + label:hover::before {
+	background-position: 0 -17px;
+}
+
+.webFormItemField input[type="checkbox"]:checked + label::before,
+.webFormItemField input[type="radio"]:checked + label::before {
+	background-position: 0 -34px;
+}
+
+.webFormItemField input[type="checkbox"]:checked + label:hover::before,
+.webFormItemField input[type="radio"]:checked + label:hover::before {
+	background-position: 0 -51px;
+}
+
+.webFormItemField input[type="checkbox"]:disabled + label,
+.webFormItemField input[type="radio"]:disabled + label {
+	cursor: default;
+}
+
+.webFormItemField input[type="checkbox"]:disabled + label::before,
+.webFormItemField input[type="radio"]:disabled + label::before {
+	background-position: 0 -68px !important;
+}
+
+.webFormItemField img.calendar-icon {
+	margin: 0 !important;
+	vertical-align: middle !important;
+	border: 0 !important;
+}
+
+.webFormItemField [multiple] {
+	height: 120px;
+	padding: 12px;
+	line-height: 120px;
+}
+
+.webFormCaptchaPicture {
+	margin-top: 12px;
+}
+
+.webFormCaptchaPicture img {
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+.webFormCaptchaLabel {
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+.webFormItemField input.captcha_word {
+	max-width: 300px;
+}
+
+.webFormTools {
+	margin-top: 24px;
+}
+
+.webFormTools input[type="submit"],
+.webFormTools input[type="reset"] {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 200px;
+	height: 55px;
+	padding: 0;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: "roboto_ltregular";
+	line-height: 55px;
+	text-align: center;
+	border: 1px solid #e7e7e7;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.webFormTools input[type="submit"]:active {
+	position: relative;
+	top: 1px;
+}
+
+.webFormTools input[type="submit"].loading {
+	color: #dddddd;
+	background-color: #000000 !important;
+	background-image: url("images/loading.gif");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	border: 1px solid #000000;
+	opacity: 0.1;
+	pointer-events: none;
+}
+
+.webFormTools input[type="reset"] {
+	color: #000000;
+	background-color: #ffffff;
+	border: 1px solid #aaaaaa;
+}
+
+.webFormTools input[type="reset"]:hover {
+	border: 1px solid #cccccc;
+}
+
+.webFormTools input[type="reset"]:active {
+	position: relative;
+	top: 1px;
+}
+
+.webFormTools input:first-child {
+	margin-right: 12px;
+}
+
+.webFormItemError,
+.webFormError {
+	display: none;
+	margin-bottom: 12px;
+	color: #ff0000;
+	font-size: 12px;
+	font-family: robotoMedium;
+}
+
+.webFormError {
+	margin-top: 24px;
+	margin-bottom: 0;
+}
+
+.webFormItemError.visible,
+.webFormError.visible {
+	display: block;
+}
+
+.webFormItemField .error {
+	border: 1px solid #ff0000 !important;
+}
+
+.webFormMessage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	line-height: 250px;
+	background: rgb(0 0 0 / 40%);
+	transition: 0.1s all ease-in-out;
+}
+
+.webFormMessageContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	box-sizing: border-box;
+	width: 450px;
+	height: 250px;
+	margin-top: -125px;
+	margin-left: -225px;
+	padding: 0 24px;
+	text-align: center;
+	background-color: #ffffff;
+	border-radius: 2px;
+	box-shadow: 1px 1px 12px rgb(0 0 0 / 40%);
+}
+
+.webFormMessageMiddle {
+	display: inline-block;
+	line-height: 21px;
+	vertical-align: middle;
+}
+
+.webFormMessageHeading {
+	margin-bottom: 24px;
+	font-weight: 500;
+	font-size: 18px;
+	text-align: center;
+}
+
+.webFormMessageDescription {
+	text-align: center;
+}
+
+.webFormMessageExit {
+	display: inline-block;
+	height: 40px;
+	margin-top: 24px;
+	padding: 0 24px;
+	color: #ffffff;
+	line-height: 40px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #000000;
+	border-radius: 2px;
+	transition: all 0.2s ease-in-out;
+}
+
+.webFormMessageExit:hover {
+	opacity: 0.8;
+}
+
+.webFormMessageExit:active {
+	position: relative;
+	top: 1px;
+}
+
+@media all and (max-width: 650px) {
+	.webFormItemsColumn {
+		display: block;
+		width: 100%;
+		padding: 0;
+	}
+
+	.webFormItemsColumn .webFormItemField textarea {
+		height: 150px;
+	}
+
+	.webFormItemField input[id*="form_date_"] {
+		margin-bottom: 12px;
+	}
+
+	.webFormItemField img.calendar-icon {
+		margin-left: 0 !important;
+	}
+
+	.webFormTools input[type="reset"] {
+		margin-bottom: 0;
+	}
+}
+
+@media all and (max-width: 500px) {
+	.webFormMessageContainer {
+		width: 400px;
+		margin-left: -200px;
+	}
+}
+
+@media all and (max-width: 420px) {
+	.webFormMessageContainer {
+		width: 300px;
+		margin-left: -150px;
+	}
+}
+
+@media all and (max-width: 400px) {
+	.webFormTools input[type="submit"],
+	.webFormTools input[type="reset"] {
+		display: block;
+		width: 100%;
+		max-width: 300px;
+		margin-bottom: 24px;
+	}
+}

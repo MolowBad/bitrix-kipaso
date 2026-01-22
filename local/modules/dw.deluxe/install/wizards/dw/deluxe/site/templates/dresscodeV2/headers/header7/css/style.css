@@ -1,0 +1,877 @@
+#headerLine4 {
+	position: relative;
+	min-width: 320px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #f3f3f3;
+}
+
+#headerLine4.color_black {
+	background-color: #2b2b2b;
+}
+
+#headerLine4.color_black,
+#headerLine4.color_theme {
+	color: #ffffff;
+	border-bottom: 1px solid rgb(255 255 255 / 15%);
+}
+
+#headerLine4 .subTable {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+#headerLine4 .subTableColumn {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#headerLine4 .subTableColumn:first-child {
+	vertical-align: top;
+}
+
+#headerLine4 .subTableColumn:last-child {
+	text-align: right;
+}
+
+#headerLine4 #geoPosition,
+#headerLine4 #topAuth {
+	display: inline-block;
+}
+
+#headerLine4 #topAuth {
+	margin-right: 24px;
+}
+
+#headerLine4 #geoPosition ul,
+#headerLine4 #topAuth ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#headerLine4 #topAuth ul li {
+	display: inline-block;
+}
+
+#headerLine4 #topAuth ul li:first-child {
+	margin-right: 12px;
+}
+
+#headerLine4 .user-geo-position-value-link,
+#headerLine4 #topAuth ul li a {
+	position: relative;
+	text-decoration: none;
+}
+
+#headerLine4.color_theme .user-geo-position-value-link,
+#headerLine4.color_theme #topAuth ul li a {
+	color: #ffffff;
+}
+
+#headerLine4 .user-geo-position-value-link:active,
+#headerLine4 #topAuth ul li a:active {
+	position: relative;
+	top: 1px;
+}
+
+#headerLine4 .user-geo-position-value-link::after,
+#headerLine4 #topAuth ul li a::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 0;
+	transition: all 0.2s ease-in-out;
+	content: "";
+}
+
+#headerLine4.color_theme .user-geo-position-value-link::after,
+#headerLine4.color_theme #topAuth ul li a::after {
+	border-color: #ffffff;
+}
+
+#headerLine4 .user-geo-position-value-link::after {
+	bottom: 12px;
+}
+
+#headerLine4.color_theme .user-geo-position-value-link {
+	color: #ffffff;
+}
+
+#headerLine4.color_theme .user-geo-position-value-link:hover {
+	opacity: 0.8;
+}
+
+#headerLine4.color_theme .user-geo-position-value-link::after {
+	border-color: #ffffff;
+}
+
+#headerLine4 #subMenu .removedItemsContainer {
+	position: relative;
+}
+
+#headerLine4 #subMenu li:first-child a {
+	padding: 0 24px 0 0;
+}
+
+#headerLine4.color_theme #subMenu li a,
+#headerLine4.color_theme #subMenu li a:hover,
+#headerLine4.color_theme #subMenu li .selected,
+#headerLine4.color_black #subMenu li a {
+	color: #ffffff;
+}
+
+#headerLine4.color_theme #subMenu li a:hover,
+#headerLine4.color_theme #subMenu li .selected {
+	opacity: 0.8;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsLink {
+	display: inline-block;
+	width: 30px;
+	height: 18px;
+	padding: 0 12px;
+	vertical-align: middle;
+	background: url("images/menuMore.svg") 50% 50% no-repeat transparent;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsLink:hover {
+	opacity: 0.6;
+}
+
+#headerLine4.color_black #subMenu .removedItemsContainer .removedItemsLink,
+#headerLine4.color_theme #subMenu .removedItemsContainer .removedItemsLink {
+	background: url("images/menuMoreW.svg") 50% 50% no-repeat transparent;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsLink:active {
+	position: relative;
+	top: 1px;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsList {
+	position: absolute;
+	top: 41px;
+	right: 0;
+	z-index: 99;
+	display: none;
+	width: 180px;
+	margin: 0;
+	padding: 0;
+	background-color: #fbfbfb;
+}
+
+#headerLine4.color_black #subMenu .removedItemsContainer .removedItemsList {
+	background-color: #2b2b2b;
+}
+
+#headerLine4.color_black #subMenu .removedItemsContainer .removedItemsList li,
+#headerLine4.color_theme #subMenu .removedItemsContainer .removedItemsList li {
+	border-top: 1px solid rgb(255 255 255 / 15%);
+}
+
+#headerLine4.color_black #subMenu .removedItemsContainer .removedItemsList li a,
+#headerLine4.color_theme #subMenu .removedItemsContainer .removedItemsList li a {
+	color: #ffffff;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsList li {
+	display: block;
+	float: none;
+	white-space: normal;
+	text-align: left;
+	border-top: 1px solid #f2f2f2;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsList li:first-child {
+	border: 0 !important;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsList li a {
+	display: block;
+	padding: 8px 12px;
+	line-height: 21px;
+}
+
+#headerLine4 #subMenu .removedItemsContainer .removedItemsList li a:active {
+	position: relative;
+	top: 1px;
+}
+
+#headerLine4 #topSocial {
+	float: right;
+	margin-left: 24px;
+	text-align: right;
+}
+
+#headerLine4 .topSoc {
+	display: inline-block;
+	margin: 0;
+	margin-left: 24px;
+	padding: 0;
+	vertical-align: middle;
+	list-style: none;
+}
+
+#headerLine4 .topSocItem {
+	display: inline-block;
+	margin-left: 2px;
+	vertical-align: middle;
+}
+
+#headerLine4 .topSocItem:first-child {
+	margin-left: 0;
+}
+
+#headerLine4 .topSocItem a {
+	display: block;
+	width: 24px;
+	height: 24px;
+	background: url("images/headSn.svg") 0 0 no-repeat transparent;
+}
+
+#headerLine4 .topSocItem a:hover {
+	opacity: 0.7;
+}
+
+#headerLine4 .topSocItem a:active {
+	position: relative;
+	top: 1px;
+}
+
+#headerLine4 .topSocItem .socFB {
+	background-position: -24px;
+}
+
+#headerLine4 .topSocItem .socODN {
+	background-position: -48px;
+}
+
+#headerLine4 .topSocItem .socTV {
+	background-position: -72px;
+}
+
+#headerLine4 .topSocItem .socINS {
+	background-position: -96px;
+}
+
+#headerLine4 .topSocItem .socYOU {
+	background-position: -120px;
+}
+
+#headerLine4 .user-geo-position-label,
+#headerLine4 .user-geo-position-value,
+#headerLine4 .user-geo-position-value-link {
+	font-size: 14px;
+}
+
+#subHeader7 {
+	position: relative;
+	min-width: 320px;
+	height: 90px;
+	line-height: 90px;
+	background-color: #ffffff;
+	border-bottom: 1px solid #f3f3f3;
+}
+
+#subHeader7.color_black {
+	background-color: #2b2b2b;
+}
+
+#subHeader7.color_black,
+#subHeader7.color_theme {
+	color: #ffffff;
+	border-bottom: 1px solid rgb(255 255 255 / 15%);
+}
+
+#subHeader7 .subTable {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+#subHeader7 .subTableRow {
+	display: table-row;
+}
+
+#subHeader7 .subTableColumn {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#subHeader7 .subTableColumn:first-child {
+	width: 230px;
+}
+
+#subHeader7 .subTableColumn:nth-child(2) {
+	padding-right: 24px;
+}
+
+#subHeader7 .subTableColumn:nth-child(3) {
+	width: 520px;
+	text-align: right;
+}
+
+#subHeader7 #logo {
+	width: 212px;
+	height: 90px;
+	line-height: 90px;
+	text-align: left;
+	border: 0;
+}
+
+#subHeader7 .subTableColumn:last-child {
+	width: 356px;
+	text-align: right;
+}
+
+#subHeader7 .subTableColumn .toolsContainer {
+	display: inline-block;
+	line-height: 21px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+#subHeader7 .phonesContainer {
+	display: inline-block;
+	margin-right: 24px;
+	vertical-align: middle;
+}
+
+#subHeader7 .firstPhones,
+#subHeader7 .secondPhones {
+	display: inline-block;
+	line-height: 21px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+#subHeader7 .firstPhones {
+	margin-right: 48px;
+}
+
+#subHeader7 .firstPhones .heading,
+#subHeader7 .secondPhones .heading {
+	display: block;
+	font-size: 16px;
+	font-family: robotoBold;
+}
+
+#subHeader7 .firstPhones .callBack {
+	position: relative;
+	text-decoration: none;
+}
+
+#subHeader7.color_theme .firstPhones .callBack {
+	color: #ffffff;
+}
+
+#subHeader7.color_theme .firstPhones .callBack:hover {
+	opacity: 0.8;
+}
+
+#subHeader7 .firstPhones .callBack:active {
+	position: relative;
+	top: 1px;
+}
+
+#subHeader7 .firstPhones .callBack::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 0;
+	transition: all 0.2s ease-in-out;
+	content: "";
+}
+
+#subHeader7.color_theme .firstPhones .callBack::after {
+	border-color: #ffffff;
+}
+
+#subHeader7.color_theme .firstPhones .callBack::after:hover {
+	opacity: 0.8;
+}
+
+#subHeader7 .phonesTb {
+	display: table;
+	table-layout: fixed;
+}
+
+#subHeader7 .phonesTc {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#subHeader7 .phonesTc:first-child {
+	padding-right: 12px;
+}
+
+#subHeader7 .callBackIcon {
+	display: block;
+	width: 34px;
+	height: 28px;
+	background: url("images/phoneIco2.svg") 0 0 no-repeat transparent;
+	transition: all 0.2s ease-in-out;
+}
+
+#subHeader7.color_black .callBackIcon,
+#subHeader7.color_theme .callBackIcon {
+	background-image: url("images/phoneIco2W.svg");
+}
+
+#subHeader7 .scheduleIcon {
+	display: block;
+	width: 27px;
+	height: 28px;
+	background: url("images/phoneIco.svg") 0 0 no-repeat transparent;
+	transition: all 0.2s ease-in-out;
+}
+
+#subHeader7.color_black .scheduleIcon,
+#subHeader7.color_theme .scheduleIcon {
+	background-image: url("images/phoneIcoW.svg");
+}
+
+#subHeader7 .callBackIcon:hover,
+#subHeader7 .scheduleIcon:hover {
+	opacity: 0.7;
+}
+
+#subHeader7 .callBackIcon:active,
+#subHeader7 .scheduleIcon:active {
+	position: relative;
+	top: 1px;
+}
+
+#subHeader7 .secondPhones .schedule {
+	color: #888888;
+}
+
+#subHeader7.color_theme .secondPhones .schedule {
+	color: #f1f1f1;
+}
+
+#subHeader7.color_black .firstPhones .heading,
+#subHeader7.color_black .secondPhones .heading {
+	font-family: "roboto_ltregular";
+}
+
+#subHeader7 .topWishlist,
+#subHeader7 .topCompare,
+#subHeader7 .cart {
+	float: left;
+}
+
+#subHeader7 .subTableColumn .toolsContainer {
+	margin-top: 6px;
+}
+
+#geo-location-window {
+	text-align: left;
+}
+
+#subHeader7 #topSearch2 .searchContainerInner {
+	background-color: #fafafa;
+}
+
+#subHeader7.color_black #topSearch2 .searchContainerInner,
+#subHeader7.color_theme #topSearch2 .searchContainerInner {
+	background-color: rgb(255 255 255 / 10%);
+	border: 1px solid rgb(255 255 255 / 20%);
+}
+
+#subHeader7.color_black #topSearch2 input[placeholder],
+#subHeader7.color_theme #topSearch2 input[placeholder] {
+	color: rgb(255 255 255 / 70%);
+	transition: all 0.2s ease-in-out;
+}
+
+#subHeader7.color_black #topSearch2 input::input-placeholder,
+#subHeader7.color_theme #topSearch2 input::input-placeholder {
+	color: rgb(255 255 255 / 70%);
+	transition: all 0.2s ease-in-out;
+}
+
+#subHeader7.color_black #topSearch2 input::placeholder,
+#subHeader7.color_theme #topSearch2 input::placeholder {
+	color: rgb(255 255 255 / 70%);
+	transition: all 0.2s ease-in-out;
+}
+
+#subHeader7.color_black #topSearch2 input:focus[placeholder],
+#subHeader7.color_theme #topSearch2 input:focus[placeholder] {
+	color: transparent;
+}
+
+#subHeader7.color_black #topSearch2 input:focus::input-placeholder,
+#subHeader7.color_theme #topSearch2 input:focus::input-placeholder {
+	color: transparent;
+}
+
+#subHeader7.color_black #topSearch2 input::placeholder,
+#subHeader7.color_theme #topSearch2 input::placeholder {
+	color: transparent;
+}
+
+#subHeader7.color_theme .topWishlist .value,
+#subHeader7.color_theme .topCompare .value,
+#subHeader7.color_theme .cart .count {
+	color: #ffffff;
+	border-color: rgb(255 255 255 / 70%);
+}
+
+#subHeader7.color_theme .topCompare .active .value,
+#subHeader7.color_theme .topWishlist .active .value,
+#subHeader7.color_theme .cart .active .count {
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+#subHeader7.color_theme .cart .total,
+#subHeader7.color_theme .cart .total:hover,
+#subHeader7.color_theme .cart .heading,
+#subHeader7.color_theme .cart .heading:hover,
+#subHeader7.color_theme .cart .heading:hover .total {
+	color: #ffffff;
+}
+
+#subHeader7.color_black .cart .heading .cartLabel {
+	color: #ffffff;
+}
+
+#subHeader7.color_theme .cart .total:hover {
+	opacity: 0.7;
+}
+
+#subHeader7.color_theme #topAuth > ul li a,
+#subHeader7.color_theme #topAuth > ul li a:hover {
+	color: #ffffff;
+}
+
+#subHeader7.color_theme #topAuth > ul li a:hover {
+	opacity: 0.8;
+}
+
+#subHeader7.color_theme #topAuth > ul li:first-child::after {
+	color: #ffffff;
+}
+
+#subHeader7.color_theme .user-geo-position-value-link::after,
+#subHeader7.color_theme #topAuth ul li a::after {
+	border-color: #ffffff;
+}
+
+#subHeader7 #searchResult {
+	top: 90px;
+	line-height: 21px;
+}
+
+#subHeader7 #searchOverlap {
+	top: 172px;
+}
+
+#subHeader7 .webformModal {
+	text-align: left;
+}
+
+#mainMenuContainer #menuCatalogSection {
+	border: 0;
+}
+
+#menuCatalogSection .menuSection .catalogButton {
+	padding: 0 12px 0 0;
+	background-color: transparent;
+}
+
+#menuCatalogSection .menuSection .catalogButton:hover {
+	background-color: transparent;
+	opacity: 0.8;
+}
+
+.menuContainerColor #mainMenuContainer {
+	border-top: 0 !important;
+}
+
+@media all and (max-width: 1590px) {
+	#subHeader7 .cart .heading {
+		display: none;
+	}
+
+	#subHeader7 .subTableColumn:last-child {
+		width: 182px;
+		text-align: right;
+	}
+}
+
+@media all and (max-width: 1340px) {
+	#subHeader7 .callBackIcon,
+	#subHeader7 .scheduleIcon {
+		display: none;
+	}
+
+	#subHeader7 .subTableColumn:nth-child(3) {
+		width: 410px;
+	}
+
+	#subHeader7 .firstPhones {
+		margin-right: 24px;
+	}
+
+	#subHeader7 .subTableColumn:first-child {
+		width: 220px;
+	}
+}
+
+@media all and (max-width: 1240px) {
+	#subHeader7 .secondPhones {
+		display: none;
+	}
+
+	#subHeader7 .firstPhones {
+		margin-right: 0;
+	}
+
+	#subHeader7 .subTableColumn:nth-child(3) {
+		width: 200px;
+	}
+
+	#headerLine4 .subTableColumn:last-child {
+		width: 660px;
+	}
+}
+
+@media all and (max-width: 1150px) {
+	#headerLine4 #topSocial {
+		display: none;
+	}
+
+	#headerLine4 .subTableColumn:last-child {
+		width: 440px;
+	}
+}
+
+@media all and (max-width: 1000px) {
+	#subHeader7 {
+		height: 164px;
+	}
+
+	#topSearchLine {
+		position: absolute;
+		top: 90px;
+		left: 0;
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0 24px;
+	}
+
+	#headerLine4 .user-geo-position-label {
+		display: none;
+	}
+
+	#headerLine4 #subMenu li a {
+		padding: 0 12px;
+	}
+
+	#headerLine4 #subMenu li:first-child a {
+		padding-right: 12px;
+		padding-left: 0;
+	}
+
+	#headerLine4 .subTableColumn:last-child {
+		width: 330px;
+	}
+
+	#headerLine4 #topAuth {
+		margin-right: 12px;
+	}
+
+	#subHeader7 #searchResult {
+		top: 74px;
+	}
+
+	#subHeader7 #searchOverlap {
+		top: 206px;
+	}
+}
+
+@media all and (max-width: 700px) {
+	#subHeader7 #logo {
+		margin-left: 12px;
+		padding-left: 0;
+	}
+
+	#topSearchLine {
+		padding: 0 12px;
+	}
+
+	#headerLine4 .subTableColumn:first-child {
+		width: 172px;
+	}
+
+	#headerLine4 #geoPosition {
+		position: absolute;
+		left: 62px;
+	}
+
+	#subHeader7 .topCompare {
+		display: none;
+	}
+
+	#subHeader7 .subTableColumn:last-child {
+		width: 120px;
+	}
+
+	#subHeader7 .phonesContainer {
+		margin-right: 12px;
+	}
+
+	#subHeader7 .phonesTc {
+		text-align: right;
+	}
+
+	#headerLine4 .top-auth-personal,
+	#headerLine4 .top-auth-exit,
+	#headerLine4 .top-auth-login,
+	#headerLine4 .top-auth-register {
+		position: static;
+	}
+
+	#headerLine4 .subTableColumn:last-child {
+		width: 155px;
+	}
+
+	#subHeader7 .subTableColumn:nth-child(3) {
+		width: 190px;
+	}
+
+	#subHeader7 .subTableColumn:first-child {
+		width: 180px;
+	}
+
+	#subHeader7 #logo {
+		width: 160px;
+	}
+
+	#headerLine4 #subMenu .removedItemsContainer .removedItemsList {
+		left: 0;
+	}
+
+	#headerLine4 #topAuth {
+		margin-right: 0;
+	}
+}
+
+@media all and (max-width: 600px) {
+	#subHeader7 .topWishlist {
+		display: none;
+	}
+
+	#subHeader7 .subTableColumn:last-child {
+		width: 60px;
+	}
+
+	#subHeader7 .subTableColumn .toolsContainer {
+		margin-top: 0;
+	}
+
+	#subHeader7 .subTableColumn:nth-child(2) {
+		display: inline;
+	}
+
+	#subHeader7 .subTableColumn:first-child {
+		width: auto;
+	}
+
+	#subHeader7 #logo {
+		width: 130px;
+		padding-right: 12px;
+	}
+}
+
+@media all and (max-width: 420px) {
+	#subHeader7 .cart {
+		position: absolute;
+		top: 98px;
+		right: 0;
+	}
+
+	#topSearchLine {
+		padding-right: 62px;
+	}
+
+	#subHeader7 .subTableColumn:last-child {
+		width: 0;
+	}
+
+	#subHeader7 #logo {
+		width: 160px;
+	}
+
+	#headerLine4 #geoPosition {
+		top: 74px;
+		right: 0;
+		z-index: 96;
+	}
+
+	#subHeader7 .firstPhones {
+		margin-top: -23px;
+	}
+
+	#headerLine4 .user-geo-position-label,
+	#headerLine4 .user-geo-position-value,
+	#headerLine4 .user-geo-position-value-link {
+		font-size: 12px;
+	}
+
+	#subHeader7 .firstPhones .callBack {
+		display: none;
+	}
+
+	#headerLine4 #geoPosition.color_theme .user-geo-position-value-link {
+		color: #ffffff;
+	}
+
+	#headerLine4 #geoPosition.color_theme .user-geo-position-value-link::after {
+		border-color: #ffffff;
+	}
+
+	#subHeader7 .phonesContainer {
+		margin-right: 0;
+	}
+}
+
+@media all and (max-width: 420px) {
+	#subHeader7 #logo {
+		z-index: 99;
+		width: 140px;
+	}
+}
+
+@media all and (max-width: 400px) {
+	#subHeader7 #logo {
+		width: 120px;
+	}
+
+	#subHeader7 .firstPhones .heading,
+	#subHeader7 .secondPhones .heading {
+		font-size: 14px;
+	}
+
+	#headerLine4 .subTableColumn:first-child {
+		width: 50px;
+	}
+
+	#subHeader7 #topSearch2 #searchQuery,
+	#subHeader7.color_theme #topSearch2 #searchQuery,
+	#subHeader7.color_black #topSearch2 #searchQuery {
+		padding-left: 12px;
+		background-image: none !important;
+	}
+}

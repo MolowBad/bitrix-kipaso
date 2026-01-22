@@ -1,0 +1,75 @@
+.backToList {
+	display: block;
+	float: right;
+	margin-top: 24px;
+	color: #000000;
+	transition: all 0.2s ease-in-out;
+}
+
+.backToList:active {
+	position: relative;
+	top: 1px;
+}
+
+#left .heading .arrow {
+	background-position: -27px 50%;
+	transition: all 0.5s;
+}
+
+#left .heading.opened .arrow {
+	transform: rotate(90deg);
+}
+
+#nextSection {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	border-top: 1px solid #e7e8ea;
+	border-right: 1px solid #e7e8ea;
+	border-left: 1px solid #e7e8ea;
+	border-radius: 4px;
+}
+
+#nextSection .title {
+	display: block;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	font-size: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: #f3f3f3;
+	cursor: pointer;
+}
+
+#nextSection ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#nextSection li,
+#nextSection .title {
+	border-bottom: 1px solid #e7e8ea;
+}
+
+/* #nextSection li{
+	padding: 12px 24px;
+} */
+
+#nextSection li a {
+	display: inline-block;
+	padding: 12px 24px;
+	color: #000000;
+	font-size: 13px;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+#nextSection li a:hover,
+#nextSection li .selected {
+	color: #ffa800;
+}
+
+#nextSection li .cnt {
+	float: right;
+	color: #888888;
+}

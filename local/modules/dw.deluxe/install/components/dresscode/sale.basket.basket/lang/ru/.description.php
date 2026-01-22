@@ -1,0 +1,4 @@
+<?php
+
+$MESS["SB0_SALE_BASKET_BASKET_COMPONENT_NAME"] = "Корзина — DW24";
+$MESS["SB0_SALE_BASKET_BASKET_COMPONENT_DESCRIPTION"] = "Компонент выводит корзину";

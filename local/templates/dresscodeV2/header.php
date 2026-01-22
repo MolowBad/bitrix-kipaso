@@ -28,6 +28,8 @@ $asset = Asset::getInstance();
 <!DOCTYPE html>
 <html lang="<?=LANGUAGE_ID?>">
 	<head>
+		<!-- Max messenger -->
+		<script src="/local/modules/dw.deluxe/js/js_max.js"></script>
 		<meta charset="<?=SITE_CHARSET?>">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>

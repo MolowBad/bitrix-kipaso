@@ -1,0 +1,11 @@
+.system-nav-orange {
+	color: #999999;
+	font-size: 12px;
+}
+
+.system-nav-orange .nav-current-page {
+	padding: 1px 0;
+	color: white;
+	font-weight: bold;
+	background-color: rgb(255 153 0);
+}
